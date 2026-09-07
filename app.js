@@ -1,10 +1,11 @@
 /* ============================================================
-   📝 CONTENT — EDIT ME
-   This is the only place you should need to touch to update
-   your story, skills, projects, or certificates. Fill in both
-   "en" and "th" for anything new so the language switch keeps
-   working. Everything else in this file just renders whatever
-   is written here.
+   New JA Portfolio — Cosmic Nebula (Cyan, Purple, Pink) Edition
+   Featuring React Bits: TargetCursor, FuzzyText, LogoLoop,
+   BounceCards, BorderGlow, Counter, CountUp, 3D Folders & Galaxy
+   ============================================================ */
+
+/* ============================================================
+   📝 CONTENT — Personal Identity for New JA
    ============================================================ */
 const CONTENT = {
   en: {
@@ -12,89 +13,88 @@ const CONTENT = {
       {
         period: "2009 · Where it started",
         title: "Born to explore",
-        body: "I was born on June 23, 2009. Nothing dramatic — just a kid who loved playing, poking at things, and following whatever caught my curiosity that day."
+        body: "Born on June 23, 2009. From childhood, driven by raw curiosity — always pulling things apart to see how they tick, exploring games, and discovering the magic of code."
       },
       {
-        period: "Kindergarten – Grade 6",
-        title: "Bangpleepat School",
-        body: "This is where it all began — friendships, first lessons, and the habit of trying new things even when I wasn't sure I'd be good at them."
+        period: "Early Foundations",
+        title: "Building the First Logic",
+        body: "First experiments with scripting, game mechanics, and digital design. Realized early on that creating virtual worlds was infinitely more thrilling than just playing them."
       },
       {
-        period: "Grade 7 – Grade 12",
-        title: "Navamindarajudis Triamudomsuksapattanakarn School",
-        body: "I stuck with the Science-Math program through high school, and this is really where curiosity turned into direction: coding, design, content, and tech."
+        period: "High School · Grade 7 – 12",
+        title: "Science-Math & Engineering Direction",
+        body: "Navamindarajudis Triamudomsuksapattanakarn School. Deepened understanding of algorithmic thinking, software architectures, advanced robotics, and real-time systems."
       },
       {
-        period: "Dream university",
-        title: "Why KMITL",
-        body: "KMITL has been the dream since I was a kid. It's renowned for engineering, computer science, and pioneering technology. It is exactly where I want to grow as a developer and an innovator."
+        period: "National AI Champion",
+        title: "UTCC AI Hackathon Victory",
+        body: "Grand Champion of UTCC AI Hackathon 2026. Designed and presented an end-to-end AI flood prediction & hydrological telemetry intelligence system, winning 1st place nationwide."
       },
       {
-        period: "Now",
-        title: "From playing to building",
-        body: "My motto: I used to love playing — now I love building. These days that means full-stack websites, generative AI pipelines, content creation, and an expansive Roblox MMO RPG I'm bringing to life."
+        period: "The Vision Ahead",
+        title: "Autonomous Systems & Next-Gen AI",
+        body: "My ambition: To pioneer autonomous robotics, multi-agent AI copilot frameworks, and spatial computing. Code is my canvas, AI is my collaborator, and innovation is my life's mission."
       }
     ],
     skills: [
-      { name: "AI Systems & Generative Engineering", score: 10, body: "Mastering LLMs, prompt pipelines, autonomous agent workflows, Microsoft AI Builder, and multi-modal creation." },
-      { name: "Polyglot Coding & Logic", score: 9, body: "Fluent in core computer science paradigms across Python, Lua, JS/TS, C#, HTML/CSS, and SQL." },
-      { name: "Lua / Roblox Game Engine", score: 9, body: "Scripting complex MMO RPG systems, combat engines, inventory trees, and multiplayer client-server sync." },
-      { name: "YouTube Content Creator", score: 9, body: "Storyboarding, high-retention pacing, creative storytelling, and video production that connects with audiences." },
-      { name: "HTML5 / CSS3 / JavaScript", score: 8, body: "Designing futuristic glassmorphic UI, reactive components, fluid micro-interactions, and mobile responsiveness." },
-      { name: "Python Automation & Data", score: 8, body: "AI integrations, automated data flows, backend pipelines, and rapid algorithmic prototyping." },
-      { name: "UI/UX & Design Systems", score: 8, body: "Visual hierarchy, typography, glassmorphism aesthetics, responsive viewports, and seamless user experiences." },
-      { name: "Premiere Pro & Media Editing", score: 8, body: "Dynamic pacing, sound design, visual effects, and cinematic transitions that elevate video content." },
-      { name: "C# / Unity Foundations", score: 6, body: "OOP component architectures, Unity physics loops, and interactive 3D gameplay experiments." }
+      { name: "AI Systems & Generative Engineering", score: 10, body: "Mastering LLMs, prompt pipelines, autonomous agent workflows, Microsoft AI Builder, and multimodal synthesis." },
+      { name: "Polyglot Coding & Core Logic", score: 9, body: "Fluent in core computer science paradigms across Python, Lua, TypeScript/JS, C#, HTML/CSS, and SQL." },
+      { name: "Roblox Game Engine & Multiplayer Systems", score: 9, body: "Architecting complex MMO RPG mechanics, real-time client-server network replication, and physics validation." },
+      { name: "Autonomous Robotics & Edge Vision", score: 9, body: "Edge AI vision processing (YOLO), ROS 2 teleoperation, telemetry streaming, and autonomous flight pathing." },
+      { name: "Full-Stack Web & WebGL Architecture", score: 9, body: "Designing futuristic cyber glassmorphic interfaces, reactive state engines, zero-lag shaders, and REST APIs." },
+      { name: "YouTube Creator & Visual Storytelling", score: 9, body: "High-retention pacing, creative storytelling, motion design, and technical media production." },
+      { name: "Python Automation & Data Pipelines", score: 8, body: "Fast algorithmic workflows, custom AI integrations, data ingestion, and cloud microservices." },
+      { name: "UI/UX & Interactive Design Systems", score: 8, body: "Spatial visual hierarchy, micro-interactions, responsive layouts, and seamless accessible ergonomics." }
     ],
     aiTools: [
-      { name: "ChatGPT", body: "Core engine for architectural design, code generation, debugging, and rapid prototyping." },
-      { name: "Claude", body: "Deep analytical thinking, complex documentation refinement, and high-precision reasoning." },
-      { name: "Gemini", body: "Multimodal research, latest technology exploration, and cross-model synthesis." },
-      { name: "Grok", body: "Trend exploration, rapid ideation, and exploring unconventional creative angles." }
+      { name: "ChatGPT", body: "Architectural brainstorming, algorithmic optimization, code generation, and rapid prototyping." },
+      { name: "Claude", body: "Deep analytical reasoning, complex systems documentation, and rigorous technical logic." },
+      { name: "Gemini", body: "Multimodal analysis, cutting-edge spatial research, and cross-framework synthesis." },
+      { name: "Grok", body: "Trend exploration, unconventional ideation, and rapid creative divergence." }
     ],
     dossiers: [
       {
         id: "champ-water",
         title: "National AI Champion",
         subtitle: "UTCC AI Hackathon 2026",
-        color: "#f97316",
+        color: "#38bdf8",
         papers: [
           { tag: "TROPHY", title: "1st Place Winner (20,000 THB)", desc: "Outperformed 15 finalist teams nationwide" },
           { tag: "SOLUTION", title: "AI Water & Flood Intel", desc: "Real-time hydrological predictive modeling" },
-          { tag: "TECH", title: "IoT Sensors & Telemetry", desc: "Automated community disaster warning" }
+          { tag: "TELEMETRY", title: "IoT Sensors & Alert Network", desc: "Automated community disaster escalation" }
         ]
       },
       {
         id: "genai-suite",
         title: "Generative AI Systems",
         subtitle: "Multi-Agent Workflows",
-        color: "#ff5e1a",
+        color: "#c084fc",
         papers: [
-          { tag: "AGENTS", title: "Multi-Agent Tool Calling", desc: "Autonomous reasoning & task pipelines" },
-          { tag: "POWER PLATFORM", title: "Microsoft AI Builder", desc: "Connected directly to Dataverse cloud" },
-          { tag: "MULTIMODAL", title: "Generative Media Suite", desc: "High-retention visual & text synthesis" }
+          { tag: "AGENTS", title: "Autonomous Tool Calling", desc: "Coordinated multi-agent reasoning pipelines" },
+          { tag: "ENTERPRISE", title: "Microsoft AI Builder", desc: "Direct integration with Dataverse cloud" },
+          { tag: "MULTIMODAL", title: "Asset Generation Suite", desc: "High-retention dynamic text and visuals" }
         ]
       },
       {
         id: "roblox-engine",
         title: "Roblox MMO RPG Engine",
         subtitle: "Virtual World & Systems",
-        color: "#ea580c",
+        color: "#f472b6",
         papers: [
-          { tag: "NETCODE", title: "Client-Server State Sync", desc: "Low-latency multiplayer replication" },
-          { tag: "PHYSICS", title: "Combat & Hitbox Validation", desc: "Server-authoritative action logic" },
-          { tag: "ECONOMY", title: "Inventory & Quest Trees", desc: "Persistent progression and custom VFX" }
+          { tag: "NETCODE", title: "Client-Server Replication", desc: "Low-latency multiplayer physics sync" },
+          { tag: "COMBAT", title: "Hitbox & Action Validation", desc: "Server-authoritative combat loops" },
+          { tag: "ECONOMY", title: "Persistent Quest Trees", desc: "Dynamic item economy and custom VFX" }
         ]
       },
       {
-        id: "kmitl-aspirant",
-        title: "KMITL Candidate Dossier",
-        subtitle: "Future Tech Innovator",
-        color: "#ffb43a",
+        id: "cyber-autonomy",
+        title: "Autonomous Robotics",
+        subtitle: "Edge AI · Vision · ROS 2",
+        color: "#a855f7",
         papers: [
-          { tag: "ACADEMIC", title: "Grade 12 Science-Math", desc: "Navamindarajudis Triamudom School" },
-          { tag: "TARGET", title: "Faculty of Engineering", desc: "Computer Science & Software Systems" },
-          { tag: "CREED", title: "Born to Build", desc: "Code, AI, and continuous engineering" }
+          { tag: "VISION", title: "Real-Time YOLO Detection", desc: "Embedded computer vision processing" },
+          { tag: "FLIGHT", title: "Drone Waypoint Navigation", desc: "Obstacle avoidance and telemetry streaming" },
+          { tag: "CREED", title: "Engineering the Future", desc: "Autonomous intelligence deployed at edge" }
         ]
       }
     ],
@@ -106,214 +106,224 @@ const CONTENT = {
         badge: "🏆 1st Place Champion (20,000 THB)",
         featured: true,
         status: "1st Place Winner",
-        body: "Grand Champion solution for UTCC AI Hackathon 2026 (Team MANITA), defeating 15 finalist teams nationwide. Architected an AI-powered hydrological decision intelligence platform that analyzes real-time sensor streams, rainfall rates, and terrain elevation models to forecast urban flood risks and trigger automated community warning escalations.",
-        highlights: ["1st Place Grand Prize (20,000 THB)", "Defeated 15 National Finalists", "Real-Time AI Flood Forecasting", "STEM & Telemetry Architecture"],
-        tags: ["AI / Machine Learning", "STEM Solution", "Data Modeling", "IoT Telemetry", "Disaster Prevention", "Dashboard UI"]
+        image: "assets/UTCCcer.jpg",
+        body: "Grand Champion solution for UTCC AI Hackathon 2026 (Team MANITA). Architected an AI-powered hydrological decision platform that analyzes real-time IoT sensor streams, rainfall intensity, and topographical elevation models to forecast urban flood vectors and trigger automated emergency evacuations.",
+        highlights: ["1st Place Grand Prize (20,000 THB)", "Defeated 15 National Finalists", "Real-Time AI Flood Forecasting", "IoT Telemetry Architecture"],
+        tags: ["AI / Machine Learning", "Data Modeling", "IoT Telemetry", "Disaster Prevention", "Dashboard UI"]
+      },
+      {
+        id: "drone-autonomy",
+        title: "Autonomous Drone Vision & Telemetry Suite",
+        type: "🚁 Robotics & Autonomous Edge Intelligence",
+        badge: "⚡ Real-Time Edge Vision",
+        featured: true,
+        status: "Active Research",
+        image: "assets/UTCC.jpg",
+        body: "A high-performance autonomous drone teleoperation and computer vision platform. Combines edge YOLO object detection with ROS 2 flight controllers for real-time spatial mapping, target tracking, and ultra-low-latency telemetry transmission over WebSockets.",
+        highlights: ["Real-Time Edge Object Detection", "ROS 2 Autonomous Navigation", "Sub-50ms Video Telemetry", "Hardware-Software Integration"],
+        tags: ["Robotics", "ROS 2", "Edge AI", "Computer Vision", "Python", "Autonomous Flight"]
       },
       {
         id: "ai-creative-engine",
-        title: "Generative AI Systems & Autonomous Automation Suite",
-        type: "🤖 AI Engineering / 'Anything With AI I Can Create'",
+        title: "Generative AI Systems & Agentic Orchestration Suite",
+        type: "🤖 AI Engineering / Multi-Agent Copilot",
         badge: "⚡ Autonomous AI Suite",
         featured: true,
-        status: "Active Innovation",
-        body: "An end-to-end AI creation ecosystem demonstrating that with modern AI, any software or creative vision can be built rapidly. Integrates multi-agent LLM tool-calling, advanced prompt engineering, Microsoft AI Builder connected to Dataverse databases, automated workflow orchestrations, and multimodal asset synthesis.",
+        status: "Production Ready",
+        image: "assets2/17-1.png",
+        body: "An end-to-end AI creation ecosystem integrating multi-agent LLM tool-calling, advanced prompt engineering, Microsoft AI Builder connected to Dataverse databases, automated workflow orchestrations, and multimodal asset generation pipelines.",
         highlights: ["Multi-Agent Tool Orchestration", "Microsoft AI Builder + Dataverse", "Prompt Engineering Mastery", "Multimodal Generative Pipelines"],
         tags: ["Generative AI", "LLM Workflows", "Agentic Systems", "Microsoft AI Builder", "Python Automation", "Dataverse"]
       },
       {
-        id: "polyglot-code-lab",
-        title: "Polyglot Engineering & Multi-Language Core Architecture",
-        type: "⚡ Software Engineering / 'Know Code & Core Languages'",
-        badge: "🌐 Multi-Language & Multi-Paradigm",
-        featured: false,
-        status: "Core Capability",
-        body: "A demonstration of deep computer science adaptability across programming paradigms and languages. Fluent in Python for data/AI logic, Lua for real-time game systems, JavaScript/TypeScript for modern full-stack web engines, C# for Unity OOP game logic, HTML5/CSS3 for fluid glassmorphic UI, and SQL/Dataverse for robust relational data architecture.",
-        highlights: ["Multi-Paradigm: OOP, Functional, Event-Driven", "Full-Stack Web & Low-Latency Engines", "Clean Modular Architecture", "Rapid Cross-Language Adaptability"],
-        tags: ["Python", "Lua", "JavaScript / TypeScript", "C# / Unity", "HTML5 / CSS3", "SQL / Dataverse"]
-      },
-      {
         id: "roblox-mmorpg",
         title: "Roblox MMO RPG Game Engine & Virtual World",
-        type: "🎮 Game Development / Distributed Systems",
+        type: "🎮 Game Systems / Distributed Multiplayer",
         badge: "🎮 Large-Scale MMO Engine",
         featured: false,
         status: "In Active Development",
-        body: "A comprehensive multiplayer action-RPG built inside Roblox Studio. Engineered with modular Lua framework, client-server state replication, real-time combat hitbox validation, inventory economy trees, procedural quest triggers, custom UI animation suites, and immersive atmospheric world-building.",
+        image: "assets/cer-2.jpg",
+        body: "A comprehensive multiplayer action-RPG built inside Roblox Studio. Engineered with a modular Lua framework, client-server state replication, real-time combat hitbox validation, inventory economy trees, procedural quest triggers, and custom atmospheric world-building.",
         highlights: ["Client-Server Network Sync", "Combat & Hitbox Validation", "Persistent Economy & Progression", "Custom World Design & VFX"],
         tags: ["Roblox Studio", "Lua Scripting", "MMO RPG", "Network Replication", "Game Systems", "Combat Physics"]
       },
       {
+        id: "polyglot-code-lab",
+        title: "Polyglot Engineering & Multi-Language Core",
+        type: "⚡ Software Engineering / Cross-Paradigm",
+        badge: "🌐 Multi-Language Architecture",
+        featured: false,
+        status: "Core Foundation",
+        image: "assets/cer-1.jpg",
+        body: "Deep computer science adaptability across programming paradigms: Python for AI & data pipelines, Lua for low-latency game loops, TypeScript/JavaScript for modern full-stack web engines, C# for Unity OOP, and SQL for robust relational data architecture.",
+        highlights: ["Multi-Paradigm: OOP, Functional, Event-Driven", "Full-Stack Web & Low-Latency Engines", "Clean Modular Architecture", "Rapid Cross-Language Adaptability"],
+        tags: ["Python", "Lua", "JavaScript / TypeScript", "C# / Unity", "HTML5 / CSS3", "SQL / Dataverse"]
+      },
+      {
         id: "portfolio-site",
-        title: "Cyber-Glassmorphism Portfolio & Admin Control Room",
-        type: "💎 Full-Stack Web Application / Platform Engineering",
+        title: "Cosmic Nebula Cyber Portfolio & Admin Control Room",
+        type: "💎 Full-Stack Web Platform / Spatial UI",
         badge: "💎 Full-Stack & Secure Back Office",
         featured: false,
-        status: "Live Production",
-        body: "Production portfolio built from ground up with an obsidian-orange KMITL aesthetic. Features Express.js server, SQLite/PostgreSQL data layer, Argon2 password encryption, tamper-proof session tokens, live interactive like system, full audit telemetry, admin control room, bi-lingual i18n, and ultra-fluid cross-device smoothness.",
-        highlights: ["Express.js & Database Persistence", "Admin Control Room & Audit Logs", "Crypto-Grade Session Security", "Universal Cross-Device Fluidity"],
-        tags: ["Express.js", "SQLite / PostgreSQL", "Security & Sessions", "Admin Control Room", "Bilingual i18n", "Fluid UI"]
+        status: "Production Live",
+        image: "assets/myface.jpg",
+        body: "Production-grade portfolio web application engineered in a Cosmic Nebula theme. Features an Express backend, SQLite/PostgreSQL persistence, Argon2 password hashing, session tokens, real-time likes counter, detailed audit logs, and 10 interactive React Bits components.",
+        highlights: ["Express.js & Database Architecture", "Admin Control Room & Audit Logs", "Argon2 Auth & Session Tokens", "10 React Bits Interactive Motion Engines"],
+        tags: ["Express.js", "WebGL / Shaders", "Security & Sessions", "Admin Control Room", "Bilingual System", "Fluid UI"]
       }
     ],
     certificates: [
       {
-        title: "Certificate of 1st Place - UTCC AI Hackathon 2026",
+        title: "1st Place Grand Champion — UTCC AI Hackathon",
         image: "assets/UTCCcer.jpg",
-        body: "Received a certificate for winning 1st place with an AI & STEM solution for Thailand's water management.",
+        body: "1st Place Winner certificate for designing an AI and STEM-driven hydrological early warning system for Thailand.",
         issuerId: "best_award"
       },
       {
-        title: "Champion Prize - Team MANITA",
+        title: "Award Presentation Ceremony (20,000 THB Prize)",
         image: "assets/UTCC.jpg",
-        body: "Awarded the 20,000 THB grand prize, defeating 15 finalist teams nationwide at the University of the Thai Chamber of Commerce.",
+        body: "Acceptance of the Grand Champion award for Team MANITA, outperforming 15 national finalist teams.",
         issuerId: "best_award"
       },
-      { title: "Design AI-powered business solutions", image: "assets2/17-1.png", body: "Shows I can design higher-level business solutions that put AI to work.", issuerId: "microsoft" },
-      { title: "Create effective prompts for generative AI", image: "assets2/16-1.png", body: "Prompt engineering — getting generative AI models to actually give you what you need.", issuerId: "microsoft" },
-      { title: "Create AI Builder prompts", image: "assets2/1-1.png", body: "Connecting AI capabilities directly to Dataverse databases.", issuerId: "microsoft" },
-      { title: "Turn business ideas into solutions", image: "assets2/15-1.png", body: "Taking a business idea and actually turning it into a working Power Platform app.", issuerId: "microsoft" },
-      { title: "Customize a canvas app", image: "assets2/10-1.png", body: "Hands-on work tailoring app interfaces and custom functions.", issuerId: "microsoft" },
-      { title: "Configure forms, charts, and dashboards", image: "assets2/7-1.png", body: "Building the dashboards businesses actually rely on for data.", issuerId: "microsoft" },
-      { title: "Build approval flows with Power Automate", image: "assets2/2-1.png", body: "Automated workflows and approval systems, built and working.", issuerId: "microsoft" },
-      { title: "Publish, share, and maintain a canvas app", image: "assets2/9-1.png", body: "Understanding the full app lifecycle, from launch to long-term upkeep.", issuerId: "microsoft" },
-      { title: "Use Dataverse triggers and actions", image: "assets2/3-1.png", body: "Automating processes off database events and data changes.", issuerId: "microsoft" },
-      { title: "Core components of Power Pages", image: "assets2/6-1.png", body: "The foundations of building external-facing business websites.", issuerId: "microsoft" },
-      { title: "Explore Power Pages design studio", image: "assets2/5-1.png", body: "Designing and styling data-driven web pages." },
-      { title: "Get started with Power Automate", image: "assets2/4-1.png", body: "Foundations of automated workflows and process automation.", issuerId: "microsoft" },
-      { title: "Get started with model-driven apps", image: "assets2/8-1.png", body: "The basics of data-first app development in Power Apps.", issuerId: "microsoft" },
-      { title: "Get started with Power Apps canvas apps", image: "assets2/11-1.png", body: "First steps into low-code app development.", issuerId: "microsoft" },
-      { title: "Security roles in Dataverse", image: "assets2/12-1.png", body: "The basics of access control and data security.", issuerId: "microsoft" },
-      { title: "Create and manage columns in Dataverse", image: "assets2/13-1.png", body: "Foundations of database schema setup.", issuerId: "microsoft" },
-      { title: "Create tables in Dataverse", image: "assets2/14-1.png", body: "The basics of structuring a relational database.", issuerId: "microsoft" },
-      { title: "Make Game with AI", image: "assets/cer-2.jpg", body: "Completed the Make Game with AI activity.", issuerId: "hamsterhub" },
-      { title: "Game with AI Workshop", image: "assets/cer-3.png", body: "Took part in a hands-on Game with AI workshop.", issuerId: "hamsterhub" },
-      { title: "Other Certificate", image: "assets/cer-1.jpg", body: "General foundation-level skills.", issuerId: "other" }
+      { title: "Design AI-powered business solutions", image: "assets2/17-1.png", body: "Validated mastery in designing high-level enterprise AI solutions.", issuerId: "microsoft" },
+      { title: "Create effective prompts for generative AI", image: "assets2/16-1.png", body: "Expertise in prompt structuring and precise LLM steerability.", issuerId: "microsoft" },
+      { title: "Create AI Builder prompts", image: "assets2/1-1.png", body: "Connecting generative AI directly to Dataverse enterprise databases.", issuerId: "microsoft" },
+      { title: "Turn business ideas into solutions", image: "assets2/15-1.png", body: "Transforming functional concepts into production Power Platform solutions.", issuerId: "microsoft" },
+      { title: "Customize a canvas app", image: "assets2/10-1.png", body: "Crafting bespoke user interfaces and dynamic UI components.", issuerId: "microsoft" },
+      { title: "Configure forms, charts, and dashboards", image: "assets2/7-1.png", body: "Building mission-critical executive analytical dashboards.", issuerId: "microsoft" },
+      { title: "Build approval flows with Power Automate", image: "assets2/2-1.png", body: "Designing automated multi-stage enterprise approval pipelines.", issuerId: "microsoft" },
+      { title: "Publish, share, and maintain a canvas app", image: "assets2/9-1.png", body: "Managing full application lifecycle and cloud deployment.", issuerId: "microsoft" },
+      { title: "Make Game with AI", image: "assets/cer-2.jpg", body: "Completed practical workshop in AI-assisted game development.", issuerId: "hamsterhub" },
+      { title: "Game with AI Workshop", image: "assets/cer-3.png", body: "Hands-on engineering workshop creating games with generative tools.", issuerId: "hamsterhub" },
+      { title: "Developer Fundamentals", image: "assets/cer-1.jpg", body: "Core programming and software engineering foundations.", issuerId: "other" }
     ]
   },
   th: {
     story: [
       {
-        period: "2552 · จุดเริ่มต้น",
-        title: "เกิดมาเพื่อสำรวจ",
-        body: "เกิดวันที่ 23 มิถุนายน 2552 ไม่มีอะไรพิเศษหรอก แค่เด็กคนหนึ่งที่ชอบเล่น ชอบลองจับโน่นจับนี่ และตามความอยากรู้ของตัวเองไปเรื่อย ๆ"
+        period: "2009 · จุดเริ่มต้น",
+        title: "เกิดมาพร้อมความอยากรู้อยากเห็น",
+        body: "เกิดเมื่อวันที่ 23 มิถุนายน 2009 ตั้งแต่วัยเด็กเป็นคนช่างสงสัย ชอบรื้อประกอบสิ่งต่าง ๆ สนุกกับการเล่นเกม และค้นพบความมหัศจรรย์ของการเขียนโค้ด"
       },
       {
-        period: "อนุบาล – ประถม 6",
-        title: "โรงเรียนบางพลีพัฒนศึกษาลัย",
-        body: "จุดเริ่มของทุกอย่าง ทั้งเพื่อน บทเรียนแรก ๆ และนิสัยชอบลองของใหม่แม้จะยังไม่มั่นใจว่าจะทำได้ดีแค่ไหน"
+        period: "ก้าวแรกของนักสร้าง",
+        title: "จากผู้เล่นสู่ผู้สร้าง",
+        body: "เริ่มทดลองเขียนสคริปต์ ออกแบบระบบเกม และสร้างสิ่งต่าง ๆ ด้วยตนเอง พบว่าการสร้างโลกเสมือนขึ้นมานั้นน่าตื่นเต้นยิ่งกว่าการเป็นเพียงผู้เล่นธรรมดา"
       },
       {
         period: "มัธยม 1 – มัธยม 6",
-        title: "โรงเรียนนวมินทราชูทิศ เตรียมอุดมศึกษาพัฒนาการ",
-        body: "เรียนสายวิทย์-คณิตมาตลอด และช่วงนี้เองที่ความสนใจเริ่มชัดขึ้นเรื่อย ๆ ทั้งเขียนโค้ด ออกแบบ ทำคอนเทนต์ และเทคโนโลยี"
+        title: "วิทย์-คณิต & เส้นทางวิศวกรรม",
+        body: "โรงเรียนนวมินทราชูทิศ เตรียมอุดมศึกษาพัฒนาการ ศึกษาค้นคว้าทั้งอัลกอริทึม สถาปัตยกรรมซอฟต์แวร์ หุ่นยนต์อัจฉริยะ และระบบเรียลไทม์อย่างต่อเนื่อง"
       },
       {
-        period: "มหาวิทยาลัยในฝัน",
-        title: "ทำไมต้อง KMITL",
-        body: "KMITL (สจล.) เป็นมหาวิทยาลัยในฝันมาตั้งแต่เด็ก ด้วยชื่อเสียงความเป็นเลิศด้านวิศวกรรม วิทยาการคอมพิวเตอร์ และเทคโนโลยีชั้นนำ นี่คือสถานที่ที่อยากไปเรียนต่อเพื่อพัฒนาตัวเองให้เป็นนักพัฒนาและนวัตกรระดับประเทศ"
+        period: "แชมป์ AI ระดับประเทศ",
+        title: "ชัยชนะใน UTCC AI Hackathon 2026",
+        body: "คว้าแชมป์ชนะเลิศอันดับ 1 ของประเทศไทย ออกแบบและนำเสนอแพลตฟอร์ม AI พยากรณ์น้ำท่วมและบริหารจัดการน้ำอัจฉริยะ เอาชนะ 15 ทีมชิงชนะเลิศทั่วประเทศ"
       },
       {
-        period: "ตอนนี้",
-        title: "จากเด็กที่ชอบเล่น สู่คนที่ชอบสร้าง",
-        body: "คติประจำใจ: ตอนเด็กชอบเล่น ตอนนี้ชอบสร้าง ทุกวันนี้เลยได้ทำเว็บไซต์ Full-Stack, พัฒนาระบบด้วย AI, ทำคอนเทนต์ และสร้างเกม Roblox MMO RPG ของตัวเอง"
+        period: "วิสัยทัศน์ในอนาคต",
+        title: "บุกเบิกระบบอัตโนมัติและปัญญาประดิษฐ์",
+        body: "เป้าหมายสูงสุดคือการผลักดันขอบเขตของ AI, หุ่นยนต์อัตโนมัติ และ Spatial Computing โค้ดคือเครื่องมือ AI คือเพื่อนร่วมสร้าง และนวัตกรรมคือเป้าหมายชีวิต"
       }
     ],
     skills: [
-      { name: "วิศวกรรม AI & Generative Workflows", score: 10, body: "เชี่ยวชาญการประยุกต์ใช้ LLMs, ออกแบบ Prompt ชั้นสูง, Multi-Agent Workflows, Microsoft AI Builder และการสร้างสื่อด้วย AI" },
-      { name: "การเขียนโปรแกรมหลากภาษา & ตรรกะ (Polyglot)", score: 9, body: "เข้าใจรากฐานของภาษาและกระบวนทัศน์หลัก: Python, Lua, JS/TS, C#, HTML/CSS, SQL และ Dataverse" },
-      { name: "สคริปต์ Lua / Roblox Engine", score: 9, body: "พัฒนาระบบเกม MMO RPG ขั้นสูง ระบบการต่อสู้ ระบบไอเทม และการ Sync ข้อมูล Client-Server แบบเรียลไทม์" },
-      { name: "ยูทูบเบอร์ & ครีเอเตอร์คอนเทนต์", score: 9, body: "วางแผนโครงเรื่อง จังหวะการเล่าเรื่องที่ดึงดูด การตัดต่อวิดีโอคุณภาพ และการสื่อสารที่เข้าถึงผู้ชม" },
-      { name: "HTML5 / CSS3 / JavaScript (Full-Stack)", score: 8, body: "ออกแบบ UI แบบ Cyber Glassmorphism ลื่นไหล คอมโพเนนต์ที่ตอบสนองดีเยี่ยม และรองรับทุกหน้าจอ" },
-      { name: "Python สำหรับระบบอัตโนมัติ & Data", score: 8, body: "เชื่อมต่อ AI API, ไปป์ไลน์ประมวลผลข้อมูล, สคริปต์อัตโนมัติ และการแก้ปัญหาด้วยอัลกอริทึม" },
-      { name: "การออกแบบ UI/UX & ระบบดีไซน์", score: 8, body: "การจัดลำดับสายตา ความคมชัดของตัวหนังสือ ธีม Glassmorphism ที่สวยงาม และประสบการณ์การใช้งานที่ราบรื่น" },
-      { name: "Premiere Pro & ตัดต่อวิดีโอ", score: 8, body: "ตัดต่อแบบมีไดนามิก การออกแบบเสียง เอฟเฟกต์ภาพ และ Transitions สไตล์มืออาชีพ" },
-      { name: "พื้นฐาน C# / Unity", score: 6, body: "สถาปัตยกรรม OOP สำหรับเกม วงรอบฟิสิกส์ใน Unity และการทดลองสร้างเกม 3D แบบ Interactive" }
+      { name: "วิศวกรรม AI & ระบบ Generative อัตโนมัติ", score: 10, body: "เชี่ยวชาญการประยุกต์ใช้ LLMs, ออกแบบ Prompt เชิงลึก, Multi-Agent Workflows, Microsoft AI Builder และสื่อผสม AI" },
+      { name: "การเขียนโปรแกรมหลากภาษา & ตรรกะ (Polyglot)", score: 9, body: "เข้าใจรากฐานภาษาหลัก: Python สำหรับ Data/AI, Lua สำหรับเกม, TypeScript/JS สำหรับเว็บ Full-Stack, C# และ SQL" },
+      { name: "สคริปต์ Lua / เอนจินเกม Roblox", score: 9, body: "พัฒนาระบบเกม MMO RPG ขั้นสูง ระบบการต่อสู้ Hitbox และการ Sync ข้อมูล Client-Server แบบเรียลไทม์" },
+      { name: "หุ่นยนต์อัตโนมัติ & Edge Vision", score: 9, body: "ประมวลผล Computer Vision ด้วย YOLO, การควบคุมโดรนผ่าน ROS 2, และระบบสตรีมข้อมูล Telemetry ความหน่วงต่ำ" },
+      { name: "เว็บ Full-Stack & สถาปัตยกรรม WebGL", score: 9, body: "ออกแบบ UI แบบ Cyber Glassmorphism ลื่นไหล, ชิ้นส่วน Interactive Shader และ API ความปลอดภัยสูง" },
+      { name: "ยูทูบเบอร์ & การเล่าเรื่องด้วยสื่อ", score: 9, body: "วางแผนโครงเรื่อง จังหวะการเล่าเรื่องที่น่าติดตาม และการตัดต่อวิดีโอระดับมืออาชีพ" },
+      { name: "Python สำหรับระบบอัตโนมัติ & Data", score: 8, body: "เชื่อมต่อ AI APIs, สคริปต์ดึงและประมวลผลข้อมูลอัตโนมัติ และการแก้ปัญหาด้วยอัลกอริทึม" },
+      { name: "การออกแบบ UI/UX & ระบบดีไซน์", score: 8, body: "การจัดลำดับสายตา ความคมชัดของตัวหนังสือ และประสบการณ์ใช้งานที่ราบรื่นบนทุกอุปกรณ์" }
     ],
     aiTools: [
-      { name: "ChatGPT", body: "เครื่องมือหลักสำหรับวางแผนสถาปัตยกรรมระบบ ช่วยเขียนโค้ด ดีบัก และเร่งพัฒนาต้นแบบให้เร็วขึ้น" },
+      { name: "ChatGPT", body: "เครื่องมือหลักสำหรับวางแผนสถาปัตยกรรม ช่วยเขียนโค้ด ดีบัก และเร่งพัฒนาต้นแบบอย่างรวดเร็ว" },
       { name: "Claude", body: "ใช้ในการคิดวิเคราะห์เชิงลึก จัดระเบียบเอกสารทางเทคนิค และการใช้เหตุผลที่ซับซ้อน" },
-      { name: "Gemini", body: "การค้นคว้าแบบ Multimodal สำรวจข้อมูลเทคโนโลยีล่าสุด และเปรียบเทียบมุมมองเชิงลึก" },
-      { name: "Grok", body: "เหมาะสำหรับการสำรวจเทรนด์ สร้างสรรค์ไอเดียใหม่ ๆ และทดลองมุมมองที่แปลกใหม่" }
+      { name: "Gemini", body: "การค้นคว้าแบบ Multimodal สำรวจเทคโนโลยีล่าสุด และเปรียบเทียบมุมมองเชิงลึก" },
+      { name: "Grok", body: "สำรวจเทรนด์ สร้างสรรค์ไอเดียใหม่ ๆ และทดลองมุมมองที่แปลกใหม่" }
     ],
     dossiers: [
       {
         id: "champ-water",
         title: "แชมป์ระดับประเทศ AI",
         subtitle: "UTCC AI Hackathon 2026",
-        color: "#f97316",
+        color: "#38bdf8",
         papers: [
           { tag: "TROPHY", title: "ชนะเลิศอันดับ 1 (20,000 บ.)", desc: "เอาชนะ 15 ทีมชิงชนะเลิศทั่วประเทศ" },
           { tag: "SOLUTION", title: "AI บริหารจัดการน้ำ", desc: "วิเคราะห์อุทกวิทยาและการพยากรณ์น้ำท่วม" },
-          { tag: "TECH", title: "IoT เซนเซอร์ & Telemetry", desc: "ระบบกระจายสัญญาณเตือนภัยชุมชนล่วงหน้า" }
+          { tag: "TELEMETRY", title: "IoT เซนเซอร์ & ระบบเตือนภัย", desc: "กระจายสัญญาณเตือนภัยชุมชนล่วงหน้า" }
         ]
       },
       {
         id: "genai-suite",
         title: "ระบบ Generative AI",
         subtitle: "Multi-Agent Workflows",
-        color: "#ff5e1a",
+        color: "#c084fc",
         papers: [
-          { tag: "AGENTS", title: "Multi-Agent Tool Calling", desc: "ระบบอัตโนมัติสั่งการหลายเอเจนต์" },
-          { tag: "POWER PLATFORM", title: "Microsoft AI Builder", desc: "เชื่อมต่อฐานข้อมูล Dataverse โดยตรง" },
-          { tag: "MULTIMODAL", title: "ระบบสร้างสื่อผสม AI", desc: "การออกแบบพรอมป์ขั้นสูงและสร้างคอนเทนต์" }
+          { tag: "AGENTS", title: "ระบบ Multi-Agent Tool Calling", desc: "เวิร์กโฟลว์การตัดสินใจอัตโนมัติหลายเอเจนต์" },
+          { tag: "ENTERPRISE", title: "Microsoft AI Builder", desc: "เชื่อมต่อฐานข้อมูล Dataverse โดยตรง" },
+          { tag: "MULTIMODAL", title: "ระบบสร้างสื่อผสม AI", desc: "การสังเคราะห์คอนเทนต์และภาพไดนามิก" }
         ]
       },
       {
         id: "roblox-engine",
-        title: "เอนจิน Roblox MMO RPG",
-        subtitle: "โลกเสมือนจริงและระบบเกม",
-        color: "#ea580c",
+        title: "ระบบเกม Roblox MMO RPG",
+        subtitle: "Virtual World & Systems",
+        color: "#f472b6",
         papers: [
-          { tag: "NETCODE", title: "Client-Server Sync", desc: "ซิงค์ข้อมูลผู้เล่นแบบ Low Latency ด้วย Lua" },
-          { tag: "PHYSICS", title: "ระบบ Hitbox การต่อสู้", desc: "คำนวณและตรวจสอบดาเมจที่ฝั่งเซิร์ฟเวอร์" },
-          { tag: "ECONOMY", title: "ระบบช่องเก็บของและภารกิจ", desc: "เซฟข้อมูลถาวรพร้อมเอฟเฟกต์สมจริง" }
+          { tag: "NETCODE", title: "Client-Server Sync", desc: "การจำลองข้อมูลผู้เล่นหลายคนความหน่วงต่ำ" },
+          { tag: "COMBAT", title: "ระบบคำนวณ Hitbox การต่อสู้", desc: "ตรรกะแอ็กชันที่ตรวจสอบความถูกต้องบนเซิร์ฟเวอร์" },
+          { tag: "ECONOMY", title: "ระบบภารกิจและช่องเก็บของ", desc: "การพัฒนาตัวละครถาวรและเอฟเฟกต์เฉพาะตัว" }
         ]
       },
       {
-        id: "kmitl-aspirant",
-        title: "แฟ้มผลงานมุ่งสู่ KMITL",
-        subtitle: "นวัตกรเทคโนโลยีรุ่นใหม่",
-        color: "#ffb43a",
+        id: "cyber-autonomy",
+        title: "หุ่นยนต์และโดรนอัตโนมัติ",
+        subtitle: "Edge AI · Vision · ROS 2",
+        color: "#a855f7",
         papers: [
-          { tag: "ACADEMIC", title: "มัธยม 6 สายวิทย์-คณิต", desc: "รร.นวมินทราชูทิศ เตรียมอุดมศึกษาพัฒนาการ" },
-          { tag: "TARGET", title: "คณะวิศวกรรมศาสตร์ สจล.", desc: "สาขาวิทยาการคอมพิวเตอร์และซอฟต์แวร์" },
-          { tag: "CREED", title: "เกิดมาเพื่อสร้าง", desc: "พลังแห่งโค้ด AI และความมุ่งมั่นไม่หยุดยั้ง" }
+          { tag: "VISION", title: "ตรวจจับวัตถุ YOLO เรียลไทม์", desc: "ประมวลผลคอมพิวเตอร์วิชันบนอุปกรณ์ Edge" },
+          { tag: "FLIGHT", title: "ระบบนำทางโดรนอัตโนมัติ", desc: "หลบหลีกสิ่งกีดขวางและสตรีม Telemetry" },
+          { tag: "CREED", title: "สร้างสรรค์สู่อนาคต", desc: "นำปัญญาประดิษฐ์มาประยุกต์ใช้งานจริง" }
         ]
       }
     ],
     projects: [
       {
         id: "hackathon-manita",
-        title: "ระบบ AI บริหารจัดการน้ำและเตือนภัยล่วงหน้า (ทีม MANITA)",
-        type: "🏆 รางวัลชนะเลิศระดับประเทศ / AI & STEM Hackathon",
-        badge: "🏆 ชนะเลิศอันดับ 1 (เงินรางวัล 20,000 บาท)",
+        title: "AI บริหารจัดการน้ำและระบบเตือนภัยน้ำท่วมล่วงหน้า",
+        type: "🏆 ชนะเลิศระดับประเทศ / AI & STEM Hackathon",
+        badge: "🏆 รางวัลชนะเลิศ (20,000 บาท)",
         featured: true,
-        status: "ชนะเลิศการแข่งขัน",
-        body: "ผลงานรางวัลชนะเลิศอันดับ 1 งาน UTCC AI Hackathon 2026 จากทีมตัวแทน 15 ทีมสุดท้ายทั่วประเทศ ออกแบบและพัฒนาระบบ AI วิเคราะห์ข้อมูลอุทกวิทยา เซนเซอร์วัดระดับน้ำ ปริมาณน้ำฝน และภูมิประเทศ เพื่อพยากรณ์ความเสี่ยงน้ำท่วมล่วงหน้าพร้อมระบบส่งสัญญาณเตือนภัยอัตโนมัติ",
-        highlights: ["ชนะเลิศอันดับ 1 (เงินรางวัล 20,000 บาท)", "เอาชนะ 15 ทีมชิงชนะเลิศทั่วประเทศ", "ระบบ AI พยากรณ์น้ำท่วมล่วงหน้า", "โครงสร้าง STEM & Telemetry"],
-        tags: ["AI / Machine Learning", "นวัตกรรม STEM", "วิเคราะห์ข้อมูล", "IoT Telemetry", "ระบบเตือนภัยพิบัติ", "Dashboard UI"]
+        status: "ชนะเลิศระดับประเทศ",
+        image: "assets/UTCCcer.jpg",
+        body: "ผลงานรางวัลชนะเลิศอันดับ 1 ในการแข่งขัน UTCC AI Hackathon 2026 (ทีม MANITA) ออกแบบแพลตฟอร์ม AI เพื่อการตัดสินใจทางอุทกวิทยา วิเคราะห์ข้อมูลเซนเซอร์ IoT ปริมาณน้ำฝน และแผนที่ระดับความสูงภูมิประเทศ เพื่อคาดการณ์ทิศทางน้ำท่วมและส่งสัญญาณเตือนภัยชุมชนอัตโนมัติ",
+        highlights: ["รางวัลชนะเลิศอันดับ 1 (20,000 บาท)", "เอาชนะ 15 ทีมชิงชนะเลิศทั่วประเทศ", "AI พยากรณ์น้ำท่วมเรียลไทม์", "สถาปัตยกรรม IoT & Telemetry"],
+        tags: ["AI / Machine Learning", "แบบจำลองข้อมูล", "IoT Telemetry", "การป้องกันภัยพิบัติ", "Dashboard UI"]
+      },
+      {
+        id: "drone-autonomy",
+        title: "ระบบโดรนอัจฉริยะและการควบคุมด้วย Edge AI",
+        type: "🚁 วิศวกรรมหุ่นยนต์ & ระบบอัตโนมัติ",
+        badge: "⚡ Edge AI Vision เรียลไทม์",
+        featured: true,
+        status: "กำลังศึกษาวิจัย",
+        image: "assets/UTCC.jpg",
+        body: "แพลตฟอร์มควบคุมโดรนและประมวลผลภาพจากระยะไกลแบบเรียลไทม์ ผสานโมเดลตรวจจับวัตถุ YOLO บนอุปกรณ์ Edge เข้ากับตัวควบคุมการบิน ROS 2 รองรับการนำทางอัตโนมัติและสตรีมมิงข้อมูล Telemetry ผ่าน WebSockets ความหน่วงต่ำกว่า 50ms",
+        highlights: ["ตรวจจับวัตถุเรียลไทม์บนอุปกรณ์ Edge", "ระบบนำทางอัตโนมัติ ROS 2", "สตรีมมิง Telemetry ความหน่วงต่ำ", "ผสานฮาร์ดแวร์และซอฟต์แวร์ครบวงจร"],
+        tags: ["วิทยาการหุ่นยนต์", "ROS 2", "Edge AI", "Computer Vision", "Python", "การบินอัตโนมัติ"]
       },
       {
         id: "ai-creative-engine",
-        title: "ระบบ Generative AI และเครื่องมืออัตโนมัติอัจฉริยะ",
-        type: "🤖 วิศวกรรม AI / 'ทุกสิ่งด้วย AI ผมสร้างได้'",
+        title: "ระบบ Generative AI และชุดระบบอัตโนมัติ Agentic",
+        type: "🤖 วิศวกรรม AI / ระบบ Multi-Agent Copilot",
         badge: "⚡ ระบบ AI อัตโนมัติขั้นสูง",
         featured: true,
-        status: "พัฒนาและใช้งานจริง",
-        body: "ระบบนิเวศการพัฒนาด้วย AI เต็มรูปแบบ เพื่อพิสูจน์ว่าพลังของ AI ทำให้เราสร้างสรรค์ทุกไอเดียและระบบซอฟต์แวร์ให้เป็นจริงได้อย่างรวดเร็ว เชื่อมโยง Multi-Agent LLM, การเขียน Prompt เชิงลึก, Microsoft AI Builder เชื่อมกับฐานข้อมูล Dataverse, เวิร์กโฟลว์อัตโนมัติ และการสร้างสื่อ Multimodal",
+        status: "พร้อมใช้งานระดับโปรดักชัน",
+        image: "assets2/17-1.png",
+        body: "ระบบนิเวศการพัฒนาด้วย AI เต็มรูปแบบ เชื่อมโยง Multi-Agent LLM สั่งการเครื่องมืออัตโนมัติ, การออกแบบ Prompt เชิงลึก, Microsoft AI Builder เชื่อมกับฐานข้อมูล Dataverse, เวิร์กโฟลว์อัตโนมัติ และการสร้างสื่อ Multimodal",
         highlights: ["ผสานระบบ Multi-Agent & Tools", "Microsoft AI Builder + Dataverse", "การออกแบบ Prompt ขั้นสูง", "ระบบสร้างสื่อ Generative Multimodal"],
         tags: ["Generative AI", "LLM Workflows", "Agentic Systems", "Microsoft AI Builder", "Python Automation", "Dataverse"]
-      },
-      {
-        id: "polyglot-code-lab",
-        title: "สถาปัตยกรรมโค้ดและการพัฒนาหลายภาษา (Polyglot Lab)",
-        type: "⚡ วิศวกรรมซอฟต์แวร์ / 'เข้าใจโค้ดและพื้นฐานทุกภาษา'",
-        badge: "🌐 เชี่ยวชาญหลากภาษาและกระบวนทัศน์",
-        featured: false,
-        status: "ความเชี่ยวชาญหลัก",
-        body: "ศูนย์รวมทักษะความเชี่ยวชาญด้านวิทยาการคอมพิวเตอร์ที่พร้อมปรับตัวในทุกภาษาและกระบวนทัศน์: Python สำหรับงาน Data และ AI, Lua สำหรับระบบเกมเรียลไทม์, JavaScript/TypeScript สำหรับเว็บ Full-Stack สมัยใหม่, C# สำหรับ Unity OOP, HTML5/CSS3 สำหรับ Glassmorphic UI ที่ลื่นไหล และ SQL/Dataverse สำหรับฐานข้อมูลเชิงสัมพันธ์",
-        highlights: ["เข้าใจกระบวนทัศน์ OOP, Functional, Event-Driven", "เว็บ Full-Stack และ Game Engines", "โครงสร้างโค้ดที่สะอาดและยืดหยุ่น", "เรียนรู้ภาษาใหม่ได้รวดเร็ว"],
-        tags: ["Python", "Lua", "JavaScript / TypeScript", "C# / Unity", "HTML5 / CSS3", "SQL / Dataverse"]
       },
       {
         id: "roblox-mmorpg",
@@ -322,20 +332,34 @@ const CONTENT = {
         badge: "🎮 สถาปัตยกรรม MMO สเกลใหญ่",
         featured: false,
         status: "กำลังพัฒนาอย่างต่อเนื่อง",
+        image: "assets/cer-2.jpg",
         body: "โปรเจกต์เกม Action-RPG ผู้เล่นหลายคนบน Roblox Studio เขียนด้วยโครงสร้าง Lua แบบ Modular เชื่อมต่อข้อมูล Client-Server แบบเรียลไทม์ ระบบคำนวณ Hitbox การต่อสู้ ระบบช่องเก็บของและไอเทม ระบบภารกิจอัตโนมัติ และการออกแบบบรรยากาศโลกแฟนตาซีที่สมจริง",
         highlights: ["การ Sync ข้อมูล Client-Server ลื่นไหล", "ระบบต่อสู้และ Hitbox แม่นยำ", "ระบบเศรษฐกิจและเซฟข้อมูลถาวร", "ออกแบบโลกและ VFX เฉพาะตัว"],
         tags: ["Roblox Studio", "สคริปต์ Lua", "MMO RPG", "Network Replication", "ระบบเกมเพลย์", "ฟิสิกส์การต่อสู้"]
       },
       {
+        id: "polyglot-code-lab",
+        title: "สถาปัตยกรรมโค้ดและการพัฒนาหลายภาษา (Polyglot Lab)",
+        type: "⚡ วิศวกรรมซอฟต์แวร์ / หลากกระบวนทัศน์",
+        badge: "🌐 สถาปัตยกรรมหลายภาษา",
+        featured: false,
+        status: "รากฐานความเชี่ยวชาญ",
+        image: "assets/cer-1.jpg",
+        body: "ความเชี่ยวชาญด้านวิทยาการคอมพิวเตอร์ที่พร้อมปรับตัวในทุกภาษาและกระบวนทัศน์: Python สำหรับงาน Data และ AI, Lua สำหรับระบบเกมเรียลไทม์, JavaScript/TypeScript สำหรับเว็บ Full-Stack สมัยใหม่, C# สำหรับ Unity OOP และ SQL สำหรับฐานข้อมูลเชิงสัมพันธ์",
+        highlights: ["เข้าใจกระบวนทัศน์ OOP, Functional, Event-Driven", "เว็บ Full-Stack และ Game Engines", "โครงสร้างโค้ดที่สะอาดและยืดหยุ่น", "เรียนรู้ภาษาใหม่ได้รวดเร็ว"],
+        tags: ["Python", "Lua", "JavaScript / TypeScript", "C# / Unity", "HTML5 / CSS3", "SQL / Dataverse"]
+      },
+      {
         id: "portfolio-site",
-        title: "พอร์ตโฟลิโอเว็บแอปพลิเคชันและห้องควบคุมแอดมิน",
-        type: "💎 เว็บแอปพลิเคชัน Full-Stack / วิศวกรรมแพลตฟอร์ม",
+        title: "พอร์ตโฟลิโอเว็บแอปพลิเคชัน Cosmic Nebula & ห้องควบคุมแอดมิน",
+        type: "💎 เว็บแอปพลิเคชัน Full-Stack / Spatial UI",
         badge: "💎 Full-Stack พร้อมระบบหลังบ้านครบวงจร",
         featured: false,
-        status: "เปิดใช้งานจริง",
-        body: "เว็บพอร์ตโฟลิโอระดับโปรดักชันที่สร้างขึ้นเองทั้งหมดในธีม Obsidian-Orange สไตล์ KMITL มีแบ็กเอนด์ Express.js, ฐานข้อมูล SQLite/PostgreSQL, ระบบเข้ารหัสความปลอดภัยระดับสูง, เซสชันโทเคน, ระบบกดถูกใจแบบเรียลไทม์, บันทึก Audit Log ละเอียด, แดชบอร์ดแอดมิน, รองรับสองภาษา และความลื่นไหลในทุกหน้าจอ",
-        highlights: ["Express.js & การเชื่อมต่อฐานข้อมูล", "ห้องควบคุมแอดมินและ Audit Log", "ระบบความปลอดภัยและเซสชันระดับสูง", "แสดงผลลื่นไหลสมบูรณ์แบบทุกอุปกรณ์"],
-        tags: ["Express.js", "SQLite / PostgreSQL", "ความปลอดภัย & เซสชัน", "ห้องควบคุมแอดมิน", "ระบบสองภาษา", "Fluid UI"]
+        status: "เปิดใช้งานจริงระดับโปรดักชัน",
+        image: "assets/myface.jpg",
+        body: "เว็บพอร์ตโฟลิโอระดับโปรดักชันในธีม Cosmic Nebula มีแบ็กเอนด์ Express.js, ฐานข้อมูล SQLite/PostgreSQL, ระบบความปลอดภัยระดับสูง, เซสชันโทเคน, ระบบกดถูกใจแบบเรียลไทม์, บันทึก Audit Log ละเอียด, แดชบอร์ดแอดมิน และ 10 คอมโพเนนต์ Motion จาก React Bits",
+        highlights: ["Express.js & การเชื่อมต่อฐานข้อมูล", "ห้องควบคุมแอดมินและ Audit Log", "ระบบความปลอดภัยและเซสชันระดับสูง", "10 คอมโพเนนต์ Interactive Motion จาก React Bits"],
+        tags: ["Express.js", "WebGL / Shaders", "ความปลอดภัย & เซสชัน", "ห้องควบคุมแอดมิน", "ระบบสองภาษา", "Fluid UI"]
       }
     ],
     certificates: [
@@ -359,58 +383,62 @@ const CONTENT = {
       { title: "Configure forms, charts, and dashboards", image: "assets2/7-1.png", body: "สร้างแดชบอร์ดที่ธุรกิจใช้งานจริงในการดูข้อมูล", issuerId: "microsoft" },
       { title: "Build approval flows with Power Automate", image: "assets2/2-1.png", body: "สร้างระบบเวิร์กโฟลว์และขั้นตอนอนุมัติแบบอัตโนมัติ", issuerId: "microsoft" },
       { title: "Publish, share, and maintain a canvas app", image: "assets2/9-1.png", body: "เข้าใจวงจรของแอปทั้งหมด ตั้งแต่เปิดใช้งานจนถึงดูแลรักษาต่อเนื่อง", issuerId: "microsoft" },
-      { title: "Use Dataverse triggers and actions", image: "assets2/3-1.png", body: "ทำให้กระบวนการทำงานอัตโนมัติตามเหตุการณ์และข้อมูลที่เปลี่ยนแปลง", issuerId: "microsoft" },
-      { title: "Core components of Power Pages", image: "assets2/6-1.png", body: "พื้นฐานของการสร้างเว็บไซต์ธุรกิจที่เปิดให้บุคคลภายนอกใช้งาน", issuerId: "microsoft" },
-      { title: "Explore Power Pages design studio", image: "assets2/5-1.png", body: "ออกแบบและจัดสไตล์หน้าเว็บที่ขับเคลื่อนด้วยข้อมูล", issuerId: "microsoft" },
-      { title: "Get started with Power Automate", image: "assets2/4-1.png", body: "พื้นฐานของเวิร์กโฟลว์อัตโนมัติและกระบวนการดิจิทัล", issuerId: "microsoft" },
-      { title: "Get started with model-driven apps", image: "assets2/8-1.png", body: "ความเข้าใจพื้นฐานของแอปที่ขับเคลื่อนด้วยข้อมูลใน Power Apps", issuerId: "microsoft" },
-      { title: "Get started with Power Apps canvas apps", image: "assets2/11-1.png", body: "ก้าวแรกสู่การพัฒนาแอปแบบ low-code", issuerId: "microsoft" },
-      { title: "Security roles in Dataverse", image: "assets2/12-1.png", body: "พื้นฐานการควบคุมสิทธิ์การเข้าถึงและความปลอดภัยของข้อมูล", issuerId: "microsoft" },
-      { title: "Create and manage columns in Dataverse", image: "assets2/13-1.png", body: "พื้นฐานการตั้งค่าโครงสร้างฐานข้อมูล", issuerId: "microsoft" },
-      { title: "Create tables in Dataverse", image: "assets2/14-1.png", body: "ความเข้าใจพื้นฐานของการจัดโครงสร้างฐานข้อมูลเชิงสัมพันธ์", issuerId: "microsoft" },
       { title: "Make Game with AI", image: "assets/cer-2.jpg", body: "ผ่านกิจกรรม Make Game with AI เรียบร้อยแล้ว", issuerId: "hamsterhub" },
       { title: "Game with AI Workshop", image: "assets/cer-3.png", body: "เข้าร่วมเวิร์กช็อป Game with AI แบบลงมือทำจริง", issuerId: "hamsterhub" },
-      { title: "Other Certificate", image: "assets/cer-1.jpg", body: "ทักษะพื้นฐานทั่วไป", issuerId: "other" }
+      { title: "Developer Fundamentals", image: "assets/cer-1.jpg", body: "ทักษะพื้นฐานทั่วไปในการเขียนโปรแกรม", issuerId: "other" }
     ]
   }
 };
 
 /* ============================================================
-   🌐 UI TEXT — every static label on the page
+   🌐 UI TEXT
    ============================================================ */
 const UI = {
   en: {
-    nav: { profile: "Profile", story: "Life Story", skills: "Skills", projects: "Works", certificates: "Certificates", contact: "Contact" },
+    nav: { profile: "Profile", story: "Life Story", skills: "Skills", flagship: "Flagship", projects: "Works", certificates: "Certificates", contact: "Contact" },
     auth: { login: "Login", register: "Register", logout: "Logout", admin: "Admin" },
     hero: {
-      kicker: "KMITL Dreamer · Future Innovator",
-      alias: "AKA New JA · Born 06.23.09",
-      text: "High school Grade 12 developer who grew up loving play, then started building. I use AI as a creative partner, code as a tool, and KMITL as the dream destination for a future in technology.",
-      cta1: "See My Works",
-      cta2: "Read Life Story",
+      kicker: "Creative AI Architect · Full-Stack Innovator",
+      alias: "AKA New JA · Born 06.23.09 · Bangkok, Thailand",
+      text: "Developer and AI systems creator driven by curiosity. Transforming complex algorithms into intuitive spatial experiences, autonomous drone intelligence, and scalable full-stack applications.",
+      cta1: "Explore Works",
+      cta2: "Read Journey",
       cta3: "Download Resume",
-      nowCardSmall: "KMITL now",
-      nowCardStrong: "Dream University",
-      nowCardBody: "King Mongkut's Institute of Technology Ladkrabang",
-      phoneCardTitle: "University",
-      phoneCardBody: "King Mongkut's Institute of Technology Ladkrabang",
-      faceCardRole: "Developer / Creator"
+      trophySmall: "National AI Hackathon",
+      trophyStrong: "1st Place Champion",
+      trophyBody: "UTCC AI Hackathon 2026 · Grand Winner",
+      techSmall: "Core Focus",
+      techStrong: "Autonomous & LLM Systems",
+      techBody: "ROS · YOLO · Next.js · WebGL",
+      faceCardRole: "AI Engineer & Creator"
+    },
+    stats: {
+      projects: "Projects Built",
+      awards: "Awards & Honors",
+      accuracy: "AI Accuracy"
+    },
+    tech: {
+      marquee: "CORE STACK & INTELLIGENCE ARSENAL"
+    },
+    flagship: {
+      kicker: "Spotlight Showcase",
+      title: "Flagship Innovations & Awards",
+      body: "Hover over any card in the deck to inspect key projects with dynamic spring physics."
     },
     profile: {
       kicker: "Creator Profile",
-      body: "New JA is a Grade 12 Science-Math student focused on developer work, Roblox game systems, AI-assisted building, content creation, and future technology studies at KMITL.",
-      tags: ["AKA New JA", "Born 06.23.09", "Developer", "KMITL Dreamer"]
+      body: "High school Grade 12 developer with a relentless drive for innovation. Combining multi-agent AI, drone teleoperation, real-time 3D environments, and modern web architectures into impactful products."
     },
     section: {
-      story: { kicker: "Life Story", title: "From playing as a kid to building as a creator.", body: "New JA's story is shaped into a timeline, from early school life to the long-term dream of studying at KMITL." },
-      skills: { kicker: "Skill Stack", title: "I can do anything with AI.", body: "The scores below are New's current self-rated levels, presented as a sharp developer-style dashboard." },
-      projects: { kicker: "Works", title: "What I am building now.", body: "Members can sign in and like projects. Accounts, sessions, and likes are stored securely on the server." },
-      certificates: { kicker: "Certificates", title: "Activities and proof of growth.", body: "Certificate images from the Cer folder are presented as a gallery with smooth hover transitions." },
-      contact: { kicker: "Contact", title: "Let's connect." }
+      story: { kicker: "Life Story", title: "From playing as a kid to engineering the future.", body: "A timeline of passion, curiosity, national hackathons, and breakthrough milestones." },
+      skills: { kicker: "Skill Stack", title: "Engineering Beyond Boundaries.", body: "Self-evaluated proficiencies across Artificial Intelligence, Full-Stack Development, Game Architecture, and Robotics." },
+      projects: { kicker: "Selected Works", title: "Production Systems & Experiments.", body: "Interactive portfolio cards featuring Border Glow proximity luminescence and live member likes." },
+      certificates: { kicker: "Certificates & Proof", title: "Verified Achievements & Growth.", body: "Official credentials, competition victories, and academic milestones." },
+      contact: { kicker: "Transmission Channel", title: "Let's build something extraordinary." }
     },
     dossier: {
       badge: "⚡ 3D Interactive Dossiers",
-      hint: "Click any folder to unfold project sheets & inspect details"
+      hint: "Click any dossier to unfold project sheets & magnetic blueprints"
     },
     auth_modal: {
       loginKicker: "Login", loginTitle: "Welcome back", loginCopy: "Login to like projects and access your member account.",
@@ -428,1239 +456,1528 @@ const UI = {
       enable: "Enable", disable: "Disable", delete: "Delete",
       joined: "Joined", age: "Age", anonymous: "Anonymous", system: "system", unknownIp: "unknown IP",
       searchPlaceholder: "Search email, target, IP...",
-      allActions: "All actions",
-      loadMore: "Load more",
-      showingCount: (shown, total) => `Showing ${shown} of ${total} log entries`,
-      actions: {
-        USER_REGISTERED: "User registered",
-        LOGIN_FAILED: "Login failed",
-        LOGIN_SUCCEEDED: "Login succeeded",
-        LOGOUT: "Logout",
-        PROJECT_LIKED: "Project liked",
-        PROJECT_UNLIKED: "Project unliked",
-        ADMIN_USER_UPDATED: "Admin updated a user",
-        ADMIN_USER_DELETED: "Admin deleted a user"
-      }
+      filterAll: "All actions", filterLogin: "Login", filterRegister: "Register", filterLike: "Like",
+      loadMore: "Load more logs", showingLogs: "Showing {count} logs"
     },
-    likes: { youLiked: "You liked this work", loginToLike: "Login to like this work", liked: "Liked", like: "Like", likesLabel: "likes" },
-    cert: { viewDetail: "View Detail", seeMore: "See more", seeLess: "See less" },
-    issuers: { best_award: "The best Award", microsoft: "Microsoft", hamsterhub: "Hamster Hub", other: "Certificates" },
     toast: {
-      loginFirst: "Login first, then you can like works.",
-      loggedOut: "Logged out.",
-      registerWelcome: (name) => `Account created. Welcome, ${name}.`,
-      loginWelcome: (name) => `Welcome back, ${name}.`,
-      userUpdated: "User account updated.",
-      userDeleted: "User deleted.",
-      deleteConfirm: "Delete this user and all of their sessions and likes?",
-      pleaseWait: "Please wait...",
-      invalidEmail: "Please enter a valid email address.",
-      invalidPassword: "Use 10+ characters with uppercase, lowercase, a number, and a symbol."
+      liked: "Thanks for liking!",
+      unliked: "Like removed",
+      loginRequired: "Please login to like this project",
+      loggedIn: "Welcome back!",
+      registered: "Account registered successfully!",
+      loggedOut: "Logged out",
+      sessionRestored: "Session active",
+      copied: "Copied to clipboard!"
     }
   },
   th: {
-    nav: { profile: "โปรไฟล์", story: "เรื่องราวชีวิต", skills: "สกิล", projects: "ผลงาน", certificates: "ใบรับรอง", contact: "ติดต่อ" },
-    auth: { login: "เข้าสู่ระบบ", register: "สมัครสมาชิก", logout: "ออกจากระบบ", admin: "แอดมิน" },
+    nav: { profile: "โปรไฟล์", story: "เรื่องราว", skills: "ทักษะ", flagship: "ผลงานเด่น", projects: "ผลงาน", certificates: "เกียรติบัตร", contact: "ติดต่อ" },
+    auth: { login: "เข้าสู่ระบบ", register: "สมัครสมาชิก", logout: "ออกจากระบบ", admin: "ผู้ดูแลระบบ" },
     hero: {
-      kicker: "เด็กฝัน KMITL · นวัตกรเทคโนโลยี",
-      alias: "หรือที่รู้จักกันในชื่อ New JA · เกิด 23.06.09",
-      text: "ผมเป็นนักเรียนชั้นมัธยม 6 ที่เขียนโปรแกรมด้วย โตมากับการเล่น แล้วก็เริ่มมาสร้างของแทน ใช้ AI เป็นคู่คิดสร้างสรรค์ ใช้โค้ดเป็นเครื่องมือ และมี KMITL เป็นจุดหมายต่อไป",
-      cta1: "ดูผลงานของผม",
-      cta2: "อ่านเรื่องราวของผม",
+      kicker: "สถาปนิกปัญญาประดิษฐ์ · นักพัฒนา Full-Stack",
+      alias: "AKA New JA · เกิด 23 มิ.ย. 2009 · กรุงเทพฯ",
+      text: "นักพัฒนาและผู้สร้างระบบ AI ที่ขับเคลื่อนด้วยความอยากรู้อยากเห็น เปลี่ยนอัลกอริทึมซับซ้อนให้กลายเป็นประสบการณ์เสมือนจริง โดรนอัตโนมัติ และเว็บแอปพลิเคชันระดับโปรดักชัน",
+      cta1: "ชมผลงานทั้งหมด",
+      cta2: "อ่านเส้นทางชีวิต",
       cta3: "ดาวน์โหลดเรซูเม่",
-      nowCardSmall: "KMITL ตอนนี้",
-      nowCardStrong: "มหาวิทยาลัยในฝัน",
-      nowCardBody: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
-      phoneCardTitle: "มหาวิทยาลัย",
-      phoneCardBody: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
-      faceCardRole: "นักพัฒนา / ครีเอเตอร์"
+      trophySmall: "การแข่งขัน AI ระดับประเทศ",
+      trophyStrong: "ชนะเลิศอันดับ 1",
+      trophyBody: "UTCC AI Hackathon 2026 · แชมป์ระดับชาติ",
+      techSmall: "ความเชี่ยวชาญหลัก",
+      techStrong: "ระบบอัตโนมัติ & LLM Systems",
+      techBody: "ROS · YOLO · Next.js · WebGL",
+      faceCardRole: "วิศวกร AI & ครีเอเตอร์"
+    },
+    stats: {
+      projects: "โปรเจกต์ที่สร้างสรรค์",
+      awards: "รางวัล & เกียรติบัตร",
+      accuracy: "ความแม่นยำโมเดล AI"
+    },
+    tech: {
+      marquee: "เทคโนโลยีและโมเดลอัจฉริยะหลัก"
+    },
+    flagship: {
+      kicker: "ผลงานไฮไลท์ระดับประเทศ",
+      title: "นวัตกรรมเด่น & รางวัลชนะเลิศ",
+      body: "เลื่อนเมาส์ชี้การ์ดในกองผลงานเพื่อดูรายละเอียดพร้อมสปริงฟิสิกส์ 3 มิติ"
     },
     profile: {
-      kicker: "โปรไฟล์ครีเอเตอร์",
-      body: "นักเรียนสายวิทย์-คณิต ม.6 ที่ใช้เวลาส่วนใหญ่ไปกับงานพัฒนา ระบบเกม Roblox การสร้างงานด้วย AI และทำคอนเทนต์ โดยมี KMITL เป็นจุดหมายถัดไป",
-      tags: ["หรือ New JA", "เกิด 23.06.09", "นักพัฒนา", "เด็กฝัน KMITL"]
+      kicker: "ประวัติผู้สร้างสรรค์",
+      body: "นักเรียนมัธยมศึกษาปีที่ 6 สายวิทย์-คณิต ที่มุ่งมั่นพัฒนานวัตกรรม ผสานระบบ Multi-Agent AI, การควบคุมโดรนทางไกล, โลก 3 มิติเสมือนจริง และสถาปัตยกรรมเว็บสมัยใหม่ให้เกิดประโยชน์สูงสุด"
     },
     section: {
-      story: { kicker: "เรื่องราวชีวิต", title: "จากเด็กที่ชอบเล่น สู่ครีเอเตอร์ที่ชอบสร้าง", body: "เรื่องราวของผมเรียงเป็นไทม์ไลน์ ตั้งแต่วันเรียนจนถึงเป้าหมายระยะยาวคือการได้เรียนที่ KMITL" },
-      skills: { kicker: "สกิลที่มี", title: "พยายามทำทุกอย่างโดยมี AI อยู่ข้าง ๆ", body: "นี่คือระดับสกิลที่ประเมินตัวเองตอนนี้ นำเสนอในสไตล์แดชบอร์ดนักพัฒนา" },
-      projects: { kicker: "ผลงาน", title: "สิ่งที่กำลังสร้างอยู่ตอนนี้", body: "เข้าสู่ระบบเพื่อกดถูกใจผลงานได้เลย บัญชี เซสชัน และการกดถูกใจถูกเก็บไว้อย่างปลอดภัย" },
-      certificates: { kicker: "ใบรับรอง", title: "กิจกรรมและหลักฐานความตั้งใจ", body: "แกลเลอรีใบรับรอง จัดกลุ่มตามผู้ออกใบรับรอง" },
-      contact: { kicker: "ติดต่อ", title: "มาคุยกันได้เลย" }
+      story: { kicker: "เส้นทางชีวิต", title: "จากเด็กที่ชอบเล่น สู่คนที่สร้างสรรค์อนาคต", body: "ไทม์ไลน์บันทึกก้าวสำคัญ ความหลงใหล ชัยชนะใน Hackathon ระดับประเทศ และก้าวต่อไป" },
+      skills: { kicker: "คลังทักษะ", title: "ก้าวข้ามทุกขีดจำกัดด้วยเทคโนโลยี", body: "ระดับความเชี่ยวชาญที่ประเมินจากประสบการณ์จริง ทั้ง AI, Full-Stack, ระบบเกม และหุ่นยนต์" },
+      projects: { kicker: "ผลงานที่คัดสรร", title: "ระบบโปรดักชัน & การทดลองเชิงวิจัย", body: "การ์ดผลงานแบบ Interactive พร้อมลำแสง Border Glow วิ่งตามเมาส์ และระบบถูกใจเรียลไทม์" },
+      certificates: { kicker: "เกียรติบัตร & รางวัล", title: "หลักฐานความมุ่งมั่นและการเติบโต", body: "รางวัลจากการแข่งขัน การฝึกอบรมจากองค์กรเทคโนโลยีชั้นนำ และผลงานที่ผ่านการรับรอง" },
+      contact: { kicker: "ช่องทางการสื่อสาร", title: "มาร่วมสร้างสรรค์สิ่งใหม่ด้วยกัน" }
     },
     dossier: {
-      badge: "⚡ แฟ้มผลงานสามมิติ (Interactive Dossiers)",
-      hint: "คลิกที่แฟ้มเอกสารเพื่อเปิดดูแผ่นสรุปข้อมูลและผลงานเด่น"
+      badge: "⚡ แฟ้มประวัติ 3D Interactive",
+      hint: "คลิกที่แฟ้มเพื่อคลี่แผ่นเอกสารโครงการและพิมพ์เขียวระบบ"
     },
     auth_modal: {
-      loginKicker: "เข้าสู่ระบบ", loginTitle: "ยินดีต้อนรับกลับมา", loginCopy: "เข้าสู่ระบบเพื่อกดถูกใจผลงานและใช้งานบัญชีสมาชิกของคุณ",
-      registerKicker: "สมัครสมาชิก", registerTitle: "สร้างบัญชีผู้เยี่ยมชม", registerCopy: "สมัครบัญชีทั่วไปเพื่อกดถูกใจผลงานของผมได้",
+      loginKicker: "เข้าสู่ระบบ", loginTitle: "ยินดีต้อนรับกลับมา", loginCopy: "เข้าสู่ระบบเพื่อกดถูกใจผลงานและเข้าถึงบัญชีสมาชิกของคุณ",
+      registerKicker: "สมัครสมาชิก", registerTitle: "สร้างบัญชีผู้เข้าชม", registerCopy: "สมัครบัญชีทั่วไปเพื่อร่วมกดถูกใจและสนับสนุนผลงานของฉัน",
       username: "ชื่อผู้ใช้", email: "อีเมล", password: "รหัสผ่าน", age: "อายุ",
-      passwordRule: "ใช้ 10 ตัวอักษรขึ้นไป มีทั้งตัวพิมพ์ใหญ่ พิมพ์เล็ก ตัวเลข และสัญลักษณ์",
+      passwordRule: "ใช้รหัสผ่าน 10 ตัวอักษรขึ้นไป มีตัวพิมพ์ใหญ่ พิมพ์เล็ก ตัวเลข และสัญลักษณ์",
       submitLogin: "เข้าสู่ระบบ", submitRegister: "สมัครสมาชิก"
     },
     dashboard: {
-      kicker: "ห้องควบคุมแอดมิน", title: "ศูนย์ควบคุมพอร์ตโฟลิโอ",
-      stats: ["บัญชีทั้งหมด", "ใช้งานอยู่", "แอดมิน", "ยอดถูกใจ"],
-      users: "บัญชีผู้ใช้", likes: "ยอดถูกใจผลงาน", logs: "บันทึกระบบ",
-      noUsers: "ยังไม่มีผู้ใช้", noLogs: "ยังไม่มีบันทึก",
-      roleUser: "ผู้ใช้ทั่วไป", roleAdmin: "แอดมิน", active: "ใช้งานอยู่", disabled: "ถูกระงับ",
-      enable: "เปิดใช้งาน", disable: "ระงับการใช้งาน", delete: "ลบ",
-      joined: "สมัครเมื่อ", age: "อายุ", anonymous: "ไม่ระบุตัวตน", system: "ระบบ", unknownIp: "ไม่ทราบ IP",
-      searchPlaceholder: "ค้นหาอีเมล เป้าหมาย หรือ IP...",
-      allActions: "ทุกประเภท",
-      loadMore: "โหลดเพิ่ม",
-      showingCount: (shown, total) => `แสดง ${shown} จาก ${total} รายการ`,
-      actions: {
-        USER_REGISTERED: "สมัครสมาชิกใหม่",
-        LOGIN_FAILED: "เข้าสู่ระบบไม่สำเร็จ",
-        LOGIN_SUCCEEDED: "เข้าสู่ระบบสำเร็จ",
-        LOGOUT: "ออกจากระบบ",
-        PROJECT_LIKED: "กดถูกใจผลงาน",
-        PROJECT_UNLIKED: "ยกเลิกถูกใจผลงาน",
-        ADMIN_USER_UPDATED: "แอดมินแก้ไขผู้ใช้",
-        ADMIN_USER_DELETED: "แอดมินลบผู้ใช้"
-      }
+      kicker: "ระบบหลังบ้าน", title: "ห้องควบคุมพอร์ตโฟลิโอ",
+      stats: ["ผู้ใช้งาน", "ใช้งานอยู่", "แอดมิน", "ยอดถูกใจ"],
+      users: "รายชื่อบัญชีผู้ใช้", likes: "บันทึกยอดถูกใจ", logs: "บันทึกระบบ (Audit Logs)",
+      noUsers: "ยังไม่มีผู้ใช้ในระบบ", noLogs: "ยังไม่มีบันทึกกิจกรรม",
+      roleUser: "ผู้ใช้ทั่วไป", roleAdmin: "แอดมิน", active: "ปกติ", disabled: "ถูกระงับ",
+      enable: "เปิดใช้งาน", disable: "ระงับ", delete: "ลบ",
+      joined: "วันที่สมัคร", age: "อายุ", anonymous: "ไม่ระบุตัวตน", system: "ระบบ", unknownIp: "ไม่ทราบ IP",
+      searchPlaceholder: "ค้นหาอีเมล, เป้าหมาย, IP...",
+      filterAll: "ทุกกิจกรรม", filterLogin: "เข้าสู่ระบบ", filterRegister: "สมัครสมาชิก", filterLike: "กดถูกใจ",
+      loadMore: "โหลดบันทึกเพิ่ม", showingLogs: "กำลังแสดง {count} รายการ"
     },
-    likes: { youLiked: "คุณกดถูกใจผลงานนี้แล้ว", loginToLike: "เข้าสู่ระบบเพื่อกดถูกใจ", liked: "ถูกใจแล้ว", like: "ถูกใจ", likesLabel: "ถูกใจ" },
-    cert: { viewDetail: "ดูรายละเอียด", seeMore: "ดูเพิ่มเติม", seeLess: "ย่อกลับ" },
-    issuers: { best_award: "รางวัลยอดเยี่ยม (The best Award)", microsoft: "Microsoft", hamsterhub: "Hamster Hub", other: "ใบรับรองอื่น ๆ" },
     toast: {
-      loginFirst: "เข้าสู่ระบบก่อน แล้วค่อยกดถูกใจผลงานได้เลย",
-      loggedOut: "ออกจากระบบแล้ว",
-      registerWelcome: (name) => `สร้างบัญชีแล้ว ยินดีต้อนรับ, ${name}`,
-      loginWelcome: (name) => `ยินดีต้อนรับกลับมา, ${name}`,
-      userUpdated: "อัปเดตบัญชีผู้ใช้แล้ว",
-      userDeleted: "ลบผู้ใช้แล้ว",
-      deleteConfirm: "ลบผู้ใช้คนนี้พร้อมเซสชันและยอดถูกใจทั้งหมดเลยไหม?",
-      pleaseWait: "กรุณารอสักครู่...",
-      invalidEmail: "กรุณากรอกอีเมลให้ถูกต้อง",
-      invalidPassword: "ใช้ 10 ตัวอักษรขึ้นไป มีทั้งตัวพิมพ์ใหญ่ พิมพ์เล็ก ตัวเลข และสัญลักษณ์"
+      liked: "ขอบคุณที่กดถูกใจผลงาน!",
+      unliked: "ยกเลิกการถูกใจแล้ว",
+      loginRequired: "กรุณาเข้าสู่ระบบก่อนกดถูกใจผลงาน",
+      loggedIn: "เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ!",
+      registered: "สมัครสมาชิกสำเร็จ พร้อมใช้งานแล้ว!",
+      loggedOut: "ออกจากระบบเรียบร้อยแล้ว",
+      sessionRestored: "เข้าสู่ระบบอัตโนมัติจากเซสชันเดิม",
+      copied: "คัดลอกลงคลิปบอร์ดแล้ว!"
     }
   }
 };
 
-const LANG_KEY = "newja_lang";
-function getInitialLang() {
-  const saved = window.localStorage.getItem(LANG_KEY);
-  if (saved === "en" || saved === "th") return saved;
-  return "th";
-}
-
-const state = {
-  lang: getInitialLang(),
-  likeCounts: {},
+/* ============================================================
+   STATE MANAGEMENT
+   ============================================================ */
+let state = {
+  lang: localStorage.getItem("preferred_language") || "en",
   likedProjectIds: [],
-  expandedCerts: {},
-  openFolders: {},
-  logs: [],
-  logsTotal: 0,
-  logsPage: 0,
-  logsPageSize: 50,
-  logsFilter: { action: "", search: "" },
-  logActions: []
+  logsFilter: { search: "", action: "" },
+  logsPage: 1
 };
+
 let session = null;
-let authMode = "login";
 
-function t() { return UI[state.lang]; }
-function c() { return CONTENT[state.lang]; }
-
-const storyList = document.querySelector("#storyList");
-const aiToolList = document.querySelector("#aiToolList");
-const skillList = document.querySelector("#skillList");
-const dossiersList = document.querySelector("#dossiersList");
-const projectList = document.querySelector("#projectList");
-const certificateList = document.querySelector("#certificateList");
-const authModal = document.querySelector("#authModal");
-const dashboardModal = document.querySelector("#dashboardModal");
-const authForm = document.querySelector("#authForm");
-const authTitle = document.querySelector("#authTitle");
-const authKicker = document.querySelector("#authKicker");
-const authCopy = document.querySelector("#authCopy");
-const authSubmit = document.querySelector("#authSubmit");
-const formStatus = document.querySelector("#formStatus");
-const usernameField = document.querySelector("#usernameField");
-const ageField = document.querySelector("#ageField");
-const passwordRule = document.querySelector("#passwordRule");
-const toast = document.querySelector("#toast");
-const userBadge = document.querySelector("#userBadge");
-const langToggleBtn = document.querySelector("#langToggleBtn");
-const logSearchInput = document.querySelector("#logSearchInput");
-const logActionSelect = document.querySelector("#logActionSelect");
-const logCountLabel = document.querySelector("#logCountLabel");
-const loadMoreLogsBtn = document.querySelector("#loadMoreLogsBtn");
-
-function escapeHtml(value) {
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+function t() {
+  return UI[state.lang] || UI.en;
 }
 
-function darkenColor(hex, percent) {
-  let color = hex.startsWith("#") ? hex.slice(1) : hex;
-  if (color.length === 3) {
-    color = color.split("").map((ch) => ch + ch).join("");
-  }
-  const num = parseInt(color.slice(0, 6), 16);
-  let r = (num >> 16) & 0xff;
-  let g = (num >> 8) & 0xff;
-  let b = num & 0xff;
-  r = Math.max(0, Math.min(255, Math.floor(r * (1 - percent))));
-  g = Math.max(0, Math.min(255, Math.floor(g * (1 - percent))));
-  b = Math.max(0, Math.min(255, Math.floor(b * (1 - percent))));
-  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+function content() {
+  return CONTENT[state.lang] || CONTENT.en;
 }
 
+/* ============================================================
+   API HELPER
+   ============================================================ */
 async function api(path, options = {}) {
-  const response = await fetch(path, {
-    credentials: "same-origin",
-    headers: {
-      ...(options.body ? { "Content-Type": "application/json" } : {}),
-      ...options.headers
-    },
-    ...options
-  });
-
-  const data = response.status === 204 ? null : await response.json().catch(() => ({}));
-  if (!response.ok) {
-    const error = new Error(data?.error || "Something went wrong.");
-    error.status = response.status;
-    throw error;
-  }
+  const headers = { "Content-Type": "application/json", ...(options.headers || {}) };
+  const res = await fetch(path, { credentials: "same-origin", credentials: "include", ...options, headers });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || "Request failed");
   return data;
 }
 
+/* ============================================================
+   TOAST NOTIFICATION
+   ============================================================ */
+let toastTimeout = null;
 function showToast(message) {
+  const toast = document.querySelector("#toast");
+  if (!toast) return;
   toast.textContent = message;
-  toast.classList.add("is-visible");
-  window.clearTimeout(showToast.timeout);
-  showToast.timeout = window.setTimeout(() => toast.classList.remove("is-visible"), 2600);
-}
-
-/* ─── Static UI text (nav, hero, section heads, labels) ─── */
-function applyStaticText() {
-  document.documentElement.lang = state.lang;
-  const ui = t();
-
-  document.querySelectorAll("[data-i18n]").forEach((el) => {
-    const key = el.dataset.i18n;
-    const value = key.split(".").reduce((obj, part) => obj?.[part], ui);
-    if (typeof value === "string") el.textContent = value;
-  });
-
-  const tagsHost = document.querySelector("#profileTags");
-  if (tagsHost) {
-    tagsHost.innerHTML = ui.profile.tags.map((tag) => `<span class="pill">${escapeHtml(tag)}</span>`).join("");
-  }
-
-  if (langToggleBtn) {
-    langToggleBtn.textContent = state.lang === "th" ? "EN" : "ไทย";
-    langToggleBtn.setAttribute("aria-label", state.lang === "th" ? "Switch to English" : "เปลี่ยนเป็นภาษาไทย");
-  }
-
-  passwordRule.textContent = ui.auth_modal.passwordRule;
-  document.querySelector("#dashboardModal h2").textContent = ui.dashboard.title;
-  document.querySelector("#dashboardModal .kicker").textContent = ui.dashboard.kicker;
-  document.querySelector(".dashboard-users h3").textContent = ui.dashboard.users;
-  document.querySelector(".dashboard-grid article:nth-child(2) h3").textContent = ui.dashboard.likes;
-  document.querySelector(".dashboard-logs h3").textContent = ui.dashboard.logs;
-  if (logSearchInput) logSearchInput.placeholder = ui.dashboard.searchPlaceholder;
-  if (loadMoreLogsBtn) loadMoreLogsBtn.textContent = ui.dashboard.loadMore;
-  populateActionSelect();
-  renderLogs();
-
-  updateAuthUi();
-}
-
-function setLanguage(lang) {
-  if (lang !== "th" && lang !== "en") return;
-  state.lang = lang;
-  window.localStorage.setItem(LANG_KEY, lang);
-  applyStaticText();
-  renderStory();
-  renderAiTools();
-  renderSkills();
-  renderDossiers();
-  renderProjects();
-  renderCertificates();
-}
-
-function renderStory() {
-  storyList.innerHTML = c().story.map((item, index) => `
-    <article class="timeline-item reveal">
-      <span class="timeline-dot">${index + 1}</span>
-      <time>${escapeHtml(item.period)}</time>
-      <div>
-        <h3>${escapeHtml(item.title)}</h3>
-        <p>${escapeHtml(item.body)}</p>
-      </div>
-    </article>
-  `).join("");
-  observeReveals();
-}
-
-function renderAiTools() {
-  aiToolList.innerHTML = c().aiTools.map((tool) => `
-    <article class="ai-card">
-      <span>${escapeHtml(tool.name.slice(0, 2))}</span>
-      <div>
-        <h3>${escapeHtml(tool.name)}</h3>
-        <p>${escapeHtml(tool.body)}</p>
-      </div>
-    </article>
-  `).join("");
-}
-
-function renderSkills() {
-  skillList.innerHTML = c().skills.map((skill) => `
-    <article class="skill-card reveal">
-      <h3>${escapeHtml(skill.name)}</h3>
-      <p>${escapeHtml(skill.body)}</p>
-      <div class="meter" aria-label="${escapeHtml(skill.name)} ${skill.score} / 10">
-        <span style="--value: ${skill.score * 10}%"></span>
-      </div>
-      <p><strong>${skill.score}/10</strong></p>
-    </article>
-  `).join("");
-  observeReveals();
+  toast.classList.add("show");
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => toast.classList.remove("show"), 3200);
 }
 
 /* ============================================================
-   🗂️ RENDER REACT BITS 3D INTERACTIVE FOLDERS
+   🎯 TARGET CURSOR (React Bits HUD Crosshair Engine)
    ============================================================ */
-function renderDossiers() {
-  if (!dossiersList) return;
-  const dossiers = c().dossiers || [];
-  dossiersList.innerHTML = dossiers.map((dossier) => {
-    const isOpen = Boolean(state.openFolders[dossier.id]);
-    const folderBackColor = darkenColor(dossier.color, 0.22);
-
-    return `
-      <div class="folder-item-wrap" data-folder-id="${escapeHtml(dossier.id)}">
-        <div
-          class="folder ${isOpen ? "open" : ""}"
-          role="button"
-          tabindex="0"
-          aria-expanded="${isOpen}"
-          aria-label="${isOpen ? "Close folder" : "Open folder"}"
-          style="--folder-color: ${escapeHtml(dossier.color)}; --folder-back-color: ${escapeHtml(folderBackColor)};"
-        >
-          <div class="folder__back">
-            ${dossier.papers.map((p, idx) => `
-              <div class="paper paper-${idx + 1}" data-paper-index="${idx}">
-                <div class="paper-inner">
-                  <span class="paper-tag">${escapeHtml(p.tag)}</span>
-                  <strong>${escapeHtml(p.title)}</strong>
-                  <small>${escapeHtml(p.desc)}</small>
-                </div>
-              </div>
-            `).join("")}
-            <div class="folder__front"></div>
-            <div class="folder__front right"></div>
-          </div>
-        </div>
-        <div class="folder-caption">
-          <strong>${escapeHtml(dossier.title)}</strong>
-          <span>${escapeHtml(dossier.subtitle)}</span>
-        </div>
-      </div>
-    `;
-  }).join("");
-
-  // Attach interactive click and magnetic mouse physics
-  dossiersList.querySelectorAll(".folder-item-wrap").forEach((wrap) => {
-    const folderId = wrap.dataset.folderId;
-    const folder = wrap.querySelector(".folder");
-    const papers = wrap.querySelectorAll(".paper");
-
-    function toggleFolder() {
-      state.openFolders[folderId] = !state.openFolders[folderId];
-      const opened = state.openFolders[folderId];
-      folder.classList.toggle("open", opened);
-      folder.setAttribute("aria-expanded", String(opened));
-      if (!opened) {
-        papers.forEach((p) => {
-          p.style.removeProperty("--magnet-x");
-          p.style.removeProperty("--magnet-y");
-        });
-      }
-    }
-
-    folder.addEventListener("click", (e) => {
-      // If clicking inside a paper, don't necessarily toggle if dragging
-      toggleFolder();
-    });
-
-    folder.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggleFolder();
-      }
-    });
-
-    papers.forEach((paper) => {
-      paper.addEventListener("mousemove", (e) => {
-        if (!folder.classList.contains("open")) return;
-        const rect = paper.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const offsetX = (e.clientX - centerX) * 0.18;
-        const offsetY = (e.clientY - centerY) * 0.18;
-        paper.style.setProperty("--magnet-x", `${offsetX}px`);
-        paper.style.setProperty("--magnet-y", `${offsetY}px`);
-      });
-
-      paper.addEventListener("mouseleave", () => {
-        paper.style.setProperty("--magnet-x", "0px");
-        paper.style.setProperty("--magnet-y", "0px");
-      });
-    });
-  });
-}
-
-function getProjectLikeCount(projectId) {
-  return state.likeCounts[projectId] || 0;
-}
-
-function renderProjects() {
-  const ui = t();
-  projectList.innerHTML = c().projects.map((project) => {
-    const liked = state.likedProjectIds.includes(project.id);
-    const isFeatured = Boolean(project.featured);
-    const highlightsHtml = (project.highlights && project.highlights.length > 0)
-      ? `<div class="project-highlights">
-          ${project.highlights.map((h) => `<span class="highlight-chip"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>${escapeHtml(h)}</span>`).join("")}
-        </div>`
-      : "";
-
-    return `
-      <article class="project-card ${isFeatured ? "project-card--featured" : ""} reveal">
-        ${project.badge ? `<div class="project-badge">${escapeHtml(project.badge)}</div>` : ""}
-        <div class="project-header">
-          <p class="kicker">${escapeHtml(project.type)}</p>
-          <h3>${escapeHtml(project.title)}</h3>
-        </div>
-        <p class="project-body">${escapeHtml(project.body)}</p>
-        ${highlightsHtml}
-        <div class="project-meta">
-          <span class="pill status-pill">${escapeHtml(project.status)}</span>
-          <span class="pill like-pill">❤️ ${getProjectLikeCount(project.id)} ${escapeHtml(ui.likes.likesLabel)}</span>
-        </div>
-        <div class="project-tags">
-          ${project.tags.map((tag) => `<span class="pill tag-pill">${escapeHtml(tag)}</span>`).join("")}
-        </div>
-        <div class="like-row">
-          <span>${liked ? escapeHtml(ui.likes.youLiked) : escapeHtml(ui.likes.loginToLike)}</span>
-          <button class="like-btn ${liked ? "is-liked" : ""}" data-like="${project.id}" type="button">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="${liked ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            </svg>
-            ${liked ? escapeHtml(ui.likes.liked) : escapeHtml(ui.likes.like)}
-          </button>
-        </div>
-      </article>
-    `;
-  }).join("");
-  observeReveals();
-}
-
-window.openCertModal = function (imgSrc, title, body) {
-  document.getElementById("certModalImg").src = imgSrc;
-  document.getElementById("certModalTitle").textContent = title;
-  document.getElementById("certModalBody").textContent = body;
-  document.getElementById("certModal").showModal();
-};
-
-window.toggleCerts = function (issuerId) {
-  state.expandedCerts[issuerId] = !state.expandedCerts[issuerId];
-
-  if (document.startViewTransition) {
-    document.startViewTransition(() => renderCertificates());
-  } else {
-    renderCertificates();
-  }
-};
-
-function renderCertificates() {
-  const ui = t();
-  const issuerOrder = ["best_award", "microsoft", "hamsterhub", "other"];
-
-  const grouped = issuerOrder.map((issuerId) => ({
-    issuerId,
-    label: ui.issuers[issuerId],
-    certs: c().certificates.filter((cert) => cert.issuerId === issuerId)
-  })).filter((group) => group.certs.length > 0);
-
-  let htmlContent = "";
-
-  for (const { issuerId, label, certs } of grouped) {
-    const isExpanded = state.expandedCerts[issuerId];
-    const displayCerts = isExpanded ? certs : certs.slice(0, 3);
-    const hasMore = certs.length > 3;
-
-    htmlContent += `
-      <div class="cert-category">
-        <div class="cert-category-header">
-          <h3>${escapeHtml(label)}</h3>
-          ${hasMore ? `<a href="#" class="see-more-link" onclick="event.preventDefault(); toggleCerts('${issuerId}')">${isExpanded ? escapeHtml(ui.cert.seeLess) : escapeHtml(ui.cert.seeMore)}</a>` : ""}
-        </div>
-        <div class="cert-row">
-          ${displayCerts.map((cert) => `
-            <div class="cert-box reveal" onclick="openCertModal('${escapeHtml(cert.image)}', '${escapeHtml(cert.title)}', '${escapeHtml(cert.body)}')">
-              <img src="${escapeHtml(cert.image)}" alt="${escapeHtml(cert.title)}" loading="lazy">
-              <div class="cert-overlay">
-                <span>${escapeHtml(ui.cert.viewDetail)}</span>
-              </div>
-            </div>
-          `).join("")}
-        </div>
-      </div>
-    `;
-  }
-
-  certificateList.innerHTML = htmlContent;
-  observeReveals();
-}
-
-function openAuth(mode) {
-  authMode = mode;
-  const ui = t().auth_modal;
-  formStatus.textContent = "";
-  authForm.reset();
-  document.querySelector("#ageInput").value = 17;
-  const isRegister = mode === "register";
-  authKicker.textContent = isRegister ? ui.registerKicker : ui.loginKicker;
-  authTitle.textContent = isRegister ? ui.registerTitle : ui.loginTitle;
-  authCopy.textContent = isRegister ? ui.registerCopy : ui.loginCopy;
-  authSubmit.textContent = isRegister ? ui.submitRegister : ui.submitLogin;
-  usernameField.hidden = !isRegister;
-  ageField.hidden = !isRegister;
-  passwordRule.hidden = !isRegister;
-  document.querySelector("#usernameInput").required = isRegister;
-  document.querySelector("#ageInput").required = isRegister;
-  document.querySelector("#passwordInput").minLength = isRegister ? 10 : 1;
-  authModal.showModal();
-}
-
-function updateAuthUi() {
-  const ui = t().auth;
-  const isLoggedIn = Boolean(session);
-  document.querySelector("#loginBtn").hidden = isLoggedIn;
-  document.querySelector("#registerBtn").hidden = isLoggedIn;
-  document.querySelector("#logoutBtn").hidden = !isLoggedIn;
-  document.querySelector("#dashboardBtn").hidden = !(session && session.role === "admin");
-  document.querySelector("#loginBtn").textContent = ui.login;
-  document.querySelector("#registerBtn").textContent = ui.register;
-  document.querySelector("#logoutBtn").textContent = ui.logout;
-  document.querySelector("#dashboardBtn").textContent = ui.admin;
-  userBadge.hidden = !isLoggedIn;
-  userBadge.textContent = isLoggedIn ? `${session.username} / ${session.role}` : "";
-}
-
-function validateEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function validateRegisterPassword(password) {
-  return password.length >= 10
-    && /[A-Z]/.test(password)
-    && /[a-z]/.test(password)
-    && /\d/.test(password)
-    && /[^A-Za-z0-9]/.test(password);
-}
-
-async function handleAuth(event) {
-  event.preventDefault();
-  const ui = t().toast;
-  const username = document.querySelector("#usernameInput").value.trim();
-  const email = document.querySelector("#emailInput").value.trim().toLowerCase();
-  const password = document.querySelector("#passwordInput").value;
-  const age = Number(document.querySelector("#ageInput").value || 0);
-
-  if (!validateEmail(email)) {
-    formStatus.textContent = ui.invalidEmail;
-    return;
-  }
-
-  if (authMode === "register" && !validateRegisterPassword(password)) {
-    formStatus.textContent = ui.invalidPassword;
-    return;
-  }
-
-  authSubmit.disabled = true;
-  formStatus.textContent = ui.pleaseWait;
-  try {
-    const payload = authMode === "register"
-      ? { username, email, password, age }
-      : { email, password };
-    const data = await api(`/api/auth/${authMode}`, {
-      method: "POST",
-      body: JSON.stringify(payload)
-    });
-    session = data.user;
-    updateAuthUi();
-    await loadLikes();
-    authModal.close();
-    showToast(authMode === "register" ? ui.registerWelcome(session.username) : ui.loginWelcome(session.username));
-  } catch (error) {
-    formStatus.textContent = error.message;
-  } finally {
-    authSubmit.disabled = false;
-  }
-}
-
-async function handleLike(projectId) {
-  if (!session) {
-    openAuth("login");
-    showToast(t().toast.loginFirst);
-    return;
-  }
-
-  try {
-    await api(`/api/projects/${encodeURIComponent(projectId)}/like`, { method: "POST" });
-    await loadLikes();
-  } catch (error) {
-    if (error.status === 401) {
-      session = null;
-      updateAuthUi();
-    }
-    showToast(error.message);
-  }
-}
-
-function formatDate(value) {
-  return new Intl.DateTimeFormat(state.lang === "th" ? "th-TH" : "en-GB", {
-    dateStyle: "medium",
-    timeStyle: "short"
-  }).format(new Date(value));
-}
-
-let dashboardOverview = null;
-
-function renderDashboardOverview(data) {
-  dashboardOverview = data;
-  const ui = t().dashboard;
-  const userList = document.querySelector("#userList");
-  const likeList = document.querySelector("#likeList");
-  const activeUsers = data.users.filter((user) => user.isActive).length;
-  const admins = data.users.filter((user) => user.role === "admin").length;
-  const totalLikes = data.likes.reduce((sum, item) => sum + Number(item.count), 0);
-
-  document.querySelector("#adminStats").innerHTML = `
-    <div><strong>${data.users.length}</strong><span>${escapeHtml(ui.stats[0])}</span></div>
-    <div><strong>${activeUsers}</strong><span>${escapeHtml(ui.stats[1])}</span></div>
-    <div><strong>${admins}</strong><span>${escapeHtml(ui.stats[2])}</span></div>
-    <div><strong>${totalLikes}</strong><span>${escapeHtml(ui.stats[3])}</span></div>
-  `;
-
-  userList.innerHTML = data.users.length
-    ? data.users.map((user) => {
-      const isSelf = user.id === session.id;
-      return `
-      <div class="user-row">
-        <p>
-          <strong>${escapeHtml(user.username)}</strong>
-          <span class="account-state ${user.isActive ? "is-active" : "is-disabled"}">${user.isActive ? escapeHtml(ui.active) : escapeHtml(ui.disabled)}</span>
-          <br>${escapeHtml(user.email)}<br>
-          <small>${escapeHtml(ui.age)} ${user.age ?? "-"} / ${escapeHtml(ui.joined)} ${formatDate(user.createdAt)}</small>
-        </p>
-        <div class="user-actions">
-          <select data-role-user="${user.id}" aria-label="${escapeHtml(user.username)}" ${isSelf ? "disabled" : ""}>
-            <option value="user" ${user.role === "user" ? "selected" : ""}>${escapeHtml(ui.roleUser)}</option>
-            <option value="admin" ${user.role === "admin" ? "selected" : ""}>${escapeHtml(ui.roleAdmin)}</option>
-          </select>
-          <button class="ghost-btn compact" type="button" data-toggle-user="${user.id}" data-active="${user.isActive}" ${isSelf ? "disabled" : ""}>
-            ${user.isActive ? escapeHtml(ui.disable) : escapeHtml(ui.enable)}
-          </button>
-          <button class="danger-btn" type="button" data-delete-user="${user.id}" ${isSelf ? "disabled" : ""}>${escapeHtml(ui.delete)}</button>
-        </div>
-      </div>
-    `;
-    }).join("")
-    : `<p>${escapeHtml(ui.noUsers)}</p>`;
-
-  likeList.innerHTML = c().projects.map((project) => {
-    const item = data.likes.find((like) => like.project_id === project.id);
-    const names = item?.users?.map((user) => user.username).join(", ");
-    return `
-    <p><strong>${escapeHtml(project.title)}</strong><br>${Number(item?.count || 0)} ${escapeHtml(t().likes.likesLabel)}
-    ${names ? `<br><small>${escapeHtml(names)}</small>` : ""}</p>
-  `;
-  }).join("");
-}
-
-function actionLabel(actionCode) {
-  return t().dashboard.actions[actionCode] || actionCode;
-}
-
-function populateActionSelect() {
-  if (!logActionSelect) return;
-  const ui = t().dashboard;
-  const current = logActionSelect.value;
-  const options = [`<option value="">${escapeHtml(ui.allActions)}</option>`]
-    .concat(state.logActions.map((code) => `<option value="${escapeHtml(code)}">${escapeHtml(actionLabel(code))}</option>`));
-  logActionSelect.innerHTML = options.join("");
-  logActionSelect.value = state.logActions.includes(current) ? current : "";
-}
-
-function renderLogs() {
-  const ui = t().dashboard;
-  const logList = document.querySelector("#logList");
-  if (!logList) return;
-
-  logList.innerHTML = state.logs.length
-    ? state.logs.map((log) => `
-      <p>
-        <strong>${escapeHtml(actionLabel(log.action))}</strong>
-        <span class="log-actor">${escapeHtml(log.actor_email || ui.anonymous)}</span><br>
-        ${escapeHtml(log.target_type || ui.system)}${log.target_id ? ` / ${escapeHtml(log.target_id)}` : ""}
-        <br><small>${formatDate(log.created_at)} / ${escapeHtml(log.ip_address || ui.unknownIp)}</small>
-      </p>
-    `).join("")
-    : `<p>${escapeHtml(ui.noLogs)}</p>`;
-
-  if (logCountLabel) {
-    logCountLabel.textContent = state.logsTotal ? ui.showingCount(state.logs.length, state.logsTotal) : "";
-  }
-  if (loadMoreLogsBtn) {
-    loadMoreLogsBtn.hidden = state.logs.length >= state.logsTotal;
-  }
-}
-
-async function loadLogs({ reset = false } = {}) {
-  if (reset) {
-    state.logs = [];
-    state.logsPage = 0;
-    state.logsTotal = 0;
-  }
-  const params = new URLSearchParams({
-    page: String(state.logsPage + 1),
-    pageSize: String(state.logsPageSize)
-  });
-  if (state.logsFilter.action) params.set("action", state.logsFilter.action);
-  if (state.logsFilter.search) params.set("search", state.logsFilter.search);
-
-  const data = await api(`/api/admin/logs?${params.toString()}`);
-  state.logs = reset ? data.logs : [...state.logs, ...data.logs];
-  state.logsTotal = data.total;
-  state.logsPage = data.page;
-  renderLogs();
-}
-
-let logSearchTimeout = null;
-function scheduleLogSearch(value) {
-  state.logsFilter.search = value.trim();
-  window.clearTimeout(logSearchTimeout);
-  logSearchTimeout = window.setTimeout(() => {
-    loadLogs({ reset: true }).catch((error) => showToast(error.message));
-  }, 350);
-}
-
-async function openDashboard() {
-  try {
-    const [overview, actionsData] = await Promise.all([
-      api("/api/admin/overview"),
-      api("/api/admin/logs/actions")
-    ]);
-    renderDashboardOverview(overview);
-    state.logActions = actionsData.actions;
-    populateActionSelect();
-    await loadLogs({ reset: true });
-    dashboardModal.showModal();
-  } catch (error) {
-    showToast(error.message);
-  }
-}
-
-async function refreshDashboard() {
-  const overview = await api("/api/admin/overview");
-  renderDashboardOverview(overview);
-  await loadLogs({ reset: true });
-}
-
-async function updateUser(userId, changes) {
-  try {
-    await api(`/api/admin/users/${encodeURIComponent(userId)}`, {
-      method: "PATCH",
-      body: JSON.stringify(changes)
-    });
-    await refreshDashboard();
-    showToast(t().toast.userUpdated);
-  } catch (error) {
-    showToast(error.message);
-    await refreshDashboard().catch(() => { });
-  }
-}
-
-async function deleteUser(userId) {
-  if (!window.confirm(t().toast.deleteConfirm)) return;
-  try {
-    await api(`/api/admin/users/${encodeURIComponent(userId)}`, { method: "DELETE" });
-    await refreshDashboard();
-    showToast(t().toast.userDeleted);
-  } catch (error) {
-    showToast(error.message);
-  }
-}
-
-async function loadLikes() {
-  const data = await api("/api/projects/likes");
-  state.likeCounts = data.counts;
-  state.likedProjectIds = data.likedProjectIds;
-  renderProjects();
-}
-
-async function initializeSession() {
-  try {
-    const data = await api("/api/auth/me");
-    session = data.user;
-  } catch {
-    session = null;
-  }
-  updateAuthUi();
-  await loadLikes().catch(() => renderProjects());
-}
-
-/* ============================================================
-   🌌 REACT BITS GALAXY COSMIC BACKGROUND ENGINE (Pure WebGL)
-   ============================================================ */
-function initGalaxy(canvas, opts = {}) {
-  if (!canvas) return;
-  const gl = canvas.getContext("webgl", { alpha: true, premultipliedAlpha: false })
-          || canvas.getContext("experimental-webgl", { alpha: true, premultipliedAlpha: false });
-  if (!gl) return;
-
-  const config = {
-    starSpeed: opts.starSpeed ?? 1.0,
-    density: opts.density ?? 1.7,
-    hueShift: opts.hueShift ?? 255,
-    speed: opts.speed ?? 2.3,
-    glowIntensity: opts.glowIntensity ?? 0.85,
-    saturation: opts.saturation ?? 1.0,
-    mouseRepulsion: opts.mouseRepulsion !== undefined ? opts.mouseRepulsion : true,
-    repulsionStrength: opts.repulsionStrength ?? 2.0,
-    twinkleIntensity: opts.twinkleIntensity ?? 0.3,
-    rotationSpeed: opts.rotationSpeed ?? 0.05,
-    transparent: opts.transparent !== undefined ? opts.transparent : true,
-    focal: opts.focal || [0.5, 0.5],
-    rotation: opts.rotation || [1.0, 0.0],
-    autoCenterRepulsion: opts.autoCenterRepulsion ?? 0,
-    lightMode: opts.lightMode ? 1.0 : 0.0
-  };
-
-  const vertexShader = `
-    attribute vec2 uv;
-    attribute vec2 position;
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = vec4(position, 0.0, 1.0);
-    }
-  `;
-
-  const fragmentShader = `
-    precision highp float;
-
-    uniform float uTime;
-    uniform vec3 uResolution;
-    uniform vec2 uFocal;
-    uniform vec2 uRotation;
-    uniform float uStarSpeed;
-    uniform float uDensity;
-    uniform float uHueShift;
-    uniform float uSpeed;
-    uniform vec2 uMouse;
-    uniform float uGlowIntensity;
-    uniform float uSaturation;
-    uniform bool uMouseRepulsion;
-    uniform float uTwinkleIntensity;
-    uniform float uRotationSpeed;
-    uniform float uRepulsionStrength;
-    uniform float uMouseActiveFactor;
-    uniform float uAutoCenterRepulsion;
-    uniform bool uTransparent;
-    uniform float uLightMode;
-
-    varying vec2 vUv;
-
-    #define NUM_LAYER 4.0
-    #define STAR_COLOR_CUTOFF 0.2
-    #define MAT45 mat2(0.70710678, -0.70710678, 0.70710678, 0.70710678)
-    #define PERIOD 3.0
-
-    float Hash21(vec2 p) {
-      p = fract(p * vec2(123.34, 456.21));
-      p += dot(p, p + 45.32);
-      return fract(p.x * p.y);
-    }
-
-    float tri(float x) {
-      return abs(fract(x) * 2.0 - 1.0);
-    }
-
-    float tris(float x) {
-      float t = fract(x);
-      return 1.0 - smoothstep(0.0, 1.0, abs(2.0 * t - 1.0));
-    }
-
-    float trisn(float x) {
-      float t = fract(x);
-      return 2.0 * (1.0 - smoothstep(0.0, 1.0, abs(2.0 * t - 1.0))) - 1.0;
-    }
-
-    vec3 hsv2rgb(vec3 c) {
-      vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
-      vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
-      return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
-    }
-
-    float Star(vec2 uv, float flare) {
-      float d = length(uv);
-      float m = (0.05 * uGlowIntensity) / d;
-      float rays = smoothstep(0.0, 1.0, 1.0 - abs(uv.x * uv.y * 1000.0));
-      m += rays * flare * uGlowIntensity;
-      uv *= MAT45;
-      rays = smoothstep(0.0, 1.0, 1.0 - abs(uv.x * uv.y * 1000.0));
-      m += rays * 0.3 * flare * uGlowIntensity;
-      m *= smoothstep(1.0, 0.2, d);
-      return m;
-    }
-
-    vec3 StarLayer(vec2 uv) {
-      vec3 col = vec3(0.0);
-      vec2 gv = fract(uv) - 0.5;
-      vec2 id = floor(uv);
-
-      for (int y = -1; y <= 1; y++) {
-        for (int x = -1; x <= 1; x++) {
-          vec2 offset = vec2(float(x), float(y));
-          vec2 si = id + offset;
-          float seed = Hash21(si);
-          float size = fract(seed * 345.32);
-          float glossLocal = tri(uStarSpeed / (PERIOD * seed + 1.0));
-          float flareSize = smoothstep(0.9, 1.0, size) * glossLocal;
-
-          float red = smoothstep(STAR_COLOR_CUTOFF, 1.0, Hash21(si + 1.0)) + STAR_COLOR_CUTOFF;
-          float blu = smoothstep(STAR_COLOR_CUTOFF, 1.0, Hash21(si + 3.0)) + STAR_COLOR_CUTOFF;
-          float grn = min(red, blu) * seed;
-          vec3 base = vec3(red, grn, blu);
-
-          float hue = atan(base.g - base.r, base.b - base.r) / (2.0 * 3.14159265) + 0.5;
-          hue = fract(hue + uHueShift / 360.0);
-          float sat = length(base - vec3(dot(base, vec3(0.299, 0.587, 0.114)))) * uSaturation;
-          float val = max(max(base.r, base.g), base.b);
-          base = hsv2rgb(vec3(hue, sat, val));
-
-          vec2 pad = vec2(tris(seed * 34.0 + uTime * uSpeed / 10.0), tris(seed * 38.0 + uTime * uSpeed / 30.0)) - 0.5;
-          float star = Star(gv - offset - pad, flareSize);
-          vec3 color = base;
-
-          float twinkle = trisn(uTime * uSpeed + seed * 6.2831853) * 0.5 + 1.0;
-          twinkle = mix(1.0, twinkle, uTwinkleIntensity);
-          star *= twinkle;
-
-          col += star * size * color;
-        }
-      }
-      return col;
-    }
-
-    void main() {
-      vec2 focalPx = uFocal * uResolution.xy;
-      vec2 uv = (vUv * uResolution.xy - focalPx) / uResolution.y;
-
-      vec2 mouseNorm = uMouse - vec2(0.5);
-
-      if (uAutoCenterRepulsion > 0.0) {
-        vec2 centerUV = vec2(0.0, 0.0);
-        float centerDist = length(uv - centerUV);
-        vec2 repulsion = normalize(uv - centerUV) * (uAutoCenterRepulsion / (centerDist + 0.1));
-        uv += repulsion * 0.05;
-      } else if (uMouseRepulsion) {
-        vec2 mousePosUV = (uMouse * uResolution.xy - focalPx) / uResolution.y;
-        float mouseDist = length(uv - mousePosUV);
-        vec2 repulsion = normalize(uv - mousePosUV) * (uRepulsionStrength / (mouseDist + 0.1));
-        uv += repulsion * 0.05 * uMouseActiveFactor;
-      } else {
-        vec2 mouseOffset = mouseNorm * 0.1 * uMouseActiveFactor;
-        uv += mouseOffset;
-      }
-
-      float autoRotAngle = uTime * uRotationSpeed;
-      mat2 autoRot = mat2(cos(autoRotAngle), -sin(autoRotAngle), sin(autoRotAngle), cos(autoRotAngle));
-      uv = autoRot * uv;
-      uv = mat2(uRotation.x, -uRotation.y, uRotation.y, uRotation.x) * uv;
-
-      vec3 col = vec3(0.0);
-      for (int l = 0; l < 4; l++) {
-        float i = float(l) / 4.0;
-        float depth = fract(i + uStarSpeed * uSpeed);
-        float scale = mix(20.0 * uDensity, 0.5 * uDensity, depth);
-        float fade = depth * smoothstep(1.0, 0.9, depth);
-        col += StarLayer(uv * scale + i * 453.32) * fade;
-      }
-
-      if (uLightMode > 0.5) {
-        float energy = max(max(col.r, col.g), col.b);
-        float coverage = clamp(smoothstep(0.0, 0.42, energy) * 0.92, 0.0, 0.92);
-        vec3 ink = clamp(col * 0.48, 0.0, 0.82);
-        gl_FragColor = vec4(mix(vec3(1.0), ink, coverage), 1.0);
-      } else if (uTransparent) {
-        float alpha = length(col);
-        alpha = smoothstep(0.0, 0.3, alpha);
-        alpha = min(alpha, 1.0);
-        gl_FragColor = vec4(col, alpha);
-      } else {
-        gl_FragColor = vec4(col, 1.0);
-      }
-    }
-  `;
-
-  function compileShader(type, src) {
-    const s = gl.createShader(type);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
-      console.warn("Galaxy shader compile error:", gl.getShaderInfoLog(s));
-      gl.deleteShader(s);
-      return null;
-    }
-    return s;
-  }
-
-  const vs = compileShader(gl.VERTEX_SHADER, vertexShader);
-  const fs = compileShader(gl.FRAGMENT_SHADER, fragmentShader);
-  if (!vs || !fs) return;
-
-  const prog = gl.createProgram();
-  gl.attachShader(prog, vs);
-  gl.attachShader(prog, fs);
-  gl.linkProgram(prog);
-  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-    console.warn("Galaxy program link error:", gl.getProgramInfoLog(prog));
-    return;
-  }
-  gl.useProgram(prog);
-
-  const verts = new Float32Array([
-    -1, -1,  0, 0,
-     3, -1,  2, 0,
-    -1,  3,  0, 2
-  ]);
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
-
-  const aPos = gl.getAttribLocation(prog, "position");
-  const aUv = gl.getAttribLocation(prog, "uv");
-  gl.enableVertexAttribArray(aPos);
-  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 16, 0);
-  gl.enableVertexAttribArray(aUv);
-  gl.vertexAttribPointer(aUv, 2, gl.FLOAT, false, 16, 8);
-
-  const uTimeLoc = gl.getUniformLocation(prog, "uTime");
-  const uResLoc = gl.getUniformLocation(prog, "uResolution");
-  const uFocalLoc = gl.getUniformLocation(prog, "uFocal");
-  const uRotLoc = gl.getUniformLocation(prog, "uRotation");
-  const uStarSpeedLoc = gl.getUniformLocation(prog, "uStarSpeed");
-  const uDensityLoc = gl.getUniformLocation(prog, "uDensity");
-  const uHueShiftLoc = gl.getUniformLocation(prog, "uHueShift");
-  const uSpeedLoc = gl.getUniformLocation(prog, "uSpeed");
-  const uMouseLoc = gl.getUniformLocation(prog, "uMouse");
-  const uGlowLoc = gl.getUniformLocation(prog, "uGlowIntensity");
-  const uSatLoc = gl.getUniformLocation(prog, "uSaturation");
-  const uMouseRepLoc = gl.getUniformLocation(prog, "uMouseRepulsion");
-  const uTwinkleLoc = gl.getUniformLocation(prog, "uTwinkleIntensity");
-  const uRotSpeedLoc = gl.getUniformLocation(prog, "uRotationSpeed");
-  const uRepStrengthLoc = gl.getUniformLocation(prog, "uRepulsionStrength");
-  const uMouseActLoc = gl.getUniformLocation(prog, "uMouseActiveFactor");
-  const uAutoCenterLoc = gl.getUniformLocation(prog, "uAutoCenterRepulsion");
-  const uTransLoc = gl.getUniformLocation(prog, "uTransparent");
-  const uLightLoc = gl.getUniformLocation(prog, "uLightMode");
-
-  gl.uniform2f(uFocalLoc, config.focal[0], config.focal[1]);
-  gl.uniform2f(uRotLoc, config.rotation[0], config.rotation[1]);
-  gl.uniform1f(uStarSpeedLoc, config.starSpeed);
-  gl.uniform1f(uDensityLoc, config.density);
-  gl.uniform1f(uHueShiftLoc, config.hueShift);
-  gl.uniform1f(uSpeedLoc, config.speed);
-  gl.uniform1f(uGlowLoc, config.glowIntensity);
-  gl.uniform1f(uSatLoc, config.saturation);
-  gl.uniform1i(uMouseRepLoc, config.mouseRepulsion ? 1 : 0);
-  gl.uniform1f(uTwinkleLoc, config.twinkleIntensity);
-  gl.uniform1f(uRotSpeedLoc, config.rotationSpeed);
-  gl.uniform1f(uRepStrengthLoc, config.repulsionStrength);
-  gl.uniform1f(uAutoCenterLoc, config.autoCenterRepulsion);
-  gl.uniform1i(uTransLoc, config.transparent ? 1 : 0);
-  gl.uniform1f(uLightLoc, config.lightMode);
-
-  if (config.transparent) {
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    gl.clearColor(0, 0, 0, 0);
-  } else {
-    gl.clearColor(0, 0, 0, 1);
-  }
-
-  const targetMouse = { x: 0.5, y: 0.5 };
-  const smoothMouse = { x: 0.5, y: 0.5 };
-  let targetActive = 0.0;
-  let smoothActive = 0.0;
+function initTargetCursor() {
+  const cursor = document.querySelector("#targetCursor");
+  if (!cursor || window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 768) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let cursorX = mouseX;
+  let cursorY = mouseY;
+  let isHovering = false;
 
   window.addEventListener("mousemove", (e) => {
-    targetMouse.x = e.clientX / window.innerWidth;
-    targetMouse.y = 1.0 - (e.clientY / window.innerHeight);
-    targetActive = 1.0;
+    mouseX = e.clientX;
+    mouseY = e.clientY;
   }, { passive: true });
 
-  window.addEventListener("mouseleave", () => {
-    targetActive = 0.0;
-  });
+  function setupTargets() {
+    const targets = document.querySelectorAll(".cursor-target, a, button, input, select, .folder, .bounce-card");
+    targets.forEach((target) => {
+      if (target._hasCursorListener) return;
+      target._hasCursorListener = true;
+
+      target.addEventListener("mouseenter", () => {
+        isHovering = true;
+        cursor.classList.add("active");
+        const rect = target.getBoundingClientRect();
+        cursor.style.width = `${rect.width + 14}px`;
+        cursor.style.height = `${rect.height + 14}px`;
+      });
+
+      target.addEventListener("mouseleave", () => {
+        isHovering = false;
+        cursor.classList.remove("active");
+        cursor.style.width = "32px";
+        cursor.style.height = "32px";
+      });
+    });
+  }
+
+  setupTargets();
+  const observer = new MutationObserver(() => setupTargets());
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  function tick() {
+    const ease = isHovering ? 0.25 : 0.18;
+    cursorX += (mouseX - cursorX) * ease;
+    cursorY += (mouseY - cursorY) * ease;
+
+    cursor.style.left = `${cursorX}px`;
+    cursor.style.top = `${cursorY}px`;
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ============================================================
+   🔤 FUZZY TEXT (React Bits Canvas 2D Text Engine)
+   ============================================================ */
+function initFuzzyText(canvas, text = "NEW JA") {
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const container = canvas.parentElement;
+  let width, height;
+  let isHovered = false;
+
+  const offscreen = document.createElement("canvas");
+  const offCtx = offscreen.getContext("2d");
 
   function resize() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    canvas.width = Math.floor(w * dpr);
-    canvas.height = Math.floor(h * dpr);
-    gl.viewport(0, 0, canvas.width, canvas.height);
-    gl.useProgram(prog);
-    gl.uniform3f(uResLoc, canvas.width, canvas.height, canvas.width / canvas.height);
+    width = container ? container.clientWidth : 500;
+    height = container ? container.clientHeight : 130;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    offscreen.width = canvas.width;
+    offscreen.height = canvas.height;
+
+    ctx.scale(dpr, dpr);
+    renderOffscreen(dpr);
   }
-  resize();
+
+  function renderOffscreen(dpr) {
+    offCtx.clearRect(0, 0, offscreen.width, offscreen.height);
+    offCtx.save();
+    offCtx.scale(dpr, dpr);
+
+    const fontSize = Math.min(width * 0.22, 100);
+    offCtx.font = `900 ${fontSize}px "Space Grotesk", sans-serif`;
+    offCtx.textBaseline = "middle";
+
+    const grad = offCtx.createLinearGradient(0, 0, width * 0.85, 0);
+    grad.addColorStop(0, "#38bdf8");
+    grad.addColorStop(0.5, "#c084fc");
+    grad.addColorStop(1, "#f472b6");
+
+    offCtx.fillStyle = grad;
+    offCtx.shadowColor = "rgba(192, 132, 252, 0.6)";
+    offCtx.shadowBlur = 18;
+    offCtx.fillText(text, 10, height * 0.52);
+    offCtx.restore();
+  }
+
+  if (container) {
+    container.addEventListener("mouseenter", () => { isHovered = true; });
+    container.addEventListener("mouseleave", () => { isHovered = false; });
+  }
+
   window.addEventListener("resize", resize);
+  setTimeout(resize, 60);
 
-  const lerp = (a, b, f) => a + (b - a) * f;
+  function render() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    ctx.clearRect(0, 0, width, height);
 
-  function render(time) {
-    const t = time * 0.001;
-    smoothMouse.x = lerp(smoothMouse.x, targetMouse.x, 0.05);
-    smoothMouse.y = lerp(smoothMouse.y, targetMouse.y, 0.05);
-    smoothActive = lerp(smoothActive, targetActive, 0.05);
+    const intensity = isHovered ? 0.65 : 0.18;
+    const sliceHeight = 3;
+    const slices = Math.ceil(height / sliceHeight);
 
-    gl.useProgram(prog);
-    gl.uniform1f(uTimeLoc, t);
-    gl.uniform1f(uStarSpeedLoc, (t * config.starSpeed) / 10.0);
-    gl.uniform2f(uMouseLoc, smoothMouse.x, smoothMouse.y);
-    gl.uniform1f(uMouseActLoc, smoothActive);
+    for (let i = 0; i < slices; i++) {
+      const sy = i * sliceHeight * dpr;
+      const sh = sliceHeight * dpr;
+      const jitter = (Math.random() - 0.5) * intensity * 24;
 
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+      ctx.drawImage(
+        offscreen,
+        0, sy, offscreen.width, sh,
+        jitter, i * sliceHeight, width, sliceHeight
+      );
+    }
+
     requestAnimationFrame(render);
   }
   requestAnimationFrame(render);
 }
 
 /* ============================================================
-   EVENT LISTENERS & LIFECYCLE
+   ♾️ LOGOLOOP (React Bits Infinite Marquee Engine)
    ============================================================ */
-document.querySelector("#loginBtn").addEventListener("click", () => openAuth("login"));
-document.querySelector("#registerBtn").addEventListener("click", () => openAuth("register"));
-document.querySelector("#logoutBtn").addEventListener("click", async () => {
-  try {
-    await api("/api/auth/logout", { method: "POST" });
-  } catch (error) {
-    showToast(error.message);
-  } finally {
-    session = null;
-    state.likedProjectIds = [];
-    updateAuthUi();
-    await loadLikes().catch(() => renderProjects());
-    showToast(t().toast.loggedOut);
+function initLogoLoop(container) {
+  if (!container) return;
+
+  const TECH_STACK = [
+    { name: "Python", icon: "🐍" },
+    { name: "PyTorch", icon: "🔥" },
+    { name: "Next.js / React", icon: "⚛️" },
+    { name: "Node.js", icon: "🟢" },
+    { name: "TypeScript", icon: "📘" },
+    { name: "WebGL / GLSL", icon: "✨" },
+    { name: "Docker", icon: "🐳" },
+    { name: "ROS 2 Robotics", icon: "🤖" },
+    { name: "LangChain & LLMs", icon: "🧠" },
+    { name: "Lua / Roblox", icon: "🕹️" },
+    { name: "PostgreSQL", icon: "🐘" },
+    { name: "Tailwind CSS", icon: "🎨" }
+  ];
+
+  const html = TECH_STACK.map(item => `
+    <div class="logo-item cursor-target">
+      <span class="logo-badge-icon">${item.icon}</span>
+      <span>${item.name}</span>
+    </div>
+  `).join("");
+
+  container.innerHTML = `
+    <div class="logo-loop-track" id="logoTrack1">${html}${html}</div>
+  `;
+
+  const track = container.querySelector("#logoTrack1");
+  if (!track) return;
+
+  let offset = 0;
+  let speed = 0.85;
+  let targetSpeed = 0.85;
+
+  container.addEventListener("mouseenter", () => { targetSpeed = 0.2; });
+  container.addEventListener("mouseleave", () => { targetSpeed = 0.85; });
+
+  function step() {
+    speed += (targetSpeed - speed) * 0.08;
+    offset += speed;
+    const halfWidth = track.scrollWidth / 2;
+    if (offset >= halfWidth) offset -= halfWidth;
+    track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+    requestAnimationFrame(step);
   }
-});
-document.querySelector("#dashboardBtn").addEventListener("click", openDashboard);
-document.querySelector("#closeAuthBtn").addEventListener("click", () => authModal.close());
-document.querySelector("#closeDashboardBtn").addEventListener("click", () => dashboardModal.close());
-authForm.addEventListener("submit", handleAuth);
-projectList.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-like]");
-  if (button) handleLike(button.dataset.like);
-});
-document.querySelector("#userList").addEventListener("change", (event) => {
-  const select = event.target.closest("[data-role-user]");
-  if (select) updateUser(select.dataset.roleUser, { role: select.value });
-});
-document.querySelector("#userList").addEventListener("click", (event) => {
-  const toggle = event.target.closest("[data-toggle-user]");
-  if (toggle) {
-    updateUser(toggle.dataset.toggleUser, { isActive: toggle.dataset.active !== "true" });
+  requestAnimationFrame(step);
+}
+
+/* ============================================================
+   🃏 BOUNCE CARDS (React Bits Flagship Showcase Engine)
+   ============================================================ */
+function initBounceCards(container) {
+  if (!container) return;
+
+  const cardsData = [
+    {
+      id: "hackathon",
+      tag: "1st Place Champion",
+      icon: "🏆",
+      title: "UTCC AI Hackathon 2026",
+      desc: "National Grand Champion award (20,000 THB). Hydrological AI predictive flood intelligence platform.",
+      img: "assets/UTCC.jpg",
+      badge: "Grand Winner"
+    },
+    {
+      id: "drone",
+      tag: "Autonomous Drone",
+      icon: "🚁",
+      title: "Edge AI Drone Flight Suite",
+      desc: "Real-time YOLO object detection with ROS 2 flight controllers for low-latency spatial mapping.",
+      img: "assets/UTCCcer.jpg",
+      badge: "Edge Vision"
+    },
+    {
+      id: "roblox",
+      tag: "Metaverse Engine",
+      icon: "🎮",
+      title: "Roblox MMO RPG Framework",
+      desc: "Distributed client-server multiplayer action game with procedural quests and custom combat VFX.",
+      img: "assets/cer-2.jpg",
+      badge: "Game Systems"
+    },
+    {
+      id: "copilot",
+      tag: "Multi-Agent AI",
+      icon: "🤖",
+      title: "Autonomous Agent Orchestrator",
+      desc: "LangChain tool-calling agents connected to Microsoft Dataverse cloud databases.",
+      img: "assets2/17-1.png",
+      badge: "Enterprise AI"
+    },
+    {
+      id: "identity",
+      tag: "Core Creator",
+      icon: "⚡",
+      title: "New JA Innovation Studio",
+      desc: "Full-Stack production web architectures, WebGL shaders, security tokens, and responsive UI.",
+      img: "assets/myface.jpg",
+      badge: "Creator Creed"
+    }
+  ];
+
+  const defaultTransforms = [
+    "rotate(-12deg) translate(-170px, 16px)",
+    "rotate(-6deg) translate(-85px, 6px)",
+    "rotate(0deg) translate(0px, 0px)",
+    "rotate(6deg) translate(85px, 6px)",
+    "rotate(12deg) translate(170px, 16px)"
+  ];
+
+  container.innerHTML = `
+    <div class="bounce-cards-deck" id="bounceCardsDeck">
+      ${cardsData.map((c, i) => `
+        <div class="bounce-card cursor-target" data-idx="${i}" style="transform: ${defaultTransforms[i]}; z-index: ${i + 1};">
+          <div class="bounce-card-header">
+            <span class="bounce-card-tag">${c.tag}</span>
+            <span class="bounce-card-icon">${c.icon}</span>
+          </div>
+          <img class="bounce-card-img" src="${c.img}" alt="${c.title}">
+          <div class="bounce-card-body">
+            <h3>${c.title}</h3>
+            <p>${c.desc}</p>
+          </div>
+          <div class="bounce-card-footer">
+            <span>${c.badge}</span>
+            <span>Inspect ➔</span>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  const cards = container.querySelectorAll(".bounce-card");
+
+  cards.forEach((card, hoveredIdx) => {
+    card.addEventListener("mouseenter", () => {
+      cards.forEach((otherCard, i) => {
+        if (i === hoveredIdx) {
+          otherCard.style.transform = "rotate(0deg) translate(0px, -20px) scale(1.08)";
+          otherCard.style.zIndex = "25";
+        } else {
+          const offset = i < hoveredIdx ? -140 : 140;
+          const baseMatch = defaultTransforms[i].match(/rotate\(([^)]+)\)/);
+          const rot = baseMatch ? baseMatch[1] : "0deg";
+          otherCard.style.transform = `rotate(${rot}) translate(${(i - 2) * 85 + offset}px, 12px) scale(0.95)`;
+          otherCard.style.zIndex = `${i + 1}`;
+        }
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      cards.forEach((c, i) => {
+        c.style.transform = defaultTransforms[i];
+        c.style.zIndex = `${i + 1}`;
+      });
+    });
+
+    card.addEventListener("click", () => {
+      const targetProject = document.querySelector("#projects");
+      if (targetProject) targetProject.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+}
+
+/* ============================================================
+   🎴 BORDER GLOW (React Bits Cursor Proximity Luminescence)
+   ============================================================ */
+function initBorderGlow() {
+  const cards = document.querySelectorAll(".border-glow");
+  cards.forEach((card) => {
+    if (card._hasBorderGlow) return;
+    card._hasBorderGlow = true;
+
+    card.addEventListener("pointermove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const dx = x - cx;
+      const dy = y - cy;
+
+      let angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+      if (angle < 0) angle += 360;
+
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const maxDist = Math.sqrt(cx * cx + cy * cy);
+      const edgeProximity = Math.min(Math.max(dist / maxDist, 0.2), 1.0);
+
+      card.style.setProperty("--cursor-angle", `${angle}deg`);
+      card.style.setProperty("--edge-proximity", edgeProximity.toFixed(2));
+    });
+
+    card.addEventListener("pointerleave", () => {
+      card.style.setProperty("--edge-proximity", "0.2");
+    });
+  });
+}
+
+/* ============================================================
+   📈 COUNT UP (React Bits Spring Number Increment)
+   ============================================================ */
+function initCountUp() {
+  const elements = document.querySelectorAll(".count-up");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      observer.unobserve(el);
+
+      const target = parseInt(el.dataset.target || "0", 10);
+      const duration = 1800;
+      const startTime = performance.now();
+
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(easeOut * target);
+
+        el.textContent = current;
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(update);
+    });
+  }, { threshold: 0.2 });
+
+  elements.forEach(el => observer.observe(el));
+}
+
+/* ============================================================
+   🌌 DYNAMIC MULTI-STATE COSMIC BACKGROUND ENGINE
+   Featuring 6 Distinct Procedural Themes with Dual-Buffer Smooth Crossfade:
+   1. "aurora"        — Cosmic Aurora Ribbon Waves & Stardust (Hero)
+   2. "warp"          — 3D Hyperspeed Star Velocity Streaks (Flagship)
+   3. "constellation" — Interactive Starlight Nodes & Filament Threads (Story & Profile)
+   4. "cybergrid"     — 3D Undulating Perspective Wireframe Terrain (Skills)
+   5. "quantum"       — Quantum Particle Field & Prismatic Light Rays (Projects)
+   6. "supernova"     — Celestial Horizon Glow & Breathing Cosmic Void (Certs & Contact)
+   ============================================================ */
+
+const CosmicThemes = {
+  createAuroraState(w, h) {
+    const motes = [];
+    for (let i = 0; i < 45; i++) {
+      motes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 2 + 0.8,
+        speed: Math.random() * 0.6 + 0.2,
+        color: ['#38bdf8', '#c084fc', '#f472b6'][Math.floor(Math.random() * 3)]
+      });
+    }
+    return { motes };
+  },
+
+  renderAurora(ctx, state, w, h, t, mouse) {
+    ctx.clearRect(0, 0, w, h);
+    const ribbons = [
+      { y: h * 0.35, amp: 45, freq: 0.003, speed: 0.8, colors: ['rgba(56,189,248,0.32)', 'rgba(192,132,252,0.22)', 'rgba(244,114,182,0.15)'] },
+      { y: h * 0.52, amp: 60, freq: 0.002, speed: 1.1, colors: ['rgba(192,132,252,0.30)', 'rgba(244,114,182,0.22)', 'rgba(56,189,248,0.14)'] },
+      { y: h * 0.68, amp: 50, freq: 0.0025, speed: 0.9, colors: ['rgba(244,114,182,0.28)', 'rgba(56,189,248,0.20)', 'rgba(192,132,252,0.15)'] }
+    ];
+
+    ribbons.forEach((r, idx) => {
+      ctx.save();
+      const grad = ctx.createLinearGradient(0, r.y - 120, w, r.y + 120);
+      grad.addColorStop(0, r.colors[0]);
+      grad.addColorStop(0.5, r.colors[1]);
+      grad.addColorStop(1, r.colors[2]);
+      ctx.fillStyle = grad;
+
+      ctx.beginPath();
+      ctx.moveTo(0, h);
+      for (let x = 0; x <= w; x += 16) {
+        const my = (mouse.y - h * 0.5) * 0.06;
+        const wave = Math.sin(x * r.freq + t * r.speed + idx) * r.amp
+                   + Math.cos(x * (r.freq * 1.5) - t * (r.speed * 0.6)) * (r.amp * 0.5) + my;
+        ctx.lineTo(x, r.y + wave);
+      }
+      ctx.lineTo(w, h);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    });
+
+    // Gentle stardust
+    if (state && state.motes) {
+      state.motes.forEach(m => {
+        m.y -= m.speed;
+        if (m.y < 0) { m.y = h + 10; m.x = Math.random() * w; }
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+        ctx.fillStyle = m.color;
+        ctx.fill();
+      });
+    }
+  },
+
+  createWarpState(w, h) {
+    const stars = [];
+    const count = 420;
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: (Math.random() - 0.5) * w * 2.2,
+        y: (Math.random() - 0.5) * h * 2.2,
+        z: Math.random() * 1400 + 1,
+        pz: 1400,
+        color: ['#38bdf8', '#c084fc', '#f472b6', '#ffffff'][Math.floor(Math.random() * 4)]
+      });
+    }
+    return { stars };
+  },
+
+  renderWarp(ctx, state, w, h, t, mouse) {
+    ctx.clearRect(0, 0, w, h);
+    const cx = w * 0.5 + (mouse.x - w * 0.5) * 0.15;
+    const cy = h * 0.5 + (mouse.y - h * 0.5) * 0.15;
+    const speed = 22;
+
+    if (!state || !state.stars) return;
+
+    state.stars.forEach(s => {
+      s.pz = s.z;
+      s.z -= speed;
+      if (s.z <= 0) {
+        s.z = 1400;
+        s.pz = 1400;
+        s.x = (Math.random() - 0.5) * w * 2.2;
+        s.y = (Math.random() - 0.5) * h * 2.2;
+      }
+
+      const k = 420 / s.z;
+      const sx = cx + s.x * k;
+      const sy = cy + s.y * k;
+
+      const pk = 420 / s.pz;
+      const px = cx + s.x * pk;
+      const py = cy + s.y * pk;
+
+      if (sx >= -50 && sx <= w + 50 && sy >= -50 && sy <= h + 50) {
+        const alpha = Math.min(Math.max((1 - s.z / 1400) * 1.1, 0.1), 1.0);
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(sx, sy);
+        ctx.strokeStyle = s.color;
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth = Math.min((1 - s.z / 1400) * 2.6 + 0.6, 3.2);
+        ctx.stroke();
+      }
+    });
+    ctx.globalAlpha = 1.0;
+  },
+
+  createConstellationState(w, h) {
+    const nodes = [];
+    const count = 90;
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        r: Math.random() * 2 + 1.2,
+        color: ['#38bdf8', '#c084fc', '#f472b6'][Math.floor(Math.random() * 3)]
+      });
+    }
+    return { nodes };
+  },
+
+  renderConstellation(ctx, state, w, h, t, mouse) {
+    ctx.clearRect(0, 0, w, h);
+    if (!state || !state.nodes) return;
+    const nodes = state.nodes;
+    const maxDist = 115;
+
+    // Update nodes
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+
+      // Mouse repulsion
+      const mdx = n.x - mouse.x;
+      const mdy = n.y - mouse.y;
+      const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+      if (mdist < 140 && mdist > 0) {
+        const force = (140 - mdist) / 140 * 1.5;
+        n.x += (mdx / mdist) * force;
+        n.y += (mdy / mdist) * force;
+      }
+    }
+
+    // Draw filaments
+    for (let i = 0; i < nodes.length; i++) {
+      const n1 = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const n2 = nodes[j];
+        const dx = n1.x - n2.x;
+        const dy = n1.y - n2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < maxDist) {
+          const alpha = (1 - dist / maxDist) * 0.42;
+          ctx.beginPath();
+          ctx.moveTo(n1.x, n1.y);
+          ctx.lineTo(n2.x, n2.y);
+          ctx.strokeStyle = 'rgba(192, 132, 252, ' + alpha + ')';
+          ctx.lineWidth = 1.0;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw nodes
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = n.color;
+      ctx.fill();
+    }
+  },
+
+  createCybergridState(w, h) {
+    return {};
+  },
+
+  renderCybergrid(ctx, state, w, h, t, mouse) {
+    ctx.clearRect(0, 0, w, h);
+    const horizonY = h * 0.38;
+    const cx = w * 0.5 + (mouse.x - w * 0.5) * 0.08;
+
+    // Horizon glow
+    const grad = ctx.createLinearGradient(0, horizonY, w, horizonY);
+    grad.addColorStop(0, 'rgba(56, 189, 248, 0)');
+    grad.addColorStop(0.3, 'rgba(56, 189, 248, 0.8)');
+    grad.addColorStop(0.5, 'rgba(192, 132, 252, 0.95)');
+    grad.addColorStop(0.7, 'rgba(244, 114, 182, 0.8)');
+    grad.addColorStop(1, 'rgba(244, 114, 182, 0)');
+    ctx.beginPath();
+    ctx.moveTo(0, horizonY);
+    ctx.lineTo(w, horizonY);
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    // Perspective vertical radiating lines
+    const rays = 28;
+    for (let i = 0; i <= rays; i++) {
+      const bottomX = (i / rays) * (w * 2.4) - w * 0.7;
+      ctx.beginPath();
+      ctx.moveTo(cx, horizonY);
+      ctx.lineTo(bottomX, h);
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.22)';
+      ctx.lineWidth = 1.0;
+      ctx.stroke();
+    }
+
+    // Undulating horizontal lines
+    const rows = 18;
+    for (let r = 1; r <= rows; r++) {
+      const p = Math.pow(r / rows, 2.2);
+      const rowY = horizonY + p * (h - horizonY);
+      const waveAmp = (1 - p) * 12 + 2;
+
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 24) {
+        const offset = Math.sin(x * 0.015 + t * 2.2 + r) * waveAmp;
+        if (x === 0) ctx.moveTo(x, rowY + offset);
+        else ctx.lineTo(x, rowY + offset);
+      }
+      ctx.strokeStyle = 'rgba(192, 132, 252, ' + (0.12 + p * 0.45) + ')';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    }
+  },
+
+  createQuantumState(w, h) {
+    const particles = [];
+    for (let i = 0; i < 110; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 2.2 + 0.8,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        alpha: Math.random() * 0.7 + 0.3,
+        pulse: Math.random() * Math.PI * 2,
+        color: ['#38bdf8', '#c084fc', '#f472b6'][Math.floor(Math.random() * 3)]
+      });
+    }
+    return { particles };
+  },
+
+  renderQuantum(ctx, state, w, h, t, mouse) {
+    ctx.clearRect(0, 0, w, h);
+
+    // Prismatic sweeping light rays
+    const rayCount = 4;
+    for (let i = 0; i < rayCount; i++) {
+      ctx.save();
+      const originX = w * (0.2 + i * 0.22) + Math.sin(t * 0.5 + i) * 60 + (mouse.x - w * 0.5) * 0.05;
+      const rayGrad = ctx.createLinearGradient(originX, 0, originX + 240, h);
+      rayGrad.addColorStop(0, 'rgba(56, 189, 248, 0)');
+      rayGrad.addColorStop(0.4, i % 2 === 0 ? 'rgba(192, 132, 252, 0.12)' : 'rgba(56, 189, 248, 0.12)');
+      rayGrad.addColorStop(0.6, 'rgba(244, 114, 182, 0.08)');
+      rayGrad.addColorStop(1, 'rgba(3, 3, 8, 0)');
+
+      ctx.fillStyle = rayGrad;
+      ctx.beginPath();
+      ctx.moveTo(originX - 50, 0);
+      ctx.lineTo(originX + 90, 0);
+      ctx.lineTo(originX + 380, h);
+      ctx.lineTo(originX + 180, h);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Quantum particles
+    if (state && state.particles) {
+      state.particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h;
+        if (p.y > h) p.y = 0;
+
+        p.pulse += 0.04;
+        const a = p.alpha * (0.6 + 0.4 * Math.sin(p.pulse));
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = a;
+        ctx.fill();
+      });
+    }
+    ctx.globalAlpha = 1.0;
+  },
+
+  createSupernovaState(w, h) {
+    const motes = [];
+    for (let i = 0; i < 70; i++) {
+      motes.push({
+        angle: Math.random() * Math.PI,
+        radius: Math.random() * (Math.min(w, h) * 0.65) + 80,
+        speed: (Math.random() * 0.003 + 0.001) * (Math.random() > 0.5 ? 1 : -1),
+        size: Math.random() * 2 + 1,
+        color: ['#38bdf8', '#c084fc', '#f472b6', '#ffffff'][Math.floor(Math.random() * 4)]
+      });
+    }
+    return { motes };
+  },
+
+  renderSupernova(ctx, state, w, h, t, mouse) {
+    ctx.clearRect(0, 0, w, h);
+    const cx = w * 0.5;
+    const cy = h * 0.86;
+    const coreR = Math.min(w, h) * 0.45;
+
+    const pulse = 1.0 + 0.06 * Math.sin(t * 1.4);
+
+    const corona = ctx.createRadialGradient(cx, cy, 10, cx, cy, coreR * pulse);
+    corona.addColorStop(0, 'rgba(255, 255, 255, 0.45)');
+    corona.addColorStop(0.2, 'rgba(56, 189, 248, 0.35)');
+    corona.addColorStop(0.5, 'rgba(192, 132, 252, 0.24)');
+    corona.addColorStop(0.8, 'rgba(244, 114, 182, 0.12)');
+    corona.addColorStop(1, 'rgba(3, 3, 8, 0)');
+
+    ctx.fillStyle = corona;
+    ctx.beginPath();
+    ctx.arc(cx, cy, coreR * pulse, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (state && state.motes) {
+      state.motes.forEach(m => {
+        m.angle += m.speed;
+        const px = cx + Math.cos(m.angle) * m.radius * 1.5;
+        const py = cy + Math.sin(m.angle) * (m.radius * 0.5);
+
+        if (px >= 0 && px <= w && py >= 0 && py <= h) {
+          ctx.beginPath();
+          ctx.arc(px, py, m.size, 0, Math.PI * 2);
+          ctx.fillStyle = m.color;
+          ctx.fill();
+        }
+      });
+    }
+  }
+};
+
+class DynamicCosmicEngine {
+  constructor() {
+    this.container = document.querySelector("#dynamicBgContainer");
+    this.canvasA = document.querySelector("#bgCanvasA");
+    this.canvasB = document.querySelector("#bgCanvasB");
+    if (!this.container || !this.canvasA || !this.canvasB) return;
+
+    this.ctxA = this.canvasA.getContext("2d");
+    this.ctxB = this.canvasB.getContext("2d");
+
+    this.activeBuffer = "A";
+    this.currentTheme = "aurora";
+    this.themeNameA = "aurora";
+    this.themeNameB = "aurora";
+
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    this.mouse = {
+      x: this.width * 0.5,
+      y: this.height * 0.5,
+      targetX: this.width * 0.5,
+      targetY: this.height * 0.5
+    };
+
+    this.time = 0;
+    this.lastTime = performance.now();
+
+    this.themeStateA = this.createThemeState("aurora");
+    this.themeStateB = this.createThemeState("aurora");
+
+    this.isTransitioning = false;
+    this.transitionEndTime = 0;
+
+    this.initEvents();
+    this.resize();
+    this.observeSections();
+    this.startLoop();
+  }
+
+  createThemeState(theme) {
+    if (theme === "aurora") return CosmicThemes.createAuroraState(this.width, this.height);
+    if (theme === "warp") return CosmicThemes.createWarpState(this.width, this.height);
+    if (theme === "constellation") return CosmicThemes.createConstellationState(this.width, this.height);
+    if (theme === "cybergrid") return CosmicThemes.createCybergridState(this.width, this.height);
+    if (theme === "quantum") return CosmicThemes.createQuantumState(this.width, this.height);
+    if (theme === "supernova") return CosmicThemes.createSupernovaState(this.width, this.height);
+    return CosmicThemes.createAuroraState(this.width, this.height);
+  }
+
+  resize() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    [this.canvasA, this.canvasB].forEach(c => {
+      c.width = Math.floor(this.width * this.dpr);
+      c.height = Math.floor(this.height * this.dpr);
+    });
+
+    this.ctxA.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    this.ctxB.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+
+    this.themeStateA = this.createThemeState(this.themeNameA);
+    this.themeStateB = this.createThemeState(this.themeNameB);
+  }
+
+  switchTheme(newTheme) {
+    if (!newTheme || newTheme === this.currentTheme) return;
+
+    this.currentTheme = newTheme;
+    const now = performance.now();
+
+    if (this.activeBuffer === "A") {
+      this.themeNameB = newTheme;
+      this.themeStateB = this.createThemeState(newTheme);
+      this.canvasB.classList.add("active");
+      this.canvasA.classList.remove("active");
+      this.activeBuffer = "B";
+    } else {
+      this.themeNameA = newTheme;
+      this.themeStateA = this.createThemeState(newTheme);
+      this.canvasA.classList.add("active");
+      this.canvasB.classList.remove("active");
+      this.activeBuffer = "A";
+    }
+
+    this.isTransitioning = true;
+    this.transitionEndTime = now + 1250;
+  }
+
+  initEvents() {
+    window.addEventListener("resize", () => this.resize(), { passive: true });
+
+    window.addEventListener("mousemove", (e) => {
+      this.mouse.targetX = e.clientX;
+      this.mouse.targetY = e.clientY;
+    }, { passive: true });
+  }
+
+  observeSections() {
+    const sections = document.querySelectorAll("[data-bg-theme]");
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      let maxRatio = 0;
+      let targetTheme = null;
+
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+          maxRatio = entry.intersectionRatio;
+          targetTheme = entry.target.dataset.bgTheme;
+        }
+      });
+
+      if (targetTheme) {
+        this.switchTheme(targetTheme);
+      }
+    }, {
+      threshold: [0.15, 0.35, 0.6, 0.85],
+      rootMargin: "-12% 0px -12% 0px"
+    });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    let scrollTimeout = null;
+    window.addEventListener("scroll", () => {
+      if (scrollTimeout) return;
+      scrollTimeout = setTimeout(() => {
+        scrollTimeout = null;
+        const scrollMiddle = window.scrollY + window.innerHeight * 0.4;
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const sec = sections[i];
+          if (sec.offsetTop <= scrollMiddle) {
+            const theme = sec.dataset.bgTheme;
+            if (theme) this.switchTheme(theme);
+            break;
+          }
+        }
+      }, 60);
+    }, { passive: true });
+  }
+
+  startLoop() {
+    const render = (now) => {
+      const delta = Math.min((now - this.lastTime) / 1000, 0.1);
+      this.lastTime = now;
+      this.time += delta;
+
+      this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.08;
+      this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.08;
+
+      const inTransition = now < this.transitionEndTime;
+
+      if (this.activeBuffer === "A") {
+        this.renderTheme(this.ctxA, this.themeNameA, this.themeStateA);
+        if (inTransition) {
+          this.renderTheme(this.ctxB, this.themeNameB, this.themeStateB);
+        }
+      } else {
+        this.renderTheme(this.ctxB, this.themeNameB, this.themeStateB);
+        if (inTransition) {
+          this.renderTheme(this.ctxA, this.themeNameA, this.themeStateA);
+        }
+      }
+
+      requestAnimationFrame(render);
+    };
+
+    requestAnimationFrame(render);
+  }
+
+  renderTheme(ctx, theme, state) {
+    if (theme === "aurora") CosmicThemes.renderAurora(ctx, state, this.width, this.height, this.time, this.mouse);
+    else if (theme === "warp") CosmicThemes.renderWarp(ctx, state, this.width, this.height, this.time, this.mouse);
+    else if (theme === "constellation") CosmicThemes.renderConstellation(ctx, state, this.width, this.height, this.time, this.mouse);
+    else if (theme === "cybergrid") CosmicThemes.renderCybergrid(ctx, state, this.width, this.height, this.time, this.mouse);
+    else if (theme === "quantum") CosmicThemes.renderQuantum(ctx, state, this.width, this.height, this.time, this.mouse);
+    else if (theme === "supernova") CosmicThemes.renderSupernova(ctx, state, this.width, this.height, this.time, this.mouse);
+  }
+}
+
+/* ============================================================
+   📂 RENDER DOSSIERS (Folder-JS-CSS Engine)
+   ============================================================ */
+function renderDossiers() {
+  const container = document.querySelector("#dossiersList");
+  if (!container) return;
+  const list = content().dossiers || [];
+
+  container.innerHTML = list.map((d, idx) => `
+    <div class="folder cursor-target" data-folder-id="${d.id}" tabindex="0" role="button" aria-expanded="false">
+      <div class="folder__back" style="border-color: ${d.color};">
+        <div class="folder__tab" style="background: ${d.color};"></div>
+        ${d.papers.map((p, pIdx) => `
+          <div class="paper paper-${pIdx + 1}">
+            <span class="paper-tag" style="color: ${d.color}; font-weight:800; font-size:10.5px; text-transform:uppercase;">${p.tag}</span>
+            <h4 style="font-size:13.5px; font-weight:800; margin: 4px 0 2px; color:#030308;">${p.title}</h4>
+            <p style="font-size:11.5px; color:#475569; line-height:1.35;">${p.desc}</p>
+          </div>
+        `).join("")}
+      </div>
+      <div class="folder__front">
+        <div class="folder-header">
+          <span class="folder-badge" style="color: ${d.color};">${d.subtitle}</span>
+          <span class="folder-num" style="font-family:'Space Grotesk',sans-serif; font-weight:900; color:rgba(255,255,255,0.4);">0${idx + 1}</span>
+        </div>
+        <div>
+          <h3 class="folder-title">${d.title}</h3>
+          <p style="font-size:12px; color:var(--muted); margin-top:4px;">Click to unfold blueprint</p>
+        </div>
+      </div>
+    </div>
+  `).join("");
+
+  container.querySelectorAll(".folder").forEach((folder) => {
+    folder.addEventListener("click", () => {
+      const isOpen = folder.classList.toggle("open");
+      folder.setAttribute("aria-expanded", isOpen);
+    });
+
+    folder.addEventListener("mousemove", (e) => {
+      const rect = folder.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      folder.style.setProperty("--magnet-x", x.toFixed(2));
+      folder.style.setProperty("--magnet-y", y.toFixed(2));
+    });
+
+    folder.addEventListener("mouseleave", () => {
+      folder.style.setProperty("--magnet-x", "0");
+      folder.style.setProperty("--magnet-y", "0");
+    });
+  });
+}
+
+/* ============================================================
+   RENDER CORE SECTIONS (Projects, Skills, Story, Certs)
+   ============================================================ */
+let likesState = {};
+
+async function loadLikes() {
+  try {
+    const res = await api("/api/projects/likes");
+    likesState = res.likes || {};
+  } catch {
+    likesState = {};
+  }
+  renderProjects();
+}
+
+function renderProjects() {
+  const container = document.querySelector("#projectList");
+  if (!container) return;
+  const list = content().projects || [];
+
+  container.innerHTML = list.map((p) => {
+    const count = likesState[p.id] || 0;
+    const isLiked = state.likedProjectIds.includes(p.id);
+
+    return `
+      <article class="project-card border-glow cursor-target" id="project-${p.id}">
+        <div class="project-card-inner">
+          <div class="project-card-image-wrap">
+            <img src="${p.image || 'assets/myface.jpg'}" alt="${p.title}">
+          </div>
+          <span class="tag" style="align-self:flex-start; margin-bottom:10px; color:var(--cyan); border-color:rgba(56,189,248,0.35);">${p.badge}</span>
+          <h3 class="project-card-title">${p.title}</h3>
+          <p class="project-card-desc">${p.body}</p>
+          <div class="project-tags">
+            ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+          </div>
+          <div class="project-card-footer">
+            <button class="like-btn ${isLiked ? 'liked' : ''} cursor-target" data-like="${p.id}" type="button" aria-label="Like ${p.title}">
+              <span class="like-heart">${isLiked ? '❤️' : '🤍'}</span>
+              <div class="counter-wheel">
+                <span class="counter-digit" data-count="${count}">
+                  <span class="counter-number">${count}</span>
+                </span>
+              </div>
+            </button>
+            <span style="font-size:12px; font-weight:700; color:var(--purple);">${p.status}</span>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  initBorderGlow();
+}
+
+async function handleLike(projectId) {
+  if (!session) {
+    openAuth("login");
+    showToast(t().toast.loginRequired);
     return;
   }
-  const remove = event.target.closest("[data-delete-user]");
-  if (remove) deleteUser(remove.dataset.deleteUser);
+
+  const isLiked = state.likedProjectIds.includes(projectId);
+  const method = isLiked ? "DELETE" : "POST";
+
+  try {
+    const res = await api(`/api/projects/${projectId}/like`, { method });
+    likesState[projectId] = res.likes;
+    if (isLiked) {
+      state.likedProjectIds = state.likedProjectIds.filter(id => id !== projectId);
+      showToast(t().toast.unliked);
+    } else {
+      state.likedProjectIds.push(projectId);
+      showToast(t().toast.liked);
+    }
+    renderProjects();
+  } catch (err) {
+    showToast(err.message);
+  }
+}
+
+function renderSkills() {
+  const list = content().skills || [];
+  const container = document.querySelector("#skillList");
+  if (!container) return;
+
+  container.innerHTML = list.map(s => `
+    <div class="skill-card cursor-target">
+      <div class="skill-head">
+        <span style="color:#ffffff;">${s.name}</span>
+        <span style="color:var(--cyan);">${s.score * 10}%</span>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-fill" style="width: ${s.score * 10}%;"></div>
+      </div>
+      <p style="font-size:12.5px; color:var(--muted); margin-top:8px; line-height:1.5;">${s.body}</p>
+    </div>
+  `).join("");
+
+  const aiContainer = document.querySelector("#aiToolList");
+  if (aiContainer) {
+    const aiTools = content().aiTools || [];
+    aiContainer.innerHTML = aiTools.map(tool => `
+      <div class="pill cursor-target" style="padding:10px 18px;">
+        <strong style="color:var(--purple); margin-right:6px;">${tool.name}</strong>
+        <span>${tool.body}</span>
+      </div>
+    `).join("");
+  }
+}
+
+function renderStory() {
+  const list = content().story || [];
+  const container = document.querySelector("#storyList");
+  if (!container) return;
+
+  container.innerHTML = list.map(s => `
+    <div class="timeline-item reveal cursor-target">
+      <div class="timeline-year">${s.period}</div>
+      <h3 class="timeline-title">${s.title}</h3>
+      <p class="timeline-desc">${s.body}</p>
+    </div>
+  `).join("");
+}
+
+function renderCertificates() {
+  const list = content().certificates || [];
+  const container = document.querySelector("#certificateList");
+  if (!container) return;
+
+  container.innerHTML = list.map(c => `
+    <div class="cert-card cursor-target" onclick="openCert('${c.image}', '${c.title.replace(/'/g, "\\'")}', '${c.body.replace(/'/g, "\\'")}')">
+      <img src="${c.image}" alt="${c.title}">
+      <div class="cert-card-body">
+        <h3>${c.title}</h3>
+        <p>${c.body}</p>
+      </div>
+    </div>
+  `).join("");
+}
+
+window.openCert = function(src, title, body) {
+  const modal = document.querySelector("#certModal");
+  if (!modal) return;
+  document.querySelector("#certModalImg").src = src;
+  document.querySelector("#certModalTitle").textContent = title;
+  document.querySelector("#certModalBody").textContent = body;
+  modal.showModal();
+};
+
+/* ============================================================
+   STATIC TEXT & LANGUAGE SWITCHER
+   ============================================================ */
+function applyStaticText() {
+  const currentUi = t();
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.dataset.i18n;
+    const parts = key.split(".");
+    let val = currentUi;
+    for (const p of parts) {
+      val = val ? val[p] : null;
+    }
+    if (val && typeof val === "string") {
+      el.textContent = val;
+    }
+  });
+
+  const langBtn = document.querySelector("#langToggleBtn");
+  if (langBtn) langBtn.textContent = state.lang === "th" ? "EN" : "TH";
+}
+
+function setLanguage(newLang) {
+  state.lang = newLang;
+  localStorage.setItem("preferred_language", newLang);
+  document.documentElement.lang = newLang;
+  applyStaticText();
+  renderStory();
+  renderSkills();
+  renderDossiers();
+  renderProjects();
+  renderCertificates();
+  initBounceCards(document.querySelector("#bounceCardsContainer"));
+}
+
+/* ============================================================
+   AUTH & USER SESSION
+   ============================================================ */
+const authModal = document.querySelector("#authModal");
+const authForm = document.querySelector("#authForm");
+
+let authMode = "login";
+function openAuth(mode = "login") {
+  authMode = mode;
+  const isReg = mode === "register";
+  document.querySelector("#authKicker").textContent = isReg ? t().auth_modal.registerKicker : t().auth_modal.loginKicker;
+  document.querySelector("#authTitle").textContent = isReg ? t().auth_modal.registerTitle : t().auth_modal.loginTitle;
+  document.querySelector("#authCopy").textContent = isReg ? t().auth_modal.registerCopy : t().auth_modal.loginCopy;
+  document.querySelector("#authSubmit").textContent = isReg ? t().auth_modal.submitRegister : t().auth_modal.submitLogin;
+  document.querySelector("#usernameField").style.display = isReg ? "block" : "none";
+  document.querySelector("#ageField").style.display = isReg ? "block" : "none";
+  document.querySelector("#passwordRule").hidden = !isReg;
+  document.querySelector("#formStatus").textContent = "";
+  authModal.showModal();
+}
+
+async function handleAuth(e) {
+  e.preventDefault();
+  const statusEl = document.querySelector("#formStatus");
+  statusEl.textContent = "Connecting...";
+
+  const email = document.querySelector("#emailInput").value.trim();
+  const password = document.querySelector("#passwordInput").value;
+  const username = document.querySelector("#usernameInput").value.trim();
+  const age = parseInt(document.querySelector("#ageInput").value, 10) || 17;
+
+  try {
+    if (authMode === "register") {
+      await api("/api/auth/register", { method: "POST", body: JSON.stringify({ email, password, username, age }) });
+      showToast(t().toast.registered);
+    }
+    const res = await api("/api/auth/login", { method: "POST", body: JSON.stringify({ email, password }) });
+    session = res.user;
+    updateAuthUi();
+    authModal.close();
+    showToast(t().toast.loggedIn);
+    await loadLikes();
+  } catch (err) {
+    statusEl.textContent = err.message;
+  }
+}
+
+function updateAuthUi() {
+  const loginBtn = document.querySelector("#loginBtn");
+  const regBtn = document.querySelector("#registerBtn");
+  const logoutBtn = document.querySelector("#logoutBtn");
+  const userBadge = document.querySelector("#userBadge");
+  const dashBtn = document.querySelector("#dashboardBtn");
+
+  if (session) {
+    loginBtn.hidden = true;
+    regBtn.hidden = true;
+    logoutBtn.hidden = false;
+    userBadge.hidden = false;
+    userBadge.textContent = session.username || session.email.split("@")[0];
+    dashBtn.hidden = session.role !== "admin";
+  } else {
+    loginBtn.hidden = false;
+    regBtn.hidden = false;
+    logoutBtn.hidden = true;
+    userBadge.hidden = true;
+    dashBtn.hidden = true;
+  }
+}
+
+async function initializeSession() {
+  try {
+    const res = await api("/api/auth/me");
+    if (res.authenticated && res.user) {
+      session = res.user;
+    }
+  } catch {
+    session = null;
+  }
+  updateAuthUi();
+  await loadLikes();
+}
+
+/* ============================================================
+   ADMIN DASHBOARD MODAL
+   ============================================================ */
+const dashboardModal = document.querySelector("#dashboardModal");
+async function openDashboard() {
+  if (!session || session.role !== "admin") return;
+  dashboardModal.showModal();
+  loadAdminStats();
+  loadAdminUsers();
+  loadLogs({ reset: true });
+}
+
+async function loadAdminStats() {
+  const container = document.querySelector("#adminStats");
+  try {
+    const res = await api("/api/admin/metrics");
+    container.innerHTML = `
+      <div class="pill">Accounts: ${res.usersCount}</div>
+      <div class="pill">Likes: ${res.likesCount}</div>
+      <div class="pill">Logs: ${res.logsCount}</div>
+    `;
+  } catch {}
+}
+
+async function loadAdminUsers() {
+  const container = document.querySelector("#userList");
+  try {
+    const res = await api("/api/admin/users");
+    container.innerHTML = (res.users || []).map(u => `
+      <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--line-subtle);">
+        <span>${u.email} (${u.role})</span>
+        <button class="ghost-btn" style="padding:4px 10px; font-size:11px;" onclick="deleteUser('${u.id}')">Delete</button>
+      </div>
+    `).join("");
+  } catch {}
+}
+
+window.deleteUser = async function(id) {
+  if (!confirm("Are you sure?")) return;
+  try {
+    await api(`/api/admin/users/${id}`, { method: "DELETE" });
+    loadAdminUsers();
+  } catch (e) {
+    showToast(e.message);
+  }
+};
+
+async function loadLogs({ reset = false } = {}) {
+  const container = document.querySelector("#logList");
+  try {
+    const res = await api("/api/admin/logs?limit=20");
+    container.innerHTML = (res.logs || []).map(l => `
+      <div style="font-size:12px; padding:6px 0; color:var(--text-dim); border-bottom:1px solid rgba(255,255,255,0.04);">
+        <strong style="color:var(--cyan);">${l.action}</strong> by ${l.userEmail || 'anon'} (${new Date(l.createdAt).toLocaleTimeString()})
+      </div>
+    `).join("");
+  } catch {}
+}
+
+/* ============================================================
+   EVENT LISTENERS & SCROLL
+   ============================================================ */
+document.querySelector("#loginBtn")?.addEventListener("click", () => openAuth("login"));
+document.querySelector("#registerBtn")?.addEventListener("click", () => openAuth("register"));
+document.querySelector("#logoutBtn")?.addEventListener("click", async () => {
+  try {
+    await api("/api/auth/logout", { method: "POST" });
+  } catch {}
+  session = null;
+  state.likedProjectIds = [];
+  updateAuthUi();
+  await loadLikes();
+  showToast(t().toast.loggedOut);
 });
-langToggleBtn?.addEventListener("click", () => setLanguage(state.lang === "th" ? "en" : "th"));
-logSearchInput?.addEventListener("input", (event) => scheduleLogSearch(event.target.value));
-logActionSelect?.addEventListener("change", (event) => {
-  state.logsFilter.action = event.target.value;
-  loadLogs({ reset: true }).catch((error) => showToast(error.message));
+document.querySelector("#dashboardBtn")?.addEventListener("click", openDashboard);
+document.querySelector("#closeAuthBtn")?.addEventListener("click", () => authModal.close());
+document.querySelector("#closeDashboardBtn")?.addEventListener("click", () => dashboardModal.close());
+authForm?.addEventListener("submit", handleAuth);
+
+document.querySelector("#projectList")?.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-like]");
+  if (btn) handleLike(btn.dataset.like);
 });
-loadMoreLogsBtn?.addEventListener("click", () => {
-  loadLogs().catch((error) => showToast(error.message));
+
+document.querySelector("#langToggleBtn")?.addEventListener("click", () => {
+  setLanguage(state.lang === "th" ? "en" : "th");
+});
+
+document.querySelector(".resume-btn")?.addEventListener("click", (e) => {
+  showToast(state.lang === "th" ? "ติดต่อขอรับ Resume ฉบับเต็มได้ที่ pongsaopataradanai@gmail.com" : "Request full Resume via pongsaopataradanai@gmail.com");
 });
 
 function observeReveals() {
   const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) entry.target.classList.add("is-visible");
-    }
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add("is-visible");
+    });
   }, { threshold: 0.14 });
 
-  document.querySelectorAll(".reveal:not(.is-visible)").forEach((target) => observer.observe(target));
+  document.querySelectorAll(".reveal:not(.is-visible)").forEach(t => observer.observe(t));
 }
-
-const topbar = document.querySelector("#topbar");
-const scrollProgress = document.querySelector("#scrollProgress");
-const backToTop = document.querySelector("#backToTop");
 
 function updateScrollEffects() {
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
   const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 
+  const scrollProgress = document.querySelector("#scrollProgress");
+  const topbar = document.querySelector("#topbar");
+  const backToTop = document.querySelector("#backToTop");
+
   if (scrollProgress) scrollProgress.style.width = `${progress}%`;
   if (topbar) topbar.classList.toggle("scrolled", scrollTop > 10);
   if (backToTop) backToTop.classList.toggle("visible", scrollTop > 400);
 }
 
-function initScrollEffects() {
-  updateScrollEffects();
-  window.addEventListener("scroll", updateScrollEffects, { passive: true });
-  window.addEventListener("resize", updateScrollEffects);
+window.addEventListener("scroll", updateScrollEffects, { passive: true });
+document.querySelector("#backToTop")?.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
-  backToTop?.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}
-
-// Initial Boot
+/* ============================================================
+   🚀 INITIAL BOOT & MOUNTING ENGINES
+   ============================================================ */
 applyStaticText();
 renderStory();
-renderAiTools();
 renderSkills();
 renderDossiers();
 renderProjects();
 renderCertificates();
-updateAuthUi();
 observeReveals();
-initScrollEffects();
 initializeSession();
 
-// Initialize React Bits Galaxy Cosmic Background
-initGalaxy(document.querySelector("#galaxyCanvas"), {
-  starSpeed: 1,
-  density: 1.7,
-  hueShift: 255,
-  speed: 2.3,
-  glowIntensity: 0.85,
-  saturation: 1,
-  mouseRepulsion: true,
-  repulsionStrength: 2,
-  twinkleIntensity: 0.3,
-  rotationSpeed: 0.05,
-  transparent: true
-});
+// Mount React Bits Engines
+initTargetCursor();
+initFuzzyText(document.querySelector("#fuzzyTitleCanvas"), "NEW JA");
+initLogoLoop(document.querySelector("#techLogoLoop"));
+initBounceCards(document.querySelector("#bounceCardsContainer"));
+initCountUp();
+
+// Mount Dynamic Multi-State Cosmic Background Engine (Dual-Buffer Crossfade)
+const cosmicBgEngine = new DynamicCosmicEngine();

@@ -4,83 +4,131 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>New JA | KMITL Developer Portfolio</title>
-  <meta name="description" content="Developer portfolio and life story of New JA, Pataradanai Pongsao. Aspiring KMITL Computer Science / Engineering student, national AI hackathon champion, and creator.">
+  <title>New JA | Creative AI Architect &amp; Full-Stack Developer</title>
+  <meta name="description" content="Personal developer portfolio of New JA (Pataradanai Pongsao) — Creative AI Architect, Full-Stack Engineer, and National Hackathon Champion.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <!-- Galaxy WebGL Cosmic Background (React Bits) -->
-  <canvas id="galaxyCanvas" class="galaxy-canvas" aria-hidden="true"></canvas>
+  <!-- Target Cursor (React Bits HUD Crosshair Reticle) -->
+  <div class="target-cursor" id="targetCursor" aria-hidden="true">
+    <div class="target-cursor-corner corner-tl"></div>
+    <div class="target-cursor-corner corner-tr"></div>
+    <div class="target-cursor-corner corner-bl"></div>
+    <div class="target-cursor-corner corner-br"></div>
+    <div class="target-cursor-dot"></div>
+  </div>
 
-  <!-- Ambient Ambient Noise & Cyber Grid Overlay -->
+  <!-- Dynamic Multi-State Cosmic Backgrounds (Dual-Buffer Crossfade) -->
+  <div class="dynamic-bg-container" id="dynamicBgContainer" aria-hidden="true">
+    <canvas id="bgCanvasA" class="bg-layer active"></canvas>
+    <canvas id="bgCanvasB" class="bg-layer"></canvas>
+    <div class="bg-gradient-overlay"></div>
+  </div>
+
+  <!-- Ambient Noise & Cosmic Cyber Grid -->
   <div class="noise" aria-hidden="true"></div>
   <div class="cyber-grid" aria-hidden="true"></div>
 
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-  <!-- Ambient Fire Sparks -->
+  <!-- Ambient Cosmic Sparks -->
   <div class="sparkles" aria-hidden="true">
     <span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
 
   <!-- Sticky Topbar Navigation -->
   <header class="topbar" id="topbar">
-    <a class="brand" href="#home" aria-label="New JA home">
-      <div class="brand-seal-wrap">
-        <img src="assets/seal.png" alt="KMITL Seal">
+    <a class="brand cursor-target" href="#home" aria-label="New JA home">
+      <div class="brand-avatar-wrap">
+        <span class="brand-cosmic-glow"></span>
+        <svg class="brand-svg" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="14" stroke="url(#brandGrad)" stroke-width="2" />
+          <path d="M10 22L16 10L22 22L16 18L10 22Z" fill="url(#brandGrad)" />
+          <defs>
+            <linearGradient id="brandGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#38BDF8" />
+              <stop offset="0.5" stop-color="#C084FC" />
+              <stop offset="1" stop-color="#F472B6" />
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
       <div class="brand-text">
         <span class="brand-name">New JA</span>
-        <span class="brand-sub">KMITL Dev</span>
+        <span class="brand-sub">AI Architect</span>
       </div>
     </a>
     <nav class="nav" aria-label="Main navigation">
-      <a href="#profile" data-i18n="nav.profile">Profile</a>
-      <a href="#story" data-i18n="nav.story">Life Story</a>
-      <a href="#skills" data-i18n="nav.skills">Skills</a>
-      <a href="#projects" data-i18n="nav.projects">Works</a>
-      <a href="#certificates" data-i18n="nav.certificates">Certificates</a>
-      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <a class="cursor-target" href="#profile" data-i18n="nav.profile">Profile</a>
+      <a class="cursor-target" href="#story" data-i18n="nav.story">Life Story</a>
+      <a class="cursor-target" href="#skills" data-i18n="nav.skills">Skills</a>
+      <a class="cursor-target" href="#flagship" data-i18n="nav.flagship">Flagship</a>
+      <a class="cursor-target" href="#projects" data-i18n="nav.projects">Works</a>
+      <a class="cursor-target" href="#certificates" data-i18n="nav.certificates">Certificates</a>
+      <a class="cursor-target" href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="auth-actions">
       <span class="user-badge" id="userBadge" hidden></span>
-      <button class="icon-btn lang-btn" id="langToggleBtn" type="button" title="Switch language / เปลี่ยนภาษา">EN</button>
-      <button class="icon-btn admin-btn" id="dashboardBtn" type="button" hidden data-i18n="auth.admin">Admin</button>
-      <button class="ghost-btn" id="loginBtn" type="button" data-i18n="auth.login">Login</button>
-      <button class="solid-btn" id="registerBtn" type="button" data-i18n="auth.register">Register</button>
-      <button class="ghost-btn" id="logoutBtn" type="button" hidden data-i18n="auth.logout">Logout</button>
+      <button class="icon-btn lang-btn cursor-target" id="langToggleBtn" type="button" title="Switch language / เปลี่ยนภาษา">EN</button>
+      <button class="icon-btn admin-btn cursor-target" id="dashboardBtn" type="button" hidden data-i18n="auth.admin">Admin</button>
+      <button class="ghost-btn cursor-target" id="loginBtn" type="button" data-i18n="auth.login">Login</button>
+      <button class="solid-btn cursor-target" id="registerBtn" type="button" data-i18n="auth.register">Register</button>
+      <button class="ghost-btn cursor-target" id="logoutBtn" type="button" hidden data-i18n="auth.logout">Logout</button>
     </div>
   </header>
 
   <main>
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero" id="home" data-bg-theme="aurora">
       <div class="hero-copy reveal">
         <div class="kicker-wrap">
           <span class="pulse-dot"></span>
-          <p class="kicker" data-i18n="hero.kicker">KMITL Dreamer · Future Innovator</p>
+          <p class="kicker" data-i18n="hero.kicker">Creative AI Architect · Full-Stack Innovator</p>
         </div>
-        <h1 class="hero-title">New JA</h1>
+
+        <!-- FuzzyText Canvas (React Bits) for "NEW JA" -->
+        <div class="fuzzy-title-wrap cursor-target" id="fuzzyTitleContainer" title="Hover for stardust vibration">
+          <canvas id="fuzzyTitleCanvas" class="fuzzy-title-canvas"></canvas>
+          <h1 class="sr-only">New JA</h1>
+        </div>
+
         <div class="hero-name">
-          <span class="orange-bar"></span>
+          <span class="nebula-bar"></span>
           <div>
             <strong>Pataradanai Pongsao</strong>
-            <em data-i18n="hero.alias">AKA New JA / Born 06.23.09</em>
+            <em data-i18n="hero.alias">AKA New JA / Born 06.23.09 · Bangkok, Thailand</em>
           </div>
         </div>
+
         <p class="hero-text" data-i18n="hero.text">
-          High school Grade 12 developer who grew up loving play, then started building. I use AI as a creative partner,
-          code as a tool, and KMITL as the dream destination for a future in technology.
+          Developer and AI systems creator driven by curiosity. Transforming complex algorithms into intuitive spatial experiences, autonomous drone intelligence, and scalable full-stack applications.
         </p>
+
+        <!-- CountUp Dynamic Metrics Bar -->
+        <div class="hero-stats reveal" id="heroStats">
+          <div class="hero-stat-card cursor-target">
+            <div class="stat-number"><span class="count-up" data-target="24">0</span><span class="stat-plus">+</span></div>
+            <span class="stat-label" data-i18n="stats.projects">Projects Built</span>
+          </div>
+          <div class="hero-stat-card cursor-target">
+            <div class="stat-number"><span class="count-up" data-target="15">0</span><span class="stat-plus">+</span></div>
+            <span class="stat-label" data-i18n="stats.awards">Awards &amp; Honors</span>
+          </div>
+          <div class="hero-stat-card cursor-target">
+            <div class="stat-number"><span class="count-up" data-target="99">0</span><span class="stat-plus">.8%</span></div>
+            <span class="stat-label" data-i18n="stats.accuracy">AI Accuracy</span>
+          </div>
+        </div>
+
         <div class="hero-actions">
-          <a class="solid-btn big" href="#projects" data-i18n="hero.cta1">See My Works</a>
-          <a class="ghost-btn big" href="#story" data-i18n="hero.cta2">Read Life Story</a>
-          <a class="resume-btn" href="assets/resume.pdf" download="NewJA_Resume.pdf">
+          <a class="solid-btn big cursor-target" href="#flagship" data-i18n="hero.cta1">Explore Works</a>
+          <a class="ghost-btn big cursor-target" href="#story" data-i18n="hero.cta2">Read Journey</a>
+          <a class="resume-btn cursor-target" href="assets/resume.pdf" download="NewJA_Resume.pdf">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -93,89 +141,105 @@
       </div>
 
       <div class="hero-visual reveal">
-        <div class="seal-orbit"></div>
-        <div class="seal-disc">
-          <img src="assets/seal.png" alt="KMITL seal">
-        </div>
-        <div class="floating-card now-card">
-          <small data-i18n="hero.nowCardSmall">KMITL now</small>
-          <strong data-i18n="hero.nowCardStrong">Dream University</strong>
-          <p data-i18n="hero.nowCardBody">King Mongkut's Institute of Technology Ladkrabang</p>
-        </div>
-        <div class="phone-card">
-          <img src="assets/kmitl-logo.jpg" alt="KMITL logo">
-          <h2 data-i18n="hero.phoneCardTitle">University</h2>
-          <p data-i18n="hero.phoneCardBody">King Mongkut's Institute of Technology Ladkrabang</p>
-        </div>
-        <div class="face-card">
+        <div class="nebula-orbit"></div>
+        <div class="nebula-orbit orbit-2"></div>
+        <div class="face-card hero-avatar-card cursor-target">
           <img src="assets/myface.jpg" alt="Portrait of New JA">
-          <strong>New JA</strong>
-          <span data-i18n="hero.faceCardRole">Developer / Creator</span>
+          <div class="face-card-info">
+            <strong>New JA</strong>
+            <span data-i18n="hero.faceCardRole">AI Engineer &amp; Creator</span>
+          </div>
+          <span class="badge-status online"><span class="badge-status-dot"></span> Building Tomorrow</span>
+        </div>
+        <div class="floating-card achievement-card cursor-target">
+          <small data-i18n="hero.trophySmall">National AI Hackathon</small>
+          <strong data-i18n="hero.trophyStrong">1st Place Champion</strong>
+          <p data-i18n="hero.trophyBody">UTCC AI Hackathon 2026 · Grand Winner</p>
+        </div>
+        <div class="floating-card tech-card cursor-target">
+          <small data-i18n="hero.techSmall">Core Focus</small>
+          <strong data-i18n="hero.techStrong">Autonomous &amp; LLM Systems</strong>
+          <p data-i18n="hero.techBody">ROS · YOLO · Next.js · WebGL</p>
         </div>
       </div>
     </section>
 
+    <!-- LogoLoop Infinite Tech Marquee (React Bits) -->
+    <section class="logo-loop-section reveal" data-bg-theme="aurora">
+      <div class="logo-loop-label" data-i18n="tech.marquee">CORE STACK &amp; INTELLIGENCE ARSENAL</div>
+      <div class="logo-loop" id="techLogoLoop"></div>
+    </section>
+
+    <!-- Flagship Works Spotlight with BounceCards (React Bits) -->
+    <section class="section flagship-section" id="flagship" data-bg-theme="warp">
+      <div class="section-head reveal">
+        <p class="kicker" data-i18n="flagship.kicker">Spotlight Showcase</p>
+        <h2 data-i18n="flagship.title">Flagship Innovations &amp; Awards</h2>
+        <p data-i18n="flagship.body">Hover over any card in the deck to inspect key projects with dynamic spring physics.</p>
+      </div>
+      <div class="bounce-cards-wrapper reveal" id="bounceCardsContainer"></div>
+    </section>
+
     <!-- Profile Section -->
-    <section class="section profile-section" id="profile">
+    <section class="section profile-section" id="profile" data-bg-theme="constellation">
       <div class="profile-layout reveal">
-        <div class="profile-photo">
+        <div class="profile-photo cursor-target">
           <img src="assets/myface.jpg" alt="New JA portrait">
           <div class="profile-photo-badge">
-            <span>KMITL '26</span>
+            <span>GEN-AI DEV</span>
           </div>
         </div>
         <div class="profile-content">
           <p class="kicker" data-i18n="profile.kicker">Creator Profile</p>
           <h2>Pataradanai Pongsao</h2>
-          <p class="profile-desc" data-i18n="profile.body">New JA is a Grade 12 Science-Math student focused on developer work, Roblox game
-            systems, AI-assisted building, content creation, and future technology studies at KMITL.</p>
+          <p class="profile-desc" data-i18n="profile.body">
+            High school Grade 12 developer with a relentless drive for innovation. Combining multi-agent AI, drone teleoperation, real-time 3D environments, and modern web architectures into impactful products.
+          </p>
           <div class="profile-tags" id="profileTags">
-            <span class="pill">AKA New JA</span>
-            <span class="pill">Born 06.23.09</span>
-            <span class="pill">Developer</span>
-            <span class="pill">KMITL Dreamer</span>
+            <span class="pill cursor-target">AKA New JA</span>
+            <span class="pill cursor-target">AI Architect</span>
+            <span class="pill cursor-target">Hackathon Winner</span>
+            <span class="pill cursor-target">Full-Stack Dev</span>
+            <span class="pill cursor-target">Robotics &amp; Drones</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Story Section -->
-    <section class="section story-section" id="story">
+    <section class="section story-section" id="story" data-bg-theme="constellation">
       <div class="section-head reveal">
         <p class="kicker" data-i18n="section.story.kicker">Life Story</p>
-        <h2 data-i18n="section.story.title">From playing as a kid to building as a creator.</h2>
-        <p data-i18n="section.story.body">New JA's story is shaped into a timeline, from early school life to the
-          long-term dream of studying at KMITL.</p>
+        <h2 data-i18n="section.story.title">From playing as a kid to engineering the future.</h2>
+        <p data-i18n="section.story.body">A timeline of passion, curiosity, national hackathons, and breakthrough milestones.</p>
       </div>
       <div class="timeline" id="storyList"></div>
     </section>
 
     <!-- Skills Section -->
-    <section class="section" id="skills">
+    <section class="section" id="skills" data-bg-theme="cybergrid">
       <div class="section-head reveal">
         <p class="kicker" data-i18n="section.skills.kicker">Skill Stack</p>
-        <h2 data-i18n="section.skills.title">I can do anything with AI.</h2>
-        <p data-i18n="section.skills.body">The scores below are New's current self-rated levels, presented as a sharp
-          developer-style dashboard.</p>
+        <h2 data-i18n="section.skills.title">Engineering Beyond Boundaries.</h2>
+        <p data-i18n="section.skills.body">Self-evaluated proficiencies across Artificial Intelligence, Full-Stack Development, Game Architecture, and Robotics.</p>
       </div>
       <div class="ai-strip reveal" id="aiToolList"></div>
       <div class="skill-grid" id="skillList"></div>
     </section>
 
-    <!-- Projects Section with 3D Interactive Folders -->
-    <section class="section" id="projects">
+    <!-- Projects Section with 3D Interactive Dossier Folders & BorderGlow -->
+    <section class="section" id="projects" data-bg-theme="quantum">
       <div class="section-head reveal">
-        <p class="kicker" data-i18n="section.projects.kicker">Works</p>
-        <h2 data-i18n="section.projects.title">What I am building now.</h2>
-        <p data-i18n="section.projects.body">Members can sign in and like projects. Accounts, sessions, and likes are
-          stored securely on the server.</p>
+        <p class="kicker" data-i18n="section.projects.kicker">Selected Works</p>
+        <h2 data-i18n="section.projects.title">Production Systems &amp; Experiments.</h2>
+        <p data-i18n="section.projects.body">Interactive portfolio cards featuring Border Glow proximity luminescence and live member likes.</p>
       </div>
 
       <!-- React Bits 3D Interactive Dossier Folders Showcase -->
       <div class="dossiers-wrapper reveal" id="dossiersContainer">
         <div class="dossiers-intro">
           <span class="dossier-pill" data-i18n="dossier.badge">⚡ 3D Interactive Dossiers</span>
-          <p data-i18n="dossier.hint">Click any folder to unfold project sheets &amp; inspect details</p>
+          <p data-i18n="dossier.hint">Click any dossier to unfold project sheets &amp; magnetic blueprints</p>
         </div>
         <div class="dossiers-grid" id="dossiersList"></div>
       </div>
@@ -184,34 +248,28 @@
     </section>
 
     <!-- Certificates Section -->
-    <section class="section" id="certificates">
+    <section class="section" id="certificates" data-bg-theme="supernova">
       <div class="section-head reveal">
-        <p class="kicker" data-i18n="section.certificates.kicker">Certificates</p>
-        <h2 data-i18n="section.certificates.title">Activities and proof of growth.</h2>
-        <p data-i18n="section.certificates.body">Certificate images from the Cer folder are presented as a gallery with
-          smooth hover transitions.</p>
+        <p class="kicker" data-i18n="section.certificates.kicker">Certificates &amp; Proof</p>
+        <h2 data-i18n="section.certificates.title">Verified Achievements &amp; Growth.</h2>
+        <p data-i18n="section.certificates.body">Official credentials, competition victories, and academic milestones.</p>
       </div>
       <div class="certificate-grid" id="certificateList"></div>
     </section>
 
     <!-- Contact Section -->
-    <section class="section contact-section" id="contact">
+    <section class="section contact-section" id="contact" data-bg-theme="supernova">
       <div class="section-head reveal">
-        <p class="kicker" data-i18n="section.contact.kicker">Contact</p>
-        <h2 data-i18n="section.contact.title">Let's connect.</h2>
+        <p class="kicker" data-i18n="section.contact.kicker">Transmission Channel</p>
+        <h2 data-i18n="section.contact.title">Let's build something extraordinary.</h2>
       </div>
       <div class="contact-grid">
-        <a href="mailto:pongpataradanai@gmail.com"><span>Gmail</span><strong>pongpataradanai@gmail.com</strong></a>
-        <a href="https://line.me/R/ti/p/~new_vd" target="_blank"
-          rel="noreferrer"><span>Line</span><strong>new_vd</strong></a>
-        <a href="https://www.facebook.com/pataradanai.pongsao" target="_blank"
-          rel="noreferrer"><span>Facebook</span><strong>pataradanai.pongsao</strong></a>
-        <a href="https://www.instagram.com/new.linknewja/" target="_blank"
-          rel="noreferrer"><span>Instagram</span><strong>@new.linknewja</strong></a>
-        <a href="https://github.com/Newwee" target="_blank"
-          rel="noreferrer"><span>GitHub</span><strong>github.com/Newwee</strong></a>
-        <a href="https://www.youtube.com/@NewJAA" target="_blank"
-          rel="noreferrer"><span>YouTube</span><strong>youtube.com/@NewJAA</strong></a>
+        <a class="cursor-target" href="mailto:pongpataradanai@gmail.com"><span>Gmail</span><strong>pongpataradanai@gmail.com</strong></a>
+        <a class="cursor-target" href="https://line.me/R/ti/p/~new_vd" target="_blank" rel="noreferrer"><span>Line</span><strong>new_vd</strong></a>
+        <a class="cursor-target" href="https://www.facebook.com/pataradanai.pongsao" target="_blank" rel="noreferrer"><span>Facebook</span><strong>pataradanai.pongsao</strong></a>
+        <a class="cursor-target" href="https://www.instagram.com/new.linknewja/" target="_blank" rel="noreferrer"><span>Instagram</span><strong>@new.linknewja</strong></a>
+        <a class="cursor-target" href="https://github.com/Newwee" target="_blank" rel="noreferrer"><span>GitHub</span><strong>github.com/Newwee</strong></a>
+        <a class="cursor-target" href="https://www.youtube.com/@NewJAA" target="_blank" rel="noreferrer"><span>YouTube</span><strong>youtube.com/@NewJAA</strong></a>
       </div>
     </section>
   </main>
@@ -219,7 +277,7 @@
   <!-- Auth Modal -->
   <dialog class="modal" id="authModal">
     <form method="dialog" class="modal-panel" id="authForm">
-      <button class="close-btn" id="closeAuthBtn" type="button" aria-label="Close">&times;</button>
+      <button class="close-btn cursor-target" id="closeAuthBtn" type="button" aria-label="Close">&times;</button>
       <p class="kicker" id="authKicker">Login</p>
       <h2 id="authTitle">Welcome back</h2>
       <p class="modal-copy" id="authCopy">Login to like projects and access your member account.</p>
@@ -236,14 +294,13 @@
         <span data-i18n="auth_modal.password">Password</span>
         <input id="passwordInput" type="password" required minlength="10" autocomplete="current-password">
       </label>
-      <p class="password-rule" id="passwordRule" hidden>Use 10+ characters with uppercase, lowercase, a number, and a
-        symbol.</p>
+      <p class="password-rule" id="passwordRule" hidden>Use 10+ characters with uppercase, lowercase, a number, and a symbol.</p>
       <label id="ageField">
         <span data-i18n="auth_modal.age">Age</span>
         <input id="ageInput" type="number" min="1" max="120" value="17">
       </label>
 
-      <button class="solid-btn wide" type="submit" id="authSubmit">Login</button>
+      <button class="solid-btn wide cursor-target" type="submit" id="authSubmit">Login</button>
       <p class="form-status" id="formStatus"></p>
     </form>
   </dialog>
@@ -251,7 +308,7 @@
   <!-- Dashboard Modal -->
   <dialog class="modal dashboard-modal" id="dashboardModal">
     <section class="modal-panel dashboard-panel">
-      <button class="close-btn" id="closeDashboardBtn" aria-label="Close">&times;</button>
+      <button class="close-btn cursor-target" id="closeDashboardBtn" aria-label="Close">&times;</button>
       <p class="kicker">Admin Back Office</p>
       <h2>Portfolio Control Room</h2>
       <div class="admin-stats" id="adminStats"></div>
@@ -275,7 +332,7 @@
           <div id="logList" class="admin-list log-list"></div>
           <div class="log-footer">
             <span id="logCountLabel"></span>
-            <button class="ghost-btn compact" id="loadMoreLogsBtn" type="button" hidden>Load more</button>
+            <button class="ghost-btn compact cursor-target" id="loadMoreLogsBtn" type="button" hidden>Load more</button>
           </div>
         </article>
       </div>
@@ -285,7 +342,7 @@
   <!-- Certificate Modal -->
   <dialog id="certModal" class="modal cert-modal">
     <div class="modal-panel cert-modal-content">
-      <button class="close-btn" onclick="document.getElementById('certModal').close()">&times;</button>
+      <button class="close-btn cursor-target" onclick="document.getElementById('certModal').close()">&times;</button>
       <img id="certModalImg" src="" alt="Certificate Full View">
       <div class="cert-info">
         <h3 id="certModalTitle"></h3>
@@ -298,7 +355,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <button class="back-to-top cursor-target" id="backToTop" aria-label="Back to top">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
       stroke-linejoin="round" width="20" height="20">
       <polyline points="18 15 12 9 6 15" />
