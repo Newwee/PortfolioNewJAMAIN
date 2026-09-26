@@ -395,7 +395,7 @@ const CONTENT = {
    ============================================================ */
 const UI = {
   en: {
-    nav: { profile: "Profile", story: "Life Story", skills: "Skills", flagship: "Flagship", projects: "Works", certificates: "Certificates", contact: "Contact" },
+    nav: { profile: "Profile", story: "Life Story", workflow: "AI Workflow", skills: "Skills", flagship: "Flagship", projects: "Works", certificates: "Certificates", contact: "Contact" },
     auth: { login: "Login", register: "Register", logout: "Logout", admin: "Admin" },
     hero: {
       kicker: "Creative AI Architect · Full-Stack Innovator",
@@ -403,6 +403,7 @@ const UI = {
       text: "Developer and AI systems creator driven by curiosity. Transforming complex algorithms into intuitive spatial experiences, autonomous drone intelligence, and scalable full-stack applications.",
       cta1: "Explore Works",
       cta2: "Read Journey",
+      ctaWorkflow: "AI Workflow",
       cta3: "Download Resume",
       trophySmall: "National AI Hackathon",
       trophyStrong: "1st Place Champion",
@@ -471,7 +472,7 @@ const UI = {
     }
   },
   th: {
-    nav: { profile: "โปรไฟล์", story: "เรื่องราว", skills: "ทักษะ", flagship: "ผลงานเด่น", projects: "ผลงาน", certificates: "เกียรติบัตร", contact: "ติดต่อ" },
+    nav: { profile: "โปรไฟล์", story: "เรื่องราว", workflow: "กระบวนการ AI", skills: "ทักษะ", flagship: "ผลงานเด่น", projects: "ผลงาน", certificates: "เกียรติบัตร", contact: "ติดต่อ" },
     auth: { login: "เข้าสู่ระบบ", register: "สมัครสมาชิก", logout: "ออกจากระบบ", admin: "ผู้ดูแลระบบ" },
     hero: {
       kicker: "สถาปนิกปัญญาประดิษฐ์ · นักพัฒนา Full-Stack",
@@ -479,6 +480,7 @@ const UI = {
       text: "นักพัฒนาและผู้สร้างระบบ AI ที่ขับเคลื่อนด้วยความอยากรู้อยากเห็น เปลี่ยนอัลกอริทึมซับซ้อนให้กลายเป็นประสบการณ์เสมือนจริง โดรนอัตโนมัติ และเว็บแอปพลิเคชันระดับโปรดักชัน",
       cta1: "ชมผลงานทั้งหมด",
       cta2: "อ่านเส้นทางชีวิต",
+      ctaWorkflow: "กระบวนการ AI",
       cta3: "ดาวน์โหลดเรซูเม่",
       trophySmall: "การแข่งขัน AI ระดับประเทศ",
       trophyStrong: "ชนะเลิศอันดับ 1",
@@ -968,6 +970,416 @@ function initCountUp() {
   }, { threshold: 0.2 });
 
   elements.forEach(el => observer.observe(el));
+}
+
+/* ============================================================
+   🕸️ WEB THREADS (React Bits Background Engine)
+   High-Performance Neural Network Waveform & Filament Synthesis
+   ============================================================ */
+function initWebThreads() {
+  const canvas = document.querySelector("#webThreadsCanvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (isReduced) return;
+
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  let mouseX = width / 2;
+  let mouseY = height / 2;
+  let targetMouseX = mouseX;
+  let targetMouseY = mouseY;
+
+  window.addEventListener("mousemove", (e) => {
+    targetMouseX = e.clientX;
+    targetMouseY = e.clientY;
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }, { passive: true });
+
+  const threadCount = 20;
+  const threads = [];
+  const colors = [
+    "rgba(16, 185, 129, 0.45)",  // Emerald
+    "rgba(56, 189, 248, 0.45)",  // Cyan
+    "rgba(192, 132, 252, 0.4)",  // Purple
+    "rgba(99, 102, 241, 0.4)"    // Indigo
+  ];
+
+  for (let i = 0; i < threadCount; i++) {
+    threads.push({
+      baseY: (height / (threadCount + 1)) * (i + 1),
+      amplitude: 16 + Math.random() * 32,
+      frequency: 0.0016 + Math.random() * 0.002,
+      speed: 0.001 + Math.random() * 0.0015,
+      phase: Math.random() * Math.PI * 2,
+      color: colors[i % colors.length],
+      lineWidth: 1 + (i % 3) * 0.5,
+      nodes: [
+        { progress: Math.random(), speed: 0.0012 + Math.random() * 0.0018 },
+        { progress: Math.random(), speed: 0.0012 + Math.random() * 0.0018 }
+      ]
+    });
+  }
+
+  let time = 0;
+  let isRunning = true;
+
+  document.addEventListener("visibilitychange", () => {
+    isRunning = !document.hidden;
+    if (isRunning) requestAnimationFrame(draw);
+  });
+
+  function draw() {
+    if (!isRunning) return;
+    time += 1;
+
+    // Smooth mouse interpolation
+    mouseX += (targetMouseX - mouseX) * 0.05;
+    mouseY += (targetMouseY - mouseY) * 0.05;
+
+    ctx.clearRect(0, 0, width, height);
+
+    threads.forEach((t) => {
+      ctx.beginPath();
+      ctx.lineWidth = t.lineWidth;
+      ctx.strokeStyle = t.color;
+
+      const step = 20;
+      let started = false;
+
+      for (let x = 0; x <= width + step; x += step) {
+        // Multi-frequency sinusoidal wave
+        const wave1 = Math.sin(x * t.frequency + time * t.speed + t.phase) * t.amplitude;
+        const wave2 = Math.cos(x * t.frequency * 1.5 - time * t.speed * 0.8) * (t.amplitude * 0.4);
+
+        // Mouse pinch / magnetic displacement
+        const dx = x - mouseX;
+        const distSq = dx * dx;
+        const sigmaSq = 160000; // ~400px radius
+        const influence = Math.exp(-distSq / sigmaSq);
+        const mouseLift = (mouseY - t.baseY) * influence * 0.35;
+
+        const y = t.baseY + wave1 + wave2 + mouseLift;
+
+        if (!started) {
+          ctx.moveTo(x, y);
+          started = true;
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.stroke();
+
+      // Render glowing nodes traversing along thread
+      t.nodes.forEach((node) => {
+        node.progress = (node.progress + node.speed) % 1;
+        const nx = node.progress * width;
+        const nWave = Math.sin(nx * t.frequency + time * t.speed + t.phase) * t.amplitude;
+        const ndx = nx - mouseX;
+        const nInfluence = Math.exp(-(ndx * ndx) / 160000);
+        const ny = t.baseY + nWave + (mouseY - t.baseY) * nInfluence * 0.35;
+
+        ctx.fillStyle = "#ffffff";
+        ctx.shadowColor = t.color;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(nx, ny, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+}
+
+/* ============================================================
+   💬 PROMPT BAR & THOUGHT LINE (React Bits Micro Engines)
+   Interactive AI Prompt Interface with Verified Knowledge Responses
+   ============================================================ */
+function initPromptBar() {
+  const container = document.querySelector("#heroPromptBar");
+  if (!container) return;
+
+  const input = container.querySelector("#promptInput");
+  const sendBtn = container.querySelector("#promptSendBtn");
+  const modelSelector = container.querySelector("#promptModelSelector");
+  const modelName = container.querySelector("#promptModelName");
+  const tokenCount = container.querySelector("#promptTokenCount");
+  const responseCard = container.querySelector("#promptResponseCard");
+  const pills = container.querySelectorAll(".prompt-pill-btn");
+
+  const models = [
+    "GPT-4o Omniscient",
+    "Claude 3.5 Sonnet",
+    "Gemini 1.5 Pro",
+    "DeepSeek V3"
+  ];
+  let currentModelIndex = 0;
+
+  if (modelSelector && modelName) {
+    modelSelector.addEventListener("click", () => {
+      currentModelIndex = (currentModelIndex + 1) % models.length;
+      modelName.textContent = models[currentModelIndex];
+      showToast(`Switched active AI reasoning engine to ${models[currentModelIndex]}`);
+    });
+  }
+
+  if (input && tokenCount) {
+    input.addEventListener("input", () => {
+      const len = input.value.trim().length;
+      tokenCount.textContent = Math.max(38, Math.round(38 + len * 1.3));
+    });
+  }
+
+  pills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      const promptText = pill.getAttribute("data-prompt");
+      if (promptText && input) {
+        input.value = promptText;
+        handlePromptSubmit(promptText);
+      }
+    });
+  });
+
+  if (sendBtn) {
+    sendBtn.addEventListener("click", () => {
+      if (input && input.value.trim()) {
+        handlePromptSubmit(input.value.trim());
+      }
+    });
+  }
+
+  if (input) {
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && input.value.trim()) {
+        e.preventDefault();
+        handlePromptSubmit(input.value.trim());
+      }
+    });
+  }
+
+  function handlePromptSubmit(promptText) {
+    if (!responseCard) return;
+    const model = models[currentModelIndex];
+
+    // Charging & Thinking Animation
+    if (sendBtn) sendBtn.classList.add("is-thinking");
+    responseCard.hidden = false;
+    responseCard.innerHTML = `
+      <div class="thought-line" id="promptThoughtLine">
+        <div class="thought-line-header cursor-target">
+          <div class="thought-line-left">
+            <span class="thought-sparkle">✦</span>
+            <strong>Reasoning with ${model}</strong>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="thought-timer-badge" id="thoughtTimer">Thinking 0.0s</span>
+            <svg class="thought-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="thought-steps-trace">
+          <div class="thought-step-item"><span class="step-num">[1/4]</span> Parsing prompt telemetry & context boundaries</div>
+          <div class="thought-step-item"><span class="step-num">[2/4]</span> Querying knowledge graph & project portfolio index</div>
+          <div class="thought-step-item"><span class="step-num">[3/4]</span> Extracting verified metrics, tech stacks & citations</div>
+          <div class="thought-step-item"><span class="step-num">[4/4]</span> Formulating synthesis with clickable navigation triggers</div>
+        </div>
+      </div>
+      <p style="color:var(--muted);font-style:italic;">Synthesizing response...</p>
+    `;
+
+    const thoughtLineEl = responseCard.querySelector("#promptThoughtLine");
+    const headerEl = responseCard.querySelector(".thought-line-header");
+    if (thoughtLineEl && headerEl) {
+      headerEl.addEventListener("click", () => {
+        thoughtLineEl.classList.toggle("is-open");
+      });
+    }
+
+    let elapsed = 0;
+    const timerInterval = setInterval(() => {
+      elapsed += 0.1;
+      const timerBadge = responseCard.querySelector("#thoughtTimer");
+      if (timerBadge) timerBadge.textContent = `Thinking ${elapsed.toFixed(1)}s`;
+    }, 100);
+
+    setTimeout(() => {
+      clearInterval(timerInterval);
+      if (sendBtn) sendBtn.classList.remove("is-thinking");
+
+      // Generate knowledge response
+      const answer = generateAiResponse(promptText);
+
+      responseCard.innerHTML = `
+        <div class="thought-line" id="promptThoughtLineDone">
+          <div class="thought-line-header cursor-target" title="Click to inspect thought trace">
+            <div class="thought-line-left">
+              <span class="thought-sparkle">✦</span>
+              <strong>Thought for ${elapsed.toFixed(1)}s (${model})</strong>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="thought-timer-badge">4 steps verified</span>
+              <svg class="thought-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <div class="thought-steps-trace">
+            <div class="thought-step-item"><span class="step-num">[1/4]</span> Verified prompt against New JA engineering corpus</div>
+            <div class="thought-step-item"><span class="step-num">[2/4]</span> Matched UTCC AI Hackathon, Drone Vision & Full-Stack nodes</div>
+            <div class="thought-step-item"><span class="step-num">[3/4]</span> Retrieved telemetry & project artifacts</div>
+            <div class="thought-step-item"><span class="step-num">[4/4]</span> Generated responsive interactive card</div>
+          </div>
+        </div>
+        <h4>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          ${answer.title}
+        </h4>
+        <p>${answer.text}</p>
+        <div class="prompt-response-actions">
+          ${answer.actions.map(a => `<a class="solid-btn compact cursor-target" href="${a.href}">${a.label}</a>`).join("")}
+        </div>
+      `;
+
+      const doneThoughtLine = responseCard.querySelector("#promptThoughtLineDone");
+      const doneHeader = responseCard.querySelector(".thought-line-header");
+      if (doneThoughtLine && doneHeader) {
+        doneHeader.addEventListener("click", () => {
+          doneThoughtLine.classList.toggle("is-open");
+        });
+      }
+    }, 1100);
+  }
+
+  function generateAiResponse(query) {
+    const q = query.toLowerCase();
+    const isThai = state.lang === "th";
+
+    if (q.includes("hackathon") || q.includes("utcc") || q.includes("water") || q.includes("flood") || q.includes("แชมป์") || q.includes("น้ำท่วม")) {
+      return {
+        title: isThai ? "ผลงานชนะเลิศอันดับ 1 ประเทศไทย — UTCC AI Hackathon 2026" : "National AI Champion — UTCC AI Hackathon 2026",
+        text: isThai
+          ? "ทีม MANITA โดย New JA คว้ารางวัลชนะเลิศอันดับ 1 ของประเทศ (ทุนการศึกษา 20,000 บาท) จากการออกแบบระบบ AI พยากรณ์น้ำท่วมและบริหารจัดการน้ำอัจฉริยะแบบเรียลไทม์ ผสานโมเดลภูมิประเทศและเครือข่ายเซนเซอร์ IoT"
+          : "Team MANITA led by New JA won 1st Place Grand Champion (20,000 THB) at the UTCC AI Hackathon 2026. The solution integrates IoT telemetry, hydrological rainfall modeling, and real-time early evacuation alert dispatch.",
+        actions: [
+          { label: isThai ? "ดูผลงานเด่น" : "View Flagship Spotlight", href: "#flagship" },
+          { label: isThai ? "ดูเกียรติบัตร" : "Inspect Certificate", href: "#certificates" }
+        ]
+      };
+    }
+
+    if (q.includes("drone") || q.includes("vision") || q.includes("yolo") || q.includes("ros") || q.includes("โดรน") || q.includes("หุ่นยนต์")) {
+      return {
+        title: isThai ? "ระบบควบคุมโดรนอัจฉริยะ & Edge Computer Vision (ROS 2 + YOLO)" : "Autonomous Drone Vision & Telemetry Platform",
+        text: isThai
+          ? "แพลตฟอร์มการควบคุมโดรนระยะไกลและประมวลผล Computer Vision แบบเรียลไทม์บน Edge Device (YOLO) พร้อมระบบนำทาง ROS 2 และสตรีมมิง Telemetry ความหน่วงต่ำผ่าน WebSockets"
+          : "A high-performance autonomous drone teleoperation and edge vision platform combining YOLO object detection with ROS 2 flight controllers for real-time spatial navigation and sub-50ms telemetry streaming.",
+        actions: [
+          { label: isThai ? "ดูโปรเจกต์โดรน" : "Inspect Drone Project", href: "#projects" },
+          { label: isThai ? "ทักษะ Robotics" : "View Skills Stack", href: "#skills" }
+        ]
+      };
+    }
+
+    if (q.includes("workflow") || q.includes("กระบวนการ") || q.includes("how") || q.includes("work")) {
+      return {
+        title: isThai ? "กระบวนการพัฒนาด้วย AI — จากแนวคิดสู่ระบบจริง" : "AI Engineering Workflow — Thought to Production",
+        text: isThai
+          ? "New JA ใช้กระบวนการ 6 ขั้นตอน: ตั้งโจทย์อย่างมีโครงสร้าง (Prompt Architecture) -> วางระบบ Multi-Agent -> สร้างโมเดล Edge AI/YOLO -> สังเคราะห์และดีบักโค้ด -> ทดสอบความแม่นยำ -> Deploy ระบบจริง"
+          : "A structured 6-stage lifecycle: Problem Framing & Prompting -> Multi-Agent Reasoning -> Edge AI / Neural Models -> Polyglot Code Synthesis -> Telemetry Benchmarking -> Production Deployment.",
+        actions: [
+          { label: isThai ? "สำรวจ AI Workflow" : "Explore AI Workflow", href: "#ai-workflow" },
+          { label: isThai ? "ดูทักษะ AI" : "Examine AI Skills", href: "#skills" }
+        ]
+      };
+    }
+
+    if (q.includes("resume") || q.includes("contact") || q.includes("จ้าง") || q.includes("เรซูเม่") || q.includes("ติดต่อ")) {
+      return {
+        title: isThai ? "ข้อมูลติดต่อ & ดาวน์โหลดเรซูเม่" : "Contact & Official Resume",
+        text: isThai
+          ? "คุณสามารถดาวน์โหลดเอกสารประวัติการทำงาน (PDF) หรือติดต่อ New JA ได้โดยตรงผ่าน Gmail, Line, Facebook หรือ GitHub"
+          : "You can download New JA's official resume (PDF) or transmit a message directly via Gmail, Line, or GitHub.",
+        actions: [
+          { label: isThai ? "ดาวน์โหลด Resume (PDF)" : "Download Resume (PDF)", href: "assets/resume.pdf" },
+          { label: isThai ? "ติดต่อ New JA" : "Transmission Channel", href: "#contact" }
+        ]
+      };
+    }
+
+    // Default / All AI projects
+    return {
+      title: isThai ? "ระบบปัญญาประดิษฐ์และโปรเจกต์ของ New JA" : "New JA's Intelligence Systems & Works",
+      text: isThai
+        ? "โปรเจกต์ครอบคลุมระบบ AI พยากรณ์น้ำท่วมชนะเลิศระดับประเทศ, ระบบควบคุมโดรนอัตโนมัติด้วย ROS 2 & YOLO, เอนจินเกม Roblox MMO RPG และสถาปัตยกรรมเว็บ Full-Stack พร้อมระบบ Admin Control Room"
+        : "Projects span the National Champion AI Flood Prediction System, Autonomous Drone Edge Vision, large-scale Roblox MMO RPG networking, and full-stack cyber architectures with secure admin telemetry.",
+      actions: [
+        { label: isThai ? "ดูผลงานทั้งหมด" : "Explore All Works", href: "#projects" },
+        { label: isThai ? "สำรวจ AI Workflow" : "Explore AI Workflow", href: "#ai-workflow" }
+      ]
+    };
+  }
+}
+
+/* ============================================================
+   🔤 REACT BITS TEXT ANIMATION SYSTEM
+   (SplitText, DecryptedText, ScrollReveal, ShinyText)
+   ============================================================ */
+function initTextAnimations() {
+  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (isReduced) return;
+
+  // Level 1: Hero SplitText
+  const headline = document.querySelector("#heroHeadline");
+  if (headline) {
+    const lines = headline.querySelectorAll(".split-line");
+    lines.forEach((line) => {
+      const text = line.textContent;
+      line.innerHTML = text
+        .split("")
+        .map((char, i) => {
+          if (char === " ") return " ";
+          return `<span class="split-char" style="transition-delay:${i * 28}ms">${char}</span>`;
+        })
+        .join("");
+    });
+
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        headline.querySelectorAll(".split-char").forEach((c) => c.classList.add("is-revealed"));
+      }, 150);
+    });
+  }
+
+  // Level 1: DecryptedText (AI status kicker)
+  const statusEl = document.querySelector("#aiStatusText");
+  if (statusEl) {
+    const originalText = statusEl.textContent;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_#@%&*";
+    let iteration = 0;
+    const interval = setInterval(() => {
+      statusEl.textContent = originalText
+        .split("")
+        .map((char, index) => {
+          if (char === " " || char === "·") return char;
+          if (index < iteration) return originalText[index];
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join("");
+
+      if (iteration >= originalText.length) {
+        clearInterval(interval);
+      }
+      iteration += 1;
+    }, 28);
+  }
 }
 
 /* ============================================================
@@ -1978,6 +2390,9 @@ initFuzzyText(document.querySelector("#fuzzyTitleCanvas"), "NEW JA");
 initLogoLoop(document.querySelector("#techLogoLoop"));
 initBounceCards(document.querySelector("#bounceCardsContainer"));
 initCountUp();
+initWebThreads();
+initPromptBar();
+initTextAnimations();
 
 // Mount Dynamic Multi-State Cosmic Background Engine (Dual-Buffer Crossfade)
 const cosmicBgEngine = new DynamicCosmicEngine();

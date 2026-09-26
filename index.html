@@ -22,8 +22,9 @@
     <div class="target-cursor-dot"></div>
   </div>
 
-  <!-- Dynamic Multi-State Cosmic Backgrounds (Dual-Buffer Crossfade) -->
+  <!-- Dynamic Multi-State Cosmic Backgrounds & Web Threads (React Bits) -->
   <div class="dynamic-bg-container" id="dynamicBgContainer" aria-hidden="true">
+    <canvas id="webThreadsCanvas" class="web-threads-canvas"></canvas>
     <canvas id="bgCanvasA" class="bg-layer active"></canvas>
     <canvas id="bgCanvasB" class="bg-layer"></canvas>
     <div class="bg-gradient-overlay"></div>
@@ -66,6 +67,7 @@
     <nav class="nav" aria-label="Main navigation">
       <a class="cursor-target" href="#profile" data-i18n="nav.profile">Profile</a>
       <a class="cursor-target" href="#story" data-i18n="nav.story">Life Story</a>
+      <a class="cursor-target" href="#ai-workflow" data-i18n="nav.workflow">AI Workflow</a>
       <a class="cursor-target" href="#skills" data-i18n="nav.skills">Skills</a>
       <a class="cursor-target" href="#flagship" data-i18n="nav.flagship">Flagship</a>
       <a class="cursor-target" href="#projects" data-i18n="nav.projects">Works</a>
@@ -86,15 +88,25 @@
     <!-- Hero Section -->
     <section class="hero" id="home" data-bg-theme="aurora">
       <div class="hero-copy reveal">
+        <div class="ai-status-badge">
+          <span class="status-indicator-dot"></span>
+          <span class="decrypted-text" id="aiStatusText">AI AGENT ONLINE · ARCHITECTING SOLUTIONS</span>
+        </div>
+
         <div class="kicker-wrap">
           <span class="pulse-dot"></span>
           <p class="kicker" data-i18n="hero.kicker">Creative AI Architect · Full-Stack Innovator</p>
         </div>
 
+        <h1 class="hero-headline" id="heroHeadline">
+          <span class="split-line">Building with AI.</span>
+          <span class="split-line highlight-gradient">Creating with Code.</span>
+        </h1>
+
         <!-- FuzzyText Canvas (React Bits) for "NEW JA" -->
         <div class="fuzzy-title-wrap cursor-target" id="fuzzyTitleContainer" title="Hover for stardust vibration">
           <canvas id="fuzzyTitleCanvas" class="fuzzy-title-canvas"></canvas>
-          <h1 class="sr-only">New JA</h1>
+          <span class="sr-only">New JA</span>
         </div>
 
         <div class="hero-name">
@@ -108,6 +120,41 @@
         <p class="hero-text" data-i18n="hero.text">
           Developer and AI systems creator driven by curiosity. Transforming complex algorithms into intuitive spatial experiences, autonomous drone intelligence, and scalable full-stack applications.
         </p>
+
+        <!-- AI Prompt Bar Interface (React Bits Micro) -->
+        <div class="prompt-bar-wrap cursor-target" id="heroPromptBar">
+          <div class="prompt-bar-container">
+            <div class="prompt-bar-top">
+              <button type="button" class="prompt-model-selector cursor-target" id="promptModelSelector" title="Click to cycle AI reasoning models">
+                <span class="prompt-model-dot"></span>
+                <span id="promptModelName">GPT-4o Omniscient</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="prompt-token-badge"><span id="promptTokenCount">48</span> tokens · &lt;14ms latency</div>
+            </div>
+            <div class="prompt-bar-main">
+              <div class="prompt-input-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                </svg>
+              </div>
+              <input type="text" class="prompt-bar-input cursor-target" id="promptInput" placeholder="Ask my portfolio anything... (e.g. 'Show me AI projects')" autocomplete="off">
+              <button type="button" class="prompt-send-btn cursor-target" id="promptSendBtn" aria-label="Submit prompt">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="prompt-pills-row" id="promptPillsRow">
+            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="Show me your AI projects">🤖 AI Projects</button>
+            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="Tell me about the UTCC Hackathon Championship">🏆 UTCC 1st Place</button>
+            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="How do you combine Drones and Vision?">🚁 Drone Vision</button>
+            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="What is your AI development workflow?">⚡ AI Workflow</button>
+          </div>
+          <div class="prompt-response-card" id="promptResponseCard" hidden></div>
+        </div>
 
         <!-- CountUp Dynamic Metrics Bar -->
         <div class="hero-stats reveal" id="heroStats">
@@ -127,7 +174,7 @@
 
         <div class="hero-actions">
           <a class="solid-btn big cursor-target" href="#flagship" data-i18n="hero.cta1">Explore Works</a>
-          <a class="ghost-btn big cursor-target" href="#story" data-i18n="hero.cta2">Read Journey</a>
+          <a class="ghost-btn big cursor-target" href="#ai-workflow" data-i18n="hero.ctaWorkflow">AI Workflow</a>
           <a class="resume-btn cursor-target" href="assets/resume.pdf" download="NewJA_Resume.pdf">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
