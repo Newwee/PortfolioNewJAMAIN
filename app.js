@@ -2575,6 +2575,19 @@ document.querySelector("#langToggleBtn")?.addEventListener("click", () => {
   setLanguage(state.lang === "th" ? "en" : "th");
 });
 
+const navToggleBtn = document.querySelector("#navToggleBtn");
+const mainNav = document.querySelector(".topbar .nav");
+if (navToggleBtn && mainNav) {
+  navToggleBtn.addEventListener("click", () => {
+    mainNav.classList.toggle("is-open");
+  });
+  mainNav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mainNav.classList.remove("is-open");
+    });
+  });
+}
+
 document.querySelector(".resume-btn")?.addEventListener("click", (e) => {
   showToast(state.lang === "th" ? "ติดต่อขอรับ Resume ฉบับเต็มได้ที่ pongsaopataradanai@gmail.com" : "Request full Resume via pongsaopataradanai@gmail.com");
 });
