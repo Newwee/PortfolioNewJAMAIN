@@ -1380,6 +1380,22 @@ function initTextAnimations() {
       iteration += 1;
     }, 28);
   }
+
+  // Level 2: Section Headings Scroll Reveal & True Focus
+  const sectionHeadings = document.querySelectorAll(".section-head h2, .section-head .kicker");
+  const headingObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("text-scroll-reveal", "is-focused");
+        headingObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  sectionHeadings.forEach((h) => {
+    h.classList.add("text-scroll-reveal");
+    headingObserver.observe(h);
+  });
 }
 
 /* ============================================================
