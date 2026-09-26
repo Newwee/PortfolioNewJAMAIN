@@ -12,8 +12,10 @@ const isProduction = process.env.NODE_ENV === "production";
 const host = process.env.HOST || (isProduction ? "0.0.0.0" : "127.0.0.1");
 const port = Number(process.env.PORT || 3000);
 const sessionCookie = "newja_session";
+const sessionMaxAgeMs = 14 * 24 * 60 * 60 * 1000;
 const projectIds = new Set([
   "hackathon-manita",
+  "drone-autonomy",
   "ai-creative-engine",
   "polyglot-code-lab",
   "roblox-mmorpg",
@@ -516,7 +518,11 @@ async function start() {
   });
 }
 
-start().catch((error) => {
-  console.error("Failed to start server:", error);
-  process.exit(1);
-});
+if (require.main === module) {
+  start().catch((error) => {
+    console.error("Failed to start server:", error);
+    process.exit(1);
+  });
+}
+
+module.exports = { app, start };
