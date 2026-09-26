@@ -2078,7 +2078,20 @@ class DynamicCosmicEngine {
   }
 
   startLoop() {
+    const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isReduced) return;
+
+    let isRunning = true;
+    document.addEventListener("visibilitychange", () => {
+      isRunning = !document.hidden;
+      if (isRunning) {
+        this.lastTime = performance.now();
+        requestAnimationFrame(render);
+      }
+    });
+
     const render = (now) => {
+      if (!isRunning) return;
       const delta = Math.min((now - this.lastTime) / 1000, 0.1);
       this.lastTime = now;
       this.time += delta;
