@@ -1383,6 +1383,125 @@ function initTextAnimations() {
 }
 
 /* ============================================================
+   🔦 SPOTLIGHT CARD (React Bits Component Engine)
+   Radial Luminescence & Proximity Illumination Tracking
+   ============================================================ */
+function initSpotlightCards() {
+  const cards = document.querySelectorAll(".spotlight-card");
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    });
+  });
+}
+
+/* ============================================================
+   ⭐ PEEK RATING (React Bits Micro Engine)
+   Wave Lift Dynamics, Floating Tooltip & Commit Pop Animation
+   ============================================================ */
+function initPeekRating() {
+  const containers = document.querySelectorAll(".peek-rating-container");
+
+  const ratingLabels = {
+    en: [
+      "1.0 · Functional Prototype",
+      "2.0 · Solid Architecture",
+      "3.0 · High Performance",
+      "4.0 · Production Grade",
+      "5.0 · National Champion / Masterpiece"
+    ],
+    th: [
+      "1.0 · ต้นแบบใช้งานได้",
+      "2.0 · สถาปัตยกรรมมั่นคง",
+      "3.0 · ประสิทธิภาพสูง",
+      "4.0 · ระดับโปรดักชัน",
+      "5.0 · แชมป์ระดับประเทศ / ยอดเยี่ยม"
+    ]
+  };
+
+  containers.forEach((container) => {
+    if (container._hasPeekInit) return;
+    container._hasPeekInit = true;
+
+    const projectId = container.dataset.project;
+    const starsRow = container.querySelector(".peek-stars-row");
+    const stars = container.querySelectorAll(".peek-star");
+    const tooltip = container.querySelector(".peek-rating-tooltip");
+    const scoreLabel = container.querySelector(".peek-rating-score");
+
+    let currentScore = parseFloat(container.dataset.score || "5.0");
+
+    function updateFilledStars(score) {
+      stars.forEach((star, idx) => {
+        star.classList.toggle("is-filled", idx < Math.round(score));
+      });
+      if (scoreLabel) scoreLabel.textContent = score.toFixed(1);
+    }
+
+    updateFilledStars(currentScore);
+
+    if (!starsRow) return;
+
+    starsRow.addEventListener("mousemove", (e) => {
+      const rect = starsRow.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const rowWidth = rect.width;
+      const hoveredIndex = Math.min(4, Math.max(0, Math.floor((mouseX / rowWidth) * 5)));
+      const isThai = state.lang === "th";
+      const label = (isThai ? ratingLabels.th : ratingLabels.en)[hoveredIndex];
+
+      // Wave lift computation for each star
+      stars.forEach((star, i) => {
+        const starCenter = (i + 0.5) * (rowWidth / 5);
+        const dist = Math.abs(mouseX - starCenter);
+        const maxDist = rowWidth * 0.45;
+        const lift = Math.max(0, 1 - dist / maxDist);
+        star.style.setProperty("--lift", lift.toFixed(2));
+      });
+
+      if (tooltip) {
+        tooltip.textContent = label;
+        tooltip.style.left = `${mouseX}px`;
+        tooltip.style.opacity = "1";
+      }
+    });
+
+    starsRow.addEventListener("mouseleave", () => {
+      stars.forEach((star) => star.style.setProperty("--lift", "0"));
+      if (tooltip) tooltip.style.opacity = "0";
+      updateFilledStars(currentScore);
+    });
+
+    stars.forEach((star, index) => {
+      star.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentScore = index + 1;
+        updateFilledStars(currentScore);
+        container.dataset.score = currentScore.toString();
+
+        // Pop particle animation
+        star.style.transform = "scale(1.55)";
+        setTimeout(() => {
+          star.style.transform = "";
+        }, 220);
+
+        const isThai = state.lang === "th";
+        showToast(isThai ? `บันทึกคะแนน ${currentScore}.0 ดาวแล้ว!` : `Rated ${currentScore}.0 stars!`);
+
+        // If authenticated and not already liked, automatically trigger like for the project
+        if (projectId && !state.likedProjectIds.includes(projectId) && session) {
+          handleLike(projectId);
+        }
+      });
+    });
+  });
+}
+
+/* ============================================================
    🌌 DYNAMIC MULTI-STATE COSMIC BACKGROUND ENGINE
    Featuring 6 Distinct Procedural Themes with Dual-Buffer Smooth Crossfade:
    1. "aurora"        — Cosmic Aurora Ribbon Waves & Stardust (Hero)
@@ -2003,23 +2122,70 @@ function renderProjects() {
   const container = document.querySelector("#projectList");
   if (!container) return;
   const list = content().projects || [];
+  const isThai = state.lang === "th";
 
   container.innerHTML = list.map((p) => {
     const count = likesState[p.id] || 0;
     const isLiked = state.likedProjectIds.includes(p.id);
+    const score = p.id === "hackathon-manita" ? 5.0 : (p.id === "drone-autonomy" ? 4.9 : 4.8);
+
+    const storyProblem = p.id === "hackathon-manita"
+      ? (isThai ? "วิกฤตน้ำท่วมฉับพลันในเขตเมือง ขาดการบูรณาการข้อมูลเซนเซอร์ล่วงหน้า ทำให้การอพยพล่าช้า" : "Urban flash flooding crisis: lack of real-time telemetry sensor fusion delays life-saving evacuations.")
+      : (p.id === "drone-autonomy"
+        ? (isThai ? "โดรนทั่วไปขาดการตัดสินใจแบบ Autonomous ที่ Edge Device ทำให้มี latency สูงในการตรวจจับสิ่งกีดขวาง" : "Conventional drones rely on high-latency cloud feeds; needed sub-50ms embedded obstacle avoidance.")
+        : (p.id === "ai-creative-engine"
+          ? (isThai ? "กระบวนการสร้างและประมวลผลงานขององค์กรแยกส่วน ขาด Multi-Agent ที่ทำงานประสานกันอัตโนมัติ" : "Fragmented enterprise workflows; required autonomous multi-agent tool calling with Dataverse integration.")
+          : (isThai ? "ความท้าทาย: ต้องการระบบที่สามารถวิเคราะห์ข้อมูลแบบเรียลไทม์และทำงานได้อย่างแม่นยำสูง" : "Challenge: High-concurrency distributed state sync and real-time client-server physics validation.")));
+
+    const storyAi = p.id === "hackathon-manita"
+      ? (isThai ? "แบบจำลอง Hydrological ML ผสานแผนที่ความสูงภูมิประเทศ คาดการณ์ระดับน้ำล่วงหน้า 6 ชม." : "Hydrological ML models fused with topological elevation data to forecast flood vectors 6 hours in advance.")
+      : (p.id === "drone-autonomy"
+        ? (isThai ? "โมเดล YOLOv8/v11 ประมวลผล Edge Computer Vision พร้อมอัลกอริทึมการบิน ROS 2" : "YOLOv8/v11 real-time edge computer vision inference fused with ROS 2 autonomous flight controllers.")
+        : (p.id === "ai-creative-engine"
+          ? (isThai ? "ระบบ Agentic Copilot กำหนดบทบาท เชื่อมต่อ LLMs เข้ากับ Microsoft AI Builder & Dataverse" : "Autonomous agentic orchestration linking LLM tool calling to Microsoft AI Builder enterprise cloud.")
+          : (isThai ? "การประมวลผลแบบจำลองฟิสิกส์และการคาดการณ์เชิงพื้นที่บนโครงข่ายแบบกระจายตัว" : "Server-authoritative physics simulation, hitbox validation, and persistent economy logic.")));
 
     return `
-      <article class="project-card border-glow cursor-target" id="project-${p.id}">
+      <article class="project-card spotlight-card border-glow cursor-target" id="project-${p.id}">
         <div class="project-card-inner">
           <div class="project-card-image-wrap">
-            <img src="${p.image || 'assets/myface.jpg'}" alt="${p.title}">
+            <img src="${p.image || 'assets/myface.jpg'}" alt="${p.title}" loading="lazy">
+            <span class="badge-status online" style="position:absolute;top:12px;right:12px;">${p.status}</span>
           </div>
-          <span class="tag" style="align-self:flex-start; margin-bottom:10px; color:var(--cyan); border-color:rgba(56,189,248,0.35);">${p.badge}</span>
-          <h3 class="project-card-title">${p.title}</h3>
+          <span class="tag" style="align-self:flex-start; margin-bottom:8px; color:var(--emerald-bright); border-color:rgba(16,185,129,0.35); background:rgba(16,185,129,0.08);">${p.badge}</span>
+          <h3 class="project-card-title shiny-text">${p.title}</h3>
           <p class="project-card-desc">${p.body}</p>
+
+          <div class="project-story-item">
+            <div class="project-story-label">🎯 ${isThai ? "ความท้าทาย & โจทย์จริง" : "Problem & Challenge"}</div>
+            <div class="project-story-content">${storyProblem}</div>
+          </div>
+
+          <div class="project-story-item" style="border-left-color:var(--emerald);">
+            <div class="project-story-label" style="color:var(--emerald-bright);">🤖 ${isThai ? "บทบาทของ AI" : "AI & Intelligence"}</div>
+            <div class="project-story-content">${storyAi}</div>
+          </div>
+
           <div class="project-tags">
             ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
           </div>
+
+          <!-- React Bits Peek Rating Micro Component -->
+          <div class="project-rating-wrap" style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,0.06);">
+            <span style="font-size:0.75rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">${isThai ? "การประเมินสถาปัตยกรรม" : "Arch Rating"}:</span>
+            <div class="peek-rating-container cursor-target" data-project="${p.id}" data-score="${score}">
+              <div class="peek-rating-tooltip">5.0 · National Champion</div>
+              <div class="peek-stars-row">
+                <span class="peek-star cursor-target">★</span>
+                <span class="peek-star cursor-target">★</span>
+                <span class="peek-star cursor-target">★</span>
+                <span class="peek-star cursor-target">★</span>
+                <span class="peek-star cursor-target">★</span>
+              </div>
+              <span class="peek-rating-score">${score.toFixed(1)}</span>
+            </div>
+          </div>
+
           <div class="project-card-footer">
             <button class="like-btn ${isLiked ? 'liked' : ''} cursor-target" data-like="${p.id}" type="button" aria-label="Like ${p.title}">
               <span class="like-heart">${isLiked ? '❤️' : '🤍'}</span>
@@ -2029,7 +2195,10 @@ function renderProjects() {
                 </span>
               </div>
             </button>
-            <span style="font-size:12px; font-weight:700; color:var(--purple);">${p.status}</span>
+            <div style="display:flex;gap:8px;">
+              <a href="https://github.com/Newwee" target="_blank" rel="noreferrer" class="ghost-btn compact cursor-target" style="padding:6px 12px;font-size:0.76rem;">GitHub</a>
+              <a href="#contact" class="solid-btn compact cursor-target" style="padding:6px 12px;font-size:0.76rem;">Inquire</a>
+            </div>
           </div>
         </div>
       </article>
@@ -2037,6 +2206,8 @@ function renderProjects() {
   }).join("");
 
   initBorderGlow();
+  initSpotlightCards();
+  initPeekRating();
 }
 
 async function handleLike(projectId) {
@@ -2046,18 +2217,16 @@ async function handleLike(projectId) {
     return;
   }
 
-  const isLiked = state.likedProjectIds.includes(projectId);
-  const method = isLiked ? "DELETE" : "POST";
-
   try {
-    const res = await api(`/api/projects/${projectId}/like`, { method });
-    likesState[projectId] = res.likes;
-    if (isLiked) {
-      state.likedProjectIds = state.likedProjectIds.filter(id => id !== projectId);
-      showToast(t().toast.unliked);
-    } else {
-      state.likedProjectIds.push(projectId);
+    const res = await api(`/api/projects/${projectId}/like`, { method: "POST" });
+    if (res.liked) {
+      if (!state.likedProjectIds.includes(projectId)) state.likedProjectIds.push(projectId);
+      likesState[projectId] = (likesState[projectId] || 0) + 1;
       showToast(t().toast.liked);
+    } else {
+      state.likedProjectIds = state.likedProjectIds.filter(id => id !== projectId);
+      likesState[projectId] = Math.max(0, (likesState[projectId] || 1) - 1);
+      showToast(t().toast.unliked);
     }
     renderProjects();
   } catch (err) {
