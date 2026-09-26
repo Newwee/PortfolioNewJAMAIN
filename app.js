@@ -441,6 +441,24 @@ const UI = {
       badge: "⚡ 3D Interactive Dossiers",
       hint: "Click any dossier to unfold project sheets & magnetic blueprints"
     },
+    workflow: {
+      kicker: "AI Engineering Lifecycle",
+      title: "Thought to Production: Co-Creating with AI.",
+      body: "AI does not replace the developer — it acts as a tireless cognitive copilot that amplifies architectural speed, algorithmic rigor, and deployment precision.",
+      traceHeader: "Active Reasoning Trace · Autonomous Multi-Agent Pipeline",
+      step1Title: "Idea & Problem Framing",
+      step1Desc: "Decomposing ambiguous real-world friction into structured algorithmic challenges and mathematical constraints.",
+      step2Title: "Prompt & Context Engineering",
+      step2Desc: "Engineering multi-shot system prompts, few-shot examples, and strict JSON schemas to steer LLMs with zero hallucinations.",
+      step3Title: "Multi-Agent Cognition",
+      step3Desc: "Orchestrating autonomous agents with tool-calling capabilities to critique, analyze edge cases, and cross-validate logic.",
+      step4Title: "Polyglot Code Synthesis",
+      step4Desc: "Translating validated reasoning into high-performance code across Python (AI), Lua (Roblox physics), and TypeScript (Full-Stack).",
+      step5Title: "Testing & Telemetry",
+      step5Desc: "Rigorous automated test suites, sub-50ms latency benchmarking, and hardware sensor telemetry validation.",
+      step6Title: "Production & Iteration",
+      step6Desc: "Deploying to edge devices (drones) and cloud environments with real-time logging, user telemetry, and continuous feedback loops."
+    },
     auth_modal: {
       loginKicker: "Login", loginTitle: "Welcome back", loginCopy: "Login to like projects and access your member account.",
       registerKicker: "Register", registerTitle: "Create a visitor account", registerCopy: "Register a normal account so you can like my work.",
@@ -517,6 +535,24 @@ const UI = {
     dossier: {
       badge: "⚡ แฟ้มประวัติ 3D Interactive",
       hint: "คลิกที่แฟ้มเพื่อคลี่แผ่นเอกสารโครงการและพิมพ์เขียวระบบ"
+    },
+    workflow: {
+      kicker: "วงจรวิศวกรรมปัญญาประดิษฐ์",
+      title: "จากความคิดสู่ระบบจริง: ร่วมสร้างสรรค์ไปกับ AI",
+      body: "AI ไม่ได้มาแทนที่นักพัฒนา แต่เป็นเพื่อนร่วมคิดที่ช่วยเร่งความเร็วในการออกแบบสถาปัตยกรรม ตรวจสอบตรรกะ และเพิ่มความแม่นยำในการพัฒนา",
+      traceHeader: "ร่องรอยการใช้เหตุผลแบบเรียลไทม์ · ระบบ Multi-Agent อัตโนมัติ",
+      step1Title: "การวางโจทย์ & นิยามปัญหา",
+      step1Desc: "วิเคราะห์และแปลงปัญหาจริงที่ซับซ้อนให้กลายเป็นโจทย์เชิงอัลกอริทึมและข้อจำกัดทางคณิตศาสตร์",
+      step2Title: "การออกแบบ Prompt & บริบท",
+      step2Desc: "วางโครงสร้างคำสั่ง Meta-Prompt ตัวอย่าง Few-Shot และ JSON Schema เพื่อควบคุม AI ให้แม่นยำสูงสุด",
+      step3Title: "การคิดร่วมกันของ Multi-Agent",
+      step3Desc: "ประสานการทำงานระหว่าง AI หลายบทบาท ให้ตรวจสอบ วิพากษ์ และหาจุดบกพร่องของตรรกะร่วมกัน",
+      step4Title: "การสังเคราะห์โค้ดหลากภาษา",
+      step4Desc: "แปลงตรรกะที่ผ่านการตรวจแล้วให้เป็นโค้ดประสิทธิภาพสูง ทั้ง Python (AI), Lua (Game Physics) และ TypeScript (Web)",
+      step5Title: "การทดสอบ & วัดผล Telemetry",
+      step5Desc: "รันชุดการทดสอบอัตโนมัติ ทดสอบความหน่วงต่ำกว่า 50ms และจำลองโหลดเสมือนจริง",
+      step6Title: "Deploy ขึ้นใช้งานจริง & พัฒนาต่อเนื่อง",
+      step6Desc: "นำไปติดตั้งบนอุปกรณ์ Edge (โดรน) และระบบคลาวด์ พร้อมระบบเก็บ Log และติดตามผลแบบเรียลไทม์"
     },
     auth_modal: {
       loginKicker: "เข้าสู่ระบบ", loginTitle: "ยินดีต้อนรับกลับมา", loginCopy: "เข้าสู่ระบบเพื่อกดถูกใจผลงานและเข้าถึงบัญชีสมาชิกของคุณ",
@@ -1515,6 +1551,21 @@ function initPeekRating() {
       });
     });
   });
+}
+
+/* ============================================================
+   ✦ LIFECYCLE THOUGHT LINE (React Bits Micro Engine)
+   Expandable AI Reasoning Trace for Workflow Pipeline
+   ============================================================ */
+function initLifecycleThoughtLine() {
+  const line = document.querySelector("#lifecycleThoughtLine");
+  if (!line) return;
+  const header = line.querySelector(".thought-line-header");
+  if (header) {
+    header.addEventListener("click", () => {
+      line.classList.toggle("is-open");
+    });
+  }
 }
 
 /* ============================================================
@@ -2578,6 +2629,7 @@ initCountUp();
 initWebThreads();
 initPromptBar();
 initTextAnimations();
+initLifecycleThoughtLine();
 
 // Mount Dynamic Multi-State Cosmic Background Engine (Dual-Buffer Crossfade)
 const cosmicBgEngine = new DynamicCosmicEngine();
