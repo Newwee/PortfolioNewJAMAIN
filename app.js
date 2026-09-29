@@ -2187,6 +2187,22 @@ function renderDossiers() {
    RENDER CORE SECTIONS (Projects, Skills, Story, Certs)
    ============================================================ */
 let likesState = {};
+let customProjects = [];
+
+async function loadCustomProjects() {
+  try {
+    const res = await api("/api/projects");
+    if (res && Array.isArray(res.projects)) {
+      customProjects = res.projects;
+    }
+  } catch {
+    try {
+      const stored = localStorage.getItem("newja_custom_projects");
+      if (stored) customProjects = JSON.parse(stored);
+    } catch {}
+  }
+  renderProjects();
+}
 
 async function loadLikes() {
   try {
@@ -2201,60 +2217,38 @@ async function loadLikes() {
 function renderProjects() {
   const container = document.querySelector("#projectList");
   if (!container) return;
-  const list = content().projects || [];
+  const staticList = content().projects || [];
+  const list = [...customProjects, ...staticList];
   const isThai = state.lang === "th";
 
   container.innerHTML = list.map((p) => {
     const count = likesState[p.id] || 0;
     const isLiked = state.likedProjectIds.includes(p.id);
     const score = p.id === "hackathon-manita" ? 5.0 : (p.id === "drone-autonomy" ? 4.9 : 4.8);
-
-    const storyProblem = p.id === "hackathon-manita"
-      ? (isThai ? "วิกฤตน้ำท่วมฉับพลันในเขตเมือง ขาดการบูรณาการข้อมูลเซนเซอร์ล่วงหน้า ทำให้การอพยพล่าช้า" : "Urban flash flooding crisis: lack of real-time telemetry sensor fusion delays life-saving evacuations.")
-      : (p.id === "drone-autonomy"
-        ? (isThai ? "โดรนทั่วไปขาดการตัดสินใจแบบ Autonomous ที่ Edge Device ทำให้มี latency สูงในการตรวจจับสิ่งกีดขวาง" : "Conventional drones rely on high-latency cloud feeds; needed sub-50ms embedded obstacle avoidance.")
-        : (p.id === "ai-creative-engine"
-          ? (isThai ? "กระบวนการสร้างและประมวลผลงานขององค์กรแยกส่วน ขาด Multi-Agent ที่ทำงานประสานกันอัตโนมัติ" : "Fragmented enterprise workflows; required autonomous multi-agent tool calling with Dataverse integration.")
-          : (isThai ? "ความท้าทาย: ต้องการระบบที่สามารถวิเคราะห์ข้อมูลแบบเรียลไทม์และทำงานได้อย่างแม่นยำสูง" : "Challenge: High-concurrency distributed state sync and real-time client-server physics validation.")));
-
-    const storyAi = p.id === "hackathon-manita"
-      ? (isThai ? "แบบจำลอง Hydrological ML ผสานแผนที่ความสูงภูมิประเทศ คาดการณ์ระดับน้ำล่วงหน้า 6 ชม." : "Hydrological ML models fused with topological elevation data to forecast flood vectors 6 hours in advance.")
-      : (p.id === "drone-autonomy"
-        ? (isThai ? "โมเดล YOLOv8/v11 ประมวลผล Edge Computer Vision พร้อมอัลกอริทึมการบิน ROS 2" : "YOLOv8/v11 real-time edge computer vision inference fused with ROS 2 autonomous flight controllers.")
-        : (p.id === "ai-creative-engine"
-          ? (isThai ? "ระบบ Agentic Copilot กำหนดบทบาท เชื่อมต่อ LLMs เข้ากับ Microsoft AI Builder & Dataverse" : "Autonomous agentic orchestration linking LLM tool calling to Microsoft AI Builder enterprise cloud.")
-          : (isThai ? "การประมวลผลแบบจำลองฟิสิกส์และการคาดการณ์เชิงพื้นที่บนโครงข่ายแบบกระจายตัว" : "Server-authoritative physics simulation, hitbox validation, and persistent economy logic.")));
+    const isCustom = customProjects.some(cp => cp.id === p.id);
+    const tags = Array.isArray(p.tags) ? p.tags : (typeof p.tags === "string" ? p.tags.split(",") : []);
 
     return `
       <article class="project-card spotlight-card border-glow cursor-target" id="project-${p.id}">
         <div class="project-card-inner">
           <div class="project-card-image-wrap">
             <img src="${p.image || 'assets/myface.jpg'}" alt="${p.title}" loading="lazy">
-            <span class="badge-status online" style="position:absolute;top:12px;right:12px;">${p.status}</span>
+            <span class="badge-status online" style="position:absolute;top:12px;right:12px;">${p.status || p.category || 'Live'}</span>
+            ${isCustom ? `<span class="badge-status" style="position:absolute;top:12px;left:12px;background:rgba(244,114,182,0.2);border-color:var(--pink);color:var(--pink);font-weight:700;">${isThai ? '⭐ ผลงานของคุณ' : '⭐ Your Project'}</span>` : ''}
           </div>
-          <span class="tag" style="align-self:flex-start; margin-bottom:8px; color:var(--emerald-bright); border-color:rgba(16,185,129,0.35); background:rgba(16,185,129,0.08);">${p.badge}</span>
+          <span class="tag" style="align-self:flex-start; margin-bottom:8px; color:var(--emerald-bright); border-color:rgba(16,185,129,0.35); background:rgba(16,185,129,0.08);">${p.badge || p.category || 'Featured'}</span>
           <h3 class="project-card-title shiny-text">${p.title}</h3>
-          <p class="project-card-desc">${p.body}</p>
-
-          <div class="project-story-item">
-            <div class="project-story-label">🎯 ${isThai ? "ความท้าทาย & โจทย์จริง" : "Problem & Challenge"}</div>
-            <div class="project-story-content">${storyProblem}</div>
-          </div>
-
-          <div class="project-story-item" style="border-left-color:var(--emerald);">
-            <div class="project-story-label" style="color:var(--emerald-bright);">🤖 ${isThai ? "บทบาทของ AI" : "AI & Intelligence"}</div>
-            <div class="project-story-content">${storyAi}</div>
-          </div>
+          <p class="project-card-desc">${p.body || p.description || ''}</p>
 
           <div class="project-tags">
-            ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+            ${tags.map(t => `<span class="tag">${String(t).trim()}</span>`).join("")}
           </div>
 
           <!-- React Bits Peek Rating Micro Component -->
           <div class="project-rating-wrap" style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,0.06);">
-            <span style="font-size:0.75rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">${isThai ? "การประเมินสถาปัตยกรรม" : "Arch Rating"}:</span>
+            <span style="font-size:0.75rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">${isThai ? "การประเมิน" : "Rating"}:</span>
             <div class="peek-rating-container cursor-target" data-project="${p.id}" data-score="${score}">
-              <div class="peek-rating-tooltip">5.0 · National Champion</div>
+              <div class="peek-rating-tooltip">${score.toFixed(1)} · ${isThai ? "คุณภาพยอดเยี่ยม" : "High Quality"}</div>
               <div class="peek-stars-row">
                 <span class="peek-star cursor-target">★</span>
                 <span class="peek-star cursor-target">★</span>
@@ -2275,9 +2269,10 @@ function renderProjects() {
                 </span>
               </div>
             </button>
-            <div style="display:flex;gap:8px;">
-              <a href="https://github.com/Newwee" target="_blank" rel="noreferrer" class="ghost-btn compact cursor-target" style="padding:6px 12px;font-size:0.76rem;">GitHub</a>
-              <a href="#contact" class="solid-btn compact cursor-target" style="padding:6px 12px;font-size:0.76rem;">Inquire</a>
+            <div style="display:flex;gap:8px;align-items:center;">
+              ${isCustom ? `<button class="ghost-btn compact cursor-target" data-delete-project="${p.id}" type="button" title="${isThai ? 'ลบผลงาน' : 'Delete'}" style="padding:6px 10px;font-size:0.76rem;color:#f87171;border-color:rgba(248,113,113,0.3);">🗑️</button>` : ''}
+              ${p.link ? `<a href="${p.link}" target="_blank" rel="noreferrer" class="ghost-btn compact cursor-target" style="padding:6px 12px;font-size:0.76rem;">${isThai ? 'เปิดดู' : 'Link'}</a>` : `<a href="https://github.com/Newwee" target="_blank" rel="noreferrer" class="ghost-btn compact cursor-target" style="padding:6px 12px;font-size:0.76rem;">GitHub</a>`}
+              <a href="#contact" class="solid-btn compact cursor-target" style="padding:6px 12px;font-size:0.76rem;">${isThai ? 'สอบถาม' : 'Inquire'}</a>
             </div>
           </div>
         </div>
@@ -2582,9 +2577,116 @@ authForm?.addEventListener("submit", handleAuth);
 document.querySelector("#projectList")?.addEventListener("click", (e) => {
   const btn = e.target.closest("[data-like]");
   if (btn) handleLike(btn.dataset.like);
+
+  const delBtn = e.target.closest("[data-delete-project]");
+  if (delBtn) handleDeleteProject(delBtn.dataset.deleteProject);
 });
 
+/* Add Project Modal & Form Handling */
+const addProjectModal = document.querySelector("#addProjectModal");
+const openAddProjectBtn = document.querySelector("#openAddProjectBtn");
+const closeAddProjectBtn = document.querySelector("#closeAddProjectBtn");
+const addProjectForm = document.querySelector("#addProjectForm");
+
+openAddProjectBtn?.addEventListener("click", () => {
+  addProjectModal?.showModal();
+});
+
+closeAddProjectBtn?.addEventListener("click", () => {
+  addProjectModal?.close();
+});
+
+// Image preset quick buttons
+document.querySelectorAll(".img-preset-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const input = document.querySelector("#newProjectImage");
+    if (input && btn.dataset.src) {
+      input.value = btn.dataset.src;
+      showToast(state.lang === "th" ? "เลือกรูปภาพตัวอย่างแล้ว" : "Sample image selected");
+    }
+  });
+});
+
+async function handleAddProject(e) {
+  e.preventDefault();
+  const isThai = state.lang === "th";
+  const statusEl = document.querySelector("#addProjectStatus");
+  if (statusEl) statusEl.textContent = isThai ? "กำลังบันทึก..." : "Saving...";
+
+  const title = document.querySelector("#newProjectTitle")?.value.trim() || "";
+  const category = document.querySelector("#newProjectCategory")?.value || "AI & Software";
+  const badge = document.querySelector("#newProjectBadge")?.value.trim() || category;
+  const body = document.querySelector("#newProjectDesc")?.value.trim() || "";
+  const image = document.querySelector("#newProjectImage")?.value.trim() || "assets/UTCC.jpg";
+  const tagsStr = document.querySelector("#newProjectTags")?.value.trim() || "";
+  const link = document.querySelector("#newProjectLink")?.value.trim() || "";
+  const tags = tagsStr ? tagsStr.split(",").map(s => s.trim()).filter(Boolean) : [category];
+
+  let createdProject = null;
+  try {
+    const res = await api("/api/projects", {
+      method: "POST",
+      body: JSON.stringify({ title, category, badge, body, image, tags, link })
+    });
+    if (res && res.project) {
+      createdProject = res.project;
+    }
+  } catch (err) {
+    console.warn("API save error, fallback to local storage:", err);
+  }
+
+  if (!createdProject) {
+    const id = "custom-" + Date.now().toString(36);
+    createdProject = { id, title, category, badge, body, image, tags, link, created_at: new Date().toISOString() };
+  }
+
+  customProjects.unshift(createdProject);
+  try {
+    localStorage.setItem("newja_custom_projects", JSON.stringify(customProjects));
+  } catch {}
+
+  renderProjects();
+
+  if (addProjectModal) addProjectModal.close();
+  addProjectForm?.reset();
+  if (statusEl) statusEl.textContent = "";
+
+  showToast(isThai ? "🎉 เพิ่มผลงานของคุณเรียบร้อยแล้ว!" : "🎉 Project added successfully!");
+
+  setTimeout(() => {
+    const card = document.querySelector(`#project-${createdProject.id}`);
+    if (card) {
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, 200);
+}
+
+async function handleDeleteProject(projectId) {
+  const isThai = state.lang === "th";
+  if (!confirm(isThai ? "คุณต้องการลบผลงานนี้หรือไม่?" : "Delete this project?")) return;
+
+  try {
+    await api(`/api/projects/${projectId}`, { method: "DELETE" });
+  } catch (e) {
+    console.warn("API delete error:", e);
+  }
+
+  customProjects = customProjects.filter(p => p.id !== projectId);
+  try {
+    localStorage.setItem("newja_custom_projects", JSON.stringify(customProjects));
+  } catch {}
+
+  renderProjects();
+  showToast(isThai ? "ลบผลงานเรียบร้อยแล้ว" : "Project deleted");
+}
+
+addProjectForm?.addEventListener("submit", handleAddProject);
+
 document.querySelector("#langToggleBtn")?.addEventListener("click", () => {
+  setLanguage(state.lang === "th" ? "en" : "th");
+});
+
+document.querySelector(".mobile-lang-btn")?.addEventListener("click", () => {
   setLanguage(state.lang === "th" ? "en" : "th");
 });
 
@@ -2641,6 +2743,7 @@ applyStaticText();
 renderStory();
 renderSkills();
 renderDossiers();
+loadCustomProjects();
 renderProjects();
 renderCertificates();
 observeReveals();

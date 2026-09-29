@@ -70,9 +70,22 @@ async function migrate() {
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
 
+    CREATE TABLE IF NOT EXISTS custom_projects (
+      id VARCHAR(100) PRIMARY KEY,
+      title VARCHAR(200) NOT NULL,
+      category VARCHAR(120),
+      badge VARCHAR(120),
+      body TEXT NOT NULL,
+      image VARCHAR(500),
+      tags JSONB NOT NULL DEFAULT '[]'::jsonb,
+      link VARCHAR(500),
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+
     CREATE INDEX IF NOT EXISTS sessions_token_hash_idx ON sessions(token_hash);
     CREATE INDEX IF NOT EXISTS sessions_expires_at_idx ON sessions(expires_at);
     CREATE INDEX IF NOT EXISTS audit_logs_created_at_idx ON audit_logs(created_at DESC);
+    CREATE INDEX IF NOT EXISTS custom_projects_created_at_idx ON custom_projects(created_at DESC);
   `);
 }
 

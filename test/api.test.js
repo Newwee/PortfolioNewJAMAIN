@@ -159,4 +159,31 @@ describe("Portfolio Backend & API Test Suite", () => {
     const logs = await logsRes.json();
     assert.ok(Array.isArray(logs.logs));
   });
+
+  it("POST /api/projects creates project and GET /api/projects retrieves it", async () => {
+    const createRes = await fetch(`${baseUrl}/api/projects`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: "Autonomous Delivery Drone",
+        category: "Robotics & Drones",
+        badge: "Edge Vision AI",
+        body: "Real-time obstacle avoidance drone telemetry built with ROS 2 and YOLO.",
+        image: "assets/UTCC.jpg",
+        tags: ["ROS 2", "Python", "YOLO"],
+        link: "https://github.com/Newwee/drone"
+      })
+    });
+    assert.strictEqual(createRes.status, 201);
+    const createData = await createRes.json();
+    assert.ok(createData.project);
+    assert.strictEqual(createData.project.title, "Autonomous Delivery Drone");
+
+    // Fetch projects
+    const listRes = await fetch(`${baseUrl}/api/projects`);
+    assert.strictEqual(listRes.status, 200);
+    const listData = await listRes.json();
+    assert.ok(Array.isArray(listData.projects));
+    assert.ok(listData.projects.some(p => p.id === createData.project.id));
+  });
 });

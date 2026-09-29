@@ -67,12 +67,14 @@
     <nav class="nav" aria-label="Main navigation">
       <a class="cursor-target" href="#profile" data-i18n="nav.profile">Profile</a>
       <a class="cursor-target" href="#story" data-i18n="nav.story">Life Story</a>
-      <a class="cursor-target" href="#ai-workflow" data-i18n="nav.workflow">AI Workflow</a>
       <a class="cursor-target" href="#skills" data-i18n="nav.skills">Skills</a>
       <a class="cursor-target" href="#flagship" data-i18n="nav.flagship">Flagship</a>
       <a class="cursor-target" href="#projects" data-i18n="nav.projects">Works</a>
       <a class="cursor-target" href="#certificates" data-i18n="nav.certificates">Certificates</a>
       <a class="cursor-target" href="#contact" data-i18n="nav.contact">Contact</a>
+      <div class="nav-mobile-footer">
+        <button class="icon-btn lang-btn cursor-target mobile-lang-btn" type="button">TH / EN</button>
+      </div>
     </nav>
     <button class="nav-toggle-btn cursor-target" id="navToggleBtn" type="button" aria-label="Toggle navigation menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
@@ -97,17 +99,17 @@
       <div class="hero-copy reveal">
         <div class="ai-status-badge">
           <span class="status-indicator-dot"></span>
-          <span class="decrypted-text" id="aiStatusText">AI AGENT ONLINE · ARCHITECTING SOLUTIONS</span>
+          <span class="decrypted-text" id="aiStatusText">STUDENT DEVELOPER · 1ST PLACE AI CHAMPION</span>
         </div>
 
         <div class="kicker-wrap">
           <span class="pulse-dot"></span>
-          <p class="kicker" data-i18n="hero.kicker">Creative AI Architect · Full-Stack Innovator</p>
+          <p class="kicker" data-i18n="hero.kicker">Full-Stack · Robotics &amp; Drones · AI Creator</p>
         </div>
 
         <h1 class="hero-headline" id="heroHeadline">
-          <span class="split-line">Building with AI.</span>
-          <span class="split-line highlight-gradient">Creating with Code.</span>
+          <span class="split-line">Pataradanai Pongsao</span>
+          <span class="split-line highlight-gradient">Code, Robotics &amp; AI</span>
         </h1>
 
         <!-- FuzzyText Canvas (React Bits) for "NEW JA" -->
@@ -125,7 +127,7 @@
         </div>
 
         <p class="hero-text" data-i18n="hero.text">
-          Developer and AI systems creator driven by curiosity. Transforming complex algorithms into intuitive spatial experiences, autonomous drone intelligence, and scalable full-stack applications.
+          Grade 12 developer passionate about robotics, drone autonomy, game development, and modern web applications. 1st Place Grand Champion of UTCC AI Hackathon 2026.
         </p>
 
         <!-- AI Prompt Bar Interface (React Bits Micro) -->
@@ -155,10 +157,10 @@
             </div>
           </div>
           <div class="prompt-pills-row" id="promptPillsRow">
-            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="Show me your AI projects">🤖 AI Projects</button>
+            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="Show me your projects">🚀 Projects</button>
             <button type="button" class="prompt-pill-btn cursor-target" data-prompt="Tell me about the UTCC Hackathon Championship">🏆 UTCC 1st Place</button>
             <button type="button" class="prompt-pill-btn cursor-target" data-prompt="How do you combine Drones and Vision?">🚁 Drone Vision</button>
-            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="What is your AI development workflow?">⚡ AI Workflow</button>
+            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="Tell me about your background">👤 About Me</button>
           </div>
           <div class="prompt-response-card" id="promptResponseCard" hidden></div>
         </div>
@@ -180,8 +182,8 @@
         </div>
 
         <div class="hero-actions">
-          <a class="solid-btn big cursor-target" href="#flagship" data-i18n="hero.cta1">Explore Works</a>
-          <a class="ghost-btn big cursor-target" href="#ai-workflow" data-i18n="hero.ctaWorkflow">AI Workflow</a>
+          <a class="solid-btn big cursor-target" href="#projects" data-i18n="hero.cta1">Explore Works</a>
+          <a class="ghost-btn big cursor-target" href="#story" data-i18n="hero.ctaStory">Life Story</a>
           <a class="resume-btn cursor-target" href="assets/resume.pdf" download="NewJA_Resume.pdf">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
@@ -234,84 +236,6 @@
       <div class="bounce-cards-wrapper reveal" id="bounceCardsContainer"></div>
     </section>
 
-    <!-- AI Workflow Section (React Bits Thought Line & Interactive Pipeline) -->
-    <section class="section ai-workflow-section" id="ai-workflow" data-bg-theme="constellation">
-      <div class="section-head reveal">
-        <p class="kicker" data-i18n="workflow.kicker">AI Engineering Lifecycle</p>
-        <h2 data-i18n="workflow.title">Thought to Production: Co-Creating with AI.</h2>
-        <p data-i18n="workflow.body">AI does not replace the developer — it acts as a tireless cognitive copilot that amplifies architectural speed, algorithmic rigor, and deployment precision.</p>
-      </div>
-
-      <!-- React Bits Thought Line Showcase in AI Workflow -->
-      <div class="workflow-thought-line-wrap reveal" id="workflowThoughtLineContainer" style="max-width:880px;margin:30px auto 40px auto;">
-        <div class="thought-line is-open cursor-target" id="lifecycleThoughtLine">
-          <div class="thought-line-header cursor-target" title="Click to collapse/expand thought trace">
-            <div class="thought-line-left">
-              <span class="thought-sparkle">✦</span>
-              <strong data-i18n="workflow.traceHeader">Active Reasoning Trace · Autonomous Multi-Agent Pipeline</strong>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <span class="thought-timer-badge">Thought for 4.2s (verified)</span>
-              <svg class="thought-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-          </div>
-          <div class="thought-steps-trace">
-            <div class="thought-step-item"><span class="step-num">[STAGE 1: IDEA]</span> Synthesize domain constraints, hydrological datasets, elevation topography</div>
-            <div class="thought-step-item"><span class="step-num">[STAGE 2: PROMPT]</span> Structure rigorous system meta-prompts, schema contracts &amp; tool calling schemas</div>
-            <div class="thought-step-item"><span class="step-num">[STAGE 3: AI COGNITION]</span> Multi-agent cross-verification: model validation, outlier analysis, latency budget check</div>
-            <div class="thought-step-item"><span class="step-num">[STAGE 4: CODE]</span> Polyglot synthesis: ROS 2 node architecture, Python ML inference, WebGL spatial rendering</div>
-            <div class="thought-step-item"><span class="step-num">[STAGE 5: BENCHMARK]</span> Automated integration tests, stress simulation, packet loss telemetry verification</div>
-            <div class="thought-step-item"><span class="step-num">[STAGE 6: DEPLOY]</span> Edge hardware deployment, Dockerized cloud microservices, zero-downtime rolling update</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Interactive 6-Stage Pipeline Cards -->
-      <div class="workflow-grid reveal" id="workflowGrid">
-        <div class="workflow-card cursor-target">
-          <div class="workflow-step-num">01</div>
-          <h3 data-i18n="workflow.step1Title">Idea &amp; Problem Framing</h3>
-          <p data-i18n="workflow.step1Desc">Decomposing ambiguous real-world friction into structured algorithmic challenges and mathematical constraints.</p>
-          <span class="workflow-tag">Problem Architecture</span>
-        </div>
-
-        <div class="workflow-card cursor-target">
-          <div class="workflow-step-num">02</div>
-          <h3 data-i18n="workflow.step2Title">Prompt &amp; Context Engineering</h3>
-          <p data-i18n="workflow.step2Desc">Engineering multi-shot system prompts, few-shot examples, and strict JSON schemas to steer LLMs with zero hallucinations.</p>
-          <span class="workflow-tag">Steerability &amp; Schemas</span>
-        </div>
-
-        <div class="workflow-card cursor-target">
-          <div class="workflow-step-num">03</div>
-          <h3 data-i18n="workflow.step3Title">Multi-Agent Cognition</h3>
-          <p data-i18n="workflow.step3Desc">Orchestrating autonomous agents with tool-calling capabilities to critique, analyze edge cases, and cross-validate logic.</p>
-          <span class="workflow-tag">Agentic Collaboration</span>
-        </div>
-
-        <div class="workflow-card cursor-target">
-          <div class="workflow-step-num">04</div>
-          <h3 data-i18n="workflow.step4Title">Polyglot Code Synthesis</h3>
-          <p data-i18n="workflow.step4Desc">Translating validated reasoning into high-performance code across Python (AI), Lua (Roblox physics), and TypeScript (Full-Stack).</p>
-          <span class="workflow-tag">Clean Architecture</span>
-        </div>
-
-        <div class="workflow-card cursor-target">
-          <div class="workflow-step-num">05</div>
-          <h3 data-i18n="workflow.step5Title">Testing &amp; Telemetry</h3>
-          <p data-i18n="workflow.step5Desc">Rigorous automated test suites, sub-50ms latency benchmarking, and hardware sensor telemetry validation.</p>
-          <span class="workflow-tag">Verification &amp; CI/CD</span>
-        </div>
-
-        <div class="workflow-card cursor-target">
-          <div class="workflow-step-num">06</div>
-          <h3 data-i18n="workflow.step6Title">Production &amp; Iteration</h3>
-          <p data-i18n="workflow.step6Desc">Deploying to edge devices (drones) and cloud environments with real-time logging, user telemetry, and continuous feedback loops.</p>
-          <span class="workflow-tag">Live Production</span>
-        </div>
-      </div>
-    </section>
-
     <!-- Profile Section -->
     <section class="section profile-section" id="profile" data-bg-theme="constellation">
       <div class="profile-layout reveal">
@@ -362,9 +286,17 @@
     <!-- Projects Section with 3D Interactive Dossier Folders & BorderGlow -->
     <section class="section" id="projects" data-bg-theme="quantum">
       <div class="section-head reveal">
-        <p class="kicker" data-i18n="section.projects.kicker">Selected Works</p>
-        <h2 data-i18n="section.projects.title">Production Systems &amp; Experiments.</h2>
-        <p data-i18n="section.projects.body">Interactive portfolio cards featuring Border Glow proximity luminescence and live member likes.</p>
+        <div class="projects-head-bar">
+          <div>
+            <p class="kicker" data-i18n="section.projects.kicker">Selected Works</p>
+            <h2 data-i18n="section.projects.title">Featured Projects &amp; Experiments</h2>
+            <p data-i18n="section.projects.body">Interactive portfolio cards with live member likes and showcase details.</p>
+          </div>
+          <button class="solid-btn cursor-target add-project-trigger-btn" id="openAddProjectBtn" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span data-i18n="projects.addBtn">ใส่ผลงานของคุณ (+ Add Project)</span>
+          </button>
+        </div>
       </div>
 
       <!-- React Bits 3D Interactive Dossier Folders Showcase -->
@@ -405,6 +337,75 @@
       </div>
     </section>
   </main>
+
+  <!-- Add Project Modal -->
+  <dialog class="modal" id="addProjectModal">
+    <div class="modal-panel add-project-panel">
+      <button class="close-btn cursor-target" id="closeAddProjectBtn" type="button" aria-label="Close">&times;</button>
+      <p class="kicker">Showcase Hub</p>
+      <h2>เพิ่มผลงานของคุณ (Add Project)</h2>
+      <p class="modal-copy">กรอกข้อมูลผลงาน หรือโปรเจกต์ของคุณเพื่อแสดงผลบนหน้าเว็บ Portfolio ทันที</p>
+
+      <form id="addProjectForm" class="add-project-form">
+        <label>
+          <span>ชื่อผลงาน / Project Title *</span>
+          <input type="text" id="newProjectTitle" required minlength="2" placeholder="เช่น AI Water Forecasting, Autonomous Drone...">
+        </label>
+
+        <div class="form-row">
+          <label>
+            <span>หมวดหมู่ / Category *</span>
+            <select id="newProjectCategory">
+              <option value="AI &amp; Machine Learning">🤖 AI &amp; Machine Learning</option>
+              <option value="Robotics &amp; Drones">🚁 Robotics &amp; Drones</option>
+              <option value="Game &amp; Metaverse">🎮 Game &amp; Metaverse</option>
+              <option value="Full-Stack Web">💎 Full-Stack Web</option>
+              <option value="Hackathon &amp; Award">🏆 Hackathon &amp; Award</option>
+              <option value="Software Tool">⚡ Software Tool</option>
+            </select>
+          </label>
+          <label>
+            <span>ป้ายกำกับ / Badge</span>
+            <input type="text" id="newProjectBadge" placeholder="เช่น 1st Place, Active, Live..." value="Featured Project">
+          </label>
+        </div>
+
+        <label>
+          <span>รายละเอียดผลงาน / Description *</span>
+          <textarea id="newProjectDesc" rows="3" required minlength="5" placeholder="อธิบายจุดเด่น ปัญหาที่แก้ หรือผลลัพธ์ของผลงานแบบเข้าใจง่าย..."></textarea>
+        </label>
+
+        <label>
+          <span>ลิงก์รูปภาพ / Cover Image URL</span>
+          <input type="text" id="newProjectImage" placeholder="ใส่ URL รูป หรือคลิกเลือกรูปตัวอย่างด้านล่าง" value="assets/UTCC.jpg">
+          <div class="img-presets-row">
+            <span>รูปตัวอย่าง:</span>
+            <button type="button" class="img-preset-btn cursor-target" data-src="assets/UTCCcer.jpg">🏆 ประกาศนียบัตร</button>
+            <button type="button" class="img-preset-btn cursor-target" data-src="assets/UTCC.jpg">👥 ถือรางวัล</button>
+            <button type="button" class="img-preset-btn cursor-target" data-src="assets2/17-1.png">🤖 AI Platform</button>
+            <button type="button" class="img-preset-btn cursor-target" data-src="assets/cer-2.jpg">🎮 Game AI</button>
+            <button type="button" class="img-preset-btn cursor-target" data-src="assets/myface.jpg">👤 โปรไฟล์</button>
+          </div>
+        </label>
+
+        <div class="form-row">
+          <label>
+            <span>เทคโนโลยีที่ใช้ / Tech Tags</span>
+            <input type="text" id="newProjectTags" placeholder="เช่น Python, YOLO, ROS 2, React" value="Python, AI, Web">
+          </label>
+          <label>
+            <span>ลิงก์ผลงาน / Project URL (GitHub, Demo)</span>
+            <input type="url" id="newProjectLink" placeholder="https://github.com/...">
+          </label>
+        </div>
+
+        <button class="solid-btn wide cursor-target" type="submit" id="saveProjectBtn">
+          บันทึกผลงาน (Publish Project)
+        </button>
+        <p class="form-status" id="addProjectStatus"></p>
+      </form>
+    </div>
+  </dialog>
 
   <!-- Auth Modal -->
   <dialog class="modal" id="authModal">

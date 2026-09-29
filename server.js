@@ -271,10 +271,97 @@ app.get("/api/projects/likes", async (request, response, next) => {
   }
 });
 
+async function isProjectValid(projectId) {
+  if (projectIds.has(projectId)) return true;
+  try {
+    const res = await pool.query("SELECT 1 FROM custom_projects WHERE id = $1", [projectId]);
+    return (res.rowCount || 0) > 0;
+  } catch {
+    return false;
+  }
+}
+
+app.get("/api/projects", async (_request, response, next) => {
+  try {
+    const result = await pool.query(
+      "SELECT id, title, category, badge, body, image, tags, link, created_at FROM custom_projects ORDER BY created_at DESC"
+    );
+    response.json({ projects: result.rows });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/projects", async (request, response, next) => {
+  try {
+    const title = String(request.body.title || "").trim();
+    const category = String(request.body.category || "AI & Software").trim();
+    const badge = String(request.body.badge || "Featured Project").trim();
+    const body = String(request.body.body || "").trim();
+    const image = String(request.body.image || "assets/UTCC.jpg").trim();
+    const link = String(request.body.link || "").trim();
+    let tags = Array.isArray(request.body.tags) ? request.body.tags : [];
+    if (typeof request.body.tags === "string") {
+      tags = request.body.tags.split(",").map(s => s.trim()).filter(Boolean);
+    }
+
+    if (title.length < 2 || title.length > 200) {
+      return response.status(400).json({ error: "Title must be between 2 and 200 characters." });
+    }
+    if (body.length < 5 || body.length > 3000) {
+      return response.status(400).json({ error: "Description must be between 5 and 3000 characters." });
+    }
+
+    const baseSlug = title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 40) || "project";
+    const id = `${baseSlug}-${crypto.randomBytes(3).toString("hex")}`;
+
+    const result = await pool.query(
+      `INSERT INTO custom_projects (id, title, category, badge, body, image, tags, link)
+       VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8)
+       RETURNING *`,
+      [id, title, category, badge, body, image, JSON.stringify(tags), link]
+    );
+
+    const project = result.rows[0];
+    await writeLog(request, "PROJECT_CREATED", {
+      targetType: "project",
+      targetId: id,
+      detail: { title, category }
+    });
+
+    response.status(201).json({ project });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.delete("/api/projects/:projectId", async (request, response, next) => {
+  try {
+    const { projectId } = request.params;
+    const result = await pool.query("DELETE FROM custom_projects WHERE id = $1 RETURNING id", [projectId]);
+    if (result.rowCount === 0) {
+      return response.status(404).json({ error: "Project not found." });
+    }
+    await pool.query("DELETE FROM project_likes WHERE project_id = $1", [projectId]);
+    await writeLog(request, "PROJECT_DELETED", {
+      targetType: "project",
+      targetId: projectId
+    });
+    response.json({ ok: true, deletedId: projectId });
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.post("/api/projects/:projectId/like", requireAuth, async (request, response, next) => {
   try {
     const { projectId } = request.params;
-    if (!projectIds.has(projectId)) {
+    const isValid = await isProjectValid(projectId);
+    if (!isValid) {
       return response.status(404).json({ error: "Project not found." });
     }
 

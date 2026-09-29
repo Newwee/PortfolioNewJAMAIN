@@ -32,27 +32,26 @@ describe("Comprehensive E2E Runtime & Asset QA", () => {
     assert.strictEqual(res.status, 200);
     const html = await res.text();
 
-    // Check required React Bits components
+    // Check required React Bits & UI components
     assert.ok(html.includes('id="webThreadsCanvas"'), "Web Threads canvas must be present");
     assert.ok(html.includes('id="heroPromptBar"'), "Prompt Bar must be present in Hero");
-    assert.ok(html.includes('id="lifecycleThoughtLine"'), "Thought Line must be present in AI Workflow");
-    assert.ok(html.includes('id="ai-workflow"'), "AI Workflow section must be present");
+    assert.ok(html.includes('id="openAddProjectBtn"'), "Add Project button must be present");
+    assert.ok(html.includes('id="addProjectModal"'), "Add Project modal must be present");
     assert.ok(html.includes('id="navToggleBtn"'), "Mobile nav toggle button must be present");
     assert.ok(html.includes('id="heroHeadline"'), "Hero headline with SplitText must be present");
   });
 
-  it("serves styles.css with React Bits CSS rules", async () => {
+  it("serves styles.css with responsive & UI rules", async () => {
     const res = await fetch(`${baseUrl}/styles.css`);
     assert.strictEqual(res.status, 200);
     const css = await res.text();
 
     assert.ok(css.includes(".web-threads-canvas"), "Web Threads CSS present");
     assert.ok(css.includes(".prompt-bar-container"), "Prompt Bar CSS present");
-    assert.ok(css.includes(".thought-line"), "Thought Line CSS present");
     assert.ok(css.includes(".peek-rating-container"), "Peek Rating CSS present");
     assert.ok(css.includes(".spotlight-card"), "Spotlight Card CSS present");
     assert.ok(css.includes(".shiny-text"), "Shiny Text CSS present");
-    assert.ok(css.includes(".ai-workflow-section"), "AI Workflow section CSS present");
+    assert.ok(css.includes(".add-project-trigger-btn"), "Add project button CSS present");
   });
 
   it("serves app.js with React Bits runtime engines", async () => {
