@@ -39,9 +39,11 @@ describe("Comprehensive E2E Runtime & Asset QA", () => {
     assert.ok(html.includes('id="addProjectModal"'), "Add Project modal must be present");
     assert.ok(html.includes('id="navToggleBtn"'), "Mobile nav toggle button must be present");
     assert.ok(html.includes('id="heroHeadline"'), "Hero headline with SplitText must be present");
+    assert.ok(html.includes('FlexCarousel.css'), "FlexCarousel.css link must be present");
+    assert.ok(html.includes('class="flex-carousel-shell'), "FlexCarousel shell container must be present");
   });
 
-  it("serves styles.css with responsive & UI rules", async () => {
+  it("serves styles.css and FlexCarousel.css with responsive & UI rules", async () => {
     const res = await fetch(`${baseUrl}/styles.css`);
     assert.strictEqual(res.status, 200);
     const css = await res.text();
@@ -52,9 +54,15 @@ describe("Comprehensive E2E Runtime & Asset QA", () => {
     assert.ok(css.includes(".spotlight-card"), "Spotlight Card CSS present");
     assert.ok(css.includes(".shiny-text"), "Shiny Text CSS present");
     assert.ok(css.includes(".add-project-trigger-btn"), "Add project button CSS present");
+    assert.ok(css.includes(".flex-carousel"), "FlexCarousel CSS present");
+
+    const fcRes = await fetch(`${baseUrl}/FlexCarousel.css`);
+    assert.strictEqual(fcRes.status, 200);
+    const fcCss = await fcRes.text();
+    assert.ok(fcCss.includes(".flex-carousel__reel"), "FlexCarousel.css reel rule present");
   });
 
-  it("serves app.js with React Bits runtime engines", async () => {
+  it("serves app.js with React Bits runtime engines including FlexCarousel", async () => {
     const res = await fetch(`${baseUrl}/app.js`);
     assert.strictEqual(res.status, 200);
     const js = await res.text();
@@ -65,6 +73,7 @@ describe("Comprehensive E2E Runtime & Asset QA", () => {
     assert.ok(js.includes("function initSpotlightCards"), "initSpotlightCards present");
     assert.ok(js.includes("function initPeekRating"), "initPeekRating present");
     assert.ok(js.includes("function initTextAnimations"), "initTextAnimations present");
+    assert.ok(js.includes("function initFlexCarousel"), "initFlexCarousel present");
   });
 
   it("serves key portfolio assets and images", async () => {

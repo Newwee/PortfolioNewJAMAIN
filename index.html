@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="FlexCarousel.css">
 </head>
 
 <body>
@@ -226,14 +227,14 @@
       <div class="logo-loop" id="techLogoLoop"></div>
     </section>
 
-    <!-- Flagship Works Spotlight with BounceCards (React Bits) -->
+    <!-- Flagship Works Spotlight with FlexCarousel (React Bits) -->
     <section class="section flagship-section" id="flagship" data-bg-theme="warp">
       <div class="section-head reveal">
         <p class="kicker" data-i18n="flagship.kicker">Spotlight Showcase</p>
         <h2 data-i18n="flagship.title">Flagship Innovations &amp; Awards</h2>
-        <p data-i18n="flagship.body">Hover over any card in the deck to inspect key projects with dynamic spring physics.</p>
+        <p data-i18n="flagship.body">Drag, scroll, or click any card in the liquid lens carousel to focus and inspect.</p>
       </div>
-      <div class="bounce-cards-wrapper reveal" id="bounceCardsContainer"></div>
+      <div class="flex-carousel-shell reveal" id="bounceCardsContainer" style="width: 100%; height: 560px; position: relative;"></div>
     </section>
 
     <!-- Profile Section -->
@@ -311,14 +312,14 @@
       <div class="project-grid" id="projectList"></div>
     </section>
 
-    <!-- Certificates Section -->
+    <!-- Certificates Section (React Bits FlexCarousel Liquid Lens) -->
     <section class="section" id="certificates" data-bg-theme="supernova">
       <div class="section-head reveal">
         <p class="kicker" data-i18n="section.certificates.kicker">Certificates &amp; Proof</p>
         <h2 data-i18n="section.certificates.title">Verified Achievements &amp; Growth.</h2>
         <p data-i18n="section.certificates.body">Official credentials, competition victories, and academic milestones.</p>
       </div>
-      <div class="certificate-grid" id="certificateList"></div>
+      <div class="flex-carousel-shell reveal" id="certificateList" style="width: 100%; height: 560px; position: relative;"></div>
     </section>
 
     <!-- Contact Section -->

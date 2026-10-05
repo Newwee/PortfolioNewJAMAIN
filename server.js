@@ -560,6 +560,15 @@ app.get(["/", "/index.html"], (_request, response) => {
 app.get("/styles.css", (_request, response) => {
   response.sendFile(path.join(__dirname, "styles.css"));
 });
+app.get("/FlexCarousel.css", (_request, response) => {
+  response.sendFile(path.join(__dirname, "FlexCarousel.css"));
+});
+app.get("/FlexCarousel.jsx", (_request, response) => {
+  response.sendFile(path.join(__dirname, "FlexCarousel.jsx"));
+});
+app.get("/components.json", (_request, response) => {
+  response.sendFile(path.join(__dirname, "components.json"));
+});
 app.get("/app.js", (_request, response) => {
   response.sendFile(path.join(__dirname, "app.js"));
 });
