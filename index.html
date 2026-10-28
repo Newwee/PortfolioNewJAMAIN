@@ -10,7 +10,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="FlexCarousel.css">
+  <!-- Three.js ES Module Import Map -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/vendor/three/build/three.module.js",
+      "three/addons/": "/vendor/three/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -23,9 +31,8 @@
     <div class="target-cursor-dot"></div>
   </div>
 
-  <!-- Dynamic Multi-State Cosmic Backgrounds & Web Threads (React Bits) -->
+  <!-- Dynamic Multi-State Cosmic Backgrounds (Dual-Buffer Crossfade) -->
   <div class="dynamic-bg-container" id="dynamicBgContainer" aria-hidden="true">
-    <canvas id="webThreadsCanvas" class="web-threads-canvas"></canvas>
     <canvas id="bgCanvasA" class="bg-layer active"></canvas>
     <canvas id="bgCanvasB" class="bg-layer"></canvas>
     <div class="bg-gradient-overlay"></div>
@@ -73,17 +80,16 @@
       <a class="cursor-target" href="#projects" data-i18n="nav.projects">Works</a>
       <a class="cursor-target" href="#certificates" data-i18n="nav.certificates">Certificates</a>
       <a class="cursor-target" href="#contact" data-i18n="nav.contact">Contact</a>
-      <div class="nav-mobile-footer">
-        <button class="icon-btn lang-btn cursor-target mobile-lang-btn" type="button">TH / EN</button>
-      </div>
     </nav>
-    <button class="nav-toggle-btn cursor-target" id="navToggleBtn" type="button" aria-label="Toggle navigation menu">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-    </button>
+    <div class="mode-actions">
+      <button class="mode-switch-btn cursor-target" id="modeSwitchBtn" type="button" aria-label="Toggle portfolio view mode" title="Switch 3D Workspace / Normal Portfolio">
+        <span class="mode-glow-dot"></span>
+        <span class="mode-label" id="modeLabel">3D Experience</span>
+      </button>
+      <button class="icon-btn audio-btn cursor-target" id="audioToggleBtn" type="button" title="Toggle audio soundscape" aria-label="Toggle audio">
+        <span id="audioIcon">🔇</span>
+      </button>
+    </div>
     <div class="auth-actions">
       <span class="user-badge" id="userBadge" hidden></span>
       <button class="icon-btn lang-btn cursor-target" id="langToggleBtn" type="button" title="Switch language / เปลี่ยนภาษา">EN</button>
@@ -94,29 +100,76 @@
     </div>
   </header>
 
+  <!-- 3D Developer Workspace Viewport -->
+  <div class="workspace-3d-viewport" id="workspace3dViewport" aria-label="Interactive 3D Workspace">
+    <div class="workspace-canvas-mount" id="workspaceCanvasMount"></div>
+
+    <!-- Loading Screen Overlay -->
+    <div class="workspace-loader" id="workspaceLoader">
+      <div class="loader-content">
+        <div class="loader-spinner-ring"></div>
+        <div class="loader-title">INITIALIZING WORKSPACE</div>
+        <div class="loader-sub">Reconstructing 3D Developer Setup...</div>
+        <div class="loader-bar-wrap">
+          <div class="loader-bar-fill" id="loaderBarFill"></div>
+        </div>
+        <div class="loader-status" id="loaderStatus">Loading PBR materials & lighting...</div>
+      </div>
+    </div>
+
+    <!-- Onboarding Hint Banner -->
+    <div class="workspace-hint" id="workspaceHint">
+      <span class="hint-pulse"></span>
+      <span class="hint-text">Click or tap any object in the workspace to explore New JA's portfolio</span>
+      <button class="hint-dismiss cursor-target" id="hintDismissBtn" type="button" aria-label="Dismiss hint">&times;</button>
+    </div>
+
+    <!-- Floating Quick Navigation Dock -->
+    <nav class="workspace-dock" id="workspaceDock" aria-label="Workspace quick navigation">
+      <button class="dock-btn cursor-target" data-object="centerMonitor" title="Projects & Flagship" type="button">
+        <span class="dock-icon">🖥️</span>
+        <span class="dock-label">Projects</span>
+      </button>
+      <button class="dock-btn cursor-target" data-object="leftMonitor" title="About & Dev Terminal" type="button">
+        <span class="dock-icon">💻</span>
+        <span class="dock-label">About</span>
+      </button>
+      <button class="dock-btn cursor-target" data-object="pc" title="Tech Stack Rig" type="button">
+        <span class="dock-icon">⚡</span>
+        <span class="dock-label">Tech</span>
+      </button>
+      <button class="dock-btn cursor-target" data-object="keyboard" title="Skills Matrix" type="button">
+        <span class="dock-icon">⌨️</span>
+        <span class="dock-label">Skills</span>
+      </button>
+      <button class="dock-btn cursor-target" data-object="mouse" title="Life Story & Journey" type="button">
+        <span class="dock-icon">🖱️</span>
+        <span class="dock-label">Journey</span>
+      </button>
+      <button class="dock-btn cursor-target" data-object="headphones" title="Transmission & Contact" type="button">
+        <span class="dock-icon">🎧</span>
+        <span class="dock-label">Contact</span>
+      </button>
+      <button class="dock-btn cursor-target" data-object="plant" title="Personal Philosophy" type="button">
+        <span class="dock-icon">🌱</span>
+        <span class="dock-label">Mindset</span>
+      </button>
+    </nav>
+  </div>
+
   <main>
     <!-- Hero Section -->
     <section class="hero" id="home" data-bg-theme="aurora">
       <div class="hero-copy reveal">
-        <div class="ai-status-badge">
-          <span class="status-indicator-dot"></span>
-          <span class="decrypted-text" id="aiStatusText">STUDENT DEVELOPER · 1ST PLACE AI CHAMPION</span>
-        </div>
-
         <div class="kicker-wrap">
           <span class="pulse-dot"></span>
-          <p class="kicker" data-i18n="hero.kicker">Full-Stack · Robotics &amp; Drones · AI Creator</p>
+          <p class="kicker" data-i18n="hero.kicker">Creative AI Architect · Full-Stack Innovator</p>
         </div>
 
-        <h1 class="hero-headline" id="heroHeadline">
-          <span class="split-line">Pataradanai Pongsao</span>
-          <span class="split-line highlight-gradient">Code, Robotics &amp; AI</span>
-        </h1>
-
-        <!-- FuzzyText Canvas (React Bits) for "NEW JA" -->
-        <div class="fuzzy-title-wrap cursor-target" id="fuzzyTitleContainer" title="Hover for stardust vibration">
-          <canvas id="fuzzyTitleCanvas" class="fuzzy-title-canvas"></canvas>
-          <span class="sr-only">New JA</span>
+        <!-- Hero Title -->
+        <div class="hero-title-wrap" id="fuzzyTitleContainer">
+          <h1 class="hero-title">New JA</h1>
+          <canvas id="fuzzyTitleCanvas" class="fuzzy-title-canvas" hidden></canvas>
         </div>
 
         <div class="hero-name">
@@ -128,43 +181,8 @@
         </div>
 
         <p class="hero-text" data-i18n="hero.text">
-          Grade 12 developer passionate about robotics, drone autonomy, game development, and modern web applications. 1st Place Grand Champion of UTCC AI Hackathon 2026.
+          Developer and AI systems creator driven by curiosity. Transforming complex algorithms into intuitive spatial experiences, autonomous drone intelligence, and scalable full-stack applications.
         </p>
-
-        <!-- AI Prompt Bar Interface (React Bits Micro) -->
-        <div class="prompt-bar-wrap cursor-target" id="heroPromptBar">
-          <div class="prompt-bar-container">
-            <div class="prompt-bar-top">
-              <button type="button" class="prompt-model-selector cursor-target" id="promptModelSelector" title="Click to cycle AI reasoning models">
-                <span class="prompt-model-dot"></span>
-                <span id="promptModelName">GPT-4o Omniscient</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div class="prompt-token-badge"><span id="promptTokenCount">48</span> tokens · &lt;14ms latency</div>
-            </div>
-            <div class="prompt-bar-main">
-              <div class="prompt-input-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-                </svg>
-              </div>
-              <input type="text" class="prompt-bar-input cursor-target" id="promptInput" placeholder="Ask my portfolio anything... (e.g. 'Show me AI projects')" autocomplete="off">
-              <button type="button" class="prompt-send-btn cursor-target" id="promptSendBtn" aria-label="Submit prompt">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <line x1="22" y1="2" x2="11" y2="13"/>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="prompt-pills-row" id="promptPillsRow">
-            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="Show me your projects">🚀 Projects</button>
-            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="Tell me about the UTCC Hackathon Championship">🏆 UTCC 1st Place</button>
-            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="How do you combine Drones and Vision?">🚁 Drone Vision</button>
-            <button type="button" class="prompt-pill-btn cursor-target" data-prompt="Tell me about your background">👤 About Me</button>
-          </div>
-          <div class="prompt-response-card" id="promptResponseCard" hidden></div>
-        </div>
 
         <!-- CountUp Dynamic Metrics Bar -->
         <div class="hero-stats reveal" id="heroStats">
@@ -183,8 +201,8 @@
         </div>
 
         <div class="hero-actions">
-          <a class="solid-btn big cursor-target" href="#projects" data-i18n="hero.cta1">Explore Works</a>
-          <a class="ghost-btn big cursor-target" href="#story" data-i18n="hero.ctaStory">Life Story</a>
+          <a class="solid-btn big cursor-target" href="#flagship" data-i18n="hero.cta1">Explore Works</a>
+          <a class="ghost-btn big cursor-target" href="#story" data-i18n="hero.cta2">Read Journey</a>
           <a class="resume-btn cursor-target" href="assets/resume.pdf" download="NewJA_Resume.pdf">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
@@ -227,14 +245,14 @@
       <div class="logo-loop" id="techLogoLoop"></div>
     </section>
 
-    <!-- Flagship Works Spotlight with FlexCarousel (React Bits) -->
+    <!-- Flagship Works Spotlight with BounceCards (React Bits) -->
     <section class="section flagship-section" id="flagship" data-bg-theme="warp">
       <div class="section-head reveal">
         <p class="kicker" data-i18n="flagship.kicker">Spotlight Showcase</p>
         <h2 data-i18n="flagship.title">Flagship Innovations &amp; Awards</h2>
-        <p data-i18n="flagship.body">Drag, scroll, or click any card in the liquid lens carousel to focus and inspect.</p>
+        <p data-i18n="flagship.body">Hover over any card in the deck to inspect key projects with dynamic spring physics.</p>
       </div>
-      <div class="flex-carousel-shell reveal" id="bounceCardsContainer" style="width: 100%; height: 560px; position: relative;"></div>
+      <div class="bounce-cards-wrapper reveal" id="bounceCardsContainer"></div>
     </section>
 
     <!-- Profile Section -->
@@ -287,17 +305,9 @@
     <!-- Projects Section with 3D Interactive Dossier Folders & BorderGlow -->
     <section class="section" id="projects" data-bg-theme="quantum">
       <div class="section-head reveal">
-        <div class="projects-head-bar">
-          <div>
-            <p class="kicker" data-i18n="section.projects.kicker">Selected Works</p>
-            <h2 data-i18n="section.projects.title">Featured Projects &amp; Experiments</h2>
-            <p data-i18n="section.projects.body">Interactive portfolio cards with live member likes and showcase details.</p>
-          </div>
-          <button class="solid-btn cursor-target add-project-trigger-btn" id="openAddProjectBtn" type="button">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            <span data-i18n="projects.addBtn">ใส่ผลงานของคุณ (+ Add Project)</span>
-          </button>
-        </div>
+        <p class="kicker" data-i18n="section.projects.kicker">Selected Works</p>
+        <h2 data-i18n="section.projects.title">Production Systems &amp; Experiments.</h2>
+        <p data-i18n="section.projects.body">Interactive portfolio cards featuring Border Glow proximity luminescence and live member likes.</p>
       </div>
 
       <!-- React Bits 3D Interactive Dossier Folders Showcase -->
@@ -312,14 +322,14 @@
       <div class="project-grid" id="projectList"></div>
     </section>
 
-    <!-- Certificates Section (React Bits FlexCarousel Liquid Lens) -->
+    <!-- Certificates Section -->
     <section class="section" id="certificates" data-bg-theme="supernova">
       <div class="section-head reveal">
         <p class="kicker" data-i18n="section.certificates.kicker">Certificates &amp; Proof</p>
         <h2 data-i18n="section.certificates.title">Verified Achievements &amp; Growth.</h2>
         <p data-i18n="section.certificates.body">Official credentials, competition victories, and academic milestones.</p>
       </div>
-      <div class="flex-carousel-shell reveal" id="certificateList" style="width: 100%; height: 560px; position: relative;"></div>
+      <div class="certificate-grid" id="certificateList"></div>
     </section>
 
     <!-- Contact Section -->
@@ -338,75 +348,6 @@
       </div>
     </section>
   </main>
-
-  <!-- Add Project Modal -->
-  <dialog class="modal" id="addProjectModal">
-    <div class="modal-panel add-project-panel">
-      <button class="close-btn cursor-target" id="closeAddProjectBtn" type="button" aria-label="Close">&times;</button>
-      <p class="kicker">Showcase Hub</p>
-      <h2>เพิ่มผลงานของคุณ (Add Project)</h2>
-      <p class="modal-copy">กรอกข้อมูลผลงาน หรือโปรเจกต์ของคุณเพื่อแสดงผลบนหน้าเว็บ Portfolio ทันที</p>
-
-      <form id="addProjectForm" class="add-project-form">
-        <label>
-          <span>ชื่อผลงาน / Project Title *</span>
-          <input type="text" id="newProjectTitle" required minlength="2" placeholder="เช่น AI Water Forecasting, Autonomous Drone...">
-        </label>
-
-        <div class="form-row">
-          <label>
-            <span>หมวดหมู่ / Category *</span>
-            <select id="newProjectCategory">
-              <option value="AI &amp; Machine Learning">🤖 AI &amp; Machine Learning</option>
-              <option value="Robotics &amp; Drones">🚁 Robotics &amp; Drones</option>
-              <option value="Game &amp; Metaverse">🎮 Game &amp; Metaverse</option>
-              <option value="Full-Stack Web">💎 Full-Stack Web</option>
-              <option value="Hackathon &amp; Award">🏆 Hackathon &amp; Award</option>
-              <option value="Software Tool">⚡ Software Tool</option>
-            </select>
-          </label>
-          <label>
-            <span>ป้ายกำกับ / Badge</span>
-            <input type="text" id="newProjectBadge" placeholder="เช่น 1st Place, Active, Live..." value="Featured Project">
-          </label>
-        </div>
-
-        <label>
-          <span>รายละเอียดผลงาน / Description *</span>
-          <textarea id="newProjectDesc" rows="3" required minlength="5" placeholder="อธิบายจุดเด่น ปัญหาที่แก้ หรือผลลัพธ์ของผลงานแบบเข้าใจง่าย..."></textarea>
-        </label>
-
-        <label>
-          <span>ลิงก์รูปภาพ / Cover Image URL</span>
-          <input type="text" id="newProjectImage" placeholder="ใส่ URL รูป หรือคลิกเลือกรูปตัวอย่างด้านล่าง" value="assets/UTCC.jpg">
-          <div class="img-presets-row">
-            <span>รูปตัวอย่าง:</span>
-            <button type="button" class="img-preset-btn cursor-target" data-src="assets/UTCCcer.jpg">🏆 ประกาศนียบัตร</button>
-            <button type="button" class="img-preset-btn cursor-target" data-src="assets/UTCC.jpg">👥 ถือรางวัล</button>
-            <button type="button" class="img-preset-btn cursor-target" data-src="assets2/17-1.png">🤖 AI Platform</button>
-            <button type="button" class="img-preset-btn cursor-target" data-src="assets/cer-2.jpg">🎮 Game AI</button>
-            <button type="button" class="img-preset-btn cursor-target" data-src="assets/myface.jpg">👤 โปรไฟล์</button>
-          </div>
-        </label>
-
-        <div class="form-row">
-          <label>
-            <span>เทคโนโลยีที่ใช้ / Tech Tags</span>
-            <input type="text" id="newProjectTags" placeholder="เช่น Python, YOLO, ROS 2, React" value="Python, AI, Web">
-          </label>
-          <label>
-            <span>ลิงก์ผลงาน / Project URL (GitHub, Demo)</span>
-            <input type="url" id="newProjectLink" placeholder="https://github.com/...">
-          </label>
-        </div>
-
-        <button class="solid-btn wide cursor-target" type="submit" id="saveProjectBtn">
-          บันทึกผลงาน (Publish Project)
-        </button>
-        <p class="form-status" id="addProjectStatus"></p>
-      </form>
-    </div>
-  </dialog>
 
   <!-- Auth Modal -->
   <dialog class="modal" id="authModal">
@@ -496,6 +437,11 @@
     </svg>
   </button>
 
+  <script type="module">
+    import { WorkspaceApp } from './3d/WorkspaceApp.js';
+    window.WorkspaceApp = WorkspaceApp;
+    window.dispatchEvent(new CustomEvent('workspace_class_ready'));
+  </script>
   <script src="app.js"></script>
 </body>
 

@@ -395,7 +395,7 @@ const CONTENT = {
    ============================================================ */
 const UI = {
   en: {
-    nav: { profile: "Profile", story: "Life Story", workflow: "AI Workflow", skills: "Skills", flagship: "Flagship", projects: "Works", certificates: "Certificates", contact: "Contact" },
+    nav: { profile: "Profile", story: "Life Story", skills: "Skills", flagship: "Flagship", projects: "Works", certificates: "Certificates", contact: "Contact" },
     auth: { login: "Login", register: "Register", logout: "Logout", admin: "Admin" },
     hero: {
       kicker: "Creative AI Architect · Full-Stack Innovator",
@@ -403,7 +403,6 @@ const UI = {
       text: "Developer and AI systems creator driven by curiosity. Transforming complex algorithms into intuitive spatial experiences, autonomous drone intelligence, and scalable full-stack applications.",
       cta1: "Explore Works",
       cta2: "Read Journey",
-      ctaWorkflow: "AI Workflow",
       cta3: "Download Resume",
       trophySmall: "National AI Hackathon",
       trophyStrong: "1st Place Champion",
@@ -441,24 +440,6 @@ const UI = {
       badge: "⚡ 3D Interactive Dossiers",
       hint: "Click any dossier to unfold project sheets & magnetic blueprints"
     },
-    workflow: {
-      kicker: "AI Engineering Lifecycle",
-      title: "Thought to Production: Co-Creating with AI.",
-      body: "AI does not replace the developer — it acts as a tireless cognitive copilot that amplifies architectural speed, algorithmic rigor, and deployment precision.",
-      traceHeader: "Active Reasoning Trace · Autonomous Multi-Agent Pipeline",
-      step1Title: "Idea & Problem Framing",
-      step1Desc: "Decomposing ambiguous real-world friction into structured algorithmic challenges and mathematical constraints.",
-      step2Title: "Prompt & Context Engineering",
-      step2Desc: "Engineering multi-shot system prompts, few-shot examples, and strict JSON schemas to steer LLMs with zero hallucinations.",
-      step3Title: "Multi-Agent Cognition",
-      step3Desc: "Orchestrating autonomous agents with tool-calling capabilities to critique, analyze edge cases, and cross-validate logic.",
-      step4Title: "Polyglot Code Synthesis",
-      step4Desc: "Translating validated reasoning into high-performance code across Python (AI), Lua (Roblox physics), and TypeScript (Full-Stack).",
-      step5Title: "Testing & Telemetry",
-      step5Desc: "Rigorous automated test suites, sub-50ms latency benchmarking, and hardware sensor telemetry validation.",
-      step6Title: "Production & Iteration",
-      step6Desc: "Deploying to edge devices (drones) and cloud environments with real-time logging, user telemetry, and continuous feedback loops."
-    },
     auth_modal: {
       loginKicker: "Login", loginTitle: "Welcome back", loginCopy: "Login to like projects and access your member account.",
       registerKicker: "Register", registerTitle: "Create a visitor account", registerCopy: "Register a normal account so you can like my work.",
@@ -490,7 +471,7 @@ const UI = {
     }
   },
   th: {
-    nav: { profile: "โปรไฟล์", story: "เรื่องราว", workflow: "กระบวนการ AI", skills: "ทักษะ", flagship: "ผลงานเด่น", projects: "ผลงาน", certificates: "เกียรติบัตร", contact: "ติดต่อ" },
+    nav: { profile: "โปรไฟล์", story: "เรื่องราว", skills: "ทักษะ", flagship: "ผลงานเด่น", projects: "ผลงาน", certificates: "เกียรติบัตร", contact: "ติดต่อ" },
     auth: { login: "เข้าสู่ระบบ", register: "สมัครสมาชิก", logout: "ออกจากระบบ", admin: "ผู้ดูแลระบบ" },
     hero: {
       kicker: "สถาปนิกปัญญาประดิษฐ์ · นักพัฒนา Full-Stack",
@@ -498,7 +479,6 @@ const UI = {
       text: "นักพัฒนาและผู้สร้างระบบ AI ที่ขับเคลื่อนด้วยความอยากรู้อยากเห็น เปลี่ยนอัลกอริทึมซับซ้อนให้กลายเป็นประสบการณ์เสมือนจริง โดรนอัตโนมัติ และเว็บแอปพลิเคชันระดับโปรดักชัน",
       cta1: "ชมผลงานทั้งหมด",
       cta2: "อ่านเส้นทางชีวิต",
-      ctaWorkflow: "กระบวนการ AI",
       cta3: "ดาวน์โหลดเรซูเม่",
       trophySmall: "การแข่งขัน AI ระดับประเทศ",
       trophyStrong: "ชนะเลิศอันดับ 1",
@@ -535,24 +515,6 @@ const UI = {
     dossier: {
       badge: "⚡ แฟ้มประวัติ 3D Interactive",
       hint: "คลิกที่แฟ้มเพื่อคลี่แผ่นเอกสารโครงการและพิมพ์เขียวระบบ"
-    },
-    workflow: {
-      kicker: "วงจรวิศวกรรมปัญญาประดิษฐ์",
-      title: "จากความคิดสู่ระบบจริง: ร่วมสร้างสรรค์ไปกับ AI",
-      body: "AI ไม่ได้มาแทนที่นักพัฒนา แต่เป็นเพื่อนร่วมคิดที่ช่วยเร่งความเร็วในการออกแบบสถาปัตยกรรม ตรวจสอบตรรกะ และเพิ่มความแม่นยำในการพัฒนา",
-      traceHeader: "ร่องรอยการใช้เหตุผลแบบเรียลไทม์ · ระบบ Multi-Agent อัตโนมัติ",
-      step1Title: "การวางโจทย์ & นิยามปัญหา",
-      step1Desc: "วิเคราะห์และแปลงปัญหาจริงที่ซับซ้อนให้กลายเป็นโจทย์เชิงอัลกอริทึมและข้อจำกัดทางคณิตศาสตร์",
-      step2Title: "การออกแบบ Prompt & บริบท",
-      step2Desc: "วางโครงสร้างคำสั่ง Meta-Prompt ตัวอย่าง Few-Shot และ JSON Schema เพื่อควบคุม AI ให้แม่นยำสูงสุด",
-      step3Title: "การคิดร่วมกันของ Multi-Agent",
-      step3Desc: "ประสานการทำงานระหว่าง AI หลายบทบาท ให้ตรวจสอบ วิพากษ์ และหาจุดบกพร่องของตรรกะร่วมกัน",
-      step4Title: "การสังเคราะห์โค้ดหลากภาษา",
-      step4Desc: "แปลงตรรกะที่ผ่านการตรวจแล้วให้เป็นโค้ดประสิทธิภาพสูง ทั้ง Python (AI), Lua (Game Physics) และ TypeScript (Web)",
-      step5Title: "การทดสอบ & วัดผล Telemetry",
-      step5Desc: "รันชุดการทดสอบอัตโนมัติ ทดสอบความหน่วงต่ำกว่า 50ms และจำลองโหลดเสมือนจริง",
-      step6Title: "Deploy ขึ้นใช้งานจริง & พัฒนาต่อเนื่อง",
-      step6Desc: "นำไปติดตั้งบนอุปกรณ์ Edge (โดรน) และระบบคลาวด์ พร้อมระบบเก็บ Log และติดตามผลแบบเรียลไทม์"
     },
     auth_modal: {
       loginKicker: "เข้าสู่ระบบ", loginTitle: "ยินดีต้อนรับกลับมา", loginCopy: "เข้าสู่ระบบเพื่อกดถูกใจผลงานและเข้าถึงบัญชีสมาชิกของคุณ",
@@ -635,7 +597,7 @@ function showToast(message) {
    ============================================================ */
 function initTargetCursor() {
   const cursor = document.querySelector("#targetCursor");
-  if (!cursor || window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 768) return;
+  if (!cursor || true) return; // Disabled in clean mode
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
@@ -692,7 +654,7 @@ function initTargetCursor() {
    🔤 FUZZY TEXT (React Bits Canvas 2D Text Engine)
    ============================================================ */
 function initFuzzyText(canvas, text = "NEW JA") {
-  if (!canvas) return;
+  if (!canvas || canvas.hidden || true) return; // Clean mode: sharp H1 heading used instead
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
@@ -825,1359 +787,87 @@ function initLogoLoop(container) {
 }
 
 /* ============================================================
-   🎠 FLEX CAROUSEL (@react-bits/FlexCarousel-JS-CSS WebGL2 Liquid Lens Engine)
-   ============================================================ */
-const FLEX_CAROUSEL_PRESETS = {
-  liquid: {
-    lensWidth: 0.74,
-    lensHeight: 1.18,
-    tilt: 62,
-    roundness: 1,
-    bend: 0.34,
-    reach: 0.38,
-    curl: "twist",
-    dispersion: 0.45,
-    liquid: 0,
-    followCursor: false
-  },
-  ribbon: {
-    lensWidth: 0.8,
-    lensHeight: 0.8,
-    tilt: 0,
-    roundness: 1,
-    bend: 0.34,
-    reach: 0.34,
-    curl: "twist",
-    dispersion: 0.4,
-    liquid: 0,
-    followCursor: false
-  },
-  vortex: {
-    lensWidth: 0.7,
-    lensHeight: 0.95,
-    tilt: 30,
-    roundness: 1,
-    bend: 0.46,
-    reach: 0.3,
-    curl: "twist",
-    dispersion: 0.5,
-    liquid: 0,
-    followCursor: false
-  },
-  arch: {
-    lensWidth: 0.8,
-    lensHeight: 0.8,
-    tilt: 0,
-    roundness: 1,
-    bend: 0.3,
-    reach: 0.36,
-    curl: "rise",
-    dispersion: 0.4,
-    liquid: 0,
-    followCursor: false
-  }
-};
-
-const FLEX_FIT_ASPECT = { portrait: 0.75, square: 1, landscape: 4 / 3 };
-const FLEX_TAPS = 12;
-const FLEX_PIXEL_BUDGET = 4.5e6;
-const FLEX_INTRO_DURATION = { rise: 2.1, bloom: 1.6, spin: 2.2, deal: 1.5, fade: 0.35 };
-
-const flexWrap = (value, size) => ((((value + size / 2) % size) + size) % size) - size / 2;
-const flexClamp01 = (value) => Math.min(Math.max(value, 0), 1);
-const flexEaseOut = (value) => 1 - Math.pow(1 - flexClamp01(value), 3);
-const flexEaseOutQuint = (value) => 1 - Math.pow(1 - flexClamp01(value), 5);
-const flexEaseInOut = (value) => {
-  const tVal = flexClamp01(value);
-  return tVal < 0.5 ? 4 * tVal * tVal * tVal : 1 - Math.pow(-2 * tVal + 2, 3) / 2;
-};
-
-const flexCardVertex = `#version 300 es
-in vec3 position;
-in vec2 uv;
-uniform vec4 uRect;
-uniform vec2 uResolution;
-out vec2 vUv;
-out vec2 vLocal;
-void main() {
-  vUv = uv;
-  vLocal = vec2(position.x, -position.y) * uRect.zw;
-  vec2 px = uRect.xy + vLocal;
-  gl_Position = vec4(px.x / uResolution.x * 2.0 - 1.0, 1.0 - px.y / uResolution.y * 2.0, 0.0, 1.0);
-}
-`;
-
-const flexCardFragment = `#version 300 es
-precision highp float;
-uniform sampler2D tMap;
-uniform vec2 uSize;
-uniform vec2 uImage;
-uniform float uRadius;
-uniform float uAlpha;
-uniform float uReady;
-uniform float uShift;
-uniform float uDpr;
-uniform vec3 uPlaceholder;
-in vec2 vUv;
-in vec2 vLocal;
-out vec4 fragColor;
-
-float roundedBox(vec2 p, vec2 b, float r) {
-  vec2 q = abs(p) - b + r;
-  return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
-}
-
-void main() {
-  float sd = roundedBox(vLocal, uSize * 0.5, min(uRadius, min(uSize.x, uSize.y) * 0.5));
-  float mask = clamp(0.5 - sd * uDpr, 0.0, 1.0);
-  vec2 local = vLocal / uSize + 0.5;
-  float cardAspect = uSize.x / uSize.y;
-  float imageAspect = uImage.x / max(uImage.y, 1.0);
-  vec2 scale = imageAspect > cardAspect ? vec2(cardAspect / imageAspect, 1.0) : vec2(1.0, imageAspect / cardAspect);
-  scale /= 1.08;
-  vec2 uv = vec2(local.x, 1.0 - local.y);
-  uv = (uv - 0.5) * scale + 0.5;
-  uv.x += uShift * (1.0 - scale.x) * 0.5;
-  vec3 image = texture(tMap, uv).rgb;
-  vec3 color = mix(uPlaceholder, image, uReady);
-  float alpha = mask * uAlpha;
-  fragColor = vec4(color * alpha, alpha);
-}
-`;
-
-const flexLensVertex = `#version 300 es
-in vec2 position;
-void main() {
-  gl_Position = vec4(position, 0.0, 1.0);
-}
-`;
-
-const flexLensFragment = `#version 300 es
-precision highp float;
-uniform sampler2D tScene;
-uniform vec2 uResolution;
-uniform float uDpr;
-uniform vec2 uCenter;
-uniform vec2 uHalf;
-uniform float uAngle;
-uniform float uExponent;
-uniform float uInner;
-uniform float uOuter;
-uniform float uFlow;
-uniform float uCurl;
-uniform float uDispersion;
-uniform float uStrength;
-uniform float uSceneAlpha;
-out vec4 fragColor;
-
-void main() {
-  vec2 frag = gl_FragCoord.xy / uDpr;
-  vec2 uv = frag / uResolution;
-  vec2 rel = frag - vec2(uCenter.x, uResolution.y - uCenter.y);
-  float ca = cos(uAngle);
-  float sa = sin(uAngle);
-  vec2 local = vec2(ca * rel.x + sa * rel.y, -sa * rel.x + ca * rel.y);
-  vec2 k = max(abs(local) / uHalf, vec2(1e-5));
-  float nd = pow(pow(k.x, uExponent) + pow(k.y, uExponent), 1.0 / uExponent);
-  vec2 grad = pow(k, vec2(uExponent - 1.0)) * sign(local) / uHalf * pow(nd, 1.0 - uExponent);
-  float glen = max(length(grad), 1e-6);
-  float edge = (nd - 1.0) / glen;
-  vec2 outward = grad / glen;
-  vec2 normal = vec2(ca * outward.x - sa * outward.y, sa * outward.x + ca * outward.y);
-  vec2 along = vec2(-normal.y, normal.x);
-
-  float t = clamp((edge + uInner) / (uInner + uOuter), 0.0, 1.0);
-  float ramp = t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
-  float slope = 16.0 * t * t * (1.0 - t) * (1.0 - t);
-  float reachX = rel.x / (uResolution.x * 0.5);
-  float side = smoothstep(0.02, 0.3, abs(reachX)) * (uCurl == 0.0 ? sign(reachX) : uCurl);
-  float lift = ramp * side * uFlow * uStrength;
-  vec2 swirl = along * along.y * side * slope * uFlow * uStrength * 0.35;
-  vec2 drift = vec2(0.0, -lift) - swirl;
-  vec2 shifted = uv + drift / uResolution;
-
-  vec2 texels = uResolution * uDpr;
-  vec2 gx = dFdx(shifted);
-  vec2 gy = dFdy(shifted);
-  gx *= min(1.0, 3.0 / max(length(gx * texels), 1e-4));
-  gy *= min(1.0, 3.0 / max(length(gy * texels), 1e-4));
-
-  vec4 color = textureGrad(tScene, shifted, gx, gy);
-  vec2 spread = vec2(0.0, side * slope * uFlow * uStrength) / uResolution * uDispersion;
-  float spreadPx = length(spread * texels);
-  if (color.a > 0.002 && spreadPx > 0.25) {
-    vec3 base = color.rgb / color.a;
-    vec3 sumColor = vec3(0.0);
-    vec3 sumWeight = vec3(0.0);
-    for (int i = 0; i < ${FLEX_TAPS}; i++) {
-      float s = (float(i) + 0.5) / float(${FLEX_TAPS});
-      vec4 c = textureGrad(tScene, shifted + spread * (s - 0.5), gx, gy);
-      vec3 w = max(1.0 - abs(vec3(s) - vec3(0.15, 0.5, 0.85)) * 2.6, 0.0) * c.a;
-      sumColor += c.rgb * (w / max(c.a, 0.002));
-      sumWeight += w;
-    }
-    vec3 split = mix(base, sumColor / max(sumWeight, vec3(1e-4)), clamp(sumWeight * 2.0, 0.0, 1.0));
-    color.rgb = mix(color.rgb, clamp(split, 0.0, 1.0) * color.a, smoothstep(0.25, 1.5, spreadPx));
-  }
-
-  fragColor = color * uSceneAlpha;
-}
-`;
-
-function renderDigitsReelHTML(value) {
-  return `<span class="flex-carousel__digits">${String(value)
-    .padStart(2, "0")
-    .split("")
-    .map(
-      (digit) =>
-        `<span class="flex-carousel__digit"><span class="flex-carousel__reel" style="transform: translateY(${-Number(digit) * 10}%)">${"0123456789"
-          .split("")
-          .map((n) => `<span>${n}</span>`)
-          .join("")}</span></span>`
-    )
-    .join("")}</span>`;
-}
-
-function initFlexCarousel(hostContainer, options = {}) {
-  if (!hostContainer) return;
-  if (typeof hostContainer._flexCarouselCleanup === "function") {
-    hostContainer._flexCarouselCleanup();
-    hostContainer._flexCarouselCleanup = null;
-  }
-
-  const presetName = options.preset || "liquid";
-  const base = FLEX_CAROUSEL_PRESETS[presetName] || FLEX_CAROUSEL_PRESETS.liquid;
-  const pick = (val, key) => (val === undefined || val === null ? base[key] : val);
-
-  const s = {
-    intro: options.intro !== undefined ? options.intro : "rise",
-    cardHeight: options.cardHeight !== undefined ? options.cardHeight : 0.5,
-    gap: options.gap !== undefined ? options.gap : 12,
-    radius: options.radius !== undefined ? options.radius : 0,
-    fit: options.fit !== undefined ? options.fit : "natural",
-    lensWidth: pick(options.lensWidth, "lensWidth"),
-    lensHeight: pick(options.lensHeight, "lensHeight"),
-    tilt: pick(options.tilt, "tilt"),
-    roundness: pick(options.roundness, "roundness"),
-    bend: pick(options.bend, "bend"),
-    reach: pick(options.reach, "reach"),
-    curl: pick(options.curl, "curl"),
-    dispersion: pick(options.dispersion, "dispersion"),
-    liquid: pick(options.liquid, "liquid"),
-    followCursor: pick(options.followCursor, "followCursor"),
-    squeeze: options.squeeze !== undefined ? options.squeeze : 0.2,
-    focusOnClick: options.focusOnClick !== undefined ? options.focusOnClick : true,
-    autoplay: options.autoplay !== undefined ? options.autoplay : false,
-    interval: options.interval !== undefined ? options.interval : 4,
-    captions: options.captions !== undefined ? options.captions : true,
-    captureWheel: options.captureWheel !== undefined ? options.captureWheel : true,
-    onChange: options.onChange,
-    onSelect: options.onSelect
-  };
-
-  const list = Array.isArray(options.items) && options.items.length ? options.items : [];
-  if (!list.length) return;
-
-  const halfPct = `${Math.min(Math.max(s.cardHeight, 0.05), 1) * 50}%`;
-  hostContainer.innerHTML = `
-    <div
-      class="flex-carousel"
-      style="--flex-carousel-half: ${halfPct};"
-      role="region"
-      aria-roledescription="carousel"
-      aria-label="Image carousel"
-      tabindex="0"
-    >
-      <div class="flex-carousel__hint">⇄ Drag / Scroll • Click to Zoom</div>
-      <div class="flex-carousel__caption" aria-hidden="true" style="display: none;">
-        <span class="flex-carousel__title"></span>
-        <span class="flex-carousel__count">
-          <span class="flex-carousel__digits-mount">${renderDigitsReelHTML(1)}</span>
-          <span class="flex-carousel__slash">/</span>
-          <span class="flex-carousel__total">${String(list.length).padStart(2, "0")}</span>
-        </span>
-      </div>
-      <div class="flex-carousel__live" aria-live="polite" aria-atomic="true"></div>
-    </div>
-  `;
-
-  const container = hostContainer.querySelector(".flex-carousel");
-  const captionEl = container.querySelector(".flex-carousel__caption");
-  const titleEl = container.querySelector(".flex-carousel__title");
-  const countEl = container.querySelector(".flex-carousel__count");
-  const digitsMount = container.querySelector(".flex-carousel__digits-mount");
-  const liveEl = container.querySelector(".flex-carousel__live");
-
-  let uiActive = 0;
-  let uiRevealed = false;
-  let uiFocusOpen = false;
-
-  const syncOverlay = () => {
-    const current = list[uiActive] || list[0];
-    const label = current ? current.title || current.alt || `Image ${uiActive + 1}` : "";
-    if (liveEl) {
-      liveEl.textContent = `${label}, ${uiActive + 1} of ${list.length}`;
-    }
-    if (!captionEl) return;
-    if (s.captions && current && uiRevealed) {
-      captionEl.style.display = "flex";
-      const subHTML = current.subtitle ? `<span class="flex-carousel__subtitle">${current.subtitle}</span>` : "";
-      titleEl.innerHTML = `${current.title || current.alt || ""}${subHTML}`;
-      const reels = digitsMount.querySelectorAll(".flex-carousel__reel");
-      const digits = String(uiActive + 1).padStart(2, "0").split("");
-      if (reels.length === digits.length) {
-        reels.forEach((reel, idx) => {
-          reel.style.transform = `translateY(${-Number(digits[idx]) * 10}%)`;
-        });
-      } else {
-        digitsMount.innerHTML = renderDigitsReelHTML(uiActive + 1);
-      }
-      if (uiFocusOpen) countEl.setAttribute("data-hidden", "");
-      else countEl.removeAttribute("data-hidden");
-    } else {
-      captionEl.style.display = "none";
-    }
-  };
-
-  const canvas = document.createElement("canvas");
-  const gl = canvas.getContext("webgl2", {
-    alpha: true,
-    premultipliedAlpha: true,
-    antialias: false,
-    depth: false
-  });
-
-  if (!gl) {
-    uiRevealed = true;
-    syncOverlay();
-    return;
-  }
-
-  gl.clearColor(0, 0, 0, 0);
-  canvas.style.display = "block";
-  canvas.style.width = "100%";
-  canvas.style.height = "100%";
-  canvas.setAttribute("aria-hidden", "true");
-  container.prepend(canvas);
-
-  const compileShader = (type, source) => {
-    const sh = gl.createShader(type);
-    gl.shaderSource(sh, source);
-    gl.compileShader(sh);
-    return sh;
-  };
-  const createProg = (vsSrc, fsSrc) => {
-    const p = gl.createProgram();
-    gl.attachShader(p, compileShader(gl.VERTEX_SHADER, vsSrc));
-    gl.attachShader(p, compileShader(gl.FRAGMENT_SHADER, fsSrc));
-    gl.linkProgram(p);
-    return p;
-  };
-
-  const cardGlProg = createProg(flexCardVertex, flexCardFragment);
-  const lensGlProg = createProg(flexLensVertex, flexLensFragment);
-
-  // Plane geometry (width 1, height 1, centered at 0)
-  const planeVao = gl.createVertexArray();
-  gl.bindVertexArray(planeVao);
-  const posBuf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
-  gl.bufferData(
-    gl.ARRAY_BUFFER,
-    new Float32Array([-0.5, 0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0]),
-    gl.STATIC_DRAW
-  );
-  const cardPosLoc = gl.getAttribLocation(cardGlProg, "position");
-  if (cardPosLoc >= 0) {
-    gl.enableVertexAttribArray(cardPosLoc);
-    gl.vertexAttribPointer(cardPosLoc, 3, gl.FLOAT, false, 0, 0);
-  }
-  const uvBuf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, uvBuf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 1, 1, 1, 0, 0, 1, 0]), gl.STATIC_DRAW);
-  const cardUvLoc = gl.getAttribLocation(cardGlProg, "uv");
-  if (cardUvLoc >= 0) {
-    gl.enableVertexAttribArray(cardUvLoc);
-    gl.vertexAttribPointer(cardUvLoc, 2, gl.FLOAT, false, 0, 0);
-  }
-  const idxBuf = gl.createBuffer();
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf);
-  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 2, 1, 1, 2, 3]), gl.STATIC_DRAW);
-
-  // Fullscreen Triangle geometry
-  const triVao = gl.createVertexArray();
-  gl.bindVertexArray(triVao);
-  const triBuf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, triBuf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-  const lensPosLoc = gl.getAttribLocation(lensGlProg, "position");
-  if (lensPosLoc >= 0) {
-    gl.enableVertexAttribArray(lensPosLoc);
-    gl.vertexAttribPointer(lensPosLoc, 2, gl.FLOAT, false, 0, 0);
-  }
-  gl.bindVertexArray(null);
-
-  // Offscreen FBO target
-  const targetFbo = gl.createFramebuffer();
-  const targetTex = gl.createTexture();
-  let targetW = 2;
-  let targetH = 2;
-  const resizeTarget = (w, h) => {
-    targetW = Math.max(2, w);
-    targetH = Math.max(2, h);
-    gl.bindTexture(gl.TEXTURE_2D, targetTex);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, targetW, targetH, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, targetFbo);
-    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, targetTex, 0);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-  };
-  resizeTarget(2, 2);
-
-  // Empty 1x1 fallback texture
-  const emptyTex = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, emptyTex);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([128, 128, 128, 255]));
-
-  const cardLocs = {
-    tMap: gl.getUniformLocation(cardGlProg, "tMap"),
-    uRect: gl.getUniformLocation(cardGlProg, "uRect"),
-    uResolution: gl.getUniformLocation(cardGlProg, "uResolution"),
-    uSize: gl.getUniformLocation(cardGlProg, "uSize"),
-    uImage: gl.getUniformLocation(cardGlProg, "uImage"),
-    uRadius: gl.getUniformLocation(cardGlProg, "uRadius"),
-    uAlpha: gl.getUniformLocation(cardGlProg, "uAlpha"),
-    uReady: gl.getUniformLocation(cardGlProg, "uReady"),
-    uShift: gl.getUniformLocation(cardGlProg, "uShift"),
-    uDpr: gl.getUniformLocation(cardGlProg, "uDpr"),
-    uPlaceholder: gl.getUniformLocation(cardGlProg, "uPlaceholder")
-  };
-
-  const lensLocs = {
-    tScene: gl.getUniformLocation(lensGlProg, "tScene"),
-    uResolution: gl.getUniformLocation(lensGlProg, "uResolution"),
-    uDpr: gl.getUniformLocation(lensGlProg, "uDpr"),
-    uCenter: gl.getUniformLocation(lensGlProg, "uCenter"),
-    uHalf: gl.getUniformLocation(lensGlProg, "uHalf"),
-    uAngle: gl.getUniformLocation(lensGlProg, "uAngle"),
-    uExponent: gl.getUniformLocation(lensGlProg, "uExponent"),
-    uInner: gl.getUniformLocation(lensGlProg, "uInner"),
-    uOuter: gl.getUniformLocation(lensGlProg, "uOuter"),
-    uFlow: gl.getUniformLocation(lensGlProg, "uFlow"),
-    uCurl: gl.getUniformLocation(lensGlProg, "uCurl"),
-    uDispersion: gl.getUniformLocation(lensGlProg, "uDispersion"),
-    uStrength: gl.getUniformLocation(lensGlProg, "uStrength"),
-    uSceneAlpha: gl.getUniformLocation(lensGlProg, "uSceneAlpha")
-  };
-
-  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-  const anisoExt =
-    gl.getExtension("EXT_texture_filter_anisotropic") ||
-    gl.getExtension("WEBKIT_EXT_texture_filter_anisotropic");
-
-  let dpr = Math.min(window.devicePixelRatio || 1, 2);
-  let slots = [];
-  let width = 1;
-  let height = 1;
-  let pos = 0;
-  let vel = 0;
-  let goal = 0;
-  let mode = "spring";
-  let wheelAt = 0;
-  let raf = 0;
-  let last = performance.now();
-  let visible = true;
-  let alive = true;
-  let dirty = true;
-  let activeIndex = -1;
-  let interactedAt = -Infinity;
-  let autoplayAt = performance.now();
-  let hasFocus = false;
-  let deform = 0;
-  let deformVel = 0;
-  let layout = null;
-  let resnap = false;
-  let hover = "";
-  let lift = 1;
-  let energy = 0;
-  let lastPos = 0;
-  const lens = { x: 0, y: 0, vx: 0, vy: 0, ready: false };
-  const pointer = {
-    x: 0,
-    y: 0,
-    over: false,
-    down: false,
-    id: -1,
-    startX: 0,
-    startY: 0,
-    startPos: 0,
-    dragging: false,
-    touch: false,
-    samples: []
-  };
-  const introState = { kind: "none", t: 0, running: false, done: false, readyAt: 0 };
-  const focus = { index: -1, pending: -1, t: 0, v: 0, target: 0 };
-  let instances = [];
-
-  const loadSlot = (item, index) => {
-    const tex = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, tex);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([30, 41, 59, 255]));
-
-    const slot = {
-      item,
-      index,
-      tex,
-      aspect: 0.8,
-      loaded: false,
-      failed: false,
-      ready: 0,
-      color: [0.12, 0.16, 0.24],
-      image: [1, 1],
-      dispose: () => {}
-    };
-
-    const image = new Image();
-    image.crossOrigin = "anonymous";
-    image.decoding = "async";
-    image.onload = () => {
-      if (!alive || !slots.includes(slot)) return;
-      gl.bindTexture(gl.TEXTURE_2D, tex);
-      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-      gl.generateMipmap(gl.TEXTURE_2D);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-      if (anisoExt) {
-        const maxAniso = gl.getParameter(anisoExt.MAX_TEXTURE_MAX_ANISOTROPY_EXT) || 1;
-        gl.texParameterf(gl.TEXTURE_2D, anisoExt.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(8, maxAniso));
-      }
-      slot.image = [image.naturalWidth || 1, image.naturalHeight || 1];
-      slot.aspect = slot.image[0] / slot.image[1];
-      try {
-        const probe = document.createElement("canvas");
-        probe.width = 8;
-        probe.height = 8;
-        const ctx = probe.getContext("2d", { willReadFrequently: true });
-        if (ctx) {
-          ctx.drawImage(image, 0, 0, 8, 8);
-          const data = ctx.getImageData(0, 0, 8, 8).data;
-          const avg = [0, 0, 0];
-          for (let i = 0; i < data.length; i += 4) {
-            avg[0] += data[i];
-            avg[1] += data[i + 1];
-            avg[2] += data[i + 2];
-          }
-          slot.color = avg.map((v) => v / 64 / 255);
-        }
-      } catch {
-        slot.color = [0.2, 0.25, 0.35];
-      }
-      slot.loaded = true;
-      dirty = true;
-      start();
-    };
-    image.onerror = () => {
-      if (!alive) return;
-      slot.failed = true;
-      dirty = true;
-      start();
-    };
-    image.src = item.src;
-    slot.dispose = () => {
-      image.onload = null;
-      image.onerror = null;
-      gl.deleteTexture(tex);
-    };
-    return slot;
-  };
-
-  const metrics = () => {
-    const cardH = Math.max(24, s.cardHeight * height);
-    const fixed = FLEX_FIT_ASPECT[s.fit];
-    const widths = slots.map((slot) => (fixed || slot.aspect) * cardH);
-    const centers = [];
-    let cursor = 0;
-    for (let i = 0; i < widths.length; i++) {
-      centers.push(cursor + widths[i] / 2);
-      cursor += widths[i] + s.gap;
-    }
-    return { cardH, widths, centers, gap: s.gap, loop: Math.max(cursor, 1) };
-  };
-
-  const nearest = (m, at) => {
-    let best = 0;
-    let bestDist = Infinity;
-    for (let i = 0; i < m.centers.length; i++) {
-      const dist = Math.abs(flexWrap(m.centers[i] - at, m.loop));
-      if (dist < bestDist) {
-        bestDist = dist;
-        best = i;
-      }
-    }
-    return best;
-  };
-
-  const snapPoint = (m, at) => {
-    const i = nearest(m, at);
-    return at + flexWrap(m.centers[i] - at, m.loop);
-  };
-
-  const remap = (from, to, at) => {
-    const i = nearest(from, at);
-    const offset = flexWrap(at - from.centers[i], from.loop);
-    const cycles = Math.round((at - offset - from.centers[i]) / from.loop);
-    return cycles * to.loop + to.centers[i] + offset * (to.widths[i] / from.widths[i]);
-  };
-
-  const step = (m, delta) => {
-    let at = snapPoint(m, goal);
-    let index = nearest(m, at);
-    const n = m.centers.length;
-    for (let k = 0; k < Math.abs(delta); k++) {
-      const next = (index + (delta > 0 ? 1 : n - 1)) % n;
-      const distance =
-        delta > 0
-          ? m.widths[index] / 2 + m.gap + m.widths[next] / 2
-          : -(m.widths[next] / 2 + m.gap + m.widths[index] / 2);
-      at += distance;
-      index = next;
-    }
-    goal = at;
-    mode = "spring";
-    dirty = true;
-    start();
-  };
-
-  const goTo = (m, index) => {
-    const i = ((index % m.centers.length) + m.centers.length) % m.centers.length;
-    goal = goal + flexWrap(m.centers[i] - goal, m.loop);
-    mode = "spring";
-    dirty = true;
-    start();
-  };
-
-  const openFocus = (index) => {
-    focus.index = index;
-    focus.pending = -1;
-    focus.target = 1;
-    uiFocusOpen = true;
-    syncOverlay();
-    dirty = true;
-    start();
-  };
-
-  const closeFocus = () => {
-    focus.pending = -1;
-    if (focus.target === 0) return false;
-    focus.target = 0;
-    uiFocusOpen = false;
-    syncOverlay();
-    dirty = true;
-    start();
-    return true;
-  };
-
-  const skipIntro = () => {
-    if (introState.running) introState.t = 1;
-  };
-
-  const introEffects = () => {
-    const tVal = introState.running ? introState.t : introState.done ? 1 : 0;
-    const e = { sceneAlpha: 1, strength: 1, card: null };
-    if (!introState.done && !introState.running) {
-      e.sceneAlpha = 0;
-      e.strength = 0;
-      return e;
-    }
-    if (tVal >= 1) return e;
-    const kind = introState.kind;
-    if (kind === "rise") {
-      e.strength = flexEaseInOut((tVal - 0.3) / 0.65);
-      e.card = (rel) => {
-        const delay = Math.min(Math.abs(rel) / (width * 0.6), 1) * 0.34;
-        const local = flexClamp01((tVal - delay) / 0.6);
-        return {
-          alpha: flexClamp01(local * 4),
-          x: 0,
-          y: (1 - flexEaseOutQuint(local)) * height * 0.62,
-          scale: 0.5 + 0.5 * flexEaseInOut((local - 0.18) / 0.82)
-        };
-      };
-    } else if (kind === "bloom") {
-      e.strength = flexEaseInOut((tVal - 0.2) / 0.8);
-      e.card = (rel) => {
-        const delay = Math.min(Math.abs(rel) / (width * 0.6), 1) * 0.25;
-        const local = flexEaseOut((tVal - delay) / 0.55);
-        return { alpha: local, x: 0, y: 0, scale: 0.92 + 0.08 * local };
-      };
-    } else if (kind === "spin") {
-      e.sceneAlpha = flexEaseOut(tVal / 0.25);
-      e.strength = flexEaseOut((tVal - 0.55) / 0.45);
-    } else if (kind === "deal") {
-      e.strength = flexEaseOut((tVal - 0.45) / 0.5);
-      e.card = (rel) => {
-        const spread = Math.min(Math.abs(rel) / (width * 0.6), 1) * 0.3;
-        const local = flexEaseOut((tVal - 0.12 - spread) / 0.5);
-        return { alpha: flexEaseOut((tVal - spread) / 0.12), x: -rel * (1 - local), y: 0, scale: 1 };
-      };
-    } else {
-      e.sceneAlpha = flexEaseOut(tVal);
-      e.strength = flexEaseOut(tVal);
-    }
-    return e;
-  };
-
-  const beginIntro = (m) => {
-    const kind = reducedMotion && s.intro !== "none" ? "fade" : s.intro;
-    introState.kind = FLEX_INTRO_DURATION[kind] ? kind : "none";
-    introState.running = introState.kind !== "none";
-    introState.done = !introState.running;
-    introState.t = 0;
-    if (introState.done) {
-      uiRevealed = true;
-      syncOverlay();
-    }
-    if (introState.kind === "spin") {
-      const distance = m.loop * 1.6 + width;
-      pos = goal + distance;
-      vel = -distance * 3;
-      mode = "spring";
-    }
-  };
-
-  const resize = () => {
-    width = Math.max(1, container.clientWidth || 800);
-    height = Math.max(1, container.clientHeight || 560);
-    dpr = Math.min(window.devicePixelRatio || 1, 2, Math.sqrt(FLEX_PIXEL_BUDGET / (width * height)));
-    canvas.width = Math.max(2, Math.round(width * dpr));
-    canvas.height = Math.max(2, Math.round(height * dpr));
-    resizeTarget(canvas.width, canvas.height);
-    dirty = true;
-    start();
-  };
-
-  const frame = (now) => {
-    raf = 0;
-    if (!alive) return;
-    const dt = Math.min(0.05, Math.max(0.001, (now - last) / 1000));
-    last = now;
-    if (!slots.length) {
-      if (visible) raf = requestAnimationFrame(frame);
-      return;
-    }
-
-    const m = metrics();
-    const n = slots.length;
-    let animating = false;
-
-    if (resnap) {
-      goal = snapPoint(m, goal);
-      pos = goal;
-      vel = 0;
-      resnap = false;
-    } else if (layout && layout.loop !== m.loop) {
-      pos = remap(layout, m, pos);
-      goal = remap(layout, m, goal);
-      pointer.startPos = pos + (pointer.x - pointer.startX);
-      animating = true;
-    }
-    layout = m;
-
-    if (!introState.running && !introState.done) {
-      const allSettled = slots.every((slot) => slot.loaded || slot.failed);
-      if (allSettled || now - introState.readyAt > 1200) {
-        goal = snapPoint(m, goal);
-        pos = goal;
-        beginIntro(m);
-      }
-    }
-    if (introState.running) {
-      introState.t = Math.min(1, introState.t + dt / (FLEX_INTRO_DURATION[introState.kind] || 1));
-      if (introState.t >= 1) {
-        introState.running = false;
-        introState.done = true;
-        uiRevealed = true;
-        syncOverlay();
-      }
-      animating = true;
-    }
-
-    if (mode === "wheel" && now - wheelAt > 150) {
-      goal = snapPoint(m, goal);
-      mode = "spring";
-    }
-    if (!pointer.dragging) {
-      const spinning = introState.running && introState.kind === "spin";
-      const stiffness = spinning ? 9 : mode === "wheel" ? 80 : 55;
-      const damping = 2 * Math.sqrt(stiffness);
-      const steps = Math.ceil(dt / (1 / 240));
-      const h = dt / steps;
-      for (let i = 0; i < steps; i++) {
-        const acc = stiffness * (goal - pos) - damping * vel;
-        vel += acc * h;
-        pos += vel * h;
-      }
-      if (Math.abs(goal - pos) < 0.05 && Math.abs(vel) < 0.5) {
-        pos = goal;
-        vel = 0;
-      } else {
-        animating = true;
-      }
-    } else {
-      animating = true;
-    }
-
-    if (Math.abs(pos) > m.loop * 8) {
-      const shift = Math.round(pos / m.loop) * m.loop;
-      pos -= shift;
-      goal -= shift;
-      pointer.startPos -= shift;
-    }
-
-    const current = nearest(m, pos);
-    if (current !== activeIndex) {
-      activeIndex = current;
-      uiActive = current;
-      syncOverlay();
-      s.onChange?.(current, list[current]);
-    }
-
-    if (focus.pending >= 0 && mode === "spring" && Math.abs(goal - pos) < 1.5 && Math.abs(vel) < 30) {
-      if (current === focus.pending) openFocus(current);
-      else focus.pending = -1;
-    }
-
-    if (
-      s.autoplay &&
-      !reducedMotion &&
-      introState.done &&
-      focus.target === 0 &&
-      focus.t < 0.01 &&
-      !pointer.over &&
-      !pointer.down &&
-      !hasFocus &&
-      mode === "spring" &&
-      Math.abs(goal - pos) < 1 &&
-      now - interactedAt > 3000 &&
-      now - autoplayAt > s.interval * 1000
-    ) {
-      autoplayAt = now;
-      step(m, 1);
-    }
-    if (s.autoplay && !reducedMotion) animating = true;
-
-    const travel = Math.abs(pos - lastPos) / dt;
-    lastPos = pos;
-    const energyTarget = reducedMotion ? 0 : Math.min(travel / 2600, 1);
-    energy += (energyTarget - energy) * (1 - Math.exp(-dt / (energyTarget > energy ? 0.07 : 0.35)));
-    if (energy > 0.001) animating = true;
-    const liquidAmount = reducedMotion ? 0 : s.liquid;
-    const push = Math.max(-1, Math.min(1, vel / 2200));
-    const deformStiffness = 120;
-    const deformDamping = 2 * Math.sqrt(deformStiffness) * 0.32;
-    deformVel += (deformStiffness * (push - deform) - deformDamping * deformVel) * dt;
-    deform += deformVel * dt;
-    if (Math.abs(deform) > 0.0005 || Math.abs(deformVel) > 0.005) animating = true;
-
-    const focusStiffness = 64;
-    focus.v += (focusStiffness * (focus.target - focus.t) - 2 * Math.sqrt(focusStiffness) * focus.v) * dt;
-    focus.t += focus.v * dt;
-    if (Math.abs(focus.target - focus.t) < 0.0005 && Math.abs(focus.v) < 0.001) {
-      focus.t = focus.target;
-      focus.v = 0;
-    } else {
-      animating = true;
-    }
-    const focusAmount = flexClamp01(focus.t);
-    const focusEase = flexEaseInOut(focusAmount);
-    const focusW = focus.index >= 0 && focus.index < n ? m.widths[focus.index] : m.cardH;
-    const focusScale = Math.max(1, Math.min(1.3, (height * 0.84) / m.cardH, (width * 0.92) / focusW));
-    const nextLift = 1 + (focusScale - 1) * focusEase;
-    if (Math.abs(nextLift - lift) > 0.0005) {
-      lift = nextLift;
-      container.style.setProperty("--flex-carousel-lift", lift.toFixed(4));
-    }
-
-    const effects = introEffects();
-
-    const homeX = width / 2;
-    const homeY = height / 2;
-    const follow = s.followCursor && pointer.over && !pointer.dragging && !pointer.touch && focus.target === 0;
-    const aimX = follow ? pointer.x : homeX;
-    const aimY = follow ? pointer.y : homeY;
-    if (!lens.ready) {
-      lens.x = homeX;
-      lens.y = homeY;
-      lens.ready = true;
-    }
-    const lensK = 110;
-    const lensC = 2 * Math.sqrt(lensK) * 0.8;
-    lens.vx += (lensK * (aimX - lens.x) - lensC * lens.vx) * dt;
-    lens.vy += (lensK * (aimY - lens.y) - lensC * lens.vy) * dt;
-    lens.x += lens.vx * dt;
-    lens.y += lens.vy * dt;
-    if (Math.abs(aimX - lens.x) + Math.abs(aimY - lens.y) > 0.2 || Math.abs(lens.vx) + Math.abs(lens.vy) > 0.5)
-      animating = true;
-
-    const cardH = m.cardH;
-    let halfW = (s.lensWidth * width) / 2;
-    let halfH = (s.lensHeight * width) / 2;
-    const squash = Math.abs(deform) * liquidAmount;
-    halfW *= 1 + squash * 0.16;
-    halfH *= 1 - squash * 0.08;
-    const lensX = lens.x - deform * 14 * liquidAmount;
-
-    for (let i = 0; i < n; i++) {
-      const slot = slots[i];
-      if (slot.loaded && slot.ready < 1) {
-        slot.ready = Math.min(1, slot.ready + dt / 0.45);
-        animating = true;
-      }
-    }
-
-    const waiting = !introState.done;
-    if (dirty || animating || pointer.dragging) {
-      dirty = false;
-      instances = [];
-      const shrink = 1 - flexClamp01(s.squeeze) * energy;
-      const draws = [];
-      for (let i = 0; i < n; i++) {
-        const w = m.widths[i];
-        const baseRel = flexWrap(m.centers[i] - pos, m.loop);
-        for (let k = -3; k <= 3; k++) {
-          const rel = baseRel + k * m.loop;
-          if (Math.abs(rel) - w / 2 > width + 40) continue;
-          const fx = effects.card ? effects.card(rel) : null;
-          let x = homeX + rel + (fx ? fx.x : 0);
-          let scale = shrink * (fx ? fx.scale : 1);
-          let alpha = fx ? fx.alpha : 1;
-          if (focusAmount > 0) {
-            if (i === focus.index && Math.abs(rel) < w) {
-              scale *= 1 + (focusScale - 1) * focusEase;
-            } else {
-              const order = Math.min(Math.abs(rel) / width, 1) * 0.25;
-              const part = flexEaseInOut(focusAmount * 1.25 - order);
-              x += Math.sign(rel) * part * width * 0.7;
-              alpha *= 1 - part;
-            }
-          }
-          const cw = w * scale;
-          if (alpha <= 0.001 || x + cw / 2 < -40 || x - cw / 2 > width + 40) continue;
-          draws.push({ i, rel, x, y: homeY + (fx ? fx.y : 0), cw, ch: cardH * scale, alpha });
-        }
-      }
-      draws.sort((a, b) => Math.abs(b.rel) - Math.abs(a.rel));
-
-      // Pass 1: Render cards into targetFbo
-      gl.bindFramebuffer(gl.FRAMEBUFFER, targetFbo);
-      gl.viewport(0, 0, targetW, targetH);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.enable(gl.BLEND);
-      gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-      gl.useProgram(cardGlProg);
-      gl.bindVertexArray(planeVao);
-
-      gl.uniform2f(cardLocs.uResolution, width, height);
-      gl.uniform1f(cardLocs.uDpr, dpr);
-      gl.uniform1f(cardLocs.uRadius, s.radius);
-      gl.uniform1i(cardLocs.tMap, 0);
-
-      for (const draw of draws) {
-        const slot = slots[draw.i];
-        gl.activeTexture(gl.TEXTURE0);
-        gl.bindTexture(gl.TEXTURE_2D, slot.loaded ? slot.tex : emptyTex);
-        gl.uniform4f(cardLocs.uRect, draw.x, draw.y, draw.cw + 2, draw.ch + 2);
-        gl.uniform2f(cardLocs.uSize, draw.cw, draw.ch);
-        gl.uniform2f(cardLocs.uImage, slot.image[0], slot.image[1]);
-        gl.uniform1f(cardLocs.uAlpha, draw.alpha);
-        gl.uniform1f(cardLocs.uReady, slot.ready);
-        gl.uniform1f(cardLocs.uShift, reducedMotion ? 0 : Math.max(-1, Math.min(1, draw.rel / (width * 0.75))));
-        gl.uniform3f(cardLocs.uPlaceholder, slot.color[0], slot.color[1], slot.color[2]);
-        gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
-
-        instances.push({
-          index: draw.i,
-          x0: draw.x - draw.cw / 2,
-          x1: draw.x + draw.cw / 2,
-          y0: draw.y - draw.ch / 2,
-          y1: draw.y + draw.ch / 2
-        });
-      }
-
-      // Pass 2: Generate mipmap on targetTex and render liquid lens distortion to screen
-      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.disable(gl.BLEND);
-
-      gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, targetTex);
-      gl.generateMipmap(gl.TEXTURE_2D);
-
-      gl.useProgram(lensGlProg);
-      gl.bindVertexArray(triVao);
-      gl.uniform1i(lensLocs.tScene, 0);
-      gl.uniform2f(lensLocs.uResolution, width, height);
-      gl.uniform1f(lensLocs.uDpr, dpr);
-      gl.uniform2f(lensLocs.uCenter, lensX, lens.y);
-      const spanW = Math.max(halfW, 1);
-      const spanH = Math.max(halfH, 1);
-      gl.uniform2f(lensLocs.uHalf, spanW, spanH);
-      gl.uniform1f(lensLocs.uAngle, (s.tilt * Math.PI) / 180);
-      gl.uniform1f(lensLocs.uExponent, 2 + Math.pow(1 - flexClamp01(s.roundness), 1.5) * 10);
-      const inner = Math.max(4, s.reach * (spanW + spanH) * 0.5);
-      gl.uniform1f(lensLocs.uInner, inner);
-      gl.uniform1f(lensLocs.uOuter, inner * 1.6);
-      gl.uniform1f(lensLocs.uFlow, s.bend * (spanW + spanH) * 0.45);
-      gl.uniform1f(lensLocs.uCurl, s.curl === "rise" ? 1 : s.curl === "fall" ? -1 : 0);
-      gl.uniform1f(lensLocs.uDispersion, s.dispersion * 0.12 * (1 + Math.abs(deform) * liquidAmount * 1.2));
-      gl.uniform1f(lensLocs.uStrength, effects.strength * (1 - focusEase));
-      gl.uniform1f(lensLocs.uSceneAlpha, effects.sceneAlpha);
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-      gl.bindVertexArray(null);
-    }
-
-    let nextHover = "";
-    if (pointer.over && !pointer.dragging && introState.done && s.focusOnClick) {
-      const hit = instances.find(
-        (inst) => pointer.x >= inst.x0 && pointer.x <= inst.x1 && pointer.y >= inst.y0 && pointer.y <= inst.y1
-      );
-      if (focus.target > 0) nextHover = "close";
-      else if (hit) nextHover = "open";
-    }
-    if (nextHover !== hover) {
-      hover = nextHover;
-      if (hover) container.setAttribute("data-hover", hover);
-      else container.removeAttribute("data-hover");
-    }
-
-    if (visible && (animating || waiting || dirty || pointer.down)) raf = requestAnimationFrame(frame);
-  };
-
-  const start = () => {
-    if (raf || !visible || !alive) return;
-    last = performance.now();
-    raf = requestAnimationFrame(frame);
-  };
-
-  const localPoint = (e) => {
-    const rect = container.getBoundingClientRect();
-    return [e.clientX - rect.left, e.clientY - rect.top];
-  };
-
-  const onPointerDown = (e) => {
-    if (e.button !== undefined && e.button > 0) return;
-    skipIntro();
-    const [x, y] = localPoint(e);
-    pointer.down = true;
-    pointer.id = e.pointerId;
-    pointer.touch = e.pointerType === "touch";
-    pointer.startX = x;
-    pointer.startY = y;
-    pointer.x = x;
-    pointer.y = y;
-    pointer.startPos = pos;
-    pointer.dragging = false;
-    pointer.samples = [{ x, t: performance.now() }];
-    interactedAt = performance.now();
-    if (Math.abs(vel) > 40) {
-      goal = pos;
-      vel = 0;
-    }
-    dirty = true;
-    start();
-  };
-
-  const onPointerMove = (e) => {
-    const [x, y] = localPoint(e);
-    pointer.x = x;
-    pointer.y = y;
-    pointer.over = true;
-    if (pointer.down && e.pointerId === pointer.id) {
-      const dx = x - pointer.startX;
-      const dy = y - pointer.startY;
-      const slop = pointer.touch ? 10 : 5;
-      if (!pointer.dragging) {
-        if (pointer.touch && Math.abs(dy) > slop && Math.abs(dy) > Math.abs(dx)) {
-          pointer.down = false;
-          return;
-        }
-        if (Math.abs(dx) > slop) {
-          pointer.dragging = true;
-          pointer.startX = x;
-          pointer.startPos = pos;
-          closeFocus();
-          try {
-            container.setPointerCapture(e.pointerId);
-          } catch {
-            pointer.dragging = true;
-          }
-          container.setAttribute("data-dragging", "");
-        }
-      }
-      if (pointer.dragging) {
-        pos = pointer.startPos - (x - pointer.startX);
-        goal = pos;
-        vel = 0;
-        const now = performance.now();
-        pointer.samples.push({ x, t: now });
-        while (pointer.samples.length > 2 && now - pointer.samples[0].t > 100) pointer.samples.shift();
-      }
-    }
-    dirty = true;
-    start();
-  };
-
-  const onPointerUp = (e) => {
-    if (!pointer.down || e.pointerId !== pointer.id) return;
-    pointer.down = false;
-    container.removeAttribute("data-dragging");
-    const m = metrics();
-    interactedAt = performance.now();
-    if (pointer.dragging) {
-      pointer.dragging = false;
-      const now = performance.now();
-      const first = pointer.samples[0];
-      const lastSample = pointer.samples[pointer.samples.length - 1];
-      let velocity = 0;
-      if (first && lastSample && lastSample.t > first.t && now - lastSample.t < 70) {
-        velocity = -((lastSample.x - first.x) / (lastSample.t - first.t)) * 1000;
-      }
-      vel = velocity;
-      const landing = snapPoint(m, pos + velocity * 0.32);
-      goal = landing;
-      if (Math.abs(velocity) > 400 && Math.abs(landing - pos) < 1) step(m, velocity > 0 ? 1 : -1);
-      mode = "spring";
-      start();
-      return;
-    }
-    if (closeFocus()) return;
-    const [x, y] = localPoint(e);
-    const hit = instances.find((inst) => x >= inst.x0 && x <= inst.x1 && y >= inst.y0 && y <= inst.y1);
-    if (!hit) return;
-    if (hit.index === activeIndex && Math.abs(goal - pos) < 2) {
-      s.onSelect?.(hit.index, list[hit.index]);
-      if (s.focusOnClick) openFocus(hit.index);
-    } else {
-      const rel = (hit.x0 + hit.x1) / 2 - width / 2;
-      goal = snapPoint(m, pos + rel);
-      mode = "spring";
-      if (s.focusOnClick) focus.pending = hit.index;
-      start();
-    }
-  };
-
-  const onPointerLeave = () => {
-    pointer.over = false;
-    dirty = true;
-    start();
-  };
-
-  const onPointerCancel = () => {
-    pointer.down = false;
-    pointer.dragging = false;
-    container.removeAttribute("data-dragging");
-    goal = snapPoint(metrics(), pos);
-    mode = "spring";
-    start();
-  };
-
-  const onWheel = (e) => {
-    if (e.ctrlKey) return;
-    let dx = e.deltaX;
-    let dy = e.deltaY;
-    if (e.shiftKey && Math.abs(dx) < Math.abs(dy)) {
-      dx = dy;
-      dy = 0;
-    }
-    const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? height : 1;
-    const horizontal = Math.abs(dx) > Math.abs(dy);
-    if (!horizontal && !s.captureWheel) return;
-    e.preventDefault();
-    skipIntro();
-    interactedAt = performance.now();
-    if (closeFocus()) return;
-    const delta = Math.max(-120, Math.min(120, (horizontal ? dx : dy) * unit));
-    goal += delta * 1.25;
-    mode = "wheel";
-    wheelAt = performance.now();
-    start();
-  };
-
-  const onKeyDown = (e) => {
-    const m = metrics();
-    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-      e.preventDefault();
-      skipIntro();
-      closeFocus();
-      interactedAt = performance.now();
-      step(m, 1);
-    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-      e.preventDefault();
-      skipIntro();
-      closeFocus();
-      interactedAt = performance.now();
-      step(m, -1);
-    } else if (e.key === "Home") {
-      e.preventDefault();
-      closeFocus();
-      goTo(m, 0);
-    } else if (e.key === "End") {
-      e.preventDefault();
-      closeFocus();
-      goTo(m, slots.length - 1);
-    } else if (e.key === "Escape") {
-      if (closeFocus()) e.preventDefault();
-    } else if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      if (closeFocus() || activeIndex < 0) return;
-      s.onSelect?.(activeIndex, list[activeIndex]);
-      if (s.focusOnClick) openFocus(activeIndex);
-    }
-  };
-
-  const onFocus = () => {
-    hasFocus = true;
-  };
-  const onBlur = () => {
-    hasFocus = false;
-  };
-  const onVisibility = () => {
-    if (!document.hidden) start();
-  };
-
-  container.addEventListener("pointerdown", onPointerDown);
-  container.addEventListener("pointermove", onPointerMove);
-  container.addEventListener("pointerup", onPointerUp);
-  container.addEventListener("pointerleave", onPointerLeave);
-  container.addEventListener("pointercancel", onPointerCancel);
-  container.addEventListener("wheel", onWheel, { passive: false });
-  container.addEventListener("keydown", onKeyDown);
-  container.addEventListener("focus", onFocus);
-  container.addEventListener("blur", onBlur);
-  document.addEventListener("visibilitychange", onVisibility);
-
-  const resizeObserver = new ResizeObserver(resize);
-  resizeObserver.observe(container);
-  const intersectionObserver = new IntersectionObserver(([entry]) => {
-    visible = entry.isIntersecting;
-    start();
-  });
-  intersectionObserver.observe(container);
-
-  slots = list.map(loadSlot);
-  resnap = true;
-  introState.readyAt = performance.now();
-  resize();
-  start();
-
-  hostContainer._flexCarouselCleanup = () => {
-    alive = false;
-    visible = false;
-    cancelAnimationFrame(raf);
-    resizeObserver.disconnect();
-    intersectionObserver.disconnect();
-    container.removeEventListener("pointerdown", onPointerDown);
-    container.removeEventListener("pointermove", onPointerMove);
-    container.removeEventListener("pointerup", onPointerUp);
-    container.removeEventListener("pointerleave", onPointerLeave);
-    container.removeEventListener("pointercancel", onPointerCancel);
-    container.removeEventListener("wheel", onWheel);
-    container.removeEventListener("keydown", onKeyDown);
-    container.removeEventListener("focus", onFocus);
-    container.removeEventListener("blur", onBlur);
-    document.removeEventListener("visibilitychange", onVisibility);
-    slots.forEach((slot) => slot.dispose());
-    slots = [];
-    gl.deleteTexture(targetTex);
-    gl.deleteTexture(emptyTex);
-    gl.deleteFramebuffer(targetFbo);
-    gl.deleteProgram(cardGlProg);
-    gl.deleteProgram(lensGlProg);
-  };
-}
-
-/* ============================================================
-   🃏 FLAGSHIP FLEX CAROUSEL SHOWCASE
+   🃏 BOUNCE CARDS (React Bits Flagship Showcase Engine)
    ============================================================ */
 function initBounceCards(container) {
   if (!container) return;
 
-  const items = [
+  const cardsData = [
     {
-      src: "assets/UTCC.jpg",
-      alt: "UTCC AI Hackathon 2026 Grand Winner",
+      id: "hackathon",
+      tag: "1st Place Champion",
+      icon: "🏆",
       title: "UTCC AI Hackathon 2026",
-      subtitle: "1st Place Grand Champion • Hydrological AI"
+      desc: "National Grand Champion award (20,000 THB). Hydrological AI predictive flood intelligence platform.",
+      img: "assets/UTCC.jpg",
+      badge: "Grand Winner"
     },
     {
-      src: "assets/UTCCcer.jpg",
-      alt: "Edge AI Drone Flight Suite",
+      id: "drone",
+      tag: "Autonomous Drone",
+      icon: "🚁",
       title: "Edge AI Drone Flight Suite",
-      subtitle: "Real-Time YOLO Vision + ROS 2 Telemetry"
+      desc: "Real-time YOLO object detection with ROS 2 flight controllers for low-latency spatial mapping.",
+      img: "assets/UTCCcer.jpg",
+      badge: "Edge Vision"
     },
     {
-      src: "assets/cer-2.jpg",
-      alt: "Roblox MMO RPG Framework",
+      id: "roblox",
+      tag: "Metaverse Engine",
+      icon: "🎮",
       title: "Roblox MMO RPG Framework",
-      subtitle: "Multiplayer Combat VFX & Server Authority"
+      desc: "Distributed client-server multiplayer action game with procedural quests and custom combat VFX.",
+      img: "assets/cer-2.jpg",
+      badge: "Game Systems"
     },
     {
-      src: "assets2/17-1.png",
-      alt: "Autonomous Agent Orchestrator",
+      id: "copilot",
+      tag: "Multi-Agent AI",
+      icon: "🤖",
       title: "Autonomous Agent Orchestrator",
-      subtitle: "Multi-Agent LangChain + Cloud Dataverse"
+      desc: "LangChain tool-calling agents connected to Microsoft Dataverse cloud databases.",
+      img: "assets2/17-1.png",
+      badge: "Enterprise AI"
     },
     {
-      src: "assets/myface.jpg",
-      alt: "New JA Innovation Studio",
+      id: "identity",
+      tag: "Core Creator",
+      icon: "⚡",
       title: "New JA Innovation Studio",
-      subtitle: "Full-Stack AI & Creative WebGL Engineering"
-    },
-    {
-      src: "assets2/16-2.png",
-      alt: "National Robotics & Coding Showcase",
-      title: "Robotics & Embedded Systems",
-      subtitle: "Hardware-in-the-Loop Sensor Fusion"
-    },
-    {
-      src: "assets2/17-2.png",
-      alt: "Enterprise AI Architecture",
-      title: "Cloud AI Pipeline",
-      subtitle: "High-Throughput Inference & Security"
+      desc: "Full-Stack production web architectures, WebGL shaders, security tokens, and responsive UI.",
+      img: "assets/myface.jpg",
+      badge: "Creator Creed"
     }
   ];
 
-  initFlexCarousel(container, {
-    items,
-    preset: "liquid",
-    intro: "rise",
-    cardHeight: 0.5,
-    gap: 12,
-    squeeze: 0.2,
-    focusOnClick: true,
-    captions: true,
-    fit: "natural",
-    radius: 0,
-    lensWidth: 0.74,
-    lensHeight: 1.18,
-    tilt: 62,
-    roundness: 1,
-    bend: 0.34,
-    reach: 0.38,
-    curl: "twist",
-    dispersion: 0.45,
-    liquid: 0,
-    followCursor: false,
-    autoplay: false,
-    interval: 4,
-    captureWheel: true
+  container.innerHTML = `
+    <div class="bounce-cards-deck" id="bounceCardsDeck">
+      ${cardsData.map((c, i) => `
+        <div class="bounce-card" data-idx="${i}">
+          <div class="bounce-card-header">
+            <span class="bounce-card-tag">${c.tag}</span>
+            <span class="bounce-card-icon">${c.icon}</span>
+          </div>
+          <img class="bounce-card-img" src="${c.img}" alt="${c.title}">
+          <div class="bounce-card-body">
+            <h3>${c.title}</h3>
+            <p>${c.desc}</p>
+          </div>
+          <div class="bounce-card-footer">
+            <span>${c.badge}</span>
+            <span>Inspect ➔</span>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  const cards = container.querySelectorAll(".bounce-card");
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const targetProject = document.querySelector("#projects");
+      if (targetProject) targetProject.scrollIntoView({ behavior: "smooth" });
+    });
   });
 }
 
@@ -2247,566 +937,6 @@ function initCountUp() {
   }, { threshold: 0.2 });
 
   elements.forEach(el => observer.observe(el));
-}
-
-/* ============================================================
-   🕸️ WEB THREADS (React Bits Background Engine)
-   High-Performance Neural Network Waveform & Filament Synthesis
-   ============================================================ */
-function initWebThreads() {
-  const canvas = document.querySelector("#webThreadsCanvas");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
-
-  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (isReduced) return;
-
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
-
-  let mouseX = width / 2;
-  let mouseY = height / 2;
-  let targetMouseX = mouseX;
-  let targetMouseY = mouseY;
-
-  window.addEventListener("mousemove", (e) => {
-    targetMouseX = e.clientX;
-    targetMouseY = e.clientY;
-  }, { passive: true });
-
-  window.addEventListener("resize", () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  }, { passive: true });
-
-  const threadCount = 20;
-  const threads = [];
-  const colors = [
-    "rgba(16, 185, 129, 0.45)",  // Emerald
-    "rgba(56, 189, 248, 0.45)",  // Cyan
-    "rgba(192, 132, 252, 0.4)",  // Purple
-    "rgba(99, 102, 241, 0.4)"    // Indigo
-  ];
-
-  for (let i = 0; i < threadCount; i++) {
-    threads.push({
-      baseY: (height / (threadCount + 1)) * (i + 1),
-      amplitude: 16 + Math.random() * 32,
-      frequency: 0.0016 + Math.random() * 0.002,
-      speed: 0.001 + Math.random() * 0.0015,
-      phase: Math.random() * Math.PI * 2,
-      color: colors[i % colors.length],
-      lineWidth: 1 + (i % 3) * 0.5,
-      nodes: [
-        { progress: Math.random(), speed: 0.0012 + Math.random() * 0.0018 },
-        { progress: Math.random(), speed: 0.0012 + Math.random() * 0.0018 }
-      ]
-    });
-  }
-
-  let time = 0;
-  let isRunning = true;
-
-  document.addEventListener("visibilitychange", () => {
-    isRunning = !document.hidden;
-    if (isRunning) requestAnimationFrame(draw);
-  });
-
-  function draw() {
-    if (!isRunning) return;
-    time += 1;
-
-    // Smooth mouse interpolation
-    mouseX += (targetMouseX - mouseX) * 0.05;
-    mouseY += (targetMouseY - mouseY) * 0.05;
-
-    ctx.clearRect(0, 0, width, height);
-
-    threads.forEach((t) => {
-      ctx.beginPath();
-      ctx.lineWidth = t.lineWidth;
-      ctx.strokeStyle = t.color;
-
-      const step = 20;
-      let started = false;
-
-      for (let x = 0; x <= width + step; x += step) {
-        // Multi-frequency sinusoidal wave
-        const wave1 = Math.sin(x * t.frequency + time * t.speed + t.phase) * t.amplitude;
-        const wave2 = Math.cos(x * t.frequency * 1.5 - time * t.speed * 0.8) * (t.amplitude * 0.4);
-
-        // Mouse pinch / magnetic displacement
-        const dx = x - mouseX;
-        const distSq = dx * dx;
-        const sigmaSq = 160000; // ~400px radius
-        const influence = Math.exp(-distSq / sigmaSq);
-        const mouseLift = (mouseY - t.baseY) * influence * 0.35;
-
-        const y = t.baseY + wave1 + wave2 + mouseLift;
-
-        if (!started) {
-          ctx.moveTo(x, y);
-          started = true;
-        } else {
-          ctx.lineTo(x, y);
-        }
-      }
-      ctx.stroke();
-
-      // Render glowing nodes traversing along thread
-      t.nodes.forEach((node) => {
-        node.progress = (node.progress + node.speed) % 1;
-        const nx = node.progress * width;
-        const nWave = Math.sin(nx * t.frequency + time * t.speed + t.phase) * t.amplitude;
-        const ndx = nx - mouseX;
-        const nInfluence = Math.exp(-(ndx * ndx) / 160000);
-        const ny = t.baseY + nWave + (mouseY - t.baseY) * nInfluence * 0.35;
-
-        ctx.fillStyle = "#ffffff";
-        ctx.shadowColor = t.color;
-        ctx.shadowBlur = 10;
-        ctx.beginPath();
-        ctx.arc(nx, ny, 2.5, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      });
-    });
-
-    requestAnimationFrame(draw);
-  }
-
-  requestAnimationFrame(draw);
-}
-
-/* ============================================================
-   💬 PROMPT BAR & THOUGHT LINE (React Bits Micro Engines)
-   Interactive AI Prompt Interface with Verified Knowledge Responses
-   ============================================================ */
-function initPromptBar() {
-  const container = document.querySelector("#heroPromptBar");
-  if (!container) return;
-
-  const input = container.querySelector("#promptInput");
-  const sendBtn = container.querySelector("#promptSendBtn");
-  const modelSelector = container.querySelector("#promptModelSelector");
-  const modelName = container.querySelector("#promptModelName");
-  const tokenCount = container.querySelector("#promptTokenCount");
-  const responseCard = container.querySelector("#promptResponseCard");
-  const pills = container.querySelectorAll(".prompt-pill-btn");
-
-  const models = [
-    "GPT-4o Omniscient",
-    "Claude 3.5 Sonnet",
-    "Gemini 1.5 Pro",
-    "DeepSeek V3"
-  ];
-  let currentModelIndex = 0;
-
-  if (modelSelector && modelName) {
-    modelSelector.addEventListener("click", () => {
-      currentModelIndex = (currentModelIndex + 1) % models.length;
-      modelName.textContent = models[currentModelIndex];
-      showToast(`Switched active AI reasoning engine to ${models[currentModelIndex]}`);
-    });
-  }
-
-  if (input && tokenCount) {
-    input.addEventListener("input", () => {
-      const len = input.value.trim().length;
-      tokenCount.textContent = Math.max(38, Math.round(38 + len * 1.3));
-    });
-  }
-
-  pills.forEach((pill) => {
-    pill.addEventListener("click", () => {
-      const promptText = pill.getAttribute("data-prompt");
-      if (promptText && input) {
-        input.value = promptText;
-        handlePromptSubmit(promptText);
-      }
-    });
-  });
-
-  if (sendBtn) {
-    sendBtn.addEventListener("click", () => {
-      if (input && input.value.trim()) {
-        handlePromptSubmit(input.value.trim());
-      }
-    });
-  }
-
-  if (input) {
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && input.value.trim()) {
-        e.preventDefault();
-        handlePromptSubmit(input.value.trim());
-      }
-    });
-  }
-
-  function handlePromptSubmit(promptText) {
-    if (!responseCard) return;
-    const model = models[currentModelIndex];
-
-    // Charging & Thinking Animation
-    if (sendBtn) sendBtn.classList.add("is-thinking");
-    responseCard.hidden = false;
-    responseCard.innerHTML = `
-      <div class="thought-line" id="promptThoughtLine">
-        <div class="thought-line-header cursor-target">
-          <div class="thought-line-left">
-            <span class="thought-sparkle">✦</span>
-            <strong>Reasoning with ${model}</strong>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span class="thought-timer-badge" id="thoughtTimer">Thinking 0.0s</span>
-            <svg class="thought-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-        </div>
-        <div class="thought-steps-trace">
-          <div class="thought-step-item"><span class="step-num">[1/4]</span> Parsing prompt telemetry & context boundaries</div>
-          <div class="thought-step-item"><span class="step-num">[2/4]</span> Querying knowledge graph & project portfolio index</div>
-          <div class="thought-step-item"><span class="step-num">[3/4]</span> Extracting verified metrics, tech stacks & citations</div>
-          <div class="thought-step-item"><span class="step-num">[4/4]</span> Formulating synthesis with clickable navigation triggers</div>
-        </div>
-      </div>
-      <p style="color:var(--muted);font-style:italic;">Synthesizing response...</p>
-    `;
-
-    const thoughtLineEl = responseCard.querySelector("#promptThoughtLine");
-    const headerEl = responseCard.querySelector(".thought-line-header");
-    if (thoughtLineEl && headerEl) {
-      headerEl.addEventListener("click", () => {
-        thoughtLineEl.classList.toggle("is-open");
-      });
-    }
-
-    let elapsed = 0;
-    const timerInterval = setInterval(() => {
-      elapsed += 0.1;
-      const timerBadge = responseCard.querySelector("#thoughtTimer");
-      if (timerBadge) timerBadge.textContent = `Thinking ${elapsed.toFixed(1)}s`;
-    }, 100);
-
-    setTimeout(() => {
-      clearInterval(timerInterval);
-      if (sendBtn) sendBtn.classList.remove("is-thinking");
-
-      // Generate knowledge response
-      const answer = generateAiResponse(promptText);
-
-      responseCard.innerHTML = `
-        <div class="thought-line" id="promptThoughtLineDone">
-          <div class="thought-line-header cursor-target" title="Click to inspect thought trace">
-            <div class="thought-line-left">
-              <span class="thought-sparkle">✦</span>
-              <strong>Thought for ${elapsed.toFixed(1)}s (${model})</strong>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <span class="thought-timer-badge">4 steps verified</span>
-              <svg class="thought-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-          </div>
-          <div class="thought-steps-trace">
-            <div class="thought-step-item"><span class="step-num">[1/4]</span> Verified prompt against New JA engineering corpus</div>
-            <div class="thought-step-item"><span class="step-num">[2/4]</span> Matched UTCC AI Hackathon, Drone Vision & Full-Stack nodes</div>
-            <div class="thought-step-item"><span class="step-num">[3/4]</span> Retrieved telemetry & project artifacts</div>
-            <div class="thought-step-item"><span class="step-num">[4/4]</span> Generated responsive interactive card</div>
-          </div>
-        </div>
-        <h4>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-          ${answer.title}
-        </h4>
-        <p>${answer.text}</p>
-        <div class="prompt-response-actions">
-          ${answer.actions.map(a => `<a class="solid-btn compact cursor-target" href="${a.href}">${a.label}</a>`).join("")}
-        </div>
-      `;
-
-      const doneThoughtLine = responseCard.querySelector("#promptThoughtLineDone");
-      const doneHeader = responseCard.querySelector(".thought-line-header");
-      if (doneThoughtLine && doneHeader) {
-        doneHeader.addEventListener("click", () => {
-          doneThoughtLine.classList.toggle("is-open");
-        });
-      }
-    }, 1100);
-  }
-
-  function generateAiResponse(query) {
-    const q = query.toLowerCase();
-    const isThai = state.lang === "th";
-
-    if (q.includes("hackathon") || q.includes("utcc") || q.includes("water") || q.includes("flood") || q.includes("แชมป์") || q.includes("น้ำท่วม")) {
-      return {
-        title: isThai ? "ผลงานชนะเลิศอันดับ 1 ประเทศไทย — UTCC AI Hackathon 2026" : "National AI Champion — UTCC AI Hackathon 2026",
-        text: isThai
-          ? "ทีม MANITA โดย New JA คว้ารางวัลชนะเลิศอันดับ 1 ของประเทศ (ทุนการศึกษา 20,000 บาท) จากการออกแบบระบบ AI พยากรณ์น้ำท่วมและบริหารจัดการน้ำอัจฉริยะแบบเรียลไทม์ ผสานโมเดลภูมิประเทศและเครือข่ายเซนเซอร์ IoT"
-          : "Team MANITA led by New JA won 1st Place Grand Champion (20,000 THB) at the UTCC AI Hackathon 2026. The solution integrates IoT telemetry, hydrological rainfall modeling, and real-time early evacuation alert dispatch.",
-        actions: [
-          { label: isThai ? "ดูผลงานเด่น" : "View Flagship Spotlight", href: "#flagship" },
-          { label: isThai ? "ดูเกียรติบัตร" : "Inspect Certificate", href: "#certificates" }
-        ]
-      };
-    }
-
-    if (q.includes("drone") || q.includes("vision") || q.includes("yolo") || q.includes("ros") || q.includes("โดรน") || q.includes("หุ่นยนต์")) {
-      return {
-        title: isThai ? "ระบบควบคุมโดรนอัจฉริยะ & Edge Computer Vision (ROS 2 + YOLO)" : "Autonomous Drone Vision & Telemetry Platform",
-        text: isThai
-          ? "แพลตฟอร์มการควบคุมโดรนระยะไกลและประมวลผล Computer Vision แบบเรียลไทม์บน Edge Device (YOLO) พร้อมระบบนำทาง ROS 2 และสตรีมมิง Telemetry ความหน่วงต่ำผ่าน WebSockets"
-          : "A high-performance autonomous drone teleoperation and edge vision platform combining YOLO object detection with ROS 2 flight controllers for real-time spatial navigation and sub-50ms telemetry streaming.",
-        actions: [
-          { label: isThai ? "ดูโปรเจกต์โดรน" : "Inspect Drone Project", href: "#projects" },
-          { label: isThai ? "ทักษะ Robotics" : "View Skills Stack", href: "#skills" }
-        ]
-      };
-    }
-
-    if (q.includes("workflow") || q.includes("กระบวนการ") || q.includes("how") || q.includes("work")) {
-      return {
-        title: isThai ? "กระบวนการพัฒนาด้วย AI — จากแนวคิดสู่ระบบจริง" : "AI Engineering Workflow — Thought to Production",
-        text: isThai
-          ? "New JA ใช้กระบวนการ 6 ขั้นตอน: ตั้งโจทย์อย่างมีโครงสร้าง (Prompt Architecture) -> วางระบบ Multi-Agent -> สร้างโมเดล Edge AI/YOLO -> สังเคราะห์และดีบักโค้ด -> ทดสอบความแม่นยำ -> Deploy ระบบจริง"
-          : "A structured 6-stage lifecycle: Problem Framing & Prompting -> Multi-Agent Reasoning -> Edge AI / Neural Models -> Polyglot Code Synthesis -> Telemetry Benchmarking -> Production Deployment.",
-        actions: [
-          { label: isThai ? "สำรวจ AI Workflow" : "Explore AI Workflow", href: "#ai-workflow" },
-          { label: isThai ? "ดูทักษะ AI" : "Examine AI Skills", href: "#skills" }
-        ]
-      };
-    }
-
-    if (q.includes("resume") || q.includes("contact") || q.includes("จ้าง") || q.includes("เรซูเม่") || q.includes("ติดต่อ")) {
-      return {
-        title: isThai ? "ข้อมูลติดต่อ & ดาวน์โหลดเรซูเม่" : "Contact & Official Resume",
-        text: isThai
-          ? "คุณสามารถดาวน์โหลดเอกสารประวัติการทำงาน (PDF) หรือติดต่อ New JA ได้โดยตรงผ่าน Gmail, Line, Facebook หรือ GitHub"
-          : "You can download New JA's official resume (PDF) or transmit a message directly via Gmail, Line, or GitHub.",
-        actions: [
-          { label: isThai ? "ดาวน์โหลด Resume (PDF)" : "Download Resume (PDF)", href: "assets/resume.pdf" },
-          { label: isThai ? "ติดต่อ New JA" : "Transmission Channel", href: "#contact" }
-        ]
-      };
-    }
-
-    // Default / All AI projects
-    return {
-      title: isThai ? "ระบบปัญญาประดิษฐ์และโปรเจกต์ของ New JA" : "New JA's Intelligence Systems & Works",
-      text: isThai
-        ? "โปรเจกต์ครอบคลุมระบบ AI พยากรณ์น้ำท่วมชนะเลิศระดับประเทศ, ระบบควบคุมโดรนอัตโนมัติด้วย ROS 2 & YOLO, เอนจินเกม Roblox MMO RPG และสถาปัตยกรรมเว็บ Full-Stack พร้อมระบบ Admin Control Room"
-        : "Projects span the National Champion AI Flood Prediction System, Autonomous Drone Edge Vision, large-scale Roblox MMO RPG networking, and full-stack cyber architectures with secure admin telemetry.",
-      actions: [
-        { label: isThai ? "ดูผลงานทั้งหมด" : "Explore All Works", href: "#projects" },
-        { label: isThai ? "สำรวจ AI Workflow" : "Explore AI Workflow", href: "#ai-workflow" }
-      ]
-    };
-  }
-}
-
-/* ============================================================
-   🔤 REACT BITS TEXT ANIMATION SYSTEM
-   (SplitText, DecryptedText, ScrollReveal, ShinyText)
-   ============================================================ */
-function initTextAnimations() {
-  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (isReduced) return;
-
-  // Level 1: Hero SplitText
-  const headline = document.querySelector("#heroHeadline");
-  if (headline) {
-    const lines = headline.querySelectorAll(".split-line");
-    lines.forEach((line) => {
-      const text = line.textContent;
-      line.innerHTML = text
-        .split("")
-        .map((char, i) => {
-          if (char === " ") return " ";
-          return `<span class="split-char" style="transition-delay:${i * 28}ms">${char}</span>`;
-        })
-        .join("");
-    });
-
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        headline.querySelectorAll(".split-char").forEach((c) => c.classList.add("is-revealed"));
-      }, 150);
-    });
-  }
-
-  // Level 1: DecryptedText (AI status kicker)
-  const statusEl = document.querySelector("#aiStatusText");
-  if (statusEl) {
-    const originalText = statusEl.textContent;
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_#@%&*";
-    let iteration = 0;
-    const interval = setInterval(() => {
-      statusEl.textContent = originalText
-        .split("")
-        .map((char, index) => {
-          if (char === " " || char === "·") return char;
-          if (index < iteration) return originalText[index];
-          return chars[Math.floor(Math.random() * chars.length)];
-        })
-        .join("");
-
-      if (iteration >= originalText.length) {
-        clearInterval(interval);
-      }
-      iteration += 1;
-    }, 28);
-  }
-
-  // Level 2: Section Headings Scroll Reveal & True Focus
-  const sectionHeadings = document.querySelectorAll(".section-head h2, .section-head .kicker");
-  const headingObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("text-scroll-reveal", "is-focused");
-        headingObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  sectionHeadings.forEach((h) => {
-    h.classList.add("text-scroll-reveal");
-    headingObserver.observe(h);
-  });
-}
-
-/* ============================================================
-   🔦 SPOTLIGHT CARD (React Bits Component Engine)
-   Radial Luminescence & Proximity Illumination Tracking
-   ============================================================ */
-function initSpotlightCards() {
-  const cards = document.querySelectorAll(".spotlight-card");
-  cards.forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
-    });
-  });
-}
-
-/* ============================================================
-   ⭐ PEEK RATING (React Bits Micro Engine)
-   Wave Lift Dynamics, Floating Tooltip & Commit Pop Animation
-   ============================================================ */
-function initPeekRating() {
-  const containers = document.querySelectorAll(".peek-rating-container");
-
-  const ratingLabels = {
-    en: [
-      "1.0 · Functional Prototype",
-      "2.0 · Solid Architecture",
-      "3.0 · High Performance",
-      "4.0 · Production Grade",
-      "5.0 · National Champion / Masterpiece"
-    ],
-    th: [
-      "1.0 · ต้นแบบใช้งานได้",
-      "2.0 · สถาปัตยกรรมมั่นคง",
-      "3.0 · ประสิทธิภาพสูง",
-      "4.0 · ระดับโปรดักชัน",
-      "5.0 · แชมป์ระดับประเทศ / ยอดเยี่ยม"
-    ]
-  };
-
-  containers.forEach((container) => {
-    if (container._hasPeekInit) return;
-    container._hasPeekInit = true;
-
-    const projectId = container.dataset.project;
-    const starsRow = container.querySelector(".peek-stars-row");
-    const stars = container.querySelectorAll(".peek-star");
-    const tooltip = container.querySelector(".peek-rating-tooltip");
-    const scoreLabel = container.querySelector(".peek-rating-score");
-
-    let currentScore = parseFloat(container.dataset.score || "5.0");
-
-    function updateFilledStars(score) {
-      stars.forEach((star, idx) => {
-        star.classList.toggle("is-filled", idx < Math.round(score));
-      });
-      if (scoreLabel) scoreLabel.textContent = score.toFixed(1);
-    }
-
-    updateFilledStars(currentScore);
-
-    if (!starsRow) return;
-
-    starsRow.addEventListener("mousemove", (e) => {
-      const rect = starsRow.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const rowWidth = rect.width;
-      const hoveredIndex = Math.min(4, Math.max(0, Math.floor((mouseX / rowWidth) * 5)));
-      const isThai = state.lang === "th";
-      const label = (isThai ? ratingLabels.th : ratingLabels.en)[hoveredIndex];
-
-      // Wave lift computation for each star
-      stars.forEach((star, i) => {
-        const starCenter = (i + 0.5) * (rowWidth / 5);
-        const dist = Math.abs(mouseX - starCenter);
-        const maxDist = rowWidth * 0.45;
-        const lift = Math.max(0, 1 - dist / maxDist);
-        star.style.setProperty("--lift", lift.toFixed(2));
-      });
-
-      if (tooltip) {
-        tooltip.textContent = label;
-        tooltip.style.left = `${mouseX}px`;
-        tooltip.style.opacity = "1";
-      }
-    });
-
-    starsRow.addEventListener("mouseleave", () => {
-      stars.forEach((star) => star.style.setProperty("--lift", "0"));
-      if (tooltip) tooltip.style.opacity = "0";
-      updateFilledStars(currentScore);
-    });
-
-    stars.forEach((star, index) => {
-      star.addEventListener("click", (e) => {
-        e.stopPropagation();
-        currentScore = index + 1;
-        updateFilledStars(currentScore);
-        container.dataset.score = currentScore.toString();
-
-        // Pop particle animation
-        star.style.transform = "scale(1.55)";
-        setTimeout(() => {
-          star.style.transform = "";
-        }, 220);
-
-        const isThai = state.lang === "th";
-        showToast(isThai ? `บันทึกคะแนน ${currentScore}.0 ดาวแล้ว!` : `Rated ${currentScore}.0 stars!`);
-
-        // If authenticated and not already liked, automatically trigger like for the project
-        if (projectId && !state.likedProjectIds.includes(projectId) && session) {
-          handleLike(projectId);
-        }
-      });
-    });
-  });
-}
-
-/* ============================================================
-   ✦ LIFECYCLE THOUGHT LINE (React Bits Micro Engine)
-   Expandable AI Reasoning Trace for Workflow Pipeline
-   ============================================================ */
-function initLifecycleThoughtLine() {
-  const line = document.querySelector("#lifecycleThoughtLine");
-  if (!line) return;
-  const header = line.querySelector(".thought-line-header");
-  if (header) {
-    header.addEventListener("click", () => {
-      line.classList.toggle("is-open");
-    });
-  }
 }
 
 /* ============================================================
@@ -3179,7 +1309,7 @@ class DynamicCosmicEngine {
     this.container = document.querySelector("#dynamicBgContainer");
     this.canvasA = document.querySelector("#bgCanvasA");
     this.canvasB = document.querySelector("#bgCanvasB");
-    if (!this.container || !this.canvasA || !this.canvasB) return;
+    if (!this.container || !this.canvasA || !this.canvasB || true) return; // Clean mode: cosmic canvases disabled
 
     this.ctxA = this.canvasA.getContext("2d");
     this.ctxB = this.canvasB.getContext("2d");
@@ -3319,20 +1449,7 @@ class DynamicCosmicEngine {
   }
 
   startLoop() {
-    const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (isReduced) return;
-
-    let isRunning = true;
-    document.addEventListener("visibilitychange", () => {
-      isRunning = !document.hidden;
-      if (isRunning) {
-        this.lastTime = performance.now();
-        requestAnimationFrame(render);
-      }
-    });
-
     const render = (now) => {
-      if (!isRunning) return;
       const delta = Math.min((now - this.lastTime) / 1000, 0.1);
       this.lastTime = now;
       this.time += delta;
@@ -3428,22 +1545,6 @@ function renderDossiers() {
    RENDER CORE SECTIONS (Projects, Skills, Story, Certs)
    ============================================================ */
 let likesState = {};
-let customProjects = [];
-
-async function loadCustomProjects() {
-  try {
-    const res = await api("/api/projects");
-    if (res && Array.isArray(res.projects)) {
-      customProjects = res.projects;
-    }
-  } catch {
-    try {
-      const stored = localStorage.getItem("newja_custom_projects");
-      if (stored) customProjects = JSON.parse(stored);
-    } catch {}
-  }
-  renderProjects();
-}
 
 async function loadLikes() {
   try {
@@ -3458,49 +1559,24 @@ async function loadLikes() {
 function renderProjects() {
   const container = document.querySelector("#projectList");
   if (!container) return;
-  const staticList = content().projects || [];
-  const list = [...customProjects, ...staticList];
-  const isThai = state.lang === "th";
+  const list = content().projects || [];
 
   container.innerHTML = list.map((p) => {
     const count = likesState[p.id] || 0;
     const isLiked = state.likedProjectIds.includes(p.id);
-    const score = p.id === "hackathon-manita" ? 5.0 : (p.id === "drone-autonomy" ? 4.9 : 4.8);
-    const isCustom = customProjects.some(cp => cp.id === p.id);
-    const tags = Array.isArray(p.tags) ? p.tags : (typeof p.tags === "string" ? p.tags.split(",") : []);
 
     return `
-      <article class="project-card spotlight-card border-glow cursor-target" id="project-${p.id}">
+      <article class="project-card border-glow cursor-target" id="project-${p.id}">
         <div class="project-card-inner">
           <div class="project-card-image-wrap">
-            <img src="${p.image || 'assets/myface.jpg'}" alt="${p.title}" loading="lazy">
-            <span class="badge-status online" style="position:absolute;top:12px;right:12px;">${p.status || p.category || 'Live'}</span>
-            ${isCustom ? `<span class="badge-status" style="position:absolute;top:12px;left:12px;background:rgba(244,114,182,0.2);border-color:var(--pink);color:var(--pink);font-weight:700;">${isThai ? '⭐ ผลงานของคุณ' : '⭐ Your Project'}</span>` : ''}
+            <img src="${p.image || 'assets/myface.jpg'}" alt="${p.title}">
           </div>
-          <span class="tag" style="align-self:flex-start; margin-bottom:8px; color:var(--emerald-bright); border-color:rgba(16,185,129,0.35); background:rgba(16,185,129,0.08);">${p.badge || p.category || 'Featured'}</span>
-          <h3 class="project-card-title shiny-text">${p.title}</h3>
-          <p class="project-card-desc">${p.body || p.description || ''}</p>
-
+          <span class="tag" style="align-self:flex-start; margin-bottom:10px; color:var(--cyan); border-color:rgba(56,189,248,0.35);">${p.badge}</span>
+          <h3 class="project-card-title">${p.title}</h3>
+          <p class="project-card-desc">${p.body}</p>
           <div class="project-tags">
-            ${tags.map(t => `<span class="tag">${String(t).trim()}</span>`).join("")}
+            ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
           </div>
-
-          <!-- React Bits Peek Rating Micro Component -->
-          <div class="project-rating-wrap" style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,0.06);">
-            <span style="font-size:0.75rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">${isThai ? "การประเมิน" : "Rating"}:</span>
-            <div class="peek-rating-container cursor-target" data-project="${p.id}" data-score="${score}">
-              <div class="peek-rating-tooltip">${score.toFixed(1)} · ${isThai ? "คุณภาพยอดเยี่ยม" : "High Quality"}</div>
-              <div class="peek-stars-row">
-                <span class="peek-star cursor-target">★</span>
-                <span class="peek-star cursor-target">★</span>
-                <span class="peek-star cursor-target">★</span>
-                <span class="peek-star cursor-target">★</span>
-                <span class="peek-star cursor-target">★</span>
-              </div>
-              <span class="peek-rating-score">${score.toFixed(1)}</span>
-            </div>
-          </div>
-
           <div class="project-card-footer">
             <button class="like-btn ${isLiked ? 'liked' : ''} cursor-target" data-like="${p.id}" type="button" aria-label="Like ${p.title}">
               <span class="like-heart">${isLiked ? '❤️' : '🤍'}</span>
@@ -3510,11 +1586,7 @@ function renderProjects() {
                 </span>
               </div>
             </button>
-            <div style="display:flex;gap:8px;align-items:center;">
-              ${isCustom ? `<button class="ghost-btn compact cursor-target" data-delete-project="${p.id}" type="button" title="${isThai ? 'ลบผลงาน' : 'Delete'}" style="padding:6px 10px;font-size:0.76rem;color:#f87171;border-color:rgba(248,113,113,0.3);">🗑️</button>` : ''}
-              ${p.link ? `<a href="${p.link}" target="_blank" rel="noreferrer" class="ghost-btn compact cursor-target" style="padding:6px 12px;font-size:0.76rem;">${isThai ? 'เปิดดู' : 'Link'}</a>` : `<a href="https://github.com/Newwee" target="_blank" rel="noreferrer" class="ghost-btn compact cursor-target" style="padding:6px 12px;font-size:0.76rem;">GitHub</a>`}
-              <a href="#contact" class="solid-btn compact cursor-target" style="padding:6px 12px;font-size:0.76rem;">${isThai ? 'สอบถาม' : 'Inquire'}</a>
-            </div>
+            <span style="font-size:12px; font-weight:700; color:var(--purple);">${p.status}</span>
           </div>
         </div>
       </article>
@@ -3522,8 +1594,6 @@ function renderProjects() {
   }).join("");
 
   initBorderGlow();
-  initSpotlightCards();
-  initPeekRating();
 }
 
 async function handleLike(projectId) {
@@ -3533,16 +1603,18 @@ async function handleLike(projectId) {
     return;
   }
 
+  const isLiked = state.likedProjectIds.includes(projectId);
+  const method = isLiked ? "DELETE" : "POST";
+
   try {
-    const res = await api(`/api/projects/${projectId}/like`, { method: "POST" });
-    if (res.liked) {
-      if (!state.likedProjectIds.includes(projectId)) state.likedProjectIds.push(projectId);
-      likesState[projectId] = (likesState[projectId] || 0) + 1;
-      showToast(t().toast.liked);
-    } else {
+    const res = await api(`/api/projects/${projectId}/like`, { method });
+    likesState[projectId] = res.likes;
+    if (isLiked) {
       state.likedProjectIds = state.likedProjectIds.filter(id => id !== projectId);
-      likesState[projectId] = Math.max(0, (likesState[projectId] || 1) - 1);
       showToast(t().toast.unliked);
+    } else {
+      state.likedProjectIds.push(projectId);
+      showToast(t().toast.liked);
     }
     renderProjects();
   } catch (err) {
@@ -3599,38 +1671,15 @@ function renderCertificates() {
   const container = document.querySelector("#certificateList");
   if (!container) return;
 
-  const items = list.map((c) => ({
-    src: c.image,
-    alt: c.title,
-    title: c.title,
-    subtitle: c.body
-  }));
-
-  initFlexCarousel(container, {
-    items,
-    preset: "liquid",
-    intro: "rise",
-    cardHeight: 0.5,
-    gap: 12,
-    squeeze: 0.2,
-    focusOnClick: true,
-    captions: true,
-    fit: "natural",
-    radius: 0,
-    lensWidth: 0.74,
-    lensHeight: 1.18,
-    tilt: 62,
-    roundness: 1,
-    bend: 0.34,
-    reach: 0.38,
-    curl: "twist",
-    dispersion: 0.45,
-    liquid: 0,
-    followCursor: false,
-    autoplay: false,
-    interval: 4,
-    captureWheel: true
-  });
+  container.innerHTML = list.map(c => `
+    <div class="cert-card cursor-target" onclick="openCert('${c.image}', '${c.title.replace(/'/g, "\\'")}', '${c.body.replace(/'/g, "\\'")}')">
+      <img src="${c.image}" alt="${c.title}">
+      <div class="cert-card-body">
+        <h3>${c.title}</h3>
+        <p>${c.body}</p>
+      </div>
+    </div>
+  `).join("");
 }
 
 window.openCert = function(src, title, body) {
@@ -3674,6 +1723,9 @@ function setLanguage(newLang) {
   renderProjects();
   renderCertificates();
   initBounceCards(document.querySelector("#bounceCardsContainer"));
+  if (typeof updateModeButtonUI === "function") {
+    updateModeButtonUI(currentMode);
+  }
 }
 
 /* ============================================================
@@ -3841,131 +1893,11 @@ authForm?.addEventListener("submit", handleAuth);
 document.querySelector("#projectList")?.addEventListener("click", (e) => {
   const btn = e.target.closest("[data-like]");
   if (btn) handleLike(btn.dataset.like);
-
-  const delBtn = e.target.closest("[data-delete-project]");
-  if (delBtn) handleDeleteProject(delBtn.dataset.deleteProject);
 });
-
-/* Add Project Modal & Form Handling */
-const addProjectModal = document.querySelector("#addProjectModal");
-const openAddProjectBtn = document.querySelector("#openAddProjectBtn");
-const closeAddProjectBtn = document.querySelector("#closeAddProjectBtn");
-const addProjectForm = document.querySelector("#addProjectForm");
-
-openAddProjectBtn?.addEventListener("click", () => {
-  addProjectModal?.showModal();
-});
-
-closeAddProjectBtn?.addEventListener("click", () => {
-  addProjectModal?.close();
-});
-
-// Image preset quick buttons
-document.querySelectorAll(".img-preset-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const input = document.querySelector("#newProjectImage");
-    if (input && btn.dataset.src) {
-      input.value = btn.dataset.src;
-      showToast(state.lang === "th" ? "เลือกรูปภาพตัวอย่างแล้ว" : "Sample image selected");
-    }
-  });
-});
-
-async function handleAddProject(e) {
-  e.preventDefault();
-  const isThai = state.lang === "th";
-  const statusEl = document.querySelector("#addProjectStatus");
-  if (statusEl) statusEl.textContent = isThai ? "กำลังบันทึก..." : "Saving...";
-
-  const title = document.querySelector("#newProjectTitle")?.value.trim() || "";
-  const category = document.querySelector("#newProjectCategory")?.value || "AI & Software";
-  const badge = document.querySelector("#newProjectBadge")?.value.trim() || category;
-  const body = document.querySelector("#newProjectDesc")?.value.trim() || "";
-  const image = document.querySelector("#newProjectImage")?.value.trim() || "assets/UTCC.jpg";
-  const tagsStr = document.querySelector("#newProjectTags")?.value.trim() || "";
-  const link = document.querySelector("#newProjectLink")?.value.trim() || "";
-  const tags = tagsStr ? tagsStr.split(",").map(s => s.trim()).filter(Boolean) : [category];
-
-  let createdProject = null;
-  try {
-    const res = await api("/api/projects", {
-      method: "POST",
-      body: JSON.stringify({ title, category, badge, body, image, tags, link })
-    });
-    if (res && res.project) {
-      createdProject = res.project;
-    }
-  } catch (err) {
-    console.warn("API save error, fallback to local storage:", err);
-  }
-
-  if (!createdProject) {
-    const id = "custom-" + Date.now().toString(36);
-    createdProject = { id, title, category, badge, body, image, tags, link, created_at: new Date().toISOString() };
-  }
-
-  customProjects.unshift(createdProject);
-  try {
-    localStorage.setItem("newja_custom_projects", JSON.stringify(customProjects));
-  } catch {}
-
-  renderProjects();
-
-  if (addProjectModal) addProjectModal.close();
-  addProjectForm?.reset();
-  if (statusEl) statusEl.textContent = "";
-
-  showToast(isThai ? "🎉 เพิ่มผลงานของคุณเรียบร้อยแล้ว!" : "🎉 Project added successfully!");
-
-  setTimeout(() => {
-    const card = document.querySelector(`#project-${createdProject.id}`);
-    if (card) {
-      card.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, 200);
-}
-
-async function handleDeleteProject(projectId) {
-  const isThai = state.lang === "th";
-  if (!confirm(isThai ? "คุณต้องการลบผลงานนี้หรือไม่?" : "Delete this project?")) return;
-
-  try {
-    await api(`/api/projects/${projectId}`, { method: "DELETE" });
-  } catch (e) {
-    console.warn("API delete error:", e);
-  }
-
-  customProjects = customProjects.filter(p => p.id !== projectId);
-  try {
-    localStorage.setItem("newja_custom_projects", JSON.stringify(customProjects));
-  } catch {}
-
-  renderProjects();
-  showToast(isThai ? "ลบผลงานเรียบร้อยแล้ว" : "Project deleted");
-}
-
-addProjectForm?.addEventListener("submit", handleAddProject);
 
 document.querySelector("#langToggleBtn")?.addEventListener("click", () => {
   setLanguage(state.lang === "th" ? "en" : "th");
 });
-
-document.querySelector(".mobile-lang-btn")?.addEventListener("click", () => {
-  setLanguage(state.lang === "th" ? "en" : "th");
-});
-
-const navToggleBtn = document.querySelector("#navToggleBtn");
-const mainNav = document.querySelector(".topbar .nav");
-if (navToggleBtn && mainNav) {
-  navToggleBtn.addEventListener("click", () => {
-    mainNav.classList.toggle("is-open");
-  });
-  mainNav.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      mainNav.classList.remove("is-open");
-    });
-  });
-}
 
 document.querySelector(".resume-btn")?.addEventListener("click", (e) => {
   showToast(state.lang === "th" ? "ติดต่อขอรับ Resume ฉบับเต็มได้ที่ pongsaopataradanai@gmail.com" : "Request full Resume via pongsaopataradanai@gmail.com");
@@ -4007,7 +1939,6 @@ applyStaticText();
 renderStory();
 renderSkills();
 renderDossiers();
-loadCustomProjects();
 renderProjects();
 renderCertificates();
 observeReveals();
@@ -4019,10 +1950,173 @@ initFuzzyText(document.querySelector("#fuzzyTitleCanvas"), "NEW JA");
 initLogoLoop(document.querySelector("#techLogoLoop"));
 initBounceCards(document.querySelector("#bounceCardsContainer"));
 initCountUp();
-initWebThreads();
-initPromptBar();
-initTextAnimations();
-initLifecycleThoughtLine();
 
 // Mount Dynamic Multi-State Cosmic Background Engine (Dual-Buffer Crossfade)
 const cosmicBgEngine = new DynamicCosmicEngine();
+
+/* ============================================================
+   ⚡ 3D DEVELOPER WORKSPACE & DUAL-MODE CONTROLLER
+   ============================================================ */
+let workspace3dInstance = null;
+let currentMode = localStorage.getItem("portfolio_mode") || "normal";
+
+function updateModeButtonUI(mode) {
+  const modeBtn = document.querySelector("#modeSwitchBtn");
+  const modeLabel = document.querySelector("#modeLabel");
+  if (!modeBtn || !modeLabel) return;
+
+  if (mode === "3d") {
+    modeLabel.textContent = state.lang === "th" ? "3D เวิร์กสเปซ" : "3D Experience";
+    modeBtn.setAttribute("title", state.lang === "th" ? "สลับเป็น Normal 2D Portfolio" : "Switch to Normal 2D Portfolio");
+  } else {
+    modeLabel.textContent = state.lang === "th" ? "Normal พอร์ตโฟลิโอ" : "Normal Mode";
+    modeBtn.setAttribute("title", state.lang === "th" ? "สลับเป็น 3D Interactive Workspace" : "Switch to 3D Interactive Workspace");
+  }
+}
+
+function updateAudioButtonUI(isMuted) {
+  const icon = document.querySelector("#audioIcon");
+  if (icon) icon.textContent = isMuted ? "🔇" : "🔊";
+}
+
+function init3DWorkspace() {
+  if (workspace3dInstance) return;
+
+  const canvasMount = document.querySelector("#workspaceCanvasMount");
+  const loader = document.querySelector("#workspaceLoader");
+  const loaderBar = document.querySelector("#loaderBarFill");
+  const loaderStatus = document.querySelector("#loaderStatus");
+
+  if (!canvasMount || !window.WorkspaceApp) return;
+
+  // Progressive loading simulation
+  if (loaderBar) loaderBar.style.width = "40%";
+  if (loaderStatus) loaderStatus.textContent = state.lang === "th" ? "กำลังโหลด Material และแสง..." : "Loading PBR materials & lighting...";
+
+  try {
+    workspace3dInstance = new window.WorkspaceApp(canvasMount, {
+      onReady: () => {
+        if (loaderBar) loaderBar.style.width = "100%";
+        if (loaderStatus) loaderStatus.textContent = state.lang === "th" ? "เวิร์กสเปซพร้อมใช้งาน!" : "Workspace Ready!";
+        setTimeout(() => {
+          loader?.classList.add("loaded");
+        }, 350);
+      },
+      onWebGLFailure: (err) => {
+        console.warn("WebGL failure detected:", err);
+        showToast(state.lang === "th" 
+          ? "อุปกรณ์ไม่รองรับ WebGL กำลังสลับเป็น Normal Mode อัตโนมัติ" 
+          : "WebGL not supported. Automatically switched to Normal Mode.");
+        setPortfolioMode("normal", true);
+      }
+    });
+
+    window.workspace3dInstance = workspace3dInstance;
+    updateAudioButtonUI(workspace3dInstance.isMuted);
+  } catch (err) {
+    console.error("Failed to mount WorkspaceApp:", err);
+    setPortfolioMode("normal", true);
+  }
+}
+
+function setPortfolioMode(mode, save = true) {
+  // WebGL feature check before switching to 3D
+  if (mode === "3d" && window.WorkspaceApp && !window.WorkspaceApp.isWebGLAvailable()) {
+    showToast(state.lang === "th"
+      ? "อุปกรณ์ของคุณไม่รองรับ WebGL กำลังใช้งาน Normal Mode"
+      : "WebGL is unavailable on this device. Using Normal Mode.");
+    mode = "normal";
+  }
+
+  currentMode = mode;
+  if (save) {
+    try { localStorage.setItem("portfolio_mode", mode); } catch {}
+  }
+
+  updateModeButtonUI(mode);
+
+  if (mode === "3d") {
+    document.body.classList.remove("mode-normal");
+    document.body.classList.add("mode-3d");
+
+    if (window.WorkspaceApp) {
+      if (!workspace3dInstance) {
+        init3DWorkspace();
+      } else {
+        workspace3dInstance.start();
+      }
+    }
+  } else {
+    document.body.classList.remove("mode-3d");
+    document.body.classList.add("mode-normal");
+
+    if (workspace3dInstance) {
+      workspace3dInstance.pause();
+    }
+
+    // Refresh reveal observers in 2D page
+    observeReveals();
+  }
+}
+
+// 1. Mode Switch Button Event
+document.querySelector("#modeSwitchBtn")?.addEventListener("click", () => {
+  const targetMode = currentMode === "3d" ? "normal" : "3d";
+  setPortfolioMode(targetMode, true);
+  showToast(targetMode === "3d" 
+    ? (state.lang === "th" ? "สลับเข้าสู่ 3D Interactive Workspace" : "Switched to 3D Workspace Experience") 
+    : (state.lang === "th" ? "สลับเข้าสู่ Normal 2D Portfolio" : "Switched to Normal Portfolio Mode")
+  );
+});
+
+// 2. Audio Toggle Event
+document.querySelector("#audioToggleBtn")?.addEventListener("click", () => {
+  if (!workspace3dInstance) return;
+  const newMuted = !workspace3dInstance.isMuted;
+  workspace3dInstance.setAudioMuted(newMuted);
+  updateAudioButtonUI(newMuted);
+  showToast(newMuted 
+    ? (state.lang === "th" ? "ปิดเสียงเอฟเฟกต์ 3D" : "3D Audio Muted") 
+    : (state.lang === "th" ? "เปิดเสียงเอฟเฟกต์ 3D" : "3D Audio Enabled")
+  );
+});
+
+// 3. Hint Dismiss Event
+document.querySelector("#hintDismissBtn")?.addEventListener("click", () => {
+  document.querySelector("#workspaceHint")?.classList.add("dismissed");
+});
+
+// Auto-dismiss onboarding hint after 8 seconds
+setTimeout(() => {
+  document.querySelector("#workspaceHint")?.classList.add("dismissed");
+}, 8000);
+
+// 4. Quick Dock Navigation Click Events
+document.querySelector("#workspaceDock")?.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-object]");
+  if (!btn) return;
+  const objectId = btn.dataset.object;
+  if (workspace3dInstance && objectId) {
+    workspace3dInstance.selectObject(objectId);
+  }
+});
+
+// 5. Initialize Mode on startup
+function bootPortfolioMode() {
+  if (window.WorkspaceApp) {
+    setPortfolioMode(currentMode, false);
+  } else {
+    window.addEventListener("workspace_class_ready", () => {
+      setPortfolioMode(currentMode, false);
+    }, { once: true });
+
+    // Fallback timer if event already dispatched
+    setTimeout(() => {
+      if (!workspace3dInstance && currentMode === "3d") {
+        setPortfolioMode(currentMode, false);
+      }
+    }, 150);
+  }
+}
+
+bootPortfolioMode();

@@ -12,10 +12,8 @@ const isProduction = process.env.NODE_ENV === "production";
 const host = process.env.HOST || (isProduction ? "0.0.0.0" : "127.0.0.1");
 const port = Number(process.env.PORT || 3000);
 const sessionCookie = "newja_session";
-const sessionMaxAgeMs = 14 * 24 * 60 * 60 * 1000;
 const projectIds = new Set([
   "hackathon-manita",
-  "drone-autonomy",
   "ai-creative-engine",
   "polyglot-code-lab",
   "roblox-mmorpg",
@@ -27,10 +25,12 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", "data:"],
-      styleSrc: ["'self'"],
-      scriptSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "blob:"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
       connectSrc: ["'self'"],
+      workerSrc: ["'self'", "blob:"],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
       frameAncestors: ["'none'"]
@@ -271,97 +271,10 @@ app.get("/api/projects/likes", async (request, response, next) => {
   }
 });
 
-async function isProjectValid(projectId) {
-  if (projectIds.has(projectId)) return true;
-  try {
-    const res = await pool.query("SELECT 1 FROM custom_projects WHERE id = $1", [projectId]);
-    return (res.rowCount || 0) > 0;
-  } catch {
-    return false;
-  }
-}
-
-app.get("/api/projects", async (_request, response, next) => {
-  try {
-    const result = await pool.query(
-      "SELECT id, title, category, badge, body, image, tags, link, created_at FROM custom_projects ORDER BY created_at DESC"
-    );
-    response.json({ projects: result.rows });
-  } catch (error) {
-    next(error);
-  }
-});
-
-app.post("/api/projects", async (request, response, next) => {
-  try {
-    const title = String(request.body.title || "").trim();
-    const category = String(request.body.category || "AI & Software").trim();
-    const badge = String(request.body.badge || "Featured Project").trim();
-    const body = String(request.body.body || "").trim();
-    const image = String(request.body.image || "assets/UTCC.jpg").trim();
-    const link = String(request.body.link || "").trim();
-    let tags = Array.isArray(request.body.tags) ? request.body.tags : [];
-    if (typeof request.body.tags === "string") {
-      tags = request.body.tags.split(",").map(s => s.trim()).filter(Boolean);
-    }
-
-    if (title.length < 2 || title.length > 200) {
-      return response.status(400).json({ error: "Title must be between 2 and 200 characters." });
-    }
-    if (body.length < 5 || body.length > 3000) {
-      return response.status(400).json({ error: "Description must be between 5 and 3000 characters." });
-    }
-
-    const baseSlug = title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "")
-      .slice(0, 40) || "project";
-    const id = `${baseSlug}-${crypto.randomBytes(3).toString("hex")}`;
-
-    const result = await pool.query(
-      `INSERT INTO custom_projects (id, title, category, badge, body, image, tags, link)
-       VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8)
-       RETURNING *`,
-      [id, title, category, badge, body, image, JSON.stringify(tags), link]
-    );
-
-    const project = result.rows[0];
-    await writeLog(request, "PROJECT_CREATED", {
-      targetType: "project",
-      targetId: id,
-      detail: { title, category }
-    });
-
-    response.status(201).json({ project });
-  } catch (error) {
-    next(error);
-  }
-});
-
-app.delete("/api/projects/:projectId", async (request, response, next) => {
-  try {
-    const { projectId } = request.params;
-    const result = await pool.query("DELETE FROM custom_projects WHERE id = $1 RETURNING id", [projectId]);
-    if (result.rowCount === 0) {
-      return response.status(404).json({ error: "Project not found." });
-    }
-    await pool.query("DELETE FROM project_likes WHERE project_id = $1", [projectId]);
-    await writeLog(request, "PROJECT_DELETED", {
-      targetType: "project",
-      targetId: projectId
-    });
-    response.json({ ok: true, deletedId: projectId });
-  } catch (error) {
-    next(error);
-  }
-});
-
 app.post("/api/projects/:projectId/like", requireAuth, async (request, response, next) => {
   try {
     const { projectId } = request.params;
-    const isValid = await isProjectValid(projectId);
-    if (!isValid) {
+    if (!projectIds.has(projectId)) {
       return response.status(404).json({ error: "Project not found." });
     }
 
@@ -554,20 +467,13 @@ app.delete("/api/admin/users/:userId", requireAdmin, async (request, response, n
 const staticOptions = { maxAge: isProduction ? "1h" : 0 };
 app.use("/assets", express.static(path.join(__dirname, "assets"), staticOptions));
 app.use("/assets2", express.static(path.join(__dirname, "assets2"), staticOptions));
+app.use("/vendor/three", express.static(path.join(__dirname, "node_modules", "three"), staticOptions));
+app.use("/3d", express.static(path.join(__dirname, "3d"), staticOptions));
 app.get(["/", "/index.html"], (_request, response) => {
   response.sendFile(path.join(__dirname, "index.html"));
 });
 app.get("/styles.css", (_request, response) => {
   response.sendFile(path.join(__dirname, "styles.css"));
-});
-app.get("/FlexCarousel.css", (_request, response) => {
-  response.sendFile(path.join(__dirname, "FlexCarousel.css"));
-});
-app.get("/FlexCarousel.jsx", (_request, response) => {
-  response.sendFile(path.join(__dirname, "FlexCarousel.jsx"));
-});
-app.get("/components.json", (_request, response) => {
-  response.sendFile(path.join(__dirname, "components.json"));
 });
 app.get("/app.js", (_request, response) => {
   response.sendFile(path.join(__dirname, "app.js"));
@@ -614,11 +520,7 @@ async function start() {
   });
 }
 
-if (require.main === module) {
-  start().catch((error) => {
-    console.error("Failed to start server:", error);
-    process.exit(1);
-  });
-}
-
-module.exports = { app, start };
+start().catch((error) => {
+  console.error("Failed to start server:", error);
+  process.exit(1);
+});
