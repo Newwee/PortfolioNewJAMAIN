@@ -20,7 +20,8 @@ const state = {
       desc: `พัฒนาเว็บแอปพลิเคชันสำหรับจำหน่ายซอฟต์แวร์และสินค้าดิจิทัล โดยมีระบบสมาชิก การสั่งซื้อสินค้า การเติมเงิน ระบบจัดการคำสั่งซื้อ และการออก License Key อัตโนมัติ พร้อมระบบแจ้งเตือนผ่าน Discord และหน้าจัดการสำหรับผู้ดูแลระบบ\n\nมุ่งเน้นการลดขั้นตอนการซื้อขายด้วยมือและเพิ่มความสะดวกให้แก่ผู้ใช้งาน ผลงานนี้แสดงถึงความสนใจในการพัฒนา Web Application การเชื่อมต่อ API การจัดการฐานข้อมูล และการออกแบบระบบอัตโนมัติ`,
       techs: ["React", "Node.js", "Express", "Discord API", "Tailwind CSS", "Database Automation"],
       image: "assets/j3a-store.png",
-      canva: "https://canva.link/u57aa4fqg7cvr0y"
+      canva: "https://canva.link/u57aa4fqg7cvr0y",
+      liveUrl: "https://j3a-store.vercel.app/"
     },
     "J3A Discord Manager": {
       title: "J3A Discord Manager",
@@ -28,7 +29,8 @@ const state = {
       desc: `พัฒนาโปรแกรมสำหรับสร้างและจัดการโครงสร้างเซิร์ฟเวอร์ Discord โดยรองรับการสร้างห้องและหมวดหมู่ การจัดการยศและสิทธิ์การเข้าถึงหลายรายการพร้อมกัน รวมถึงการใช้แม่แบบสำเร็จรูปเพื่อช่วยลดขั้นตอนการตั้งค่าเซิร์ฟเวอร์\n\nมีหน้าจอควบคุมสำหรับติดตามการทำงานและแสดงความคืบหน้าของระบบ ผลงานนี้แสดงถึงความสนใจในการพัฒนาโปรแกรม การเชื่อมต่อ Discord API การออกแบบระบบอัตโนมัติ และการแก้ปัญหาด้วยกระบวนการทางซอฟต์แวร์`,
       techs: ["Discord API", "Role Studio", "Channel Architect", "JavaScript / TS", "Template Engine", "Process Monitor"],
       image: "assets/j3a-discord-manager.png",
-      canva: "https://canva.link/x9hqhoiqjwvr499"
+      canva: "https://canva.link/x9hqhoiqjwvr499",
+      liveUrl: null
     }
   }
 };
@@ -241,10 +243,11 @@ function initTypewriter() {
   if (!target) return;
 
   const roles = [
+    "NMRTUP Grade 12 | Sci - Math",
+    "Target: IT @ KMITL (สจล.)",
     "Junior Fullstack Developer",
-    "AI & STEM Innovator (แชมป์ระดับชาติ)",
-    "KMITL IT Aspirant (มุ่งมั่นศึกษาต่อ สจล.)",
-    "Discord Bot & Automation Architect"
+    "Discord Bot & Automation Architect",
+    "AI & STEM Innovator (แชมป์ระดับชาติ)"
   ];
 
   let roleIdx = 0;
@@ -306,7 +309,55 @@ window.switchTab = function(tabName) {
   if (window.lucide) lucide.createIcons();
 };
 
-// ─── 11. PROJECT DETAIL MODAL (3D LAPTOP MOCKUP VIEW) ───────────────────────
+// ─── 11. CERTIFICATES EXPAND & LIGHTBOX MODAL ───────────────────────────────
+window.toggleMoreCertificates = function() {
+  playBeep(520, 0.06);
+  const moreCerts = document.getElementById("more-certificates");
+  const txt = document.getElementById("txt-toggle-certs");
+  const icon = document.getElementById("icon-toggle-certs");
+  if (!moreCerts) return;
+
+  const isHidden = moreCerts.classList.contains("hidden");
+  if (isHidden) {
+    moreCerts.classList.remove("hidden");
+    if (txt) txt.textContent = "ย่อใบรับรองกลับ ↑";
+    if (icon) icon.style.transform = "rotate(180deg)";
+  } else {
+    moreCerts.classList.add("hidden");
+    if (txt) txt.textContent = "ดูใบรับรองเพิ่มเติม (+8 ใบเซอร์)";
+    if (icon) icon.style.transform = "rotate(0deg)";
+  }
+  if (window.lucide) lucide.createIcons();
+};
+
+window.openCertModal = function(imgSrc, title, issuer) {
+  playBeep(640, 0.08);
+  const modal = document.getElementById("cert-lightbox-modal");
+  const imgEl = document.getElementById("cert-modal-img");
+  const titleEl = document.getElementById("cert-modal-title");
+  const issuerEl = document.getElementById("cert-modal-issuer");
+
+  if (imgEl) imgEl.src = imgSrc;
+  if (titleEl) titleEl.textContent = title;
+  if (issuerEl) issuerEl.textContent = issuer;
+
+  if (modal) {
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+  if (window.lucide) lucide.createIcons();
+};
+
+window.closeCertModal = function() {
+  playBeep(420, 0.06);
+  const modal = document.getElementById("cert-lightbox-modal");
+  if (modal) {
+    modal.classList.add("hidden");
+    document.body.style.overflow = "auto";
+  }
+};
+
+// ─── 12. PROJECT DETAIL MODAL (3D LAPTOP MOCKUP VIEW) ───────────────────────
 window.openProjectDetail = function(title) {
   playBeep(640, 0.08);
   const p = state.projects[title];
@@ -319,6 +370,19 @@ window.openProjectDetail = function(title) {
   document.getElementById("modal-desc").textContent = p.desc;
   document.getElementById("modal-screen-img").src = p.image;
 
+  // Live URL Button
+  const liveBtn = document.getElementById("modal-live-link");
+  if (liveBtn) {
+    if (p.liveUrl) {
+      liveBtn.href = p.liveUrl;
+      liveBtn.classList.remove("hidden");
+      liveBtn.innerHTML = `<i data-lucide="globe" class="w-4 h-4"></i><span>เข้าชมเว็บไซต์จริง (Live Demo) ↗</span>`;
+    } else {
+      liveBtn.classList.add("hidden");
+    }
+  }
+
+  // Canva Presentation Link
   const canvaLink = document.getElementById("modal-canva-link");
   if (canvaLink) canvaLink.href = p.canva;
 
