@@ -6,18 +6,68 @@ const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const { rateLimit } = require("express-rate-limit");
 const { pool, migrate } = require("./db");
+const { createClient } = require("@supabase/supabase-js");
+const fs = require("fs");
+
+// Load local .env variables safely
+if (fs.existsSync(path.join(__dirname, ".env"))) {
+  try {
+    const envLines = fs.readFileSync(path.join(__dirname, ".env"), "utf8").split(/\r?\n/);
+    envLines.forEach((line) => {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith("#")) return;
+      const eqIdx = trimmed.indexOf("=");
+      if (eqIdx !== -1) {
+        const k = trimmed.slice(0, eqIdx).trim();
+        const v = trimmed.slice(eqIdx + 1).trim();
+        if (!process.env[k]) process.env[k] = v;
+      }
+    });
+  } catch (e) {}
+}
 
 const app = express();
 const isProduction = process.env.NODE_ENV === "production";
 const host = process.env.HOST || (isProduction ? "0.0.0.0" : "127.0.0.1");
 const port = Number(process.env.PORT || 3000);
 const sessionCookie = "newja_session";
+const sessionMaxAgeMs = 14 * 24 * 60 * 60 * 1000;
+
+// Supabase Integration via Environment Variables
+const SUPABASE_URL = process.env.SUPABASE_URL || "https://nbmjzhhvpksbxvqcxjpn.supabase.co";
+const SUPABASE_SECRET_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_KEY || "";
+const supabase = SUPABASE_SECRET_KEY
+  ? createClient(SUPABASE_URL, SUPABASE_SECRET_KEY)
+  : { from: () => ({ select: () => ({ order: () => ({ limit: async () => ({ data: null, error: true }) }) }), insert: async () => ({ data: null, error: true }), delete: () => ({ eq: async () => {} }), upsert: async () => {} }) };
+
+// In-Memory Fallback State (ensures 100% uptime even before user runs SQL setup in Supabase)
+const fallbackComments = [
+  {
+    id: "welcome-1",
+    name: "New JA (Admin)",
+    message: "ยินดีต้อนรับสู่ Portfolio ของผมครับ! สามารถคอมเมนต์พูดคุยหรือติชมผลงานไว้ได้เลยครับ 👋🚀",
+    avatar: "NJ",
+    created_at: new Date().toISOString()
+  }
+];
+
+let fallbackSpotify = {
+  title: "A little music. A lot of ideas.",
+  embed_url: "https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0"
+};
+
+// Thai & English Profanity Filter
+const BAD_WORDS_REGEX = /(ควย|เหี้ย|สัส|เย็ด|กู|มึง|จวย|ดอ|หอย|ปี้|fuck|shit|bitch|asshole|dick|pussy|cunt)/gi;
+function filterBadWords(text) {
+  return String(text || "").replace(BAD_WORDS_REGEX, (match) => "*".repeat(match.length));
+}
+
 const projectIds = new Set([
+  "j3a-store",
+  "j3a-discord-manager",
   "hackathon-manita",
   "ai-creative-engine",
-  "polyglot-code-lab",
-  "roblox-mmorpg",
-  "portfolio-site"
+  "roblox-mmorpg"
 ]);
 
 app.set("trust proxy", isProduction ? 1 : false);
@@ -25,11 +75,12 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "blob:"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      connectSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "blob:", "https:", "http:"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.tailwindcss.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "https:"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://unpkg.com", "https://cdn.jsdelivr.net"],
+      connectSrc: ["'self'", "https://nbmjzhhvpksbxvqcxjpn.supabase.co", "wss://nbmjzhhvpksbxvqcxjpn.supabase.co", "https:"],
+      frameSrc: ["'self'", "https://open.spotify.com", "https://api.qrserver.com", "https:"],
       workerSrc: ["'self'", "blob:"],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
@@ -269,6 +320,124 @@ app.get("/api/projects/likes", async (request, response, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+// ==============================================================================
+// 💬 REALTIME SUPABASE COMMENTS & PROFANITY FILTER
+// ==============================================================================
+app.get("/api/comments", async (request, response) => {
+  try {
+    const { data, error } = await supabase
+      .from("comments")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(60);
+
+    if (error || !data) {
+      return response.json({ comments: fallbackComments, source: "local" });
+    }
+    return response.json({ comments: data, source: "supabase" });
+  } catch (err) {
+    return response.json({ comments: fallbackComments, source: "local" });
+  }
+});
+
+app.post("/api/comments", async (request, response) => {
+  try {
+    const rawName = String(request.body.name || "").trim();
+    const rawMessage = String(request.body.message || "").trim();
+    const avatar = String(request.body.avatar || "").trim().slice(0, 4) || rawName.slice(0, 2).toUpperCase() || "NJ";
+
+    if (!rawName || !rawMessage) {
+      return response.status(400).json({ error: "กรุณาระบุชื่อและความคิดเห็น" });
+    }
+
+    const cleanName = filterBadWords(rawName.slice(0, 50));
+    const cleanMessage = filterBadWords(rawMessage.slice(0, 500));
+
+    const newComment = {
+      name: cleanName,
+      message: cleanMessage,
+      avatar: avatar,
+      created_at: new Date().toISOString()
+    };
+
+    try {
+      const { data, error } = await supabase
+        .from("comments")
+        .insert([newComment])
+        .select()
+        .single();
+
+      if (!error && data) {
+        return response.status(201).json({ comment: data, source: "supabase" });
+      }
+    } catch (e) {
+      // Fallback
+    }
+
+    // In-memory fallback
+    const fallbackItem = { ...newComment, id: `local-${Date.now()}` };
+    fallbackComments.unshift(fallbackItem);
+    if (fallbackComments.length > 50) fallbackComments.pop();
+    return response.status(201).json({ comment: fallbackItem, source: "local" });
+  } catch (error) {
+    response.status(500).json({ error: "Failed to post comment" });
+  }
+});
+
+app.delete("/api/comments/:id", requireAdmin, async (request, response) => {
+  const { id } = request.params;
+  try {
+    await supabase.from("comments").delete().eq("id", id);
+  } catch (e) {}
+
+  const index = fallbackComments.findIndex((c) => c.id === id);
+  if (index !== -1) fallbackComments.splice(index, 1);
+
+  await writeLog(request, "COMMENT_DELETED", { targetType: "comment", targetId: id });
+  response.json({ ok: true, deletedId: id });
+});
+
+// ==============================================================================
+// 🎵 SPOTIFY EMBED & SETTINGS (SUPABASE INTEGRATION)
+// ==============================================================================
+app.get("/api/settings/spotify", async (request, response) => {
+  try {
+    const { data, error } = await supabase
+      .from("portfolio_settings")
+      .select("value")
+      .eq("key", "spotify")
+      .single();
+
+    if (!error && data?.value) {
+      return response.json(data.value);
+    }
+  } catch (e) {}
+  response.json(fallbackSpotify);
+});
+
+app.post("/api/settings/spotify", requireAdmin, async (request, response) => {
+  const { title, embed_url } = request.body;
+  if (!embed_url) return response.status(400).json({ error: "embed_url is required" });
+
+  fallbackSpotify = {
+    title: String(title || "A little music. A lot of ideas."),
+    embed_url: String(embed_url)
+  };
+
+  try {
+    await supabase
+      .from("portfolio_settings")
+      .upsert({
+        key: "spotify",
+        value: fallbackSpotify,
+        updated_at: new Date().toISOString()
+      });
+  } catch (e) {}
+
+  await writeLog(request, "SPOTIFY_SETTINGS_UPDATED", { detail: fallbackSpotify });
+  response.json({ ok: true, settings: fallbackSpotify });
 });
 
 app.post("/api/projects/:projectId/like", requireAuth, async (request, response, next) => {
