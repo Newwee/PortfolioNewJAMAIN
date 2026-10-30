@@ -123,6 +123,105 @@ function initPreloader() {
   }, 50);
 }
 
+// ─── 5.1. NAVBAR SCROLLSPY & SMOOTH NAVIGATION ──────────────────────────
+function initNavbarScrollSpy() {
+  const navWrap = document.querySelector(".nav-pill-wrap");
+  const navItems = document.querySelectorAll(".nav-item");
+  const sectionIds = ["home", "about", "portfolio", "contact"];
+  const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+
+  if (!navItems.length || !sections.length) return;
+
+  function setActive(id) {
+    navItems.forEach((item) => {
+      const href = item.getAttribute("href");
+      if (href === `#${id}`) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    });
+  }
+
+  let ticking = false;
+  function updateActiveNav() {
+    const scrollPos = window.scrollY;
+
+    // Header scrolled elevation style
+    if (navWrap) {
+      if (scrollPos > 30) {
+        navWrap.classList.add("nav-scrolled");
+      } else {
+        navWrap.classList.remove("nav-scrolled");
+      }
+    }
+
+    // Bottom of page check -> activate contact
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80) {
+      setActive("contact");
+      return;
+    }
+
+    // Determine active section using viewport boundary
+    let currentId = sections[0].id;
+    const triggerOffset = 220; // px threshold from viewport top
+
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const sec = sections[i];
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= triggerOffset) {
+        currentId = sec.id;
+        break;
+      }
+    }
+
+    setActive(currentId);
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveNav();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  // Smooth click navigation
+  navItems.forEach((item) => {
+    item.addEventListener("click", (e) => {
+      const href = item.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+      const targetId = href.replace("#", "");
+      const targetSection = document.getElementById(targetId);
+      if (targetSection) {
+        e.preventDefault();
+        playBeep(440, 0.05);
+        setActive(targetId);
+        targetSection.scrollIntoView({ behavior: "smooth" });
+        if (history.pushState) {
+          history.pushState(null, "", `#${targetId}`);
+        }
+      }
+    });
+  });
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("hashchange", () => {
+    const hash = window.location.hash.replace("#", "");
+    if (hash) setActive(hash);
+  });
+
+  // Initial position check
+  const initialHash = window.location.hash.replace("#", "");
+  if (initialHash && document.getElementById(initialHash)) {
+    setActive(initialHash);
+  } else {
+    updateActiveNav();
+  }
+}
+
 // ─── 5. BACKGROUND STARFIELD CANVAS ─────────────────────────────────────────
 function initStarfield() {
   const canvas = document.getElementById("starfield");
@@ -633,6 +732,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
   initPreloader();
   initStarfield();
+  initNavbarScrollSpy();
   initLanyard();
   initMaskReveal();
   initTypewriter();

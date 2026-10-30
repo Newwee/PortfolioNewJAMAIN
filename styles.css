@@ -609,6 +609,13 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-pill-wrap.nav-scrolled .nav-pill {
+  background: rgba(11, 17, 29, 0.95);
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 24px rgba(44, 103, 237, 0.25);
 }
 
 .nav-pill {
@@ -622,6 +629,7 @@ body {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-item {
@@ -630,18 +638,20 @@ body {
   font-size: 13.5px;
   font-weight: 600;
   color: #94a3b8;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
+  cursor: pointer;
 }
 
-.nav-item:hover, .nav-item.active {
+.nav-item:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .nav-item.active {
-  background: var(--accent-blue);
+  background: #2563eb;
   color: #ffffff;
+  box-shadow: 0 0 18px rgba(37, 99, 235, 0.55);
 }
 
 /* ─── 6. PRELOADER COUNTUP (0% -> 100%) ────────────────────────────────── */
