@@ -199,14 +199,16 @@ async function initLanyard() {
 
   try {
     const { initLanyard: mountLanyard } = await import("./lanyard.js");
+    const isDesktop = window.innerWidth >= 768;
     const lanyard = mountLanyard(container, {
       frontImage: "assets/badge-front.png",
       backImage: "assets/badge-back.png",
       strapImage: "assets/badge-strap.png",
       strapColor: "#1e3a8a",
       strapWidth: 0.65,
-      strapLength: 0.28,
-      size: 0.68,
+      strapLength: 0.22,
+      anchor: isDesktop ? 0.78 : 0.5,
+      size: isDesktop ? 0.65 : 0.55,
       cornerRadius: 0.22,
       finish: "holographic",
       metal: "silver",

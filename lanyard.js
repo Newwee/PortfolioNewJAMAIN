@@ -1752,7 +1752,8 @@ container.classList.add("lanyard");
 
       foilUniforms.foilTop.value.set(0.5, 4.5, 8).normalize().transformDirection(camera.matrixWorldInverse);
 
-      const anchorX = ((ANCHORS[s.anchor] ?? 0.5) - 0.5) * viewWidth;
+      const anchorVal = typeof s.anchor === "number" ? s.anchor : (ANCHORS[s.anchor] ?? 0.5);
+      const anchorX = (anchorVal - 0.5) * viewWidth;
 
       const anchorY = viewHeight / 2 + 0.2;
 
@@ -2384,6 +2385,23 @@ container.classList.add("lanyard");
 
     canvas.addEventListener('touchstart', onTouchStart, { passive: false });
 
+    canvas.style.pointerEvents = 'none';
+
+    const handleGlobalPointerMove = event => {
+      if (!settingsRef.current.interactive) return;
+      if (sim.grab) return;
+      toPointer(event);
+      const hit = pickCard();
+      if (hit) {
+        canvas.style.pointerEvents = 'auto';
+        setCursor('grab');
+      } else {
+        canvas.style.pointerEvents = 'none';
+        setCursor('');
+      }
+    };
+    window.addEventListener('pointermove', handleGlobalPointerMove, { passive: true });
+
 
 
     const resize = () => {
@@ -2456,6 +2474,7 @@ alive = false;
       canvas.removeEventListener('lostpointercapture', onPointerUp);
 
       canvas.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('pointermove', handleGlobalPointerMove);
 
       [bodyMesh, frontMesh, backMesh, ring, clampMesh, eyelet, band].forEach(mesh => mesh.geometry?.dispose());
 
