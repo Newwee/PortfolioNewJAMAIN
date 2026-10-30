@@ -1436,7 +1436,7 @@ container.classList.add("lanyard");
 
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-    renderer.toneMapping = THREE.NeutralToneMapping;
+    renderer.toneMapping = THREE.NeutralToneMapping || THREE.ACESFilmicToneMapping || 3;
 
     renderer.toneMappingExposure = 1;
 

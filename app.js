@@ -204,18 +204,18 @@ async function initLanyard() {
       backImage: "assets/badge-back.png",
       strapImage: "assets/badge-strap.png",
       strapColor: "#1e3a8a",
-      strapWidth: 0.68,
-      strapLength: 0.44,
-      size: 0.85,
+      strapWidth: 0.65,
+      strapLength: 0.28,
+      size: 0.68,
       cornerRadius: 0.22,
       finish: "holographic",
       metal: "silver",
-      gravity: 1.0,
+      gravity: 0.9,
       damping: 0.55,
       elasticity: 0.55,
       breeze: 0.35,
       interactive: true,
-      intro: true
+      intro: false
     });
 
     const flipBtn = document.getElementById("lanyard-flip-btn");
