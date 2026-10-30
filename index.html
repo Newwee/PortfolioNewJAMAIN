@@ -11,6 +11,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Three.js Import Map -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
   
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -127,71 +136,21 @@
         </div>
       </div>
 
-      <!-- Right Column: Interactive 3D Lanyard ID Card (React Bits Style) -->
-      <div class="md:col-span-5 flex flex-col items-center justify-center lanyard-perspective select-none">
+      <!-- Right Column: Interactive 3D Lanyard ID Card (Official React Bits Physics Engine) -->
+      <div class="md:col-span-5 flex flex-col items-center justify-center relative select-none">
         
-        <div class="lanyard-strap-wrap">
-          <div id="lanyard-strap" class="lanyard-strap">
-            <span>PORTFOLIO ✦ NEW JA</span>
-          </div>
-          <div class="lanyard-clip"></div>
-          <div class="lanyard-ring"></div>
+        <!-- WebGL Lanyard Canvas Container -->
+        <div id="lanyard-container" class="w-full h-[520px] md:h-[620px] relative rounded-3xl overflow-hidden shadow-2xl shadow-blue-950/40 border border-white/5 bg-slate-950/40 backdrop-blur-sm"></div>
+
+        <div class="flex items-center justify-between w-full max-w-sm px-2 mt-3 text-xs text-slate-400">
+          <span class="flex items-center gap-1.5 text-blue-400 font-medium">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+            <span>ดึง ยืด หรือเหวี่ยงป้ายได้อิสระ</span>
+          </span>
+          <button id="lanyard-flip-btn" type="button" class="text-xs text-slate-300 hover:text-white transition flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-white/10 hover:border-blue-500/40 shadow-sm">
+            <span>พลิกด้าน ↻</span>
+          </button>
         </div>
-
-        <!-- 3D Card (Move cursor to tilt, click to flip) -->
-        <div id="lanyard-card" class="lanyard-card" title="คลิกเพื่อพลิกดู QR Code ด้านหลัง">
-          
-          <!-- Front Face -->
-          <div class="card-face card-front">
-            <div class="w-14 h-2 bg-slate-900 rounded-full mx-auto border border-white/10"></div>
-            
-            <div class="flex justify-between items-start mt-2">
-              <div>
-                <span class="px-2 py-0.5 text-[10px] font-bold bg-blue-600/30 text-blue-300 rounded border border-blue-500/30">NMRTUP • GRADE 12 (SCI-MATH)</span>
-                <h3 class="text-xl font-black text-white leading-tight mt-1">NEW JA</h3>
-                <p class="text-[11px] text-cyan-400 font-semibold">Target: IT @ KMITL</p>
-              </div>
-              <div class="w-9 h-9 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold text-xs shadow-inner">
-                3D
-              </div>
-            </div>
-
-            <!-- Profile Photo in Badge -->
-            <div class="relative my-3 rounded-xl overflow-hidden border border-white/15 bg-slate-950 h-52">
-              <img src="assets/myface.jpg" alt="Pataradanai Pongsao" class="w-full h-full object-cover" />
-              <div class="absolute bottom-2 left-2 right-2 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-bold text-slate-200 text-center border border-white/10">
-                FULL-STACK &amp; AI INNOVATOR
-              </div>
-            </div>
-
-            <div class="flex justify-between items-center text-[11px] font-semibold text-slate-400 pt-2 border-t border-white/10">
-              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> READY TO BUILD</span>
-              <span class="text-blue-400 font-bold hover:underline">คลิกเพื่อพลิก ↻</span>
-            </div>
-          </div>
-
-          <!-- Back Face (QR Code) -->
-          <div class="card-face card-back">
-            <div class="w-14 h-2 bg-slate-800 rounded-full mx-auto border border-white/10"></div>
-            
-            <div class="my-auto space-y-3">
-              <p class="text-xs font-black tracking-widest text-blue-400 uppercase">SCAN TO CONNECT</p>
-              <div class="p-3 bg-white rounded-2xl shadow-xl inline-block mx-auto border-2 border-slate-700">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://github.com/Newwee" alt="QR Code" class="w-32 h-32" />
-              </div>
-              <p class="text-[11px] font-mono text-slate-400">github.com/Newwee</p>
-            </div>
-
-            <div class="text-[10px] font-bold tracking-wider text-slate-400 uppercase border-t border-white/10 pt-2 w-full">
-              NMRTUP GR.12 ➔ TARGET: IT @ KMITL
-            </div>
-          </div>
-        </div>
-
-        <p class="text-xs text-slate-400 mt-4 flex items-center gap-1.5">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-400"></i>
-          <span>เลื่อนเมาส์เพื่อแกว่งป้าย หรือคลิกเพื่อพลิกดู QR Code</span>
-        </p>
       </div>
 
     </section>

@@ -192,29 +192,42 @@ function initStarfield() {
   animate();
 }
 
-// ─── 6. 3D INTERACTIVE LANYARD PHYSICS & FLIP ───────────────────────────────
-function initLanyard() {
-  const card = document.getElementById("lanyard-card");
-  const strap = document.getElementById("lanyard-strap");
-  if (!card) return;
+// ─── 6. 3D INTERACTIVE LANYARD PHYSICS & FLIP (React Bits Engine) ───────────
+async function initLanyard() {
+  const container = document.getElementById("lanyard-container");
+  if (!container) return;
 
-  card.addEventListener("click", () => {
-    card.classList.toggle("flipped");
-    playBeep(480, 0.08);
-  });
+  try {
+    const { initLanyard: mountLanyard } = await import("./lanyard.js");
+    const lanyard = mountLanyard(container, {
+      frontImage: "assets/badge-front.png",
+      backImage: "assets/badge-back.png",
+      strapImage: "assets/badge-strap.png",
+      strapColor: "#1e3a8a",
+      strapWidth: 0.68,
+      strapLength: 0.44,
+      size: 0.85,
+      cornerRadius: 0.22,
+      finish: "holographic",
+      metal: "silver",
+      gravity: 1.0,
+      damping: 0.55,
+      elasticity: 0.55,
+      breeze: 0.35,
+      interactive: true,
+      intro: true
+    });
 
-  window.addEventListener("mousemove", (e) => {
-    if (card.classList.contains("flipped")) return;
-    const centerX = window.innerWidth * 0.72;
-    const centerY = window.innerHeight * 0.45;
-    const x = (centerX - e.clientX) / 28;
-    const y = (centerY - e.clientY) / 28;
-
-    card.style.transform = `rotateY(${-x}deg) rotateX(${y}deg) rotateZ(${-x * 0.28}deg)`;
-    if (strap) {
-      strap.style.transform = `rotateZ(${-x * 0.22}deg)`;
+    const flipBtn = document.getElementById("lanyard-flip-btn");
+    if (flipBtn && lanyard) {
+      flipBtn.addEventListener("click", () => {
+        lanyard.flip();
+        playBeep(480, 0.08);
+      });
     }
-  }, { passive: true });
+  } catch (err) {
+    console.error("Failed to initialize 3D Lanyard:", err);
+  }
 }
 
 // ─── 7. MOUSE HOVER MASK REVEAL (Hero Mask Effect) ──────────────────────────
@@ -223,15 +236,26 @@ function initMaskReveal() {
   const layer = document.getElementById("mask-layer");
   if (!container || !layer) return;
 
-  container.addEventListener("mousemove", (e) => {
+  const updateMask = (clientX, clientY) => {
     const rect = container.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
     layer.style.setProperty("--reveal-x", `${x}px`);
     layer.style.setProperty("--reveal-y", `${y}px`);
-  });
+  };
+
+  container.addEventListener("mousemove", (e) => updateMask(e.clientX, e.clientY));
+  container.addEventListener("touchmove", (e) => {
+    if (e.touches && e.touches[0]) {
+      updateMask(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
 
   container.addEventListener("mouseleave", () => {
+    layer.style.setProperty("--reveal-x", "-300px");
+    layer.style.setProperty("--reveal-y", "-300px");
+  });
+  container.addEventListener("touchend", () => {
     layer.style.setProperty("--reveal-x", "-300px");
     layer.style.setProperty("--reveal-y", "-300px");
   });

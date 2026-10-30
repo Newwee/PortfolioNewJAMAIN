@@ -647,6 +647,9 @@ app.get("/styles.css", (_request, response) => {
 app.get("/app.js", (_request, response) => {
   response.sendFile(path.join(__dirname, "app.js"));
 });
+app.get("/lanyard.js", (_request, response) => {
+  response.sendFile(path.join(__dirname, "lanyard.js"));
+});
 app.use((_request, response) => {
   response.status(404).send("404 Not Found");
 });
