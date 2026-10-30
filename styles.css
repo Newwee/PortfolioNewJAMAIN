@@ -481,11 +481,6 @@ body {
   font-size: 0.76rem;
   font-weight: 500;
 }
-  display: block;
-  width: 100%;
-  height: 100%;
-  outline: none;
-}
 
 /* ─── 3. HOVER MASK REVEAL (Spider-Man / Hero Mask Effect) ──────────────── */
 .hero-reveal-container {
