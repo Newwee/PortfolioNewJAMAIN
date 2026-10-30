@@ -91,7 +91,7 @@ if (soundBtn) {
 
 // ─── 4. PRELOADER COUNTUP (0% -> 100%) ──────────────────────────────────────
 function initPreloader() {
-  const loader = document.getElementById("loader");
+  const loader = document.getElementById("welcome-screen") || document.getElementById("loader");
   const percentEl = document.getElementById("loader-percent");
   const barEl = document.getElementById("loader-bar");
   if (!loader || !percentEl || !barEl) return;
@@ -103,15 +103,24 @@ function initPreloader() {
       progress = 100;
       clearInterval(interval);
       setTimeout(() => {
+        loader.classList.add("is-leaving");
         loader.classList.add("loaded");
         playBeep(523.25, 0.12);
         setTimeout(() => playBeep(659.25, 0.12), 80);
         setTimeout(() => playBeep(783.99, 0.2), 160);
+        setTimeout(() => {
+          if (loader.parentNode) loader.parentNode.removeChild(loader);
+        }, 800);
       }, 250);
     }
-    percentEl.textContent = progress;
+    if (percentEl.firstChild && percentEl.firstChild.nodeType === Node.TEXT_NODE) {
+      percentEl.firstChild.nodeValue = progress;
+    } else {
+      percentEl.innerHTML = `${progress}<span>%</span>`;
+    }
+    barEl.style.transform = `scaleX(${progress / 100})`;
     barEl.style.width = `${progress}%`;
-  }, 65);
+  }, 50);
 }
 
 // ─── 5. BACKGROUND STARFIELD CANVAS ─────────────────────────────────────────
@@ -204,19 +213,21 @@ async function initLanyard() {
       frontImage: "assets/badge-front.png",
       backImage: "assets/badge-back.png",
       strapImage: "assets/badge-strap.png",
-      strapColor: "#1e3a8a",
-      strapWidth: 0.65,
-      strapLength: 0.22,
-      anchor: isDesktop ? 0.78 : 0.5,
-      size: isDesktop ? 0.65 : 0.55,
-      cornerRadius: 0.22,
-      finish: "holographic",
+      cardColor: "#04010e",
+      strapColor: "#111827",
+      strapWidth: 0.62,
+      strapLength: 0.58,
+      anchor: isDesktop ? 0.74 : 0.5,
+      size: isDesktop ? 0.62 : 0.54,
+      cornerRadius: 0.25,
+      finish: "glossy",
       metal: "silver",
-      gravity: 0.9,
-      damping: 0.55,
-      elasticity: 0.55,
-      breeze: 0.35,
+      gravity: 1.2,
+      damping: 0.35,
+      elasticity: 0.7,
+      breeze: 0.15,
       interactive: true,
+      autoFlip: true,
       intro: false
     });
 
