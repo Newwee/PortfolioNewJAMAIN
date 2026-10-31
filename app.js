@@ -1033,6 +1033,20 @@ async function initEducationBounceCards() {
   if (!mount) return;
   try {
     const { createBounceCards } = await import("./bounce-cards.js");
+
+    const getResponsiveConfig = () => {
+      const w = window.innerWidth;
+      if (w < 480) {
+        return { cardSize: 260, spread: 130, height: 380, push: 140 };
+      } else if (w < 768) {
+        return { cardSize: 310, spread: 180, height: 430, push: 180 };
+      } else {
+        return { cardSize: 360, spread: 220, height: 480, push: 220 };
+      }
+    };
+
+    const cfg = getResponsiveConfig();
+
     createBounceCards(mount, {
       images: [
         {
@@ -1047,16 +1061,16 @@ async function initEducationBounceCards() {
         }
       ],
       containerWidth: "100%",
-      containerHeight: 330,
-      cardSize: 210,
-      spread: 110,
-      rotation: 9,
-      pushDistance: 130,
+      containerHeight: cfg.height,
+      cardSize: cfg.cardSize,
+      spread: cfg.spread,
+      rotation: 8,
+      pushDistance: cfg.push,
       hoverScale: 1.08,
       bounciness: 0.6,
-      borderWidth: 3,
-      borderColor: "rgba(56, 189, 248, 0.4)",
-      radius: 20,
+      borderWidth: 4,
+      borderColor: "rgba(56, 189, 248, 0.45)",
+      radius: 24,
       shadow: true,
       enableHover: true,
       onCardClick: (idx, card) => {
