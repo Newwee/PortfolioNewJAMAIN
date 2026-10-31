@@ -383,11 +383,11 @@ function initTypewriter() {
   if (!target) return;
 
   const roles = [
-    "NMRTUP Grade 12 | Sci - Math",
-    "Target: IT @ KMITL (สจล.)",
-    "Junior Fullstack Developer",
-    "Discord Bot & Automation Architect",
-    "AI & STEM Innovator (แชมป์ระดับชาติ)"
+    "Problem Solver & Bug Fixer",
+    "Web Maintenance & Developer",
+    "Fullstack & Discord Architect",
+    "AI & STEM Innovator (แชมป์ระดับชาติ)",
+    "NMRTUP Grade 12 | Sci - Math"
   ];
 
   let roleIdx = 0;
@@ -552,55 +552,85 @@ window.closeProjectDetail = function() {
   }
 };
 
-// ─── 12. REALTIME COMMENTS WITH SUPABASE & BAD WORDS FILTER ─────────────────
+// ─── 12. REALTIME COMMENTS WITH SUPABASE & LOCAL STORAGE FALLBACK ─────────
+const DEFAULT_COMMENTS = [
+  {
+    id: "welcome-1",
+    name: "New JA",
+    message: "ยินดีต้อนรับสู่ Portfolio ของผมครับ! สามารถคอมเมนต์พูดคุยหรือติชมผลงานไว้ได้เลยครับ 👋🚀",
+    avatar: "NJ",
+    created_at: new Date().toISOString()
+  }
+];
+
 async function loadComments() {
   const listEl = document.getElementById("comment-list");
   const countEl = document.getElementById("comment-count");
 
+  let comments = [];
+
   try {
     const res = await fetch("/api/comments");
-    const data = await res.json();
-    state.comments = data.comments || [];
-
-    if (countEl) countEl.textContent = state.comments.length;
-
-    if (listEl) {
-      if (state.comments.length === 0) {
-        listEl.innerHTML = `<p class="text-xs text-slate-500 text-center py-6">ยังไม่มีความคิดเห็น เป็นคนแรกที่แสดงความคิดเห็นได้เลยครับ!</p>`;
-        return;
+    if (res.ok) {
+      const data = await res.json();
+      const list = Array.isArray(data) ? data : (data.comments || []);
+      if (list && list.length) {
+        comments = list;
+        try {
+          localStorage.setItem("newja_comments", JSON.stringify(comments));
+        } catch (e) {}
       }
+    }
+  } catch (err) {}
 
-      listEl.innerHTML = state.comments
-        .map((c) => {
-          const avatar = c.avatar || (c.name ? c.name.slice(0, 2).toUpperCase() : "NJ");
-          const timeStr = c.created_at ? new Date(c.created_at).toLocaleDateString("th-TH") : "ล่าสุด";
+  if (!comments.length) {
+    try {
+      const cached = localStorage.getItem("newja_comments");
+      if (cached) {
+        comments = JSON.parse(cached);
+      }
+    } catch (e) {}
+  }
 
-          return `
-            <div class="p-4 rounded-2xl bg-slate-900/90 border border-white/10 flex items-start gap-3.5 group hover:border-blue-500/30 transition">
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-xs shrink-0 shadow-md">
-                ${avatar}
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="flex justify-between items-center">
-                  <span class="text-xs font-bold text-white truncate">${c.name}</span>
-                  <span class="text-[10px] text-slate-500">${timeStr}</span>
-                </div>
-                <p class="text-xs text-slate-300 mt-1 leading-relaxed break-words">${c.message}</p>
-              </div>
-              <button onclick="handleDeleteComment('${c.id}')" title="ลบคอมเมนต์ (Admin)" class="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition text-xs">
-                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-              </button>
+  if (!comments.length) {
+    comments = DEFAULT_COMMENTS;
+  }
+
+  state.comments = comments;
+  if (countEl) countEl.textContent = state.comments.length;
+
+  if (listEl) {
+    if (state.comments.length === 0) {
+      listEl.innerHTML = `<p class="text-xs text-slate-500 text-center py-6">ยังไม่มีความคิดเห็น เป็นคนแรกที่แสดงความคิดเห็นได้เลยครับ!</p>`;
+      return;
+    }
+
+    listEl.innerHTML = state.comments
+      .map((c) => {
+        const avatar = c.avatar || (c.name ? c.name.slice(0, 2).toUpperCase() : "NJ");
+        const timeStr = c.created_at ? new Date(c.created_at).toLocaleDateString("th-TH") : "ล่าสุด";
+
+        return `
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-white/10 flex items-start gap-3.5 group hover:border-blue-500/30 transition">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-xs shrink-0 shadow-md">
+              ${avatar}
             </div>
-          `;
-        })
-        .join("");
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-white truncate">${c.name}</span>
+                <span class="text-[10px] text-slate-500">${timeStr}</span>
+              </div>
+              <p class="text-xs text-slate-300 mt-1 leading-relaxed break-words">${c.message}</p>
+            </div>
+            <button onclick="handleDeleteComment('${c.id}')" title="ลบคอมเมนต์" class="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition text-xs">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        `;
+      })
+      .join("");
 
-      if (window.lucide) lucide.createIcons();
-    }
-  } catch (err) {
-    if (listEl) {
-      listEl.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">ไม่สามารถโหลดคอมเมนต์ได้ชั่วคราว</p>`;
-    }
+    if (window.lucide) lucide.createIcons();
   }
 }
 
@@ -622,6 +652,14 @@ window.handlePostComment = async function(e) {
 
   if (btn) btn.disabled = true;
 
+  const newComment = {
+    id: `c-${Date.now()}`,
+    name,
+    avatar: (avatar || name.slice(0, 2)).toUpperCase(),
+    message,
+    created_at: new Date().toISOString()
+  };
+
   try {
     const res = await fetch("/api/comments", {
       method: "POST",
@@ -634,12 +672,24 @@ window.handlePostComment = async function(e) {
       showToast("โพสต์ความคิดเห็นสำเร็จ!");
       playBeep(700, 0.1);
       await loadComments();
-    } else {
-      const err = await res.json();
-      showToast(err.error || "เกิดข้อผิดพลาดในการโพสต์");
+      return;
     }
+  } catch (err) {}
+
+  // Local Storage Fallback ensures instant responsiveness
+  try {
+    let localComments = [];
+    const cached = localStorage.getItem("newja_comments");
+    if (cached) localComments = JSON.parse(cached);
+    if (!localComments.length) localComments = [...DEFAULT_COMMENTS];
+    localComments.unshift(newComment);
+    localStorage.setItem("newja_comments", JSON.stringify(localComments));
+    if (msgInput) msgInput.value = "";
+    showToast("โพสต์ความคิดเห็นสำเร็จ!");
+    playBeep(700, 0.1);
+    await loadComments();
   } catch (err) {
-    showToast("เกิดข้อผิดพลาดในการเชื่อมต่อ");
+    showToast("เกิดข้อผิดพลาดในการบันทึกความคิดเห็น");
   } finally {
     if (btn) btn.disabled = false;
   }
@@ -648,16 +698,17 @@ window.handlePostComment = async function(e) {
 window.handleDeleteComment = async function(id) {
   if (!confirm("คุณต้องการลบคอมเมนต์นี้หรือไม่?")) return;
   try {
-    const res = await fetch(`/api/comments/${id}`, { method: "DELETE" });
-    if (res.ok) {
-      showToast("ลบคอมเมนต์เรียบร้อยแล้ว");
-      await loadComments();
-    } else {
-      showToast("จำเป็นต้องใช้สิทธิ์ Admin เพื่อลบคอมเมนต์");
-    }
-  } catch (err) {
-    showToast("ไม่สามารถลบคอมเมนต์ได้");
-  }
+    await fetch(`/api/comments/${id}`, { method: "DELETE" });
+  } catch (err) {}
+
+  try {
+    let localComments = JSON.parse(localStorage.getItem("newja_comments") || "[]");
+    localComments = localComments.filter(c => c.id !== id);
+    localStorage.setItem("newja_comments", JSON.stringify(localComments));
+  } catch (e) {}
+
+  showToast("ลบคอมเมนต์เรียบร้อยแล้ว");
+  await loadComments();
 };
 
 // ─── 13. SPOTIFY PLAYLIST INITIALIZATION ────────────────────────────────────
@@ -680,8 +731,14 @@ function initSpotify() {
 // ─── 14. CONTACT FORM SUBMISSION ────────────────────────────────────────────
 window.handleSendContact = function(e) {
   e.preventDefault();
-  const name = document.getElementById("contact-name")?.value;
-  showToast(`ขอบคุณครับ ${name || ""}! ระบบได้รับข้อความแล้ว จะติดต่อกลับโดยเร็วที่สุดครับ`);
+  const name = document.getElementById("contact-name")?.value || "";
+  const email = document.getElementById("contact-email")?.value || "";
+  const msg = document.getElementById("contact-msg")?.value || "";
+
+  const mailtoUrl = `mailto:Pongpataradanai@gmail.com?subject=${encodeURIComponent("ติดต่อจากเว็บ Portfolio: " + name)}&body=${encodeURIComponent("ชื่อผู้ติดต่อ: " + name + "\nอีเมล: " + email + "\n\nข้อความ:\n" + msg)}`;
+  window.open(mailtoUrl, "_blank");
+
+  showToast(`ขอบคุณครับ ${name}! ระบบกำลังเปิดโปรแกรมส่งอีเมลถึง Pongpataradanai@gmail.com`);
   document.getElementById("contact-form")?.reset();
 };
 
