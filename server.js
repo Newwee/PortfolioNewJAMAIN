@@ -583,11 +583,14 @@ app.get(["/", "/index.html"], (_request, response) => {
 app.get("/styles.css", (_request, response) => {
   response.sendFile(path.join(__dirname, "styles.css"));
 });
-app.get("/app.js", (_request, response) => {
-  response.sendFile(path.join(__dirname, "app.js"));
-});
-app.get("/lanyard.js", (_request, response) => {
-  response.sendFile(path.join(__dirname, "lanyard.js"));
+app.get("/:file", (req, res, next) => {
+  if (req.params.file && req.params.file.endsWith(".js")) {
+    const filePath = path.join(__dirname, req.params.file);
+    if (fs.existsSync(filePath)) {
+      return res.sendFile(filePath);
+    }
+  }
+  next();
 });
 app.use((_request, response) => {
   response.status(404).send("404 Not Found");

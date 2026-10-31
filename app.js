@@ -1360,6 +1360,318 @@ window.handleAdminDeletePermanent = function(id) {
   });
 };
 
+// ─── 19. REACT BITS FESTIVAL LAB: ANIMATED LIST + COUNTER + STROKE TEXT ─────
+const UPCOMING_FESTIVALS = [
+  {
+    id: "halloween",
+    title: "Halloween & Día de los Muertos",
+    thaiTitle: "วันปล่อยผี & วันแห่งผู้ล่วงลับ",
+    days: 0,
+    dateText: "31 ต.ค. – 2 พ.ย. 2026",
+    location: "ทั่วโลก / เม็กซิโก (Mexico City, Oaxaca)",
+    description: "งานเฉลิมฉลองคืนปล่อยผีทั่วโลก ควบคู่กับเทศกาลมรดกโลกของเม็กซิโกที่ผู้คนจะแต่งหน้าเป็นโครงกระดูก (Catrina) ประดับดอกดาวเรือง และเดินขบวนพาเหรดสุดคึกคัก",
+    icon: "🎃",
+    meta: "เริ่มวันนี้!"
+  },
+  {
+    id: "diwali",
+    title: "Diwali Festival of Lights",
+    thaiTitle: "เทศกาลดิวาลี (เทศกาลแห่งแสงไฟ)",
+    days: 6,
+    dateText: "6 – 10 พ.ย. 2026 (วันหลัก 8 พ.ย.)",
+    location: "อินเดีย และชุมชนชาวฮินดูทั่วโลก",
+    description: "เทศกาลที่ยิ่งใหญ่ที่สุดของอินเดีย สว่างไสวไปด้วยตะเกียงดินเผา (Diyas) นับล้านดวง การทำลวดลายรังโกลี และจุดดอกไม้ไฟเฉลิมฉลองชัยชนะของความดีเหนือความชั่ว",
+    icon: "🪔",
+    meta: "อีก 6 วัน"
+  },
+  {
+    id: "loykrathong",
+    title: "Yi Peng & Loy Krathong",
+    thaiTitle: "เทศกาลยี่เป็ง และ วันลอยกระทง",
+    days: 24,
+    dateText: "24 – 25 พ.ย. 2026",
+    location: "เชียงใหม่ สุโขทัย และทั่วประเทศไทย",
+    description: "เทศกาลระดับโลกที่นักท่องเที่ยวปักหมุดมาชมภาพโคมลอยนับพันดวงสว่างไสวเต็มท้องฟ้าเชียงใหม่ และการลอยกระทงประดับประทีปตามสายน้ำทั่วไทย",
+    icon: "🏮",
+    meta: "อีก 24 วัน"
+  },
+  {
+    id: "christmas-markets",
+    title: "European Christmas Markets",
+    thaiTitle: "ตลาดคริสต์มาสยุโรป",
+    days: 25,
+    dateText: "25 พ.ย. – 25 ธ.ค. 2026",
+    location: "เยอรมนี ออสเตรีย ฝรั่งเศส (Nuremberg, Vienna, Strasbourg)",
+    description: "การเนรมิตจัตุรัสใจกลางเมืองเก่าในยุโรปให้กลายเป็นหมู่บ้านคริสต์มาส ประดับไฟสวยงาม พร้อมร้านค้างานฝีมือและขนมประจำเทศกาลตลอดทั้งเดือน",
+    icon: "🎄",
+    meta: "อีก 25 วัน"
+  },
+  {
+    id: "thanksgiving",
+    title: "Macy's Thanksgiving Parade",
+    thaiTitle: "ขบวนพาเหรดวันขอบคุณพระเจ้า เมซีส์",
+    days: 26,
+    dateText: "26 พ.ย. 2026",
+    location: "นิวยอร์ก สหรัฐอเมริกา",
+    description: "ขบวนพาเหรดวันขอบคุณพระเจ้าระดับตำนานของสหรัฐฯ โดดเด่นด้วยบอลลูนคาแรกเตอร์ยักษ์ลอยฟ้าไปตามถนนแมนฮัตตัน",
+    icon: "🦃",
+    meta: "อีก 26 วัน"
+  },
+  {
+    id: "tomorrowland",
+    title: "Tomorrowland Thailand 2026",
+    thaiTitle: "เทศกาลดนตรีทูมอร์โรว์แลนด์ ไทยแลนด์",
+    days: 41,
+    dateText: "11 – 13 ธ.ค. 2026",
+    location: "Wisdom Valley (เขาไม้แก้ว พัทยา) จ.ชลบุรี ประเทศไทย",
+    description: "ประวัติศาสตร์หน้าใหม่ เทศกาลดนตรีอิเล็กทรอนิกส์ (EDM) อันดับ 1 ของโลกมาจัดเต็มรูปแบบในเอเชียตะวันออกเฉียงใต้เป็นครั้งแรกที่ประเทศไทย",
+    icon: "🎧",
+    meta: "อีก 41 วัน"
+  },
+  {
+    id: "countdown",
+    title: "New Year's Eve Countdown",
+    thaiTitle: "คริสต์มาส & เคานต์ดาวน์ปีใหม่ 2027",
+    days: 55,
+    dateText: "25 – 31 ธ.ค. 2026",
+    location: "กรุงเทพฯ ซิดนีย์ โตเกียว ลอนดอน ไทม์สแควร์นิวยอร์ก",
+    description: "มหกรรมส่งท้ายปีเก่าต้อนรับปีใหม่ด้วยการแสดงพลุดอกไม้ไฟระดับโลกและการนับถอยหลังข้ามปีทั่วแลนด์มาร์กสำคัญ",
+    icon: "🎆",
+    meta: "อีก 55 วัน"
+  },
+  {
+    id: "harbin-ice",
+    title: "Harbin Ice & Snow Festival",
+    thaiTitle: "เทศกาลน้ำแข็งฮาร์บิน",
+    days: 66,
+    dateText: "5 ม.ค. – ก.พ. 2027",
+    location: "เมืองฮาร์บิน ประเทศจีน",
+    description: "เทศกาลประติมากรรมน้ำแข็งและหิมะที่ใหญ่ที่สุดในโลก ปราสาทน้ำแข็งขนาดยักษ์ประดับไฟหลากสีสันท่ามกลางอุณหภูมิติดลบ",
+    icon: "❄️",
+    meta: "อีก 66 วัน"
+  },
+  {
+    id: "venice-carnival",
+    title: "Venice Carnival 2027",
+    thaiTitle: "เทศกาลหน้ากากเวนิส",
+    days: 91,
+    dateText: "30 ม.ค. – 9 ก.พ. 2027",
+    location: "เมืองเวนิส ประเทศอิตาลี",
+    description: "เทศกาลคาร์นิวัลสุดคลาสสิกที่ผู้คนสวมหน้ากากเวนิสและชุดย้อนยุคสุดวิจิตรตระการตาออกมาเดินทั่วเมืองและล่องเรือในคลองเวนิส",
+    icon: "🎭",
+    meta: "อีก 91 วัน"
+  },
+  {
+    id: "sapporo-snow",
+    title: "Sapporo Snow Festival",
+    thaiTitle: "เทศกาลหิมะซัปโปโร",
+    days: 96,
+    dateText: "4 – 11 ก.พ. 2027",
+    location: "เมืองซัปโปโร ฮอกไกโด ประเทศญี่ปุ่น",
+    description: "งานแสดงประติมากรรมหิมะและน้ำแข็งแกะสลักขนาดใหญ่ใจกลางสวนโอโดริ ดึงดูดนักท่องเที่ยวหลายล้านคนจากทั่วโลก",
+    icon: "⛄",
+    meta: "อีก 96 วัน"
+  },
+  {
+    id: "rio-carnival",
+    title: "Rio Carnival 2027",
+    thaiTitle: "ริโอ คาร์นิวัล บราซิล",
+    days: 97,
+    dateText: "5 – 10 ก.พ. 2027",
+    location: "เมืองรีโอเดจาเนโร ประเทศบราซิล",
+    description: "งานคาร์นิวัลที่ใหญ่และมีสีสันที่สุดในโลก การประชันขบวนแห่และจังหวะแซมบ้าสุดเร้าใจในสนาม Sambadrome",
+    icon: "💃",
+    meta: "อีก 97 วัน"
+  },
+  {
+    id: "lunar-new-year",
+    title: "Lunar New Year 2027",
+    thaiTitle: "เทศกาลตรุษจีน (ปีมะแม)",
+    days: 98,
+    dateText: "6 ก.พ. 2027",
+    location: "จีน ไต้หวัน ฮ่องกง สิงคโปร์ เยาวราชไทย",
+    description: "การเฉลิมฉลองก้าวเข้าสู่ปีมะแม (ปีแพะ) ตามปฏิทินจันทรคติ เชิดสิงโต เชิดมังกร โคมไฟสีแดง และดอกไม้ไฟ",
+    icon: "🧧",
+    meta: "อีก 98 วัน"
+  },
+  {
+    id: "holi",
+    title: "Holi Festival of Colours",
+    thaiTitle: "เทศกาลโฮลี (เทศกาลสาดสี)",
+    days: 141,
+    dateText: "21 – 22 มี.ค. 2027",
+    location: "อินเดีย และเนปาล",
+    description: "เทศกาลต้อนรับฤดูใบไม้ผลิของชาวฮินดู สาดผงสีธรรมชาติ (Gulal) และน้ำใส่กันอย่างสนุกสนานทั่วท้องถนน",
+    icon: "🎨",
+    meta: "อีก 141 วัน"
+  },
+  {
+    id: "sakura",
+    title: "Cherry Blossom Hanami",
+    thaiTitle: "เทศกาลชมดอกซากุระ",
+    days: 145,
+    dateText: "ปลาย มี.ค. – เม.ย. 2027",
+    location: "ญี่ปุ่น เกาหลีใต้ และไต้หวัน",
+    description: "ช่วงเวลาที่ดอกซากุระผลิบานเปลี่ยนเมืองให้กลายเป็นสีชมพู ผู้คนออกมานั่งปิกนิกชมดอกไม้ (ฮานามิ) ตามสวนสาธารณะ",
+    icon: "🌸",
+    meta: "อีก 145 วัน"
+  },
+  {
+    id: "coachella",
+    title: "Coachella Music & Arts",
+    thaiTitle: "เทศกาลดนตรีโคเชลลา 2027",
+    days: 160,
+    dateText: "9 – 18 เม.ย. 2027",
+    location: "แคลิฟอร์เนีย สหรัฐอเมริกา",
+    description: "เทศกาลดนตรีและศิลปะระดับโลกกลางทะเลทรายโคเชลลา รวมศิลปินตัวท็อปจากทุกมุมโลกและเวทีกำหนดเทรนด์แฟชั่น",
+    icon: "🎡",
+    meta: "อีก 160 วัน"
+  },
+  {
+    id: "songkran",
+    title: "Maha Songkran Festival",
+    thaiTitle: "เทศกาลมหาสงกรานต์ (ปีใหม่ไทย)",
+    days: 164,
+    dateText: "13 – 15 เม.ย. 2027",
+    location: "ทั่วประเทศไทย (มรดกโลก UNESCO)",
+    description: "เทศกาลปีใหม่ไทย มรดกทางวัฒนธรรมโดย UNESCO มหกรรมสาดน้ำคลายร้อนและประเพณีไทยอันงดงามที่โด่งดังไปทั่วโลก",
+    icon: "💦",
+    meta: "อีก 164 วัน"
+  },
+  {
+    id: "kings-day",
+    title: "King's Day (Koningsdag)",
+    thaiTitle: "วันพระราชา เนเธอร์แลนด์",
+    days: 178,
+    dateText: "27 เม.ย. 2027",
+    location: "อัมสเตอร์ดัม และทั่วประเทศเนเธอร์แลนด์",
+    description: "ปาร์ตี้กลางแจ้งที่ใหญ่ที่สุดของเนเธอร์แลนด์ ผู้คนพร้อมใจกันแต่งกายด้วยสีส้ม ออกมาล่องเรือตามลำคลองและจัดตลาดนัดทั่วเมือง",
+    icon: "👑",
+    meta: "อีก 178 วัน"
+  }
+];
+
+let festivalCounterInstance = null;
+let festivalStrokeInstance = null;
+let festivalListInstance = null;
+let festivalLabMounted = false;
+
+async function initFestivalLab() {
+  if (festivalLabMounted) return;
+
+  const counterMount = document.getElementById("festival-counter-mount");
+  const strokeMount = document.getElementById("festival-stroke-mount");
+  const listMount = document.getElementById("festival-animated-list-mount");
+
+  if (!counterMount || !strokeMount || !listMount) return;
+
+  try {
+    const [{ createCounter }, { createStrokeText }, { createAnimatedList }] = await Promise.all([
+      import("./counter.js"),
+      import("./stroke-text.js"),
+      import("./animated-list.js")
+    ]);
+
+    const initialItem = UPCOMING_FESTIVALS[0];
+
+    // 1. Mount Counter
+    festivalCounterInstance = createCounter(counterMount, {
+      value: initialItem.days,
+      fontSize: 64,
+      fontWeight: 800,
+      textColor: "#38bdf8",
+      bounce: 0.2,
+      duration: 0.7,
+      motionBlur: true
+    });
+
+    // 2. Mount StrokeText
+    festivalStrokeInstance = createStrokeText(strokeMount, {
+      text: initialItem.title,
+      strokeColor: "#38bdf8",
+      fillColor: "#ffffff",
+      fontSize: 26,
+      fontWeight: 800,
+      drawDuration: 0.9,
+      fillDelay: 0.15,
+      wipeFrom: "left",
+      shadow: true
+    });
+
+    // Function to update details view
+    const updateFestivalDisplay = (item) => {
+      if (!item) return;
+      const emojiEl = document.getElementById("festival-badge-emoji");
+      const thaiTitleEl = document.getElementById("festival-thai-title");
+      const dateEl = document.getElementById("festival-info-date");
+      const locEl = document.getElementById("festival-info-location");
+      const descEl = document.getElementById("festival-info-desc");
+
+      if (emojiEl) emojiEl.textContent = item.icon || "🎉";
+      if (thaiTitleEl) thaiTitleEl.textContent = `${item.thaiTitle || ''} • ${item.dateText || ''}`;
+      if (dateEl) dateEl.textContent = item.dateText || "";
+      if (locEl) locEl.textContent = item.location || "";
+      if (descEl) descEl.textContent = item.description || "";
+
+      // Roll Counter digits
+      if (festivalCounterInstance) {
+        festivalCounterInstance.setValue(item.days);
+      }
+
+      // Redraw StrokeText
+      if (festivalStrokeInstance) {
+        festivalStrokeInstance.setText(item.title);
+      }
+
+      playBeep(520, 0.05);
+    };
+
+    // 3. Mount AnimatedList
+    festivalListInstance = createAnimatedList(listMount, {
+      items: UPCOMING_FESTIVALS,
+      initialSelectedIndex: 0,
+      selectOnHover: true,
+      enableArrowNavigation: true,
+      loop: true,
+      maxHeight: 280,
+      accentColor: "#38bdf8",
+      onItemSelect: (item) => {
+        updateFestivalDisplay(item);
+      }
+    });
+
+    updateFestivalDisplay(initialItem);
+    festivalLabMounted = true;
+  } catch (err) {
+    console.warn("Festival Lab failed to mount:", err);
+  }
+}
+
+window.openFestivalModal = function() {
+  playBeep(640, 0.08);
+  const modal = document.getElementById("festival-modal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    initFestivalLab();
+    if (window.lucide) lucide.createIcons();
+  }
+};
+
+window.closeFestivalModal = function() {
+  const modal = document.getElementById("festival-modal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+};
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeFestivalModal();
+  }
+});
+
 // ─── 16. BOOTSTRAP APPLICATION ──────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();

@@ -11,6 +11,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- GSAP Animation Library (for React Bits StrokeText) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
   <!-- Three.js Import Map -->
   <script type="importmap">
@@ -57,6 +59,14 @@
       <!-- Sound FX Toggle Button -->
       <button id="sound-btn" type="button" title="เปิด/ปิดเสียงเอฟเฟกต์ UI" class="p-2 rounded-full hover:bg-white/10 text-slate-300 hover:text-white transition">
         <i data-lucide="volume-2" class="w-4 h-4"></i>
+      </button>
+
+      <div class="w-px h-5 bg-white/10 mx-1"></div>
+
+      <!-- Upcoming Festivals Countdown Trigger -->
+      <button onclick="openFestivalModal()" type="button" title="ดูเทศกาลที่จะถึงนี้ (Festival Countdown)" class="px-3 py-1.5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/40 text-cyan-300 text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-cyan-400"></i>
+        <span>เทศกาล</span>
       </button>
     </nav>
   </header>
@@ -327,6 +337,29 @@
       </div>
 
     </section>
+
+    <!-- ================= FESTIVAL COUNTDOWN QUICK BANNER (React Bits Lab) ================= -->
+    <div class="my-6 p-6 rounded-3xl bg-gradient-to-r from-slate-900/90 via-cyan-950/40 to-slate-900/90 border border-cyan-500/30 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden group">
+      <div class="flex items-center gap-4 z-10">
+        <div class="w-14 h-14 rounded-2xl bg-cyan-500/15 border border-cyan-400/40 flex items-center justify-center text-3xl shadow-lg shrink-0 group-hover:scale-110 transition duration-300">
+          🎉
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="text-lg font-bold text-white">Upcoming Festivals Countdown</h3>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold">REACT BITS LAB</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">
+            เช็คดูว่าอีกกี่วันจะถึงเทศกาลอะไร (ฮาโลวีน, ลอยกระทง, คริสต์มาส, สงกรานต์ ฯลฯ) พร้อม AnimatedList, Counter และ StrokeText
+          </p>
+        </div>
+      </div>
+
+      <button onclick="openFestivalModal()" type="button" class="z-10 px-6 py-3 rounded-2xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs transition flex items-center gap-2 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-400/40 cursor-pointer shrink-0">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        <span>เปิดดูเทศกาลที่จะถึง (17 เทศกาล)</span>
+      </button>
+    </div>
 
     <!-- ================= 5. PORTFOLIO SHOWCASE (โฟกัส: ผลงาน และ การแข่งขัน) ================= -->
     <section id="portfolio" class="py-24 space-y-12">
@@ -959,6 +992,117 @@
               <span class="w-2 h-2 rounded-full bg-cyan-400 inline-block animate-pulse"></span>
               <span>INTERACTIVE SYSTEM PREVIEW</span>
             </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= UPCOMING FESTIVALS COUNTDOWN MODAL (React Bits Lab) ================= -->
+  <div id="festival-modal" class="fixed inset-0 z-[99999] hidden items-center justify-center p-3 sm:p-5 bg-slate-950/85 backdrop-blur-xl transition-all duration-300">
+    <div class="relative w-full max-w-4xl max-h-[92vh] flex flex-col rounded-3xl bg-slate-900/95 border border-cyan-500/40 shadow-[0_0_80px_rgba(6,182,212,0.3)] text-slate-100 overflow-hidden">
+
+      <!-- Header Bar -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-slate-950/70 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-cyan-400 shadow-md">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-base sm:text-lg font-black text-white tracking-wide">FESTIVAL COUNTDOWN</h3>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold">2026 – 2027</span>
+            </div>
+            <p class="text-xs text-slate-400">เช็คเวลาถอยหลังเทศกาลสำคัญระดับโลกและเทศกาลไทย (React Bits Lab)</p>
+          </div>
+        </div>
+
+        <button onclick="closeFestivalModal()" type="button" class="text-slate-400 hover:text-white p-2 rounded-xl bg-white/5 hover:bg-white/10 transition cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6">
+
+        <!-- Top Showcase: StrokeText Animated Title -->
+        <div class="p-6 rounded-3xl bg-gradient-to-br from-slate-950/90 via-slate-900/80 to-blue-950/40 border border-cyan-500/25 shadow-xl space-y-3 text-center relative overflow-hidden">
+          <div class="absolute -top-12 -left-12 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-12 -right-12 w-48 h-48 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25 text-cyan-300 text-xs font-semibold">
+            <span id="festival-badge-emoji">🎃</span>
+            <span id="festival-badge-sub">กำลังดูเทศกาล</span>
+          </div>
+
+          <!-- StrokeText SVG Mount -->
+          <div id="festival-stroke-mount" class="w-full max-w-xl mx-auto min-h-[44px] flex items-center justify-center">
+            <!-- Dynamically populated by StrokeText -->
+          </div>
+
+          <p id="festival-thai-title" class="text-sm sm:text-base font-bold text-slate-300">
+            วันปล่อยผี &amp; วันแห่งผู้ล่วงลับ
+          </p>
+        </div>
+
+        <!-- Middle Showcase: Counter Rolling Digits & Festival Details -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
+          
+          <!-- Counter Stage Card -->
+          <div class="md:col-span-5 p-6 rounded-3xl bg-slate-950/80 border border-white/10 flex flex-col items-center justify-center text-center space-y-2 relative shadow-lg">
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">เหลือเวลาอีก</span>
+            <div id="festival-counter-mount" class="py-2 flex items-center justify-center min-h-[80px]">
+              <!-- Dynamically populated by Counter -->
+            </div>
+            <span class="text-xs text-cyan-400/90 font-medium">วัน (Days Remaining)</span>
+          </div>
+
+          <!-- Festival Info Details Card -->
+          <div class="md:col-span-7 p-6 rounded-3xl bg-slate-950/80 border border-white/10 flex flex-col justify-center space-y-3.5 text-xs text-slate-300">
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="calendar" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+              <div>
+                <span class="font-bold text-white block">ช่วงเวลาจัดงาน:</span>
+                <span id="festival-info-date" class="text-slate-300">31 ต.ค. – 2 พ.ย. 2026</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-rose-400 shrink-0 mt-0.5"></i>
+              <div>
+                <span class="font-bold text-white block">สถานที่จัดงาน:</span>
+                <span id="festival-info-location" class="text-slate-300">ทั่วโลก / เม็กซิโก (Mexico City, Oaxaca)</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="info" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <div>
+                <span class="font-bold text-white block">รายละเอียด:</span>
+                <span id="festival-info-desc" class="text-slate-400 leading-relaxed block">
+                  งานเฉลิมฉลองคืนปล่อยผีทั่วโลก ควบคู่กับเทศกาลมรดกโลกของเม็กซิโก
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Showcase: AnimatedList of Upcoming Festivals -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i data-lucide="list-ordered" class="w-4 h-4 text-cyan-400"></i>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-white">เลือกเทศกาลที่จะถึงนี้ (17 รายการ)</h4>
+            </div>
+            <span class="text-[11px] text-slate-400 hidden sm:inline">ใช้เมาส์ชี้/คลิก หรือปุ่มลูกศร ↑ ↓ เพื่อเลือก</span>
+          </div>
+
+          <!-- AnimatedList Mount Container -->
+          <div id="festival-animated-list-mount" class="w-full">
+            <!-- Dynamically populated by AnimatedList -->
           </div>
         </div>
 
