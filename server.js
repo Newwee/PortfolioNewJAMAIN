@@ -53,7 +53,7 @@ const fallbackComments = [
 
 let fallbackSpotify = {
   title: "A little music. A lot of ideas.",
-  embed_url: "https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0"
+  embed_url: "https://open.spotify.com/embed/playlist/6qM9smcDFHdPK2UTYKzAzd?utm_source=generator&theme=0"
 };
 
 // Thai & English Profanity Filter

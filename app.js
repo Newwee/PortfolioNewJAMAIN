@@ -5,14 +5,18 @@
    ============================================================================== */
 
 // ─── 1. GLOBAL STATE & CONFIGURATION ─────────────────────────────────────────
+// 🎵 SPOTIFY CONFIGURATION: ปรับเปลี่ยนลิงก์ Playlist หรือ Track ได้ที่นี่โดยตรง
+const SPOTIFY_CONFIG = {
+  title: "A little music.<br /><span class=\"text-blue-400\">A lot of ideas.</span>",
+  playlistUrl: "https://open.spotify.com/playlist/6qM9smcDFHdPK2UTYKzAzd?si=264c5e89d1584525",
+  embedUrl: "https://open.spotify.com/embed/playlist/6qM9smcDFHdPK2UTYKzAzd?utm_source=generator&theme=0"
+};
+
 const state = {
   soundEnabled: true,
   audioCtx: null,
   comments: [],
-  spotify: {
-    title: "A little music. A lot of ideas.",
-    embed_url: "https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0"
-  },
+  spotify: SPOTIFY_CONFIG,
   projects: {
     "J3A STORE": {
       title: "J3A STORE",
@@ -656,70 +660,24 @@ window.handleDeleteComment = async function(id) {
   }
 };
 
-// ─── 13. SPOTIFY PLAYLIST SYNC (SUPABASE INTEGRATION) ───────────────────────
-async function loadSpotifySettings() {
-  try {
-    const res = await fetch("/api/settings/spotify");
-    const data = await res.json();
-    if (data && data.embed_url) {
-      state.spotify = data;
-      const iframe = document.getElementById("spotify-iframe");
-      const heading = document.getElementById("spotify-heading");
-      const adminUrlInput = document.getElementById("admin-spotify-url");
-      const adminTitleInput = document.getElementById("admin-spotify-title");
+// ─── 13. SPOTIFY PLAYLIST INITIALIZATION ────────────────────────────────────
+function initSpotify() {
+  const iframe = document.getElementById("spotify-iframe");
+  const heading = document.getElementById("spotify-heading");
+  const link = document.getElementById("spotify-external-link");
 
-      if (iframe) iframe.src = data.embed_url;
-      if (adminUrlInput) adminUrlInput.value = data.embed_url;
-      if (adminTitleInput) adminTitleInput.value = data.title;
-    }
-  } catch (e) {}
+  if (heading && SPOTIFY_CONFIG.title) {
+    heading.innerHTML = SPOTIFY_CONFIG.title;
+  }
+  if (iframe && SPOTIFY_CONFIG.embedUrl) {
+    iframe.src = SPOTIFY_CONFIG.embedUrl;
+  }
+  if (link && SPOTIFY_CONFIG.playlistUrl) {
+    link.href = SPOTIFY_CONFIG.playlistUrl;
+  }
 }
 
-window.handleSaveSpotify = async function(e) {
-  e.preventDefault();
-  const title = document.getElementById("admin-spotify-title")?.value;
-  const embed_url = document.getElementById("admin-spotify-url")?.value;
-
-  try {
-    const res = await fetch("/api/settings/spotify", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, embed_url })
-    });
-
-    if (res.ok) {
-      showToast("บันทึกการตั้งค่า Spotify ลง Supabase สำเร็จ!");
-      closeAdminModal();
-      await loadSpotifySettings();
-    } else {
-      showToast("กรุณาตรวจสอบข้อมูลหรือสิทธิ์ Admin");
-    }
-  } catch (err) {
-    showToast("เกิดข้อผิดพลาดในการบันทึก");
-  }
-};
-
-// ─── 14. ADMIN MODAL ────────────────────────────────────────────────────────
-window.openAdminModal = function() {
-  playBeep(600, 0.08);
-  const modal = document.getElementById("admin-modal");
-  if (modal) modal.classList.remove("hidden");
-  if (window.lucide) lucide.createIcons();
-};
-
-window.closeAdminModal = function() {
-  playBeep(400, 0.06);
-  const modal = document.getElementById("admin-modal");
-  if (modal) modal.classList.add("hidden");
-};
-
-const adminBtn = document.getElementById("admin-btn");
-if (adminBtn) adminBtn.addEventListener("click", openAdminModal);
-
-const editSpotifyBtn = document.getElementById("edit-spotify-btn");
-if (editSpotifyBtn) editSpotifyBtn.addEventListener("click", openAdminModal);
-
-// ─── 15. CONTACT FORM SUBMISSION ────────────────────────────────────────────
+// ─── 14. CONTACT FORM SUBMISSION ────────────────────────────────────────────
 window.handleSendContact = function(e) {
   e.preventDefault();
   const name = document.getElementById("contact-name")?.value;
@@ -727,7 +685,7 @@ window.handleSendContact = function(e) {
   document.getElementById("contact-form")?.reset();
 };
 
-// ─── 16. BOOTSTRAP APPLICATION ──────────────────────────────────────────────
+// ─── 15. BOOTSTRAP APPLICATION ──────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
   initPreloader();
@@ -738,5 +696,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initTypewriter();
   initSpotlightCards();
   loadComments();
-  loadSpotifySettings();
+  initSpotify();
 });

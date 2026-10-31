@@ -55,11 +55,6 @@
       <button id="sound-btn" type="button" title="เปิด/ปิดเสียงเอฟเฟกต์ UI" class="p-2 rounded-full hover:bg-white/10 text-slate-300 hover:text-white transition">
         <i data-lucide="volume-2" class="w-4 h-4"></i>
       </button>
-
-      <!-- Admin Control Button -->
-      <button id="admin-btn" type="button" title="Admin Settings" class="p-2 rounded-full hover:bg-blue-600/20 text-slate-300 hover:text-blue-400 transition">
-        <i data-lucide="shield" class="w-4 h-4"></i>
-      </button>
     </nav>
   </header>
 
@@ -302,21 +297,17 @@
             <span class="text-blue-400">A lot of ideas.</span>
           </h3>
           <p class="text-sm text-slate-400 leading-relaxed">
-            เพลงที่เปิดคู่ใจตอนนั่งเขียนโค้ด สร้างระบบ และเปลี่ยนไอเดียให้กลายเป็นผลงานจริง สามารถเชื่อมต่อและปรับเปลี่ยนเพลย์ลิสต์ผ่าน Supabase ได้แบบ Realtime
+            เพลย์ลิสต์เพลงโปรดที่เปิดคู่ใจตอนนั่งเขียนโค้ด พัฒนาระบบ และเปลี่ยนไอเดียให้กลายเป็นผลงานจริง
           </p>
           <div class="flex items-center gap-3 pt-1">
-            <a href="https://open.spotify.com" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-semibold text-slate-200 hover:border-emerald-500/50 transition">
+            <a id="spotify-external-link" href="https://open.spotify.com/playlist/6qM9smcDFHdPK2UTYKzAzd?si=264c5e89d1584525" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-semibold text-slate-200 hover:border-emerald-500/50 hover:text-emerald-400 transition">
               <i data-lucide="disc-3" class="w-4 h-4 text-emerald-400"></i>
               <span>Listen on Spotify ↗</span>
             </a>
-            <button id="edit-spotify-btn" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs font-semibold text-slate-400 hover:text-white transition" title="จัดการเพลง (Admin)">
-              <i data-lucide="settings" class="w-3.5 h-3.5"></i>
-              <span>ตั้งค่าเพลง</span>
-            </button>
           </div>
         </div>
         <div class="md:col-span-7">
-          <iframe id="spotify-iframe" style="border-radius:18px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe id="spotify-iframe" style="border-radius:18px" src="https://open.spotify.com/embed/playlist/6qM9smcDFHdPK2UTYKzAzd?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
       </div>
 
@@ -890,53 +881,6 @@
 
       <div class="rounded-2xl overflow-hidden bg-black/90 max-h-[70vh] flex items-center justify-center border border-white/10 p-2">
         <img id="cert-modal-img" src="" alt="Certificate Preview" class="w-full h-full object-contain max-h-[62vh] rounded-xl" />
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= ADMIN SETTINGS & MANAGEMENT MODAL ================= -->
-  <div id="admin-modal" class="fixed inset-0 z-50 hidden portfolio-modal flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-white/15 rounded-3xl max-w-md w-full p-6 md:p-8 space-y-6 shadow-2xl relative">
-      <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-1">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400">
-          <i data-lucide="shield-check" class="w-5 h-5"></i>
-        </div>
-        <div>
-          <h3 class="text-xl font-bold text-white">Admin Control Room</h3>
-          <p class="text-xs text-slate-400">จัดการเพลง Spotify &amp; ควบคุมระบบ</p>
-        </div>
-      </div>
-
-      <!-- Spotify Edit Form -->
-      <form onsubmit="handleSaveSpotify(event)" class="space-y-4 pt-2 border-t border-white/10">
-        <h4 class="text-xs font-bold uppercase text-slate-300 tracking-wider">ตั้งค่า Spotify Playlist / Track</h4>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">หัวข้อเพลง (Title)</label>
-          <input id="admin-spotify-title" type="text" placeholder="A little music. A lot of ideas." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-white/10 text-xs text-white focus:outline-none focus:border-blue-500" />
-        </div>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">Spotify Embed URL</label>
-          <input id="admin-spotify-url" type="url" placeholder="https://open.spotify.com/embed/playlist/..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-white/10 text-xs text-white focus:outline-none focus:border-blue-500" />
-        </div>
-        <button type="submit" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition">
-          บันทึกลง Supabase
-        </button>
-      </form>
-
-      <!-- Admin Status -->
-      <div class="pt-4 border-t border-white/10 text-xs text-slate-400 space-y-2">
-        <div class="flex justify-between">
-          <span>Supabase Status:</span>
-          <span class="text-emerald-400 font-bold">CONNECTED</span>
-        </div>
-        <div class="flex justify-between">
-          <span>Profanity Filter:</span>
-          <span class="text-blue-400 font-bold">ACTIVE (Thai/EN)</span>
-        </div>
       </div>
     </div>
   </div>
