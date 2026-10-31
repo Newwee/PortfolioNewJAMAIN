@@ -411,7 +411,7 @@
                   <span>Canva</span>
                 </a>
               </div>
-              <div class="pulse-heart-mount" data-heart-id="j3a-store" data-heart-count="148"></div>
+              <div class="pulse-heart-mount" data-heart-id="j3a-store" data-heart-count="0"></div>
             </div>
           </div>
         </div>
@@ -440,15 +440,18 @@
             </div>
           </div>
           
-          <div class="flex items-center gap-3 pt-2">
-            <button onclick="openProjectDetail('J3A Discord Manager')" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white flex items-center gap-2 transition">
-              <span>Details (3D Laptop View)</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-            <a href="https://canva.link/x9hqhoiqjwvr499" target="_blank" rel="noreferrer" class="px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 hover:border-indigo-500/40 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
-              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-              <span>เอกสารนำเสนอ (Canva)</span>
-            </a>
+          <div class="flex flex-wrap items-center justify-between w-full gap-3 pt-2">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <button onclick="openProjectDetail('J3A Discord Manager')" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white flex items-center gap-2 transition shadow-md shadow-blue-600/30">
+                <span>Details (3D Laptop View)</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <a href="https://canva.link/x9hqhoiqjwvr499" target="_blank" rel="noreferrer" class="px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 hover:border-indigo-500/40 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                <span>Canva</span>
+              </a>
+            </div>
+            <div class="pulse-heart-mount" data-heart-id="j3a-discord" data-heart-count="0"></div>
           </div>
         </div>
 
@@ -517,7 +520,7 @@
                   <i data-lucide="external-link" class="w-4 h-4 text-amber-400"></i>
                   <span>อ่านบทความและรายละเอียดงานข่าว UTCC ฉบับเต็ม ↗</span>
                 </a>
-                <div class="pulse-heart-mount" data-heart-id="utcc-hackathon" data-heart-count="256"></div>
+                <div class="pulse-heart-mount" data-heart-id="utcc-hackathon" data-heart-count="0"></div>
               </div>
             </div>
 
@@ -563,7 +566,7 @@
                   <i data-lucide="external-link" class="w-4 h-4 text-blue-400"></i>
                   <span>อ่านโพสต์ประกาศผลทางการ คณะไอที สจล. ↗</span>
                 </a>
-                <div class="pulse-heart-mount" data-heart-id="kmitl-hackathon" data-heart-count="189"></div>
+                <div class="pulse-heart-mount" data-heart-id="kmitl-hackathon" data-heart-count="0"></div>
               </div>
             </div>
 
@@ -986,14 +989,14 @@
   </div>
 
 
-  <!-- ================= SECRET ADMIN HUD INDICATOR (Hold AltLeft 3s) ================= -->
+  <!-- ================= SECRET ADMIN HUD INDICATOR (Hold AltRight 1.5s) ================= -->
   <div id="admin-secret-hud" class="fixed bottom-6 left-6 z-[999999] pointer-events-none transition-all duration-300 opacity-0 transform translate-y-4">
     <div class="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-slate-950/95 border border-cyan-500/50 text-cyan-300 shadow-[0_0_24px_rgba(6,182,212,0.4)] backdrop-blur-md text-xs font-mono">
       <span class="relative flex h-2.5 w-2.5">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
         <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400"></span>
       </span>
-      <span>SECURITY CLEARANCE: HOLD ALT ( <span id="admin-hud-timer" class="font-bold text-white">3.0s</span> )</span>
+      <span>SECURITY CLEARANCE: HOLD RIGHT-ALT ( <span id="admin-hud-timer" class="font-bold text-white">1.5s</span> )</span>
     </div>
   </div>
 
@@ -1109,6 +1112,29 @@
 
       </div>
 
+    </div>
+  </div>
+
+  <!-- ================= CUSTOM ADMIN CONFIRMATION MODAL (No Browser Confirm) ================= -->
+  <div id="admin-confirm-modal" class="fixed inset-0 z-[99999999] hidden items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
+    <div class="relative w-full max-w-sm p-6 rounded-3xl bg-slate-900 border border-rose-500/40 shadow-[0_0_50px_rgba(244,63,94,0.35)] text-slate-100 space-y-5 text-center">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400">
+        <i data-lucide="alert-triangle" class="w-7 h-7"></i>
+      </div>
+      <div class="space-y-1.5">
+        <h3 id="admin-confirm-title" class="text-lg font-black text-white">ยืนยันการลบความคิดเห็นถาวร</h3>
+        <p id="admin-confirm-desc" class="text-xs text-slate-400 leading-relaxed">
+          การกระทำนี้ไม่สามารถย้อนกลับได้ ความคิดเห็นนี้จะถูกลบออกจากฐานข้อมูลอย่างถาวร
+        </p>
+      </div>
+      <div class="flex items-center gap-3 pt-2">
+        <button id="admin-confirm-cancel-btn" type="button" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition">
+          ยกเลิก
+        </button>
+        <button id="admin-confirm-ok-btn" type="button" class="flex-1 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition shadow-lg shadow-rose-600/30">
+          ลบทิ้งถาวร
+        </button>
+      </div>
     </div>
   </div>
 

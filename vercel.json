@@ -2,6 +2,7 @@
   "version": 2,
   "rewrites": [
     { "source": "/api/admin/notify-login", "destination": "/api/admin-notify.js" },
+    { "source": "/api/likes", "destination": "/api/likes.js" },
     { "source": "/api/comments", "destination": "/api/comments.js" },
     { "source": "/api/comments/(.*)", "destination": "/api/comments.js" }
   ]

@@ -22,7 +22,7 @@ export function createPulseHeart(container, options = {}) {
 
   const {
     id = 'item',
-    initialCount = 120,
+    initialCount = 0,
     showCount = true,
     size = 32,
     corner = 24,
@@ -213,6 +213,11 @@ export function createPulseHeart(container, options = {}) {
   return {
     isLiked: () => liked,
     getCount: () => total,
+    setCount: (n) => {
+      total = Number(n || 0);
+      shown = { liked, count: total };
+      renderDom();
+    },
     destroy: () => {
       cancelAnimationFrame(rafId);
       clearTimeout(rollTimer);

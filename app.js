@@ -206,12 +206,12 @@ function initNavbarScrollSpy() {
 
     // Determine active section using viewport boundary
     let currentId = sections[0].id;
-    const triggerOffset = 220; // px threshold from viewport top
+    const triggerOffset = Math.max(180, window.innerHeight * 0.3);
 
     for (let i = sections.length - 1; i >= 0; i--) {
       const sec = sections[i];
       const rect = sec.getBoundingClientRect();
-      if (rect.top <= triggerOffset) {
+      if (rect.top <= triggerOffset && rect.bottom >= 60) {
         currentId = sec.id;
         break;
       }
@@ -252,16 +252,20 @@ function initNavbarScrollSpy() {
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("hashchange", () => {
     const hash = window.location.hash.replace("#", "");
-    if (hash) setActive(hash);
+    if (hash && document.getElementById(hash)) {
+      setActive(hash);
+    }
   });
 
   // Initial position check
-  const initialHash = window.location.hash.replace("#", "");
-  if (initialHash && document.getElementById(initialHash)) {
-    setActive(initialHash);
-  } else {
-    updateActiveNav();
-  }
+  setTimeout(() => {
+    const initialHash = window.location.hash.replace("#", "");
+    if (initialHash && document.getElementById(initialHash)) {
+      setActive(initialHash);
+    } else {
+      updateActiveNav();
+    }
+  }, 50);
 }
 
 // ─── 5. BACKGROUND STARFIELD CANVAS ─────────────────────────────────────────
@@ -357,9 +361,9 @@ async function initLanyard() {
       cardColor: "#04010e",
       strapColor: "#111827",
       strapWidth: 0.62,
-      strapLength: 0.58,
-      anchor: isDesktop ? 0.74 : 0.5,
-      size: isDesktop ? 0.62 : 0.54,
+      strapLength: 0.52,
+      anchor: isDesktop ? 0.85 : 0.5,
+      size: isDesktop ? 0.50 : 0.46,
       cornerRadius: 0.25,
       finish: "glossy",
       metal: "silver",
@@ -703,9 +707,6 @@ async function loadComments() {
               </div>
               <p class="text-xs text-slate-300 mt-1 leading-relaxed break-words">${c.message}</p>
             </div>
-            <button onclick="handleDeleteComment('${c.id}')" title="ลบคอมเมนต์" class="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition text-xs">
-              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-            </button>
           </div>
         `;
       })
@@ -776,20 +777,12 @@ window.handlePostComment = async function(e) {
   }
 };
 
-window.handleDeleteComment = async function(id) {
-  if (!confirm("คุณต้องการลบคอมเมนต์นี้หรือไม่?")) return;
-  try {
-    await fetch(`/api/comments/${id}`, { method: "DELETE" });
-  } catch (err) {}
-
-  try {
-    let localComments = JSON.parse(localStorage.getItem("newja_comments") || "[]");
-    localComments = localComments.filter(c => c.id !== id);
-    localStorage.setItem("newja_comments", JSON.stringify(localComments));
-  } catch (e) {}
-
-  showToast("ลบคอมเมนต์เรียบร้อยแล้ว");
-  await loadComments();
+window.handleDeleteComment = function() {
+  showToast({
+    title: "ไม่อนุญาตให้ลบ",
+    description: "เฉพาะผู้ดูแลระบบ (Admin) เท่านั้นที่สามารถลบหรือจัดการความคิดเห็นได้",
+    fuseColor: "#f43f5e"
+  });
 };
 
 // ─── 13. SPOTIFY PLAYLIST INITIALIZATION ────────────────────────────────────
@@ -810,11 +803,12 @@ function initSpotify() {
 }
 
 // ─── 14. CONTACT FORM SUBMISSION ────────────────────────────────────────────
-window.handleSendContact = function(e) {
+window.handleSendContact = async function(e) {
   e.preventDefault();
   const name = document.getElementById("contact-name")?.value.trim() || "";
   const email = document.getElementById("contact-email")?.value.trim() || "";
   const msg = document.getElementById("contact-msg")?.value.trim() || "";
+  const submitBtn = document.getElementById("contact-submit-btn");
 
   // Strict email validation: Must be valid format AND end with @gmail.com
   const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/i;
@@ -837,15 +831,53 @@ window.handleSendContact = function(e) {
     return;
   }
 
-  const mailtoUrl = `mailto:Pongpataradanai@gmail.com?subject=${encodeURIComponent("ติดต่อจากเว็บ Portfolio: " + name)}&body=${encodeURIComponent("ชื่อผู้ติดต่อ: " + name + "\nอีเมล: " + email + "\n\nข้อความ:\n" + msg)}`;
-  window.open(mailtoUrl, "_blank");
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span>กำลังส่งข้อความ...</span>`;
+  }
 
-  showToast({
-    title: "กำลังเปิดโปรแกรมส่งอีเมล",
-    description: `ขอบคุณครับคุณ ${name}! ระบบกำลังส่งอีเมลถึง Pongpataradanai@gmail.com`,
-    fuseColor: "#10b981"
-  });
-  document.getElementById("contact-form")?.reset();
+  try {
+    const res = await fetch("https://formsubmit.co/ajax/Pongpataradanai@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        _subject: `📬 ข้อความใหม่จากแบบฟอร์มติดต่อ (Portfolio New JA): ${name}`,
+        "ชื่อผู้ติดต่อ": name,
+        "อีเมล Gmail": email,
+        "ข้อความ": msg,
+        _template: "table"
+      })
+    });
+
+    if (!res.ok) throw new Error("HTTP " + res.status);
+
+    showToast({
+      title: "ส่งข้อความสำเร็จแล้ว!",
+      description: `ขอบคุณครับคุณ ${name} ข้อมูลถูกส่งตรงไปยัง Pongpataradanai@gmail.com เรียบร้อยแล้ว`,
+      fuseColor: "#10b981"
+    });
+    document.getElementById("contact-form")?.reset();
+    playBeep(660, 0.1);
+  } catch (err) {
+    // If FormSubmit blocked, direct mailto without _blank
+    const mailtoUrl = `mailto:Pongpataradanai@gmail.com?subject=${encodeURIComponent("ติดต่อจากเว็บ Portfolio: " + name)}&body=${encodeURIComponent("ชื่อผู้ติดต่อ: " + name + "\nอีเมล: " + email + "\n\nข้อความ:\n" + msg)}`;
+    window.location.href = mailtoUrl;
+
+    showToast({
+      title: "เปิดโปรแกรมส่งอีเมล",
+      description: `ขอบคุณครับคุณ ${name}! ระบบกำลังเปิดโปรแกรมส่งเมลเพื่อส่งหา Pongpataradanai@gmail.com`,
+      fuseColor: "#38bdf8"
+    });
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<span>ส่งข้อความ</span><i data-lucide="send" class="w-4 h-4"></i>`;
+      if (window.lucide) lucide.createIcons();
+    }
+  }
 };
 
 // ─── 15. REACT BITS INTEGRATIONS ───────────────────────────────────────────
@@ -858,13 +890,13 @@ async function initHeroGradientASCII() {
       shape: "horizon",
       characters: " =+xX0S8#@",
       cellSize: 18,
-      density: 0.85,
+      density: 0.9,
       glyphOpacity: 0.85,
       gradientOpacity: 0.85,
       glow: 0.25,
       flicker: 0.15,
-      softness: 0.5,
-      scale: 1.0,
+      softness: 0.6,
+      scale: 1.8,
       flow: 0.5,
       speed: 0.75,
       grain: 0.08,
@@ -921,22 +953,44 @@ async function initPulseHearts() {
   if (!mounts.length) return;
   try {
     const { createPulseHeart } = await import("./pulse-heart.js");
+    let serverLikes = {};
+    try {
+      const res = await fetch("/api/likes");
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.likes) serverLikes = data.likes;
+      }
+    } catch (e) {}
+
     mounts.forEach(mount => {
       const id = mount.dataset.heartId || "item";
-      const initialCount = Number(mount.dataset.heartCount || 100);
-      createPulseHeart(mount, {
+      const initialCount = typeof serverLikes[id] === "number" ? serverLikes[id] : Number(mount.dataset.heartCount || 0);
+      const heartInstance = createPulseHeart(mount, {
         id,
         initialCount,
         size: 32,
         corner: 20,
         likedColor: "#ff4d6d",
-        onLike: (count) => {
+        onLike: async (count) => {
           playBeep(750, 0.08);
           showToast({
             title: "ขอบคุณสำหรับการกดหัวใจ! ❤️",
             description: `คุณได้ส่งกำลังใจให้ผลงานนี้เรียบร้อยแล้ว (ยอดรวม: ${count})`,
             fuseColor: "#ff4d6d"
           });
+          try {
+            const postRes = await fetch("/api/likes", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ id })
+            });
+            if (postRes.ok) {
+              const postData = await postRes.json();
+              if (postData && typeof postData.count === "number" && heartInstance && heartInstance.setCount) {
+                heartInstance.setCount(postData.count);
+              }
+            }
+          } catch (e) {}
         },
         onAlreadyLiked: () => {
           showToast({
@@ -972,10 +1026,10 @@ async function initElectricBorder() {
   }
 }
 
-// ─── 18. SECRET ADMIN CLEARANCE SYSTEM (LeftAlt 3s or Mobile Trigger) ──────
+// ─── 18. SECRET ADMIN CLEARANCE SYSTEM (RightAlt 1.5s or Mobile Trigger) ──────
 let altPressTimer = null;
 let altStartTime = 0;
-const ALT_HOLD_DURATION = 3000;
+const ALT_HOLD_DURATION = 1500;
 
 function setupAdminSecretTrigger() {
   const hud = document.getElementById("admin-secret-hud");
@@ -993,7 +1047,8 @@ function setupAdminSecretTrigger() {
   }
 
   window.addEventListener("keydown", (e) => {
-    if (e.code === "AltLeft" && !altPressTimer) {
+    const isRightAlt = e.code === "AltRight" || (e.key === "Alt" && e.location === 2);
+    if (isRightAlt && !altPressTimer) {
       altStartTime = Date.now();
       if (hud) {
         hud.classList.remove("opacity-0", "translate-y-4");
@@ -1015,7 +1070,8 @@ function setupAdminSecretTrigger() {
   });
 
   window.addEventListener("keyup", (e) => {
-    if (e.code === "AltLeft") {
+    const isRightAlt = e.code === "AltRight" || (e.key === "Alt" && e.location === 2);
+    if (isRightAlt) {
       if (altPressTimer) {
         clearTimeout(altPressTimer);
         altPressTimer = null;
@@ -1238,24 +1294,70 @@ window.handleAdminBanComment = async function(id) {
   loadComments();
 };
 
-window.handleAdminDeletePermanent = async function(id) {
-  if (!confirm("คุณแน่ใจว่าต้องการลบคอมเมนต์นี้ทิ้งถาวรหรือไม่?")) return;
-  try {
-    await fetch(`/api/comments?id=${id}&key=Admin1230S_asdl133`, {
-      method: "DELETE",
-      headers: { "X-Admin-Key": "Admin1230S_asdl133" }
-    });
-  } catch (e) {}
+function showCustomConfirm({ title, desc, okText, onConfirm }) {
+  const modal = document.getElementById("admin-confirm-modal");
+  if (!modal) {
+    if (confirm(desc || title || "คุณต้องการดำเนินการนี้หรือไม่?")) {
+      if (typeof onConfirm === "function") onConfirm();
+    }
+    return;
+  }
+  const titleEl = document.getElementById("admin-confirm-title");
+  const descEl = document.getElementById("admin-confirm-desc");
+  const okBtn = document.getElementById("admin-confirm-ok-btn");
+  const cancelBtn = document.getElementById("admin-confirm-cancel-btn");
 
-  try {
-    let list = JSON.parse(localStorage.getItem("newja_comments") || "[]");
-    list = list.filter(c => c.id !== id);
-    localStorage.setItem("newja_comments", JSON.stringify(list));
-  } catch (e) {}
+  if (title && titleEl) titleEl.textContent = title;
+  if (desc && descEl) descEl.textContent = desc;
+  if (okText && okBtn) okBtn.textContent = okText;
 
-  showToast({ title: "ลบคอมเมนต์เรียบร้อย", description: "นำความคิดเห็นออกจากระบบถาวรแล้ว", fuseColor: "#f43f5e" });
-  loadAdminComments();
-  loadComments();
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  if (window.lucide) lucide.createIcons();
+
+  const cleanup = () => {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+    if (okBtn) okBtn.onclick = null;
+    if (cancelBtn) cancelBtn.onclick = null;
+  };
+
+  if (cancelBtn) cancelBtn.onclick = cleanup;
+
+  if (okBtn) {
+    okBtn.onclick = async () => {
+      cleanup();
+      if (typeof onConfirm === "function") {
+        await onConfirm();
+      }
+    };
+  }
+}
+
+window.handleAdminDeletePermanent = function(id) {
+  showCustomConfirm({
+    title: "ยืนยันการลบความคิดเห็นถาวร",
+    desc: "คุณแน่ใจว่าต้องการลบความคิดเห็นนี้ทิ้งถาวรหรือไม่? การกระทำนี้ไม่สามารถย้อนกลับได้",
+    okText: "ลบทิ้งถาวร",
+    onConfirm: async () => {
+      try {
+        await fetch(`/api/comments?id=${id}&key=Admin1230S_asdl133`, {
+          method: "DELETE",
+          headers: { "X-Admin-Key": "Admin1230S_asdl133" }
+        });
+      } catch (e) {}
+
+      try {
+        let list = JSON.parse(localStorage.getItem("newja_comments") || "[]");
+        list = list.filter(c => c.id !== id);
+        localStorage.setItem("newja_comments", JSON.stringify(list));
+      } catch (e) {}
+
+      showToast({ title: "ลบคอมเมนต์เรียบร้อย", description: "นำความคิดเห็นออกจากระบบถาวรแล้ว", fuseColor: "#f43f5e" });
+      loadAdminComments();
+      loadComments();
+    }
+  });
 };
 
 // ─── 16. BOOTSTRAP APPLICATION ──────────────────────────────────────────────

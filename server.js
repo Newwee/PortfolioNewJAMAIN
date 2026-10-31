@@ -327,6 +327,7 @@ app.get("/api/projects/likes", async (request, response, next) => {
 // ==============================================================================
 const commentsHandler = require("./api/comments.js");
 const adminNotifyHandler = require("./api/admin-notify.js");
+const likesHandler = require("./api/likes.js");
 
 app.all("/api/comments", (req, res) => commentsHandler(req, res));
 app.all("/api/comments/:id", (req, res) => {
@@ -335,6 +336,7 @@ app.all("/api/comments/:id", (req, res) => {
   return commentsHandler(req, res);
 });
 app.all("/api/admin/notify-login", (req, res) => adminNotifyHandler(req, res));
+app.all("/api/likes", (req, res) => likesHandler(req, res));
 
 // ==============================================================================
 // 🎵 SPOTIFY EMBED & SETTINGS (SUPABASE INTEGRATION)
