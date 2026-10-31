@@ -1,0 +1,97 @@
+/* ==============================================================================
+   🚀 ElasticSlider CSS (React Bits Exact Styles)
+   ============================================================================== */
+.elastic-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 220px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.elastic-slider__body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.elastic-slider__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.elastic-slider__hit {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  height: 32px;
+  outline: none;
+  cursor: grab;
+  touch-action: none;
+}
+
+.elastic-slider__hit:active {
+  cursor: grabbing;
+}
+
+.elastic-slider__track {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  will-change: transform;
+}
+
+.elastic-slider__range {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #3b82f6, #38bdf8);
+  border-radius: 999px;
+  clip-path: inset(0 25% 0 0);
+}
+
+.elastic-slider__thumb {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  margin-left: -8px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8), 0 2px 4px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.elastic-slider__bubble {
+  position: absolute;
+  bottom: calc(50% + 14px);
+  left: 0;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #0f172a;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  font-size: 11px;
+  font-weight: 700;
+  color: #38bdf8;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+  transition: opacity 0.15s ease;
+}

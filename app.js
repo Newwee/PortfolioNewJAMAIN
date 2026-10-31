@@ -14,6 +14,7 @@ const SPOTIFY_CONFIG = {
 
 const state = {
   soundEnabled: true,
+  soundVolume: 0.75,
   audioCtx: null,
   comments: [],
   spotify: SPOTIFY_CONFIG,
@@ -39,13 +40,47 @@ const state = {
   }
 };
 
-// ─── 2. TOAST NOTIFICATION HELPER ───────────────────────────────────────────
-function showToast(message) {
+// ─── 2. TOAST NOTIFICATION HELPER (React Bits SwipeToast Engine) ────────────
+let swipeToastManager = null;
+async function getSwipeToastManager() {
+  if (swipeToastManager) return swipeToastManager;
+  try {
+    const { createSwipeToastManager } = await import("./swipe-toast.js");
+    swipeToastManager = createSwipeToastManager();
+    return swipeToastManager;
+  } catch (err) {
+    return null;
+  }
+}
+
+async function showToast(titleOrMsg, description = "", options = {}) {
+  playBeep(600, 0.05);
+
+  try {
+    const manager = await getSwipeToastManager();
+    if (manager) {
+      let title = typeof titleOrMsg === "string" ? titleOrMsg : (titleOrMsg?.title || "แจ้งเตือนระบบ");
+      let desc = description;
+      if (!desc && typeof titleOrMsg === "string" && titleOrMsg.length > 25) {
+        desc = titleOrMsg;
+        title = "แจ้งเตือนระบบ";
+      }
+      manager.show({
+        title,
+        description: desc,
+        duration: options.duration || 4200,
+        fuseColor: options.fuseColor || "#38bdf8",
+        ...options
+      });
+      return;
+    }
+  } catch (e) {}
+
+  // Native fallback if dynamic import unavailable
   const toast = document.getElementById("toast");
   if (!toast) return;
-  toast.textContent = message;
+  toast.textContent = typeof titleOrMsg === "string" ? titleOrMsg : titleOrMsg.title;
   toast.classList.add("show");
-  playBeep(600, 0.05);
   setTimeout(() => {
     toast.classList.remove("show");
   }, 3200);
@@ -65,11 +100,14 @@ function playBeep(freq = 440, duration = 0.08, type = "sine") {
     const osc = state.audioCtx.createOscillator();
     const gain = state.audioCtx.createGain();
 
+    const masterVol = typeof state.soundVolume === "number" ? state.soundVolume : 0.75;
+    const peakGain = 0.1 * masterVol;
+
     osc.type = type;
     osc.frequency.setValueAtTime(freq, state.audioCtx.currentTime);
 
-    gain.gain.setValueAtTime(0.08, state.audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, state.audioCtx.currentTime + duration);
+    gain.gain.setValueAtTime(Math.max(peakGain, 0.001), state.audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, state.audioCtx.currentTime + duration);
 
     osc.connect(gain);
     gain.connect(state.audioCtx.destination);
@@ -436,18 +474,61 @@ window.switchTab = function(tabName) {
   if (targetContent) targetContent.classList.remove("hidden");
 
   document.querySelectorAll(".tab-btn").forEach((btn) => {
-    btn.classList.remove("bg-blue-600", "text-white");
-    btn.classList.add("text-slate-400");
+    btn.classList.remove(
+      "bg-blue-600",
+      "text-white",
+      "bg-gradient-to-r",
+      "from-amber-500",
+      "via-yellow-500",
+      "to-amber-500",
+      "text-slate-950",
+      "shadow-[0_0_28px_rgba(245,158,11,0.65)]"
+    );
+    if (btn.id !== "tab-achievements") {
+      btn.classList.add("text-slate-400");
+    } else {
+      btn.classList.add("text-amber-300");
+    }
   });
 
   const activeBtn = document.getElementById(`tab-${tabName}`);
   if (activeBtn) {
-    activeBtn.classList.add("bg-blue-600", "text-white");
-    activeBtn.classList.remove("text-slate-400");
+    if (tabName === "achievements") {
+      activeBtn.classList.add(
+        "bg-gradient-to-r",
+        "from-amber-500",
+        "via-yellow-500",
+        "to-amber-500",
+        "text-slate-950",
+        "shadow-[0_0_28px_rgba(245,158,11,0.65)]"
+      );
+      activeBtn.classList.remove("text-amber-300");
+      triggerAchievementsCountUps();
+    } else {
+      activeBtn.classList.add("bg-blue-600", "text-white");
+      activeBtn.classList.remove("text-slate-400");
+    }
   }
 
   if (window.lucide) lucide.createIcons();
 };
+
+let countUpModule = null;
+async function triggerAchievementsCountUps() {
+  try {
+    if (!countUpModule) {
+      countUpModule = await import("./count-up.js");
+    }
+    const container = document.getElementById("content-achievements");
+    if (!container) return;
+    const counters = container.querySelectorAll("[data-countup-to]");
+    counters.forEach((el) => {
+      countUpModule.animateCountUp(el);
+    });
+  } catch (err) {
+    console.warn("CountUp trigger error:", err);
+  }
+}
 
 // ─── 11. CERTIFICATES EXPAND & LIGHTBOX MODAL ───────────────────────────────
 window.toggleMoreCertificates = function() {
@@ -742,7 +823,73 @@ window.handleSendContact = function(e) {
   document.getElementById("contact-form")?.reset();
 };
 
-// ─── 15. BOOTSTRAP APPLICATION ──────────────────────────────────────────────
+// ─── 15. REACT BITS INTEGRATIONS ───────────────────────────────────────────
+async function initHeroGradientASCII() {
+  const container = document.getElementById("gradient-ascii-hero");
+  if (!container) return;
+  try {
+    const { initGradientASCII } = await import("./gradient-ascii.js");
+    initGradientASCII(container, {
+      shape: "horizon",
+      characters: " =+xX0S8#@",
+      cellSize: 18,
+      density: 0.85,
+      glyphOpacity: 0.85,
+      gradientOpacity: 0.85,
+      glow: 0.25,
+      flicker: 0.15,
+      softness: 0.5,
+      scale: 1.0,
+      flow: 0.5,
+      speed: 0.75,
+      grain: 0.08,
+      mouseInteraction: true,
+      scrambleRadius: 0.12,
+      clickEffect: "wave",
+      colors: ["#090d16", "#1e3fd8", "#0284c7", "#38bdf8", "#f6f8ff"]
+    });
+  } catch (err) {
+    console.warn("GradientASCII failed to mount:", err);
+  }
+}
+
+async function initVolumeElasticSlider() {
+  const mount = document.getElementById("elastic-slider-mount");
+  if (!mount) return;
+  try {
+    const { createElasticSlider } = await import("./elastic-slider.js");
+    createElasticSlider(mount, {
+      defaultValue: Math.round((state.soundVolume ?? 0.75) * 100),
+      min: 0,
+      max: 100,
+      step: 1,
+      onChange: (val) => {
+        state.soundVolume = val / 100;
+        if (val === 0) {
+          state.soundEnabled = false;
+        } else {
+          state.soundEnabled = true;
+        }
+        playBeep(350 + val * 5, 0.04);
+      }
+    });
+  } catch (err) {
+    console.warn("ElasticSlider failed to mount:", err);
+  }
+}
+
+async function initCountUps() {
+  try {
+    if (!countUpModule) {
+      countUpModule = await import("./count-up.js");
+    }
+    countUpModule.initAllCountUps();
+  } catch (err) {
+    console.warn("CountUp failed to init:", err);
+  }
+}
+
+// ─── 16. BOOTSTRAP APPLICATION ──────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
   initPreloader();
@@ -754,4 +901,10 @@ document.addEventListener("DOMContentLoaded", () => {
   initSpotlightCards();
   loadComments();
   initSpotify();
+
+  // React Bits Components
+  initHeroGradientASCII();
+  initVolumeElasticSlider();
+  initCountUps();
+  getSwipeToastManager();
 });
