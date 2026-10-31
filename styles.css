@@ -1438,6 +1438,47 @@ body {
   border: 1px solid rgba(56, 189, 248, 0.25);
 }
 
+.animated-list__item--highlight {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.16) 0%, rgba(234, 88, 12, 0.1) 40%, rgba(30, 41, 59, 0.75) 100%) !important;
+  border: 1px solid rgba(251, 191, 36, 0.35) !important;
+  box-shadow: 0 4px 14px -3px rgba(245, 158, 11, 0.25) !important;
+}
+
+.animated-list__item--highlight .animated-list__title {
+  color: #fef08a !important;
+  font-weight: 800;
+  text-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+}
+
+.animated-list__item--highlight .animated-list__lead {
+  background: rgba(245, 158, 11, 0.2) !important;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3) inset;
+}
+
+.animated-list__badge-highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1.5px 7px;
+  border-radius: 9999px;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.3) 0%, rgba(239, 68, 68, 0.3) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.6);
+  color: #fffbeb;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.35);
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.animated-list__meta--highlight {
+  color: #fef08a !important;
+  background: rgba(245, 158, 11, 0.2) !important;
+  border-color: rgba(251, 191, 36, 0.5) !important;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
 .animated-list__rim {
   position: absolute;
   inset: 0;

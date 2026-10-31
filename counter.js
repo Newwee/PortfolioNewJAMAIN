@@ -456,6 +456,22 @@ export function createCounter(container, options = {}) {
         item.wait = order * settings.stagger;
       });
 
+    // Ensure DOM order in rowSpan strictly matches the left-to-right reading order of slots
+    slots.forEach(slot => {
+      const it = engine.items.get(slot.key);
+      if (it?.el && it.el.parentNode === rowSpan) {
+        rowSpan.appendChild(it.el);
+      }
+    });
+    const pfx = rowSpan.querySelector('.counter__affix:first-child');
+    if (pfx) {
+      rowSpan.insertBefore(pfx, rowSpan.firstChild);
+    }
+    const sfx = rowSpan.querySelector('.counter__affix:last-child');
+    if (sfx) {
+      rowSpan.appendChild(sfx);
+    }
+
     kick();
   };
 

@@ -245,16 +245,24 @@ export function createAnimatedList(container, options = {}) {
       el.dataset.index = String(index);
 
       const isSel = index === selected;
-      el.setAttribute('aria-selected', String(isSel));
+      const isHighlight = Boolean(item.highlight);
+      el.className = `animated-list__item${isHighlight ? ' animated-list__item--highlight' : ''}`;
+      el.setAttribute('role', 'option');
+      el.setAttribute('tabindex', '-1');
+      el.dataset.index = String(index);
+
       if (isSel) el.dataset.selected = '';
 
       el.innerHTML = `
         <span class="animated-list__lead">${item.icon || '📌'}</span>
         <span class="animated-list__text">
-          <span class="animated-list__title">${item.title}</span>
+          <span class="animated-list__title">
+            ${item.title}
+            ${isHighlight ? `<span class="animated-list__badge-highlight">${item.highlightBadge || '🔥 ไฮไลท์'}</span>` : ''}
+          </span>
           ${item.thaiTitle ? `<span class="animated-list__description">${item.thaiTitle} • ${item.dateText || ''}</span>` : ''}
         </span>
-        ${item.meta ? `<span class="animated-list__meta">${item.meta}</span>` : ''}
+        ${item.meta ? `<span class="animated-list__meta${isHighlight ? ' animated-list__meta--highlight' : ''}">${item.meta}</span>` : ''}
         <span class="animated-list__rim" aria-hidden="true"></span>
       `;
 
