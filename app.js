@@ -837,7 +837,7 @@ window.handleSendContact = async function(e) {
   }
 
   try {
-    const res = await fetch("https://formsubmit.co/ajax/Pongpataradanai@gmail.com", {
+    const res = await fetch("https://formsubmit.co/ajax/fa521c79a3af82c9fb8a6f503ff81e3d", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -845,6 +845,7 @@ window.handleSendContact = async function(e) {
       },
       body: JSON.stringify({
         _subject: `📬 ข้อความใหม่จากแบบฟอร์มติดต่อ (Portfolio New JA): ${name}`,
+        _captcha: "false",
         "ชื่อผู้ติดต่อ": name,
         "อีเมล Gmail": email,
         "ข้อความ": msg,
@@ -1161,14 +1162,16 @@ window.handleAdminLogin = async function(e) {
       })
     }).catch(() => {});
 
-    fetch("https://formsubmit.co/ajax/Pongpataradanai@gmail.com", {
+    fetch("https://formsubmit.co/ajax/fa521c79a3af82c9fb8a6f503ff81e3d", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({
         _subject: "🚨 [ADMIN LOGIN ALERT] มีการเข้าสู่ระบบ Admin Panel (New JA Portfolio)",
+        _captcha: "false",
         "User": "Admin",
         "Device": deviceInfo,
-        "Time (Bangkok)": bangkokTime
+        "Time (Bangkok)": bangkokTime,
+        _template: "table"
       })
     }).catch(() => {});
 
