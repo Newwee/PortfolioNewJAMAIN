@@ -710,13 +710,13 @@ body {
    🚀 GradientASCII Styles (React Bits Component CSS)
    ============================================================================== */
 .gradient-ascii-container {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
-  pointer-events: auto;
-  z-index: 1;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .gradient-ascii-canvas {
@@ -972,4 +972,183 @@ body {
   transform-origin: 50% 100%;
   will-change: transform, opacity;
   transition: opacity 0.15s ease;
+}
+
+
+/* === pulse-heart.css === */
+/* ==============================================================================
+   🚀 PulseHeart CSS — React Bits Exact Component Styles
+   ============================================================================== */
+.pulse-heart {
+  --ph-size: 36px;
+  --ph-corner: 28px;
+  --ph-pill: rgba(15, 23, 42, 0.85);
+  --ph-idle: #94a3b8;
+  --ph-liked: #ff4d6d;
+  --ph-text: #f8fafc;
+  --ph-roll: 350ms;
+  --ph-stroke: 2.2px;
+  --ph-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--ph-corner);
+  background: none;
+  color: var(--ph-text);
+  font-family: inherit;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  outline: none;
+  transition: transform 160ms var(--ph-ease-out), border-color 200ms ease, box-shadow 200ms ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.pulse-heart:hover {
+  border-color: rgba(255, 77, 109, 0.4);
+  box-shadow: 0 0 16px rgba(255, 77, 109, 0.2);
+}
+
+.pulse-heart[data-pressed] {
+  transform: scale(0.95);
+}
+
+.pulse-heart:focus-visible {
+  outline: 2px solid rgba(255, 77, 109, 0.6);
+  outline-offset: 3px;
+}
+
+.pulse-heart:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pulse-heart__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--ph-size) * 0.22);
+  padding: calc(var(--ph-size) * 0.22) calc(var(--ph-size) * 0.38);
+  border-radius: var(--ph-corner);
+  background: var(--ph-pill);
+  transform-origin: center;
+  transition: transform 200ms ease;
+}
+
+.pulse-heart[data-no-count] .pulse-heart__pill {
+  padding-inline-end: calc(var(--ph-size) * 0.22);
+}
+
+.pulse-heart__heart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ph-size);
+  height: var(--ph-size);
+  color: var(--ph-idle);
+  transform-origin: center;
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.pulse-heart__heart svg {
+  display: block;
+  width: 72%;
+  height: 72%;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--ph-stroke);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: fill 200ms ease, stroke 200ms ease;
+}
+
+.pulse-heart[data-liked='true'] .pulse-heart__heart svg {
+  fill: currentColor;
+}
+
+.pulse-heart[data-liked='true'] .pulse-heart__heart {
+  color: var(--ph-liked);
+  filter: drop-shadow(0 0 8px rgba(255, 77, 109, 0.6));
+}
+
+.pulse-heart[data-running] .pulse-heart__heart,
+.pulse-heart[data-instant] .pulse-heart__heart {
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pulse-heart:not([data-liked='true']):not(:disabled):hover .pulse-heart__heart {
+    color: #fda4af;
+  }
+}
+
+.pulse-heart__count {
+  display: inline-flex;
+  font-size: calc(var(--ph-size) * 0.44);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.2px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ph-text);
+  font-family: inherit;
+}
+
+.pulse-heart__count > span {
+  display: block;
+  height: 1em;
+}
+
+.pulse-heart__slot {
+  position: relative;
+  overflow: hidden;
+}
+
+.pulse-heart__roll {
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--ph-roll) var(--ph-ease-out);
+}
+
+.pulse-heart__roll > span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+
+.pulse-heart__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+
+/* === electric-border.css === */
+/* ==============================================================================
+   🚀 ElectricBorder CSS — React Bits Exact Component Styles
+   ============================================================================== */
+.electric-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.electric-border__canvas {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  pointer-events: none;
 }

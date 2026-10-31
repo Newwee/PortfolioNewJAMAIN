@@ -42,6 +42,9 @@
   <!-- ================= BACKGROUND STARFIELD CANVAS ================= -->
   <canvas id="starfield" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
+  <!-- ================= FULLSCREEN GRADIENT ASCII SHADER (React Bits) ================= -->
+  <div id="gradient-ascii-hero" class="gradient-ascii-container pointer-events-none opacity-25"></div>
+
   <!-- ================= 2. FLOATING PILL NAVBAR ================= -->
   <header class="nav-pill-wrap">
     <nav class="nav-pill">
@@ -63,9 +66,6 @@
 
     <!-- ================= 3. HERO SECTION & 3D LANYARD BADGE ================= -->
     <section id="home" class="hero-root-section">
-      
-      <!-- GradientASCII Ambient Matrix Shader (React Bits Component) -->
-      <div id="gradient-ascii-hero" class="gradient-ascii-container pointer-events-none opacity-30 z-0"></div>
 
       <!-- Full-Section 3D Lanyard Overlay (Top Layer z-20 - Never blocked by text) -->
       <div id="lanyard-container" class="lanyard-card-container"></div>
@@ -76,7 +76,7 @@
         <div class="hero-text-col">
           <div class="hero-status-pill">
             <span class="hero-status-dot"></span>
-            <span class="hero-status-label">NMRTUP Grade 12 (Sci - Math) • Problem Solver &amp; Web Specialist</span>
+            <span class="hero-status-label"><a href="https://nmrtup.ac.th/" target="_blank" rel="noreferrer" class="hover:text-cyan-300 underline underline-offset-2 transition font-bold" title="โรงเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาพัฒนาการ (NMRTUP)">NMRTUP (น.ม.ร.ต.อ.พ.) ↗</a> Grade 12 (Sci - Math) • Problem Solver &amp; Web Specialist</span>
           </div>
 
           <div class="hero-heading-group">
@@ -396,18 +396,23 @@
           </div>
           
           <div class="flex flex-wrap items-center gap-2.5 pt-2">
-            <button onclick="openProjectDetail('J3A STORE')" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white flex items-center gap-1.5 transition shadow-md shadow-blue-600/30">
-              <span>Details (3D Laptop View)</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-            <a href="https://j3a-store.vercel.app/" target="_blank" rel="noreferrer" class="px-4 py-2.5 rounded-xl bg-cyan-600/20 border border-cyan-500/40 hover:bg-cyan-600 text-xs font-bold text-cyan-300 hover:text-white flex items-center gap-1.5 transition">
-              <i data-lucide="globe" class="w-3.5 h-3.5"></i>
-              <span>เข้าชมเว็บจริง (j3a-store.vercel.app) ↗</span>
-            </a>
-            <a href="https://canva.link/u57aa4fqg7cvr0y" target="_blank" rel="noreferrer" class="px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 hover:border-blue-500/40 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
-              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-              <span>เอกสารนำเสนอ (Canva)</span>
-            </a>
+            <div class="flex flex-wrap items-center justify-between w-full gap-3">
+              <div class="flex flex-wrap items-center gap-2.5">
+                <button onclick="openProjectDetail('J3A STORE')" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white flex items-center gap-1.5 transition shadow-md shadow-blue-600/30">
+                  <span>Details (3D Laptop View)</span>
+                  <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </button>
+                <a href="https://j3a-store.vercel.app/" target="_blank" rel="noreferrer" class="px-4 py-2.5 rounded-xl bg-cyan-600/20 border border-cyan-500/40 hover:bg-cyan-600 text-xs font-bold text-cyan-300 hover:text-white flex items-center gap-1.5 transition">
+                  <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                  <span>เว็บจริง ↗</span>
+                </a>
+                <a href="https://canva.link/u57aa4fqg7cvr0y" target="_blank" rel="noreferrer" class="px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 hover:border-blue-500/40 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Canva</span>
+                </a>
+              </div>
+              <div class="pulse-heart-mount" data-heart-id="j3a-store" data-heart-count="148"></div>
+            </div>
           </div>
         </div>
 
@@ -484,8 +489,9 @@
           </div>
         </div>
 
-        <!-- Achievement 1: UTCC AI Hackathon 2026 (อันดับ 1 ระดับชาติ) -->
-        <div class="spotlight-card rounded-3xl p-8 border-amber-500/30">
+        <!-- Achievement 1: UTCC AI Hackathon 2026 (อันดับ 1 ระดับชาติ) Wrapped in ElectricBorder -->
+        <div id="electric-border-utcc" class="rounded-3xl">
+          <div class="spotlight-card rounded-3xl p-8 border-amber-500/40">
           <div class="grid md:grid-cols-12 gap-8 items-center">
             
             <div class="md:col-span-7 space-y-4">
@@ -506,11 +512,12 @@
               <p class="text-xs md:text-sm text-slate-400 leading-relaxed">
                 คัดเลือกจากทีมทั่วประเทศจนผ่านเข้าสู่รอบชิง 15 ทีมสุดท้าย เข้าร่วม AI Bootcamp จาก AWS และนำเสนอไอเดีย Pitching ในสถานที่จริง โดยผมทำหน้าที่เป็น <strong>หัวหน้าทีมพัฒนาหน้าตาเว็บไซต์ (Lead Frontend / Pitching UI)</strong> ออกแบบและสร้าง UI นำเสนอโครงงานจนคณะกรรมการผู้ทรงคุณวุฒินั่งฟังโดยไม่มีข้อติ และคว้ารางวัลชนะเลิศอันดับ 1 มาครองได้สำเร็จ
               </p>
-              <div class="pt-2">
+              <div class="pt-2 flex flex-wrap items-center justify-between gap-4">
                 <a href="https://www.utcc.ac.th/utcc-ai-hackathon-2026-aqua-ai-stem-water-management/" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-300 hover:text-white hover:bg-amber-500/30 text-xs font-bold transition shadow-lg shadow-amber-500/10">
                   <i data-lucide="external-link" class="w-4 h-4 text-amber-400"></i>
                   <span>อ่านบทความและรายละเอียดงานข่าว UTCC ฉบับเต็ม ↗</span>
                 </a>
+                <div class="pulse-heart-mount" data-heart-id="utcc-hackathon" data-heart-count="256"></div>
               </div>
             </div>
 
@@ -527,6 +534,7 @@
           </div>
         </div>
 
+        </div>
         <!-- Achievement 2: AI for [Mystery Box] Hackathon (อันดับ 2 เขตพื้นที่ - KMITL) -->
         <div class="spotlight-card rounded-3xl p-8 border-blue-500/30">
           <div class="grid md:grid-cols-12 gap-8 items-center">
@@ -534,23 +542,41 @@
             <div class="md:col-span-7 space-y-4">
               <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase">
                 <i data-lucide="medal" class="w-3.5 h-3.5"></i>
-                <span>อันดับที่ 2 ระดับเขตพื้นที่การศึกษา</span>
+                <span>อันดับที่ 2 ระดับเขตพื้นที่การศึกษา (รางวัลชนะเลิศ &amp; รองชนะเลิศ)</span>
               </div>
               <h3 class="text-2xl md:text-3xl font-black text-white leading-tight">
                 การแข่งขัน AI for [Mystery Box] Hackathon
               </h3>
+              <div class="flex flex-wrap items-center gap-2 text-xs text-blue-300 font-semibold">
+                <span class="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/20">IT Ladkrabang Open House 2026</span>
+                <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-300">ผลงาน: Thai LLM Chatbot Solution</span>
+              </div>
               <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
                 การแข่งขันที่พัฒนา Chatbot ด้วย <strong>Thai LLM</strong> ภายในระยะเวลาเพียงวันเดียว และได้รับการคัดเลือกและตัดสินจากคณะกรรมการ <strong>คณะเทคโนโลยีสารสนเทศ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง (KMITL)</strong>
               </p>
               <p class="text-xs md:text-sm text-slate-400 leading-relaxed">
                 แสดงถึงความสามารถในการประยุกต์ใช้โมเดลภาษาขนาดใหญ่ การเชื่อมต่อ Prompt Engineering ภายใต้เงื่อนไขเวลาที่จำกัด และเป็นแรงผลักดันสำคัญในการเลือกเรียนต่อที่ สจล.
               </p>
+
+              <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                <a href="https://www.facebook.com/ITLadkrabangOpenhouse/posts/%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%A7%E0%B8%B1%E0%B8%A5%E0%B8%88%E0%B8%B2%E0%B8%81%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%81%E0%B8%82%E0%B9%88%E0%B8%87%E0%B8%82%E0%B8%B1%E0%B8%99-ai-for-mystery-box-hackathon-%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%A7%E0%B8%B1%E0%B8%A5%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B9%80%E0%B8%A5%E0%B8%B4%E0%B8%A8-%E0%B8%97%E0%B8%B5%E0%B8%A1-%E0%B8%AB/1712277930904521/" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-500/15 border border-blue-500/40 text-blue-300 hover:text-white hover:bg-blue-500/30 text-xs font-bold transition shadow-lg shadow-blue-500/10">
+                  <i data-lucide="external-link" class="w-4 h-4 text-blue-400"></i>
+                  <span>อ่านโพสต์ประกาศผลทางการ คณะไอที สจล. ↗</span>
+                </a>
+                <div class="pulse-heart-mount" data-heart-id="kmitl-hackathon" data-heart-count="189"></div>
+              </div>
             </div>
 
-            <!-- Certificate Image -->
-            <div class="md:col-span-5 flex justify-center">
-              <div class="rounded-2xl overflow-hidden border border-white/10 bg-slate-950 aspect-[4/3] w-full max-w-sm shadow-xl">
-                <img src="assets/cerKMITL.png" alt="KMITL Certificate" class="w-full h-full object-contain p-2" />
+            <!-- Double Images + Certificate Gallery -->
+            <div class="md:col-span-5 grid grid-cols-2 gap-3">
+              <div onclick="openCertModal('assets/KMITLwithrewardChatbot.jpg', 'ภาพรับรางวัล AI for Mystery Box Hackathon (สจล.)', 'เวทีพิธีมอบรางวัล คณะเทคโนโลยีสารสนเทศ พระจอมเกล้าลาดกระบัง')" class="cursor-pointer group rounded-2xl overflow-hidden border border-white/10 hover:border-blue-400/50 bg-slate-950 aspect-[4/5] shadow-lg transition">
+                <img src="assets/KMITLwithrewardChatbot.jpg" alt="KMITL Award Stage" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              </div>
+              <div onclick="openCertModal('assets/KmitChatbot.jpg', 'ภาพนำเสนอผลงาน Chatbot AI สจล.', 'ทีมผู้พัฒนาโครงงาน ณ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง')" class="cursor-pointer group rounded-2xl overflow-hidden border border-white/10 hover:border-blue-400/50 bg-slate-950 aspect-[4/5] shadow-lg transition">
+                <img src="assets/KmitChatbot.jpg" alt="KMITL Chatbot Solution" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              </div>
+              <div onclick="openCertModal('assets/cerKMITL.png', 'เกียรติบัตรรางวัลการแข่งขัน AI for Mystery Box', 'คณะเทคโนโลยีสารสนเทศ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง')" class="col-span-2 cursor-pointer group rounded-2xl overflow-hidden border border-white/10 hover:border-blue-400/50 bg-slate-950 p-2 shadow-lg transition">
+                <img src="assets/cerKMITL.png" alt="KMITL Certificate" class="w-full h-32 object-contain group-hover:scale-105 transition duration-300" />
               </div>
             </div>
 
@@ -804,8 +830,11 @@
                 <input id="contact-name" type="text" required placeholder="ชื่อ หรือ นามแฝง" class="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-white/10 text-sm focus:outline-none focus:border-blue-500 text-white" />
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1.5">อีเมลของคุณ</label>
-                <input id="contact-email" type="email" required placeholder="name@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-white/10 text-sm focus:outline-none focus:border-blue-500 text-white" />
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center justify-between">
+                  <span>อีเมลของคุณ (บังคับใช้ Gmail)</span>
+                  <span class="text-[10px] text-cyan-400 font-mono font-bold">@gmail.com เท่านั้น</span>
+                </label>
+                <input id="contact-email" type="email" required placeholder="yourname@gmail.com" class="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-white/10 text-sm focus:outline-none focus:border-cyan-500 text-white font-mono" />
               </div>
               <div>
                 <label class="block text-xs font-semibold text-slate-300 mb-1.5">ข้อความ</label>
@@ -953,6 +982,133 @@
       <div class="rounded-2xl overflow-hidden bg-black/90 max-h-[70vh] flex items-center justify-center border border-white/10 p-2">
         <img id="cert-modal-img" src="" alt="Certificate Preview" class="w-full h-full object-contain max-h-[62vh] rounded-xl" />
       </div>
+    </div>
+  </div>
+
+
+  <!-- ================= SECRET ADMIN HUD INDICATOR (Hold AltLeft 3s) ================= -->
+  <div id="admin-secret-hud" class="fixed bottom-6 left-6 z-[999999] pointer-events-none transition-all duration-300 opacity-0 transform translate-y-4">
+    <div class="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-slate-950/95 border border-cyan-500/50 text-cyan-300 shadow-[0_0_24px_rgba(6,182,212,0.4)] backdrop-blur-md text-xs font-mono">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400"></span>
+      </span>
+      <span>SECURITY CLEARANCE: HOLD ALT ( <span id="admin-hud-timer" class="font-bold text-white">3.0s</span> )</span>
+    </div>
+  </div>
+
+  <!-- ================= SECRET ADMIN LOGIN MODAL ================= -->
+  <div id="admin-login-modal" class="fixed inset-0 z-[9999999] hidden items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
+    <div class="relative w-full max-w-md p-6 sm:p-8 rounded-3xl bg-slate-900/95 border border-cyan-500/40 shadow-[0_0_60px_rgba(6,182,212,0.3)] text-slate-100 space-y-6">
+      <button onclick="closeAdminLoginModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-xl bg-white/5 hover:bg-white/10 transition">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="space-y-2 text-center">
+        <div class="w-12 h-12 mx-auto rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shadow-inner">
+          <i data-lucide="shield-alert" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-xl font-black text-white tracking-wide">ADMIN SECURITY CLEARANCE</h3>
+        <p class="text-xs text-slate-400">ระบบเข้าสู่ระบบสำหรับผู้ดูแลคนเดียวเท่านั้น (Single User) • ไม่มีการเปิดรับสมัครสมาชิก</p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Username</label>
+          <input id="admin-user-input" type="text" required placeholder="Admin" autocomplete="off" class="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-white/10 text-sm focus:outline-none focus:border-cyan-500 text-white font-mono" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Password</label>
+          <input id="admin-pass-input" type="password" required placeholder="••••••••••••••••" autocomplete="off" class="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-white/10 text-sm focus:outline-none focus:border-cyan-500 text-white font-mono" />
+        </div>
+
+        <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-300/90 space-y-1">
+          <div class="font-bold flex items-center gap-1.5">
+            <i data-lucide="mail-warning" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span>การแจ้งเตือนความปลอดภัย</span>
+          </div>
+          <p>ระบบจะส่งอีเมลแจ้งเตือนพร้อมข้อมูลอุปกรณ์และเวลาล็อกอินไปยัง <strong>Pongpataradanai@gmail.com</strong> โดยอัตโนมัติ</p>
+        </div>
+
+        <button type="submit" id="admin-login-submit-btn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-sm flex items-center justify-center gap-2 transition shadow-lg shadow-cyan-500/25">
+          <i data-lucide="key" class="w-4 h-4"></i>
+          <span>เข้าสู่ระบบ ADMIN</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= SECRET ADMIN DASHBOARD MODAL ================= -->
+  <div id="admin-dashboard-modal" class="fixed inset-0 z-[9999999] hidden items-center justify-center p-4 bg-slate-950/85 backdrop-blur-lg">
+    <div class="relative w-full max-w-4xl max-h-[92vh] overflow-hidden flex flex-col rounded-3xl bg-slate-900/95 border border-cyan-500/40 shadow-[0_0_70px_rgba(6,182,212,0.35)] text-slate-100">
+      
+      <!-- Modal Top Bar -->
+      <div class="flex items-center justify-between px-6 py-5 border-b border-white/10 bg-slate-950/60">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+            <i data-lucide="sliders" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-lg font-black text-white">ADMIN CONTROL ROOM</h3>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold">SINGLE OPERATOR</span>
+            </div>
+            <p class="text-xs text-slate-400">จัดการระบบ ความคิดเห็น และปลดแบนคำไม่สุภาพ</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button onclick="handleAdminLogout()" class="px-3.5 py-2 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 hover:bg-rose-500 hover:text-white text-xs font-bold transition flex items-center gap-1.5">
+            <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+            <span>ออกจากระบบ</span>
+          </button>
+          <button onclick="closeAdminDashboardModal()" class="text-slate-400 hover:text-white p-2 rounded-xl bg-white/5 hover:bg-white/10 transition">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dashboard Content Body -->
+      <div class="flex-1 overflow-y-auto p-6 space-y-6">
+        
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="p-4 rounded-2xl bg-slate-950/60 border border-white/10">
+            <div class="text-xs text-slate-400">ความคิดเห็นทั้งหมด</div>
+            <div id="admin-stat-total" class="text-2xl font-black text-white mt-1">0</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-950/60 border border-amber-500/30">
+            <div class="text-xs text-amber-400">โดนบล็อก / รอตรวจสอบ</div>
+            <div id="admin-stat-flagged" class="text-2xl font-black text-amber-400 mt-1">0</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-950/60 border border-emerald-500/30">
+            <div class="text-xs text-emerald-400">แสดงผลสาธารณะ</div>
+            <div id="admin-stat-active" class="text-2xl font-black text-emerald-400 mt-1">0</div>
+          </div>
+        </div>
+
+        <!-- Comments Management Section -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="message-square" class="w-4 h-4 text-cyan-400"></i>
+              <span>จัดการความคิดเห็น &amp; ปลดแบน (Comments Moderation)</span>
+            </h4>
+            <button onclick="loadAdminComments()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs text-slate-300 hover:text-white flex items-center gap-1 transition">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              <span>รีเฟรช</span>
+            </button>
+          </div>
+
+          <div id="admin-comments-table" class="space-y-3">
+            <div class="text-center py-8 text-xs text-slate-500">
+              กำลังโหลดรายการคอมเมนต์...
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 

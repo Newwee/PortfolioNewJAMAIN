@@ -325,79 +325,16 @@ app.get("/api/projects/likes", async (request, response, next) => {
 // ==============================================================================
 // 💬 REALTIME SUPABASE COMMENTS & PROFANITY FILTER
 // ==============================================================================
-app.get("/api/comments", async (request, response) => {
-  try {
-    const { data, error } = await supabase
-      .from("comments")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(60);
+const commentsHandler = require("./api/comments.js");
+const adminNotifyHandler = require("./api/admin-notify.js");
 
-    if (error || !data) {
-      return response.json({ comments: fallbackComments, source: "local" });
-    }
-    return response.json({ comments: data, source: "supabase" });
-  } catch (err) {
-    return response.json({ comments: fallbackComments, source: "local" });
-  }
+app.all("/api/comments", (req, res) => commentsHandler(req, res));
+app.all("/api/comments/:id", (req, res) => {
+  req.query = req.query || {};
+  req.query.id = req.params.id;
+  return commentsHandler(req, res);
 });
-
-app.post("/api/comments", async (request, response) => {
-  try {
-    const rawName = String(request.body.name || "").trim();
-    const rawMessage = String(request.body.message || "").trim();
-    const avatar = String(request.body.avatar || "").trim().slice(0, 4) || rawName.slice(0, 2).toUpperCase() || "NJ";
-
-    if (!rawName || !rawMessage) {
-      return response.status(400).json({ error: "กรุณาระบุชื่อและความคิดเห็น" });
-    }
-
-    const cleanName = filterBadWords(rawName.slice(0, 50));
-    const cleanMessage = filterBadWords(rawMessage.slice(0, 500));
-
-    const newComment = {
-      name: cleanName,
-      message: cleanMessage,
-      avatar: avatar,
-      created_at: new Date().toISOString()
-    };
-
-    try {
-      const { data, error } = await supabase
-        .from("comments")
-        .insert([newComment])
-        .select()
-        .single();
-
-      if (!error && data) {
-        return response.status(201).json({ comment: data, source: "supabase" });
-      }
-    } catch (e) {
-      // Fallback
-    }
-
-    // In-memory fallback
-    const fallbackItem = { ...newComment, id: `local-${Date.now()}` };
-    fallbackComments.unshift(fallbackItem);
-    if (fallbackComments.length > 50) fallbackComments.pop();
-    return response.status(201).json({ comment: fallbackItem, source: "local" });
-  } catch (error) {
-    response.status(500).json({ error: "Failed to post comment" });
-  }
-});
-
-app.delete("/api/comments/:id", requireAdmin, async (request, response) => {
-  const { id } = request.params;
-  try {
-    await supabase.from("comments").delete().eq("id", id);
-  } catch (e) {}
-
-  const index = fallbackComments.findIndex((c) => c.id === id);
-  if (index !== -1) fallbackComments.splice(index, 1);
-
-  await writeLog(request, "COMMENT_DELETED", { targetType: "comment", targetId: id });
-  response.json({ ok: true, deletedId: id });
-});
+app.all("/api/admin/notify-login", (req, res) => adminNotifyHandler(req, res));
 
 // ==============================================================================
 // 🎵 SPOTIFY EMBED & SETTINGS (SUPABASE INTEGRATION)

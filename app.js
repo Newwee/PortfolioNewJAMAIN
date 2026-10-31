@@ -812,14 +812,39 @@ function initSpotify() {
 // ─── 14. CONTACT FORM SUBMISSION ────────────────────────────────────────────
 window.handleSendContact = function(e) {
   e.preventDefault();
-  const name = document.getElementById("contact-name")?.value || "";
-  const email = document.getElementById("contact-email")?.value || "";
-  const msg = document.getElementById("contact-msg")?.value || "";
+  const name = document.getElementById("contact-name")?.value.trim() || "";
+  const email = document.getElementById("contact-email")?.value.trim() || "";
+  const msg = document.getElementById("contact-msg")?.value.trim() || "";
+
+  // Strict email validation: Must be valid format AND end with @gmail.com
+  const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/i;
+  if (!gmailRegex.test(email)) {
+    showToast({
+      title: "อีเมลต้องเป็น @gmail.com เท่านั้น",
+      description: "ระบบบังคับให้ใช้อีเมล @gmail.com เท่านั้น เพื่อความปลอดภัยและยืนยันตัวตนจริง กรุณาตรวจสอบอีเมลของคุณอีกครั้ง (ตัวอย่าง: yourname@gmail.com)",
+      fuseColor: "#f43f5e"
+    });
+    return;
+  }
+
+  const userPart = email.split("@")[0];
+  if (userPart.length < 3 || userPart.includes("..")) {
+    showToast({
+      title: "รูปแบบอีเมลไม่ถูกต้อง",
+      description: "กรุณาระบุชื่อบัญชี Gmail ที่ถูกต้อง",
+      fuseColor: "#f43f5e"
+    });
+    return;
+  }
 
   const mailtoUrl = `mailto:Pongpataradanai@gmail.com?subject=${encodeURIComponent("ติดต่อจากเว็บ Portfolio: " + name)}&body=${encodeURIComponent("ชื่อผู้ติดต่อ: " + name + "\nอีเมล: " + email + "\n\nข้อความ:\n" + msg)}`;
   window.open(mailtoUrl, "_blank");
 
-  showToast(`ขอบคุณครับ ${name}! ระบบกำลังเปิดโปรแกรมส่งอีเมลถึง Pongpataradanai@gmail.com`);
+  showToast({
+    title: "กำลังเปิดโปรแกรมส่งอีเมล",
+    description: `ขอบคุณครับคุณ ${name}! ระบบกำลังส่งอีเมลถึง Pongpataradanai@gmail.com`,
+    fuseColor: "#10b981"
+  });
   document.getElementById("contact-form")?.reset();
 };
 
@@ -889,6 +914,350 @@ async function initCountUps() {
   }
 }
 
+
+// ─── 17. REACT BITS: PULSE HEART & ELECTRIC BORDER ──────────────────────────
+async function initPulseHearts() {
+  const mounts = document.querySelectorAll(".pulse-heart-mount");
+  if (!mounts.length) return;
+  try {
+    const { createPulseHeart } = await import("./pulse-heart.js");
+    mounts.forEach(mount => {
+      const id = mount.dataset.heartId || "item";
+      const initialCount = Number(mount.dataset.heartCount || 100);
+      createPulseHeart(mount, {
+        id,
+        initialCount,
+        size: 32,
+        corner: 20,
+        likedColor: "#ff4d6d",
+        onLike: (count) => {
+          playBeep(750, 0.08);
+          showToast({
+            title: "ขอบคุณสำหรับการกดหัวใจ! ❤️",
+            description: `คุณได้ส่งกำลังใจให้ผลงานนี้เรียบร้อยแล้ว (ยอดรวม: ${count})`,
+            fuseColor: "#ff4d6d"
+          });
+        },
+        onAlreadyLiked: () => {
+          showToast({
+            title: "คุณเคยกดหัวใจให้รายการนี้แล้ว",
+            description: "ขอบคุณมากครับสำหรับการสนับสนุน! ❤️",
+            fuseColor: "#fda4af"
+          });
+        }
+      });
+    });
+  } catch (e) {
+    console.warn("PulseHeart failed to mount:", e);
+  }
+}
+
+async function initElectricBorder() {
+  const container = document.getElementById("electric-border-utcc");
+  if (!container) return;
+  try {
+    const { createElectricBorder } = await import("./electric-border.js");
+    createElectricBorder(container, {
+      color: "#f59e0b",
+      glowColor: "#fbbf24",
+      speed: 1.0,
+      chaos: 0.5,
+      spread: 0.6,
+      thickness: 1.6,
+      strands: 3,
+      borderRadius: 24
+    });
+  } catch (e) {
+    console.warn("ElectricBorder failed to mount:", e);
+  }
+}
+
+// ─── 18. SECRET ADMIN CLEARANCE SYSTEM (LeftAlt 3s or Mobile Trigger) ──────
+let altPressTimer = null;
+let altStartTime = 0;
+const ALT_HOLD_DURATION = 3000;
+
+function setupAdminSecretTrigger() {
+  const hud = document.getElementById("admin-secret-hud");
+  const timerLabel = document.getElementById("admin-hud-timer");
+
+  let animFrame = 0;
+  function updateHudTimer() {
+    if (!altStartTime) return;
+    const elapsed = Date.now() - altStartTime;
+    const remaining = Math.max(0, (ALT_HOLD_DURATION - elapsed) / 1000);
+    if (timerLabel) timerLabel.textContent = `${remaining.toFixed(1)}s`;
+    if (elapsed < ALT_HOLD_DURATION) {
+      animFrame = requestAnimationFrame(updateHudTimer);
+    }
+  }
+
+  window.addEventListener("keydown", (e) => {
+    if (e.code === "AltLeft" && !altPressTimer) {
+      altStartTime = Date.now();
+      if (hud) {
+        hud.classList.remove("opacity-0", "translate-y-4");
+        hud.classList.add("opacity-100", "translate-y-0");
+      }
+      updateHudTimer();
+
+      altPressTimer = setTimeout(() => {
+        if (hud) {
+          hud.classList.remove("opacity-100", "translate-y-0");
+          hud.classList.add("opacity-0", "translate-y-4");
+        }
+        playBeep(880, 0.15, "triangle");
+        openAdminLoginModal();
+        altPressTimer = null;
+        altStartTime = 0;
+      }, ALT_HOLD_DURATION);
+    }
+  });
+
+  window.addEventListener("keyup", (e) => {
+    if (e.code === "AltLeft") {
+      if (altPressTimer) {
+        clearTimeout(altPressTimer);
+        altPressTimer = null;
+        altStartTime = 0;
+        cancelAnimationFrame(animFrame);
+        if (hud) {
+          hud.classList.remove("opacity-100", "translate-y-0");
+          hud.classList.add("opacity-0", "translate-y-4");
+        }
+      }
+    }
+  });
+}
+
+window.openAdminLoginModal = function() {
+  playBeep(700, 0.08);
+  const modal = document.getElementById("admin-login-modal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    document.getElementById("admin-user-input")?.focus();
+  }
+};
+
+window.closeAdminLoginModal = function() {
+  const modal = document.getElementById("admin-login-modal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+};
+
+window.openAdminDashboardModal = function() {
+  playBeep(800, 0.08);
+  const modal = document.getElementById("admin-dashboard-modal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    loadAdminComments();
+  }
+};
+
+window.closeAdminDashboardModal = function() {
+  const modal = document.getElementById("admin-dashboard-modal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+};
+
+window.handleAdminLogout = function() {
+  sessionStorage.removeItem("newja_admin_session");
+  closeAdminDashboardModal();
+  showToast({
+    title: "ออกจากระบบแล้ว",
+    description: "ระบบล็อกเอาต์เซสชัน Admin เรียบร้อยแล้ว",
+    fuseColor: "#94a3b8"
+  });
+};
+
+window.handleAdminLogin = async function(e) {
+  e.preventDefault();
+  const user = document.getElementById("admin-user-input")?.value.trim();
+  const pass = document.getElementById("admin-pass-input")?.value.trim();
+
+  if (user === "Admin" && pass === "Admin1230S_asdl133") {
+    sessionStorage.setItem("newja_admin_session", pass);
+    closeAdminLoginModal();
+    openAdminDashboardModal();
+
+    showToast({
+      title: "ยินดีต้อนรับ Admin New JA",
+      description: "ยืนยันตัวตนสำเร็จ! ระบบกำลังส่งบันทึกการเข้าใช้งานไปยัง Pongpataradanai@gmail.com",
+      fuseColor: "#06b6d4"
+    });
+
+    const deviceInfo = `${navigator.userAgent} (${window.screen.width}x${window.screen.height})`;
+    const bangkokTime = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
+
+    fetch("/api/admin/notify-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: "Admin",
+        device: deviceInfo,
+        time: bangkokTime
+      })
+    }).catch(() => {});
+
+    fetch("https://formsubmit.co/ajax/Pongpataradanai@gmail.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        _subject: "🚨 [ADMIN LOGIN ALERT] มีการเข้าสู่ระบบ Admin Panel (New JA Portfolio)",
+        "User": "Admin",
+        "Device": deviceInfo,
+        "Time (Bangkok)": bangkokTime
+      })
+    }).catch(() => {});
+
+  } else {
+    playBeep(300, 0.2, "sawtooth");
+    showToast({
+      title: "การยืนยันตัวตนล้มเหลว",
+      description: "Username หรือ Password ไม่ถูกต้อง ระบบนี้จำกัดเฉพาะผู้ดูแลระบบคนเดียวเท่านั้น",
+      fuseColor: "#f43f5e"
+    });
+  }
+};
+
+window.loadAdminComments = async function() {
+  const container = document.getElementById("admin-comments-table");
+  if (!container) return;
+  container.innerHTML = `<div class="text-center py-6 text-xs text-slate-400">กำลังดึงข้อมูล...</div>`;
+
+  let comments = [];
+  try {
+    const res = await fetch("/api/comments?admin=true&key=Admin1230S_asdl133");
+    if (res.ok) {
+      const data = await res.json();
+      comments = data.comments || [];
+    }
+  } catch (e) {}
+
+  if (!comments.length) {
+    try {
+      comments = JSON.parse(localStorage.getItem("newja_comments") || "[]");
+    } catch (e) {}
+  }
+
+  const total = comments.length;
+  const flagged = comments.filter(c => c.is_flagged).length;
+  const active = total - flagged;
+
+  const statTotal = document.getElementById("admin-stat-total");
+  const statFlagged = document.getElementById("admin-stat-flagged");
+  const statActive = document.getElementById("admin-stat-active");
+  if (statTotal) statTotal.textContent = total;
+  if (statFlagged) statFlagged.textContent = flagged;
+  if (statActive) statActive.textContent = active;
+
+  if (!comments.length) {
+    container.innerHTML = `<div class="text-center py-8 text-xs text-slate-500">ไม่มีความคิดเห็นในระบบ</div>`;
+    return;
+  }
+
+  container.innerHTML = comments.map(c => `
+    <div class="p-4 rounded-2xl bg-slate-950/70 border ${c.is_flagged ? 'border-amber-500/40 bg-amber-950/10' : 'border-white/10'} space-y-2">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-blue-600/30 border border-blue-500/30 text-blue-300 font-bold text-xs flex items-center justify-center">${c.avatar || 'NJ'}</span>
+          <span class="font-bold text-sm text-white">${c.name}</span>
+          ${c.is_flagged ? `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">⚠️ รอปลดแบน: ${c.flag_reason || 'คำไม่สุภาพ'}</span>` : `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">✓ อนุมัติแล้ว</span>`}
+        </div>
+        <span class="text-[11px] text-slate-500">${new Date(c.created_at).toLocaleString('th-TH')}</span>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">${c.message}</p>
+      <div class="flex items-center gap-2 pt-1 border-t border-white/5">
+        ${c.is_flagged ? `
+          <button onclick="handleAdminUnbanComment('${c.id}')" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 text-xs font-bold transition flex items-center gap-1">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i> <span>ปลดแบน (Approve)</span>
+          </button>
+        ` : `
+          <button onclick="handleAdminBanComment('${c.id}')" class="px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500 hover:text-slate-950 text-xs font-bold transition flex items-center gap-1">
+            <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> <span>แบน (Hide)</span>
+          </button>
+        `}
+        <button onclick="handleAdminDeletePermanent('${c.id}')" class="px-3 py-1.5 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300 hover:bg-rose-500 hover:text-white text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> <span>ลบทิ้ง</span>
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  if (window.lucide) lucide.createIcons();
+};
+
+window.handleAdminUnbanComment = async function(id) {
+  try {
+    await fetch("/api/comments", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", "X-Admin-Key": "Admin1230S_asdl133" },
+      body: JSON.stringify({ id, action: "unban" })
+    });
+  } catch (e) {}
+
+  try {
+    let list = JSON.parse(localStorage.getItem("newja_comments") || "[]");
+    const item = list.find(c => c.id === id);
+    if (item) {
+      item.is_flagged = false;
+      item.flag_reason = null;
+    }
+    localStorage.setItem("newja_comments", JSON.stringify(list));
+  } catch (e) {}
+
+  showToast({ title: "ปลดแบนเรียบร้อย", description: "ความคิดเห็นได้รับการอนุมัติและแสดงต่อสาธารณะแล้ว", fuseColor: "#10b981" });
+  loadAdminComments();
+  loadComments();
+};
+
+window.handleAdminBanComment = async function(id) {
+  try {
+    await fetch("/api/comments", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", "X-Admin-Key": "Admin1230S_asdl133" },
+      body: JSON.stringify({ id, action: "ban" })
+    });
+  } catch (e) {}
+
+  try {
+    let list = JSON.parse(localStorage.getItem("newja_comments") || "[]");
+    const item = list.find(c => c.id === id);
+    if (item) item.is_flagged = true;
+    localStorage.setItem("newja_comments", JSON.stringify(list));
+  } catch (e) {}
+
+  showToast({ title: "แบนความคิดเห็นเรียบร้อย", description: "ซ่อนความคิดเห็นนี้ออกจากหน้าสาธารณะแล้ว", fuseColor: "#f59e0b" });
+  loadAdminComments();
+  loadComments();
+};
+
+window.handleAdminDeletePermanent = async function(id) {
+  if (!confirm("คุณแน่ใจว่าต้องการลบคอมเมนต์นี้ทิ้งถาวรหรือไม่?")) return;
+  try {
+    await fetch(`/api/comments?id=${id}&key=Admin1230S_asdl133`, {
+      method: "DELETE",
+      headers: { "X-Admin-Key": "Admin1230S_asdl133" }
+    });
+  } catch (e) {}
+
+  try {
+    let list = JSON.parse(localStorage.getItem("newja_comments") || "[]");
+    list = list.filter(c => c.id !== id);
+    localStorage.setItem("newja_comments", JSON.stringify(list));
+  } catch (e) {}
+
+  showToast({ title: "ลบคอมเมนต์เรียบร้อย", description: "นำความคิดเห็นออกจากระบบถาวรแล้ว", fuseColor: "#f43f5e" });
+  loadAdminComments();
+  loadComments();
+};
+
 // ─── 16. BOOTSTRAP APPLICATION ──────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
@@ -906,5 +1275,10 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroGradientASCII();
   initVolumeElasticSlider();
   initCountUps();
+  initPulseHearts();
+  initElectricBorder();
   getSwipeToastManager();
+
+  // Admin secret trigger
+  setupAdminSecretTrigger();
 });

@@ -1,0 +1,14 @@
+/* ==============================================================================
+   🚀 ElectricBorder CSS — React Bits Exact Component Styles
+   ============================================================================== */
+.electric-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.electric-border__canvas {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  pointer-events: none;
+}
