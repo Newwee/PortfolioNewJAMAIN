@@ -169,7 +169,7 @@ function initPreloader() {
 function initNavbarScrollSpy() {
   const navWrap = document.querySelector(".nav-pill-wrap");
   const navItems = document.querySelectorAll(".nav-item");
-  const sectionIds = ["home", "about", "portfolio", "contact"];
+  const sectionIds = ["home", "about", "portfolio", "services", "contact"];
   const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
 
   if (!navItems.length || !sections.length) return;
@@ -1027,6 +1027,101 @@ async function initElectricBorder() {
   }
 }
 
+// ─── 17.1. REACT BITS: BOUNCE CARDS (EDUCATION JOURNEY) ─────────────────────
+async function initEducationBounceCards() {
+  const mount = document.getElementById("education-bounce-cards-mount");
+  if (!mount) return;
+  try {
+    const { createBounceCards } = await import("./bounce-cards.js");
+    createBounceCards(mount, {
+      images: [
+        {
+          src: "assets/school_bangpleepat.png",
+          alt: "รร.บางพลีพัฒนศึกษาลัย (อนุบาล - ป.6)",
+          url: "https://www.bangpleepat.com/"
+        },
+        {
+          src: "assets/school_nmrtup.png",
+          alt: "รร.นวมินทราชินูทิศ เตรียมอุดมศึกษาพัฒนาการ (ม.1 - ม.6)",
+          url: "https://nmrtup.ac.th/"
+        }
+      ],
+      containerWidth: "100%",
+      containerHeight: 330,
+      cardSize: 210,
+      spread: 110,
+      rotation: 9,
+      pushDistance: 130,
+      hoverScale: 1.08,
+      bounciness: 0.6,
+      borderWidth: 3,
+      borderColor: "rgba(56, 189, 248, 0.4)",
+      radius: 20,
+      shadow: true,
+      enableHover: true,
+      onCardClick: (idx, card) => {
+        playBeep(650, 0.08);
+        if (card?.url) {
+          window.open(card.url, "_blank", "noopener,noreferrer");
+        }
+      }
+    });
+  } catch (err) {
+    console.warn("BounceCards failed to mount:", err);
+  }
+}
+
+// ─── 17.2. REACT BITS: PIXEL CARD (SERVICES & HIRE ME) ──────────────────────
+async function initServicesPixelCards() {
+  const card1 = document.getElementById("pixel-card-1");
+  const card2 = document.getElementById("pixel-card-2");
+  const card3 = document.getElementById("pixel-card-3");
+
+  if (!card1 && !card2 && !card3) return;
+
+  try {
+    const { createPixelCard } = await import("./pixel-card.js");
+
+    if (card1) {
+      createPixelCard(card1, {
+        variant: "cyan",
+        pixelSize: 2.5,
+        speed: 30,
+        spotlight: 0.65,
+        glow: 0.55,
+        radius: 24,
+        clickPulse: true
+      });
+    }
+
+    if (card2) {
+      createPixelCard(card2, {
+        variant: "purple",
+        pixelSize: 2.5,
+        speed: 30,
+        spotlight: 0.65,
+        glow: 0.55,
+        radius: 24,
+        clickPulse: true
+      });
+    }
+
+    if (card3) {
+      createPixelCard(card3, {
+        variant: "amber",
+        pixelSize: 2.5,
+        speed: 25,
+        spotlight: 0.7,
+        glow: 0.6,
+        radius: 24,
+        clickPulse: true
+      });
+    }
+  } catch (err) {
+    console.warn("PixelCard failed to mount:", err);
+  }
+}
+
 // ─── 18. SECRET ADMIN CLEARANCE SYSTEM (RightAlt 1.5s or Mobile Trigger) ──────
 let altPressTimer = null;
 let altStartTime = 0;
@@ -1718,6 +1813,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initCountUps();
   initPulseHearts();
   initElectricBorder();
+  initEducationBounceCards();
+  initServicesPixelCards();
   getSwipeToastManager();
 
   // Admin secret trigger

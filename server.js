@@ -587,7 +587,7 @@ app.get("/favicon.ico", (_request, response) => {
   response.sendFile(path.join(__dirname, "favicon.ico"));
 });
 app.get("/:file", (req, res, next) => {
-  if (req.params.file && req.params.file.endsWith(".js")) {
+  if (req.params.file && (req.params.file.endsWith(".js") || req.params.file.endsWith(".css"))) {
     const filePath = path.join(__dirname, req.params.file);
     if (fs.existsSync(filePath)) {
       return res.sendFile(filePath);

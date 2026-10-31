@@ -22,8 +22,8 @@ module.exports = async function handler(req, res) {
       "ระบบความปลอดภัย": "Verified Admin Clearance (Single User)"
     };
 
-    // Forward notification to Pongpataradanai@gmail.com
-    fetch("https://formsubmit.co/ajax/Pongpataradanai@gmail.com", {
+    // Forward notification to Pongpataradanai@gmail.com via verified token
+    fetch("https://formsubmit.co/ajax/fa521c79a3af82c9fb8a6f503ff81e3d", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
