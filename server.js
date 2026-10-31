@@ -583,6 +583,9 @@ app.get(["/", "/index.html"], (_request, response) => {
 app.get("/styles.css", (_request, response) => {
   response.sendFile(path.join(__dirname, "styles.css"));
 });
+app.get("/favicon.ico", (_request, response) => {
+  response.sendFile(path.join(__dirname, "favicon.ico"));
+});
 app.get("/:file", (req, res, next) => {
   if (req.params.file && req.params.file.endsWith(".js")) {
     const filePath = path.join(__dirname, req.params.file);

@@ -7,6 +7,14 @@
   <title>New JA (ภัทรดนัย ป้องเศร้า) | Senior Creative Developer Portfolio</title>
   <meta name="description" content="Portfolio of Pataradanai Pongsao (New JA) — Problem Solver, Web Maintenance, Bug Fixer &amp; Full-Stack Specialist." />
   
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logo-192.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <meta property="og:image" content="assets/logo.png" />
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
@@ -50,6 +58,13 @@
   <!-- ================= 2. FLOATING PILL NAVBAR ================= -->
   <header class="nav-pill-wrap">
     <nav class="nav-pill">
+      <!-- Brand Logo / Avatar -->
+      <a href="#home" class="flex items-center gap-2 pl-1 pr-2.5 py-0.5 rounded-full hover:bg-white/10 transition group" title="New JA Portfolio">
+        <img src="assets/logo.png" alt="New JA" class="w-6 h-6 rounded-full object-cover ring-2 ring-cyan-400/80 shadow-[0_0_10px_rgba(6,182,212,0.6)] group-hover:scale-105 transition" />
+        <span class="font-black text-xs text-white tracking-wider hidden sm:inline group-hover:text-cyan-300 transition">NEW JA</span>
+      </a>
+      <div class="w-px h-5 bg-white/10 mx-1 hidden sm:block"></div>
+
       <a href="#home" class="nav-item active">Home</a>
       <a href="#about" class="nav-item">About</a>
       <a href="#portfolio" class="nav-item">Portfolio</a>
@@ -202,10 +217,10 @@
         <div class="md:col-span-4 flex flex-col items-center">
           <div id="mask-container" class="hero-reveal-container relative w-[280px] h-[330px] rounded-[22px] overflow-hidden">
             <!-- Base Photo (Normal Face) -->
-            <img src="assets/myface.jpg" alt="Pataradanai Pongsao" class="w-full h-full object-cover" />
+            <img src="assets/myface.png" alt="Pataradanai Pongsao" class="w-full h-full object-cover" />
             <!-- Top Reveal Layer (Mask Face) -->
             <div id="mask-layer" class="hero-reveal-layer">
-              <img src="assets/myfacewithmas.jpg" alt="Pataradanai with Mask" class="w-full h-full object-cover" />
+              <img src="assets/myfacewithmas.png" alt="Pataradanai with Mask" class="w-full h-full object-cover" />
             </div>
           </div>
           <span class="text-xs text-slate-400 mt-3 flex items-center gap-1.5">
@@ -1287,7 +1302,8 @@
 
   <!-- ================= FOOTER ================= -->
   <footer class="relative z-10 border-t border-white/10 py-12 px-6 max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-3">
+      <img src="assets/logo.png" alt="New JA Logo" class="w-7 h-7 rounded-full object-cover ring-1 ring-cyan-400/60 shadow-[0_0_10px_rgba(6,182,212,0.4)]" />
       <span class="font-bold text-white">New JA (ภัทรดนัย ป้องเศร้า)</span>
       <span>•</span>
       <span>Problem Solver &amp; Web Specialist</span>
