@@ -113,8 +113,10 @@ body {
 
 .lanyard-card-container {
   position: absolute;
-  inset: 0;
-  width: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
   height: 100%;
   z-index: 20;
   pointer-events: none;

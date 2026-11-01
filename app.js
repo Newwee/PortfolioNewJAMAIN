@@ -353,6 +353,14 @@ async function initLanyard() {
 
   try {
     const { initLanyard: mountLanyard } = await import("./lanyard.js");
+    const calcLanyardAnchor = () => {
+      const w = window.innerWidth;
+      if (w < 768) return 0.5;
+      const contentWidth = Math.min(w, 1152);
+      const targetX = (w / 2) + (contentWidth * 0.22);
+      return Math.min(0.85, Math.max(0.5, targetX / w));
+    };
+
     const isDesktop = window.innerWidth >= 768;
     const lanyard = mountLanyard(container, {
       frontImage: "assets/badge-front.png",
@@ -362,8 +370,8 @@ async function initLanyard() {
       strapColor: "#111827",
       strapWidth: 0.62,
       strapLength: 0.52,
-      anchor: isDesktop ? 0.85 : 0.5,
-      size: isDesktop ? 0.50 : 0.46,
+      anchor: calcLanyardAnchor(),
+      size: isDesktop ? 0.52 : 0.46,
       cornerRadius: 0.25,
       finish: "glossy",
       metal: "silver",
@@ -375,6 +383,12 @@ async function initLanyard() {
       autoFlip: true,
       intro: false
     });
+
+    window.addEventListener("resize", () => {
+      if (lanyard?.update) {
+        lanyard.update({ anchor: calcLanyardAnchor() });
+      }
+    }, { passive: true });
 
     const flipBtn = document.getElementById("lanyard-flip-btn");
     if (flipBtn && lanyard) {
@@ -1473,28 +1487,28 @@ window.handleAdminDeletePermanent = function(id) {
 };
 
 // ─── 19. REACT BITS FESTIVAL LAB: ANIMATED LIST + COUNTER + STROKE TEXT ─────
-function getDaysRemaining(targetDateStr) {
+const THAI_DAYS = ["วันอาทิตย์", "วันจันทร์", "วันอังคาร", "วันพุธ", "วันพฤหัสบดี", "วันศุกร์", "วันเสาร์"];
+const THAI_MONTHS_FULL = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+
+function formatThaiDate(date = new Date()) {
+  const d = date.getDate();
+  const m = THAI_MONTHS_FULL[date.getMonth()];
+  const y = date.getFullYear() + 543;
+  const dayName = THAI_DAYS[date.getDay()];
+  return `${dayName}ที่ ${d} ${m} ${y}`;
+}
+
+function getDaysDiff(targetDateStr) {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const [y, m, d] = targetDateStr.split("-").map(Number);
   const target = new Date(y, m - 1, d);
-  const diff = Math.ceil((target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-  return Math.max(0, diff);
+  const diffTime = target.getTime() - today.getTime();
+  return Math.round(diffTime / (1000 * 60 * 60 * 24));
 }
 
+// ⏳ เทศกาลที่จะถึงนี้ (Upcoming Festivals: พฤศจิกายน 2026 เป็นต้นไป)
 const UPCOMING_FESTIVALS = [
-  {
-    id: "halloween",
-    title: "Halloween & Día de los Muertos",
-    thaiTitle: "วันปล่อยผี & วันแห่งผู้ล่วงลับ",
-    targetDate: "2026-10-31",
-    dateText: "31 ต.ค. – 2 พ.ย. 2026",
-    location: "ทั่วโลก / เม็กซิโก (Mexico City, Oaxaca)",
-    description: "งานเฉลิมฉลองคืนปล่อยผีทั่วโลก ควบคู่กับเทศกาลมรดกโลกของเม็กซิโกที่ผู้คนจะแต่งหน้าเป็นโครงกระดูก (Catrina) ประดับดอกดาวเรือง และเดินขบวนพาเหรดสุดคึกคัก",
-    icon: "🎃",
-    highlight: true,
-    highlightBadge: "🎃 TODAY"
-  },
   {
     id: "diwali",
     title: "Diwali Festival of Lights",
@@ -1667,11 +1681,184 @@ const UPCOMING_FESTIVALS = [
   }
 ];
 
-// Initialize dynamic days remaining & meta
-UPCOMING_FESTIVALS.forEach(item => {
-  item.days = getDaysRemaining(item.targetDate);
-  item.meta = item.days === 0 ? "เริ่มวันนี้!" : `อีก ${item.days} วัน`;
-});
+// 📜 เทศกาลและวันสำคัญที่พึ่งผ่านไป (Past Festivals: ย้อนหลัง 2 เดือน กันยายน – ตุลาคม 2026)
+const PAST_FESTIVALS = [
+  {
+    id: "halloween-past",
+    title: "Halloween & Día de los Muertos",
+    thaiTitle: "เทศกาลฮาโลวีน (วันปล่อยผี)",
+    targetDate: "2026-10-31",
+    dateText: "31 ต.ค. – 2 พ.ย. 2026",
+    location: "ทั่วโลก / เม็กซิโก (Mexico City, Oaxaca)",
+    description: "เทศกาลเฉลิมฉลองประจำปีระดับสากล มีกิจกรรมแต่งกายแฟนซี เล่าเรื่องสยองขวัญ และเด็กๆ เดินเคาะประตูเพื่อเล่น Trick or Treat",
+    icon: "🎃",
+    highlight: true,
+    highlightBadge: "🎃 พึ่งจัดไป"
+  },
+  {
+    id: "awk-phansa",
+    title: "Awk Phansa & Tak Bat Devo",
+    thaiTitle: "วันออกพรรษาและประเพณีตักบาตรเทโว",
+    targetDate: "2026-10-26",
+    dateText: "26 – 27 ต.ค. 2026",
+    location: "ริมแม่น้ำโขง (หนองคาย-บึงกาฬ) และวัดทั่วประเทศไทย",
+    description: "วันสิ้นสุดการจำพรรษา 3 เดือนของพระสงฆ์ มีประเพณีสืบทอดเอกลักษณ์เฉพาะถิ่น เช่น ปรากฏการณ์บั้งไฟพญานาคริมแม่น้ำโขง (หนองคาย-บึงกาฬ) และประเพณีตักบาตรเทโวโรหณะทั่วประเทศ",
+    icon: "🪷",
+    highlight: true,
+    highlightBadge: "🪷 ประเพณีไทย"
+  },
+  {
+    id: "chulalongkorn-memorial",
+    title: "Chulalongkorn & Navamindra Memorial",
+    thaiTitle: "วันปิยมหาราช (23 ต.ค.) & วันนวมินทรมหาราช (13 ต.ค.)",
+    targetDate: "2026-10-23",
+    dateText: "13 และ 23 ต.ค. 2026",
+    location: "พระบรมมหาราชวัง ลานพระบรมรูปทรงม้า และทั่วประเทศไทย",
+    description: "วันคล้ายวันสวรรคตของพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร (ร.9) และ พระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว (ร.5)",
+    icon: "🇹🇭"
+  },
+  {
+    id: "world-food-day",
+    title: "World Food Day 2026",
+    thaiTitle: "วันอาหารโลก (World Food Day)",
+    targetDate: "2026-10-16",
+    dateText: "16 ต.ค. 2026",
+    location: "องค์การอาหารและเกษตรแห่งสหประชาชาติ (FAO) กรุงโรม และทั่วโลก",
+    description: "จัดตั้งโดยองค์การอาหารและการเกษตรแห่งสหประชาชาติ (FAO) เพื่อรณรงค์เรื่องความมั่นคงทางอาหารและการขจัดความหิวโหยในระดับสากล",
+    icon: "🌾"
+  },
+  {
+    id: "vegetarian-festival",
+    title: "Vegetarian Festival (กินเจ)",
+    thaiTitle: "เทศกาลกินเจ (ประเพณีถือศีลกินผัก)",
+    targetDate: "2026-10-11",
+    dateText: "11 – 20 ต.ค. 2026",
+    location: "เยาวราช กรุงเทพฯ, ภูเก็ต และชุมชนชาวไทยเชื้อสายจีนทั่วประเทศ",
+    description: "เทศกาลรักษาศีล ละเว้นการบริโภคเนื้อสัตว์ และชำระล้างจิตใจ มีชื่อเสียงโดดเด่นทั้งในกรุงเทพฯ (เยาวราช) และงานประเพณีถือศีลกินผักของชาวไทยเชื้อสายจีนในจังหวัดภูเก็ต",
+    icon: "🥬",
+    highlight: true,
+    highlightBadge: "🥬 เทศกาลกินเจ"
+  },
+  {
+    id: "sat-thai",
+    title: "Sat Thai & Sart Duan Sip",
+    thaiTitle: "ประเพณีสารทเดือนสิบ / สารทไทย",
+    targetDate: "2026-10-10",
+    dateText: "ปลาย ก.ย. – 10 ต.ค. 2026",
+    location: "จ.นครศรีธรรมราช และทั่วภาคใต้ / ภาคกลาง",
+    description: "ประเพณีทำบุญอุทิศส่วนกุศลให้บรรพบุรุษที่ล่วงลับ โดยเฉพาะ งานประเพณีบุญสารทเดือนสิบ ของภาคใต้ (จ.นครศรีธรรมราช)",
+    icon: "🍚"
+  },
+  {
+    id: "um-phra-dam-nam",
+    title: "Um Phra Dam Nam Festival",
+    thaiTitle: "ประเพณีอุ้มพระดำน้ำ เพชรบูรณ์",
+    targetDate: "2026-10-09",
+    dateText: "9 – 10 ต.ค. 2026",
+    location: "แม่น้ำป่าสัก อ.เมือง จ.เพชรบูรณ์",
+    description: "ประเพณีเอกลักษณ์ระดับชาติของจังหวัดเพชรบูรณ์ อัญเชิญพระพุทธมหาธรรมราชาดำน้ำในแม่น้ำป่าสักเพื่อความเป็นสิริมงคลและความอุดมสมบูรณ์",
+    icon: "🌊"
+  },
+  {
+    id: "mid-autumn",
+    title: "Mid-Autumn Festival & Chuseok",
+    thaiTitle: "เทศกาลไหว้พระจันทร์ / ชูซอก",
+    targetDate: "2026-09-25",
+    dateText: "25 – 27 ก.ย. 2026",
+    location: "จีน ฮ่องกง ไต้หวัน เกาหลีใต้ สิงคโปร์ เยาวราชไทย",
+    description: "เทศกาลเฉลิมฉลองการเก็บเกี่ยวและการรวมตัวของครอบครัวในหลายประเทศแถบเอเชีย เช่น จีน ฮ่องกง ไต้หวัน รวมถึงเทศกาลชูซอกในเกาหลีใต้",
+    icon: "🥮"
+  },
+  {
+    id: "peace-day",
+    title: "International Day of Peace",
+    thaiTitle: "วันสันติภาพสากล (UN Peace Day)",
+    targetDate: "2026-09-21",
+    dateText: "21 ก.ย. 2026",
+    location: "สำนักงานใหญ่สหประชาชาติ (UN) นิวยอร์ก และทั่วโลก",
+    description: "วันที่องค์การสหประชาชาติ (UN) อุทิศให้กับการรณรงค์เพื่อสันติภาพและการหยุดยิงทั่วโลก การลั่นระฆังสันติภาพและการรณรงค์งดใช้ความรุนแรง",
+    icon: "🕊️"
+  },
+  {
+    id: "oktoberfest",
+    title: "Oktoberfest Munich",
+    thaiTitle: "เทศกาลอ็อกโทเบอร์เฟสต์ เยอรมนี",
+    targetDate: "2026-09-19",
+    dateText: "19 ก.ย. – 4 ต.ค. 2026",
+    location: "เมืองมิวนิก รัฐบาวาเรีย ประเทศเยอรมนี",
+    description: "เทศกาลพื้นบ้านและเทศกาลเบียร์ที่ใหญ่ที่สุดในโลก จัดขึ้นเป็นประจำทุกปีที่เมืองมิวนิก ประเทศเยอรมนี ดึงดูดนักท่องเที่ยวหลายล้านคนจากทั่วทุกมุมโลก",
+    icon: "🍺"
+  }
+];
+
+function prepareFestivalsData() {
+  UPCOMING_FESTIVALS.forEach(item => {
+    const diff = getDaysDiff(item.targetDate);
+    item.days = Math.max(0, diff);
+    item.isPast = false;
+    item.meta = diff === 0 ? "จัดขึ้นวันนี้! 🎉" : `อีก ${diff} วัน`;
+  });
+
+  PAST_FESTIVALS.forEach(item => {
+    const diff = getDaysDiff(item.targetDate);
+    const daysAgo = Math.max(0, -diff);
+    item.days = daysAgo;
+    item.isPast = true;
+    item.meta = diff === 0 ? "จัดขึ้นวันนี้! 🎉" : `ผ่านไป ${daysAgo} วัน`;
+  });
+
+  const upBadge = document.getElementById("festival-upcoming-badge-count");
+  if (upBadge) upBadge.textContent = UPCOMING_FESTIVALS.length;
+  const pastBadge = document.getElementById("festival-past-badge-count");
+  if (pastBadge) pastBadge.textContent = PAST_FESTIVALS.length;
+}
+
+prepareFestivalsData();
+
+let currentFestivalMode = "upcoming";
+
+window.switchFestivalTab = function(mode) {
+  if (currentFestivalMode === mode) return;
+  currentFestivalMode = mode;
+  playBeep(600, 0.06);
+
+  const btnUpcoming = document.getElementById("festival-tab-upcoming");
+  const btnPast = document.getElementById("festival-tab-past");
+
+  if (mode === "upcoming") {
+    if (btnUpcoming) {
+      btnUpcoming.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-cyan-500 text-slate-950 shadow-md cursor-pointer";
+    }
+    if (btnPast) {
+      btnPast.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5 cursor-pointer";
+    }
+    const topStatus = document.getElementById("festival-counter-status-top");
+    const bottomStatus = document.getElementById("festival-counter-status-bottom");
+    if (topStatus) topStatus.textContent = "เหลือเวลาอีก";
+    if (bottomStatus) bottomStatus.textContent = "วัน (Days Remaining)";
+
+    if (festivalListInstance) {
+      festivalListInstance.updateItems(UPCOMING_FESTIVALS);
+      festivalListInstance.setSelected(0, true);
+    }
+  } else {
+    if (btnUpcoming) {
+      btnUpcoming.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5 cursor-pointer";
+    }
+    if (btnPast) {
+      btnPast.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-amber-500 text-slate-950 shadow-md cursor-pointer";
+    }
+    const topStatus = document.getElementById("festival-counter-status-top");
+    const bottomStatus = document.getElementById("festival-counter-status-bottom");
+    if (topStatus) topStatus.textContent = "ผ่านพ้นไปแล้ว";
+    if (bottomStatus) bottomStatus.textContent = "วันที่แล้ว (Days Ago)";
+
+    if (festivalListInstance) {
+      festivalListInstance.updateItems(PAST_FESTIVALS);
+      festivalListInstance.setSelected(0, true);
+    }
+  }
+};
 
 let festivalCounterInstance = null;
 let festivalStrokeInstance = null;
@@ -1749,6 +1936,16 @@ async function initFestivalLab() {
       if (locEl) locEl.textContent = item.location || "";
       if (descEl) descEl.textContent = item.description || "";
 
+      const topStatus = document.getElementById("festival-counter-status-top");
+      const bottomStatus = document.getElementById("festival-counter-status-bottom");
+      if (item.isPast) {
+        if (topStatus) topStatus.textContent = "ผ่านพ้นไปแล้ว";
+        if (bottomStatus) bottomStatus.textContent = item.days === 0 ? "จัดขึ้นวันนี้! (Today)" : "วันที่แล้ว (Days Ago)";
+      } else {
+        if (topStatus) topStatus.textContent = item.days === 0 ? "เทศกาลสำคัญ" : "เหลือเวลาอีก";
+        if (bottomStatus) bottomStatus.textContent = item.days === 0 ? "จัดขึ้นวันนี้! (Today)" : "วัน (Days Remaining)";
+      }
+
       // Roll Counter digits
       if (festivalCounterInstance) {
         festivalCounterInstance.setValue(item.days);
@@ -1789,7 +1986,21 @@ window.openFestivalModal = function() {
   if (modal) {
     modal.classList.remove("hidden");
     modal.classList.add("flex");
+
+    const todayEl = document.getElementById("festival-today-text");
+    if (todayEl) {
+      todayEl.textContent = `วันนี้: ${formatThaiDate(new Date())}`;
+    }
+
+    prepareFestivalsData();
+
     initFestivalLab();
+
+    if (festivalLabMounted && festivalListInstance) {
+      const list = currentFestivalMode === "upcoming" ? UPCOMING_FESTIVALS : PAST_FESTIVALS;
+      festivalListInstance.updateItems(list);
+    }
+
     if (window.lucide) lucide.createIcons();
   }
 };
