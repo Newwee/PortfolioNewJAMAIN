@@ -112,16 +112,31 @@ body {
 }
 
 .lanyard-card-container {
-  width: 100%;
-  height: 440px;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  z-index: 20;
+  pointer-events: none;
   overflow: visible;
-  touch-action: pan-y;
 }
 
+/* Mobile (< 768px): sits in the lower hero zone below the bio text */
+@media (max-width: 767px) {
+  .lanyard-card-container {
+    top: auto;
+    bottom: 25px;
+    height: 460px;
+    touch-action: pan-y;
+  }
+}
+
+/* PC / Desktop (>= 768px): covers the FULL hero section so the card can be dragged ANYWHERE */
 @media (min-width: 768px) {
   .lanyard-card-container {
-    height: 580px;
+    top: 0;
+    bottom: 0;
+    height: 100%;
   }
 }
 

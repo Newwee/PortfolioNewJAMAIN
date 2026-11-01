@@ -415,6 +415,14 @@ async function initLanyard() {
 
   try {
     const { initLanyard: mountLanyard } = await import("./lanyard.js");
+    const calcLanyardAnchor = () => {
+      const w = window.innerWidth;
+      if (w < 768) return 0.5;
+      const contentWidth = Math.min(w, 1152);
+      const targetX = (w / 2) + (contentWidth * 0.22);
+      return Math.min(0.85, Math.max(0.5, targetX / w));
+    };
+
     const isDesktop = window.innerWidth >= 768;
     const lanyard = mountLanyard(container, {
       frontImage: "assets/badge-front.png",
@@ -424,7 +432,7 @@ async function initLanyard() {
       strapColor: "#111827",
       strapWidth: 0.62,
       strapLength: 0.52,
-      anchor: 0.5,
+      anchor: calcLanyardAnchor(),
       size: isDesktop ? 0.52 : 0.44,
       cornerRadius: 0.25,
       finish: "glossy",
@@ -441,7 +449,7 @@ async function initLanyard() {
     window.addEventListener("resize", () => {
       if (lanyard?.update) {
         lanyard.update({
-          anchor: 0.5,
+          anchor: calcLanyardAnchor(),
           size: window.innerWidth >= 768 ? 0.52 : 0.44
         });
       }

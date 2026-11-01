@@ -148,6 +148,9 @@
     <!-- ================= 3. HERO SECTION & 3D LANYARD BADGE ================= -->
     <section id="home" class="hero-root-section">
 
+      <!-- Full-Section 3D Lanyard Overlay (PC: Fullscreen Draggable Everywhere; Mobile: Positioned Below Bio) -->
+      <div id="lanyard-container" class="lanyard-card-container"></div>
+
       <div class="hero-container-inner">
         
         <!-- Left Column: Bio & Hero Info -->
@@ -226,11 +229,9 @@
           </div>
         </div>
 
-        <!-- Right Column: Interactive 3D Lanyard Card & Flip Button (Desktop: Right Side; Mobile: Below Bio) -->
-        <div class="hero-lanyard-col flex flex-col items-center justify-center w-full min-h-[460px] md:min-h-[600px] relative select-none mt-8 md:mt-0">
-          <div id="lanyard-container" class="lanyard-card-container"></div>
-          
-          <div class="flex items-center justify-between w-full max-w-sm px-4 mt-2 text-xs text-slate-400 relative z-30">
+        <!-- Right Column: Spacer & Flip Button (Desktop: Right Spacer; Mobile: Lower Spacer) -->
+        <div class="hero-lanyard-col flex flex-col items-center justify-end w-full min-h-[460px] md:min-h-[600px] relative select-none mt-8 md:mt-0 pointer-events-none">
+          <div class="flex items-center justify-between w-full max-w-sm px-4 mt-auto text-xs text-slate-400 relative z-30 pointer-events-auto">
             <span class="flex items-center gap-1.5 text-cyan-400 font-medium">
               <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
               <span data-i18n="hero_drag_hint">ดึง ยืด หรือเหวี่ยงป้ายได้อิสระ</span>
