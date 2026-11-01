@@ -36,11 +36,15 @@ const ENG_MONTHS = [
 ];
 const ENG_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-function formatClockDate(date, timeZone, lang) {
+const THAI_SHORT_DAYS = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
+const THAI_SHORT_MONTHS = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+const ENG_SHORT_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const ENG_SHORT_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function formatClockDate(date, timeZone, lang, isCompact = false) {
   try {
     const formatter = new Intl.DateTimeFormat('en-US', {
       timeZone,
-      weekday: 'numeric',
       year: 'numeric',
       month: 'numeric',
       day: 'numeric'
@@ -57,12 +61,18 @@ function formatClockDate(date, timeZone, lang) {
 
     if (lang === 'th') {
       const thaiYear = year + 543;
+      if (isCompact) {
+        return `${THAI_SHORT_DAYS[dayOfWeek]} ${day} ${THAI_SHORT_MONTHS[month - 1]} ${thaiYear}`;
+      }
       return `${THAI_DAYS[dayOfWeek]}ที่ ${day} ${THAI_MONTHS[month - 1]} ${thaiYear}`;
     } else {
+      if (isCompact) {
+        return `${ENG_SHORT_DAYS[dayOfWeek]}, ${ENG_SHORT_MONTHS[month - 1]} ${day}, ${year}`;
+      }
       return `${ENG_DAYS[dayOfWeek]}, ${ENG_MONTHS[month - 1]} ${day}, ${year}`;
     }
   } catch (e) {
-    return date.toDateString();
+    return date.toLocaleDateString();
   }
 }
 
@@ -122,7 +132,7 @@ export function createWorldClock(container, options = {}) {
   if (variant === 'hero') {
     widget.className = 'world-clock-hero-widget';
     widget.innerHTML = `
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2.5 shrink-0">
         <span class="world-clock-dot" title="Atomic Sync"></span>
         <div class="world-clock-time">
           <span class="wc-hh">00</span>
@@ -132,11 +142,11 @@ export function createWorldClock(container, options = {}) {
         </div>
         <span class="text-sm ml-0.5 wc-icon">☀️</span>
       </div>
-      <div class="h-4 w-px bg-white/20 hidden sm:block"></div>
-      <div class="flex items-center gap-2">
+      <div class="h-4 w-px bg-white/20 hidden sm:block shrink-0"></div>
+      <div class="hidden sm:flex items-center gap-1.5 shrink-0">
         <span class="text-xs text-slate-300 font-medium wc-date">Loading date...</span>
       </div>
-      <div class="relative flex items-center">
+      <div class="relative flex items-center shrink-0">
         <button type="button" class="world-clock-city-btn" aria-haspopup="true">
           <span class="wc-flag">${cityObj().flag}</span>
           <span class="wc-btn-name">${cityName()}</span>
@@ -261,7 +271,7 @@ export function createWorldClock(container, options = {}) {
     if (iconEl) iconEl.textContent = isDay ? '☀️' : '🌙';
 
     if (dateEl) {
-      dateEl.textContent = formatClockDate(now, localTz, currentLanguage);
+      dateEl.textContent = formatClockDate(now, localTz, currentLanguage, variant === 'hero');
     }
     if (offsetEl) {
       const atomicText = currentLanguage === 'th' ? 'เวลาตรงเป๊ะ (Atomic)' : 'Exact Time (Atomic)';
