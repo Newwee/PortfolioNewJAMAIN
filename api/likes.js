@@ -51,18 +51,31 @@ module.exports = async function handler(req, res) {
 
       if (!id) return res.status(400).json({ error: "Missing like target id" });
 
-      const current = Number(globalLikes[id] || 0) + 1;
-      globalLikes[id] = current;
+      let nextCount = Number(globalLikes[id] || 0) + 1;
 
       if (supabase) {
         try {
+          const { data: row } = await supabase
+            .from("likes")
+            .select("count")
+            .eq("id", id)
+            .maybeSingle();
+
+          const dbCount = row ? Number(row.count || 0) + 1 : nextCount;
+          nextCount = dbCount;
+
           await supabase
             .from("likes")
-            .upsert({ id, count: current });
+            .upsert({
+              id,
+              count: nextCount,
+              updated_at: new Date().toISOString()
+            });
         } catch (e) {}
       }
 
-      return res.status(200).json({ ok: true, id, count: current });
+      globalLikes[id] = nextCount;
+      return res.status(200).json({ ok: true, id, count: nextCount });
     } catch (err) {
       return res.status(500).json({ error: "Failed to update like" });
     }

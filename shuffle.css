@@ -1,0 +1,37 @@
+/* ==============================================================================
+   🚀 React Bits: Shuffle Component (Vanilla JS + GSAP 3D Flip Variant)
+   Ported for New JA Portfolio — 3D Flip Scramble Transition for i18n
+   ============================================================================== */
+
+.shuffle-parent {
+  display: inline-block;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: inherit;
+  vertical-align: baseline;
+  visibility: hidden;
+}
+
+.shuffle-parent.is-ready {
+  visibility: visible;
+}
+
+.shuffle-char-wrapper {
+  display: inline-block;
+  vertical-align: baseline;
+  position: relative;
+  backface-visibility: hidden;
+}
+
+.shuffle-char-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.shuffle-char {
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
+}

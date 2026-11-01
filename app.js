@@ -438,13 +438,31 @@ function initTypewriter() {
   const target = document.getElementById("typewriter");
   if (!target) return;
 
-  const roles = [
+  const rolesTh = [
     "Problem Solver & Bug Fixer",
     "Web Maintenance & Developer",
     "Fullstack & Discord Architect",
     "AI & STEM Innovator (แชมป์ระดับชาติ)",
     "NMRTUP Grade 12 | Sci - Math"
   ];
+  const rolesEn = [
+    "Problem Solver & Bug Fixer",
+    "Web Maintenance & Developer",
+    "Full-Stack Web Architect",
+    "AI & STEM Innovator (National Champion)",
+    "NMRTUP Grade 12 | Sci - Math"
+  ];
+
+  let currentLang = localStorage.getItem("newja_lang") || (navigator.language?.startsWith("th") ? "th" : "en");
+  let roles = currentLang === "en" ? rolesEn : rolesTh;
+
+  window.addEventListener("newja_language_changed", e => {
+    currentLang = e.detail?.lang || "th";
+    roles = currentLang === "en" ? rolesEn : rolesTh;
+    roleIdx = 0;
+    charIdx = 0;
+    isDeleting = false;
+  });
 
   let roleIdx = 0;
   let charIdx = 0;
@@ -977,6 +995,7 @@ async function initPulseHearts() {
       }
     } catch (e) {}
 
+    window._pulseHeartInstances = {};
     mounts.forEach(mount => {
       const id = mount.dataset.heartId || "item";
       const initialCount = typeof serverLikes[id] === "number" ? serverLikes[id] : Number(mount.dataset.heartCount || 0);
@@ -1002,7 +1021,7 @@ async function initPulseHearts() {
             if (postRes.ok) {
               const postData = await postRes.json();
               if (postData && typeof postData.count === "number" && heartInstance && heartInstance.setCount) {
-                heartInstance.setCount(postData.count);
+                heartInstance.setCount(postData.count, true);
               }
             }
           } catch (e) {}
@@ -1015,7 +1034,27 @@ async function initPulseHearts() {
           });
         }
       });
+      window._pulseHeartInstances[id] = heartInstance;
     });
+
+    // Realtime Cross-User Sync Poller (every 3.5s with rolling number pulse)
+    setInterval(async () => {
+      if (document.hidden) return;
+      try {
+        const res = await fetch("/api/likes");
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.likes) {
+            Object.entries(data.likes).forEach(([itemId, liveCount]) => {
+              const inst = window._pulseHeartInstances[itemId];
+              if (inst && typeof liveCount === "number" && liveCount !== inst.getCount()) {
+                inst.setCount(liveCount, true);
+              }
+            });
+          }
+        }
+      } catch (e) {}
+    }, 3500);
   } catch (e) {
     console.warn("PulseHeart failed to mount:", e);
   }
@@ -2019,6 +2058,64 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+// ─── 18. TIME.IS ATOMIC WORLD CLOCK WIDGETS ──────────────────────────────
+async function initWorldClockWidgets() {
+  try {
+    const { createWorldClock } = await import("./world-clock.js");
+
+    const navMount = document.getElementById("navbar-world-clock");
+    if (navMount) {
+      createWorldClock(navMount, { variant: "pill", showSelector: true });
+    }
+
+    const heroMount = document.getElementById("hero-world-clock");
+    if (heroMount) {
+      createWorldClock(heroMount, { variant: "pill", showSelector: true });
+    }
+
+    const modalMount = document.getElementById("festival-world-clock-mount");
+    if (modalMount) {
+      createWorldClock(modalMount, { variant: "panel", showSelector: true });
+    }
+  } catch (e) {
+    console.warn("World clock init failed:", e);
+  }
+}
+
+// ─── 19. VISITOR TRACKING & SESSION LOGGING ─────────────────────────────
+async function trackVisitorSession() {
+  try {
+    let visitorId = localStorage.getItem("newja_visitor_id");
+    if (!visitorId) {
+      visitorId = "vis_" + Math.random().toString(36).substring(2, 10) + "_" + Date.now().toString(36);
+      localStorage.setItem("newja_visitor_id", visitorId);
+    }
+    const payload = {
+      visitorId,
+      language: localStorage.getItem("newja_lang") || (navigator.language?.startsWith("th") ? "th" : "en"),
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Bangkok",
+      referrer: document.referrer || "direct",
+      screenWidth: window.screen?.width || 0,
+      screenHeight: window.screen?.height || 0
+    };
+    await fetch("/api/visitors", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) {}
+}
+
+// ─── 20. MULTI-LANGUAGE SYSTEM (i18n & SHUFFLE FLIP) ─────────────────────
+async function initI18nSystem() {
+  try {
+    const { initLanguageSystem } = await import("./i18n.js");
+    initLanguageSystem();
+  } catch (e) {
+    console.warn("i18n init failed:", e);
+  }
+}
+
 // ─── 16. BOOTSTRAP APPLICATION ──────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
@@ -2041,6 +2138,15 @@ document.addEventListener("DOMContentLoaded", () => {
   initEducationBounceCards();
   initServicesPixelCards();
   getSwipeToastManager();
+
+  // Multi-Language System (i18n + React Bits Shuffle Flip Animation)
+  initI18nSystem();
+
+  // Time.is World Clock Widgets (Navbar, Hero & Festival Modal)
+  initWorldClockWidgets();
+
+  // Visitor Tracking & Session Logging
+  trackVisitorSession();
 
   // Admin secret trigger
   setupAdminSecretTrigger();

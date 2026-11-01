@@ -213,10 +213,18 @@ export function createPulseHeart(container, options = {}) {
   return {
     isLiked: () => liked,
     getCount: () => total,
-    setCount: (n) => {
-      total = Number(n || 0);
-      shown = { liked, count: total };
-      renderDom();
+    setCount: (n, animate = true) => {
+      const next = Number(n || 0);
+      if (next === total) return;
+      const prev = total;
+      total = next;
+      if (animate) {
+        startRoll(prev, next);
+        shown = { liked, count: next };
+      } else {
+        shown = { liked, count: next };
+        renderDom();
+      }
     },
     destroy: () => {
       cancelAnimationFrame(rafId);
