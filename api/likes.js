@@ -1,14 +1,7 @@
-const { createClient } = require("@supabase/supabase-js");
+const fs = require("fs");
+const path = require("path");
 
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://nbmjzhhvpksbxvqcxjpn.supabase.co";
-const SUPABASE_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || "";
-
-let supabase = null;
-if (SUPABASE_KEY) {
-  try {
-    supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-  } catch (e) {}
-}
+const CACHE_FILE = path.join("/tmp", "portfolio_likes.json");
 
 // In-Memory store starting at 0 for real counting
 let globalLikes = {
@@ -17,6 +10,22 @@ let globalLikes = {
   "utcc-hackathon": 0,
   "kmitl-hackathon": 0
 };
+
+// Try to read from disk cache if exists
+try {
+  if (fs.existsSync(CACHE_FILE)) {
+    const cached = JSON.parse(fs.readFileSync(CACHE_FILE, "utf8"));
+    if (cached && typeof cached === "object") {
+      Object.assign(globalLikes, cached);
+    }
+  }
+} catch (e) {}
+
+function persistLikes() {
+  try {
+    fs.writeFileSync(CACHE_FILE, JSON.stringify(globalLikes), "utf8");
+  } catch (e) {}
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -27,19 +36,6 @@ module.exports = async function handler(req, res) {
 
   // 1. GET: Fetch current real like counts
   if (req.method === "GET") {
-    if (supabase) {
-      try {
-        const { data, error } = await supabase
-          .from("likes")
-          .select("id, count");
-
-        if (!error && data && data.length) {
-          data.forEach(item => {
-            if (item.id) globalLikes[item.id] = Number(item.count || 0);
-          });
-        }
-      } catch (err) {}
-    }
     return res.status(200).json({ ok: true, likes: globalLikes });
   }
 
@@ -51,31 +47,11 @@ module.exports = async function handler(req, res) {
 
       if (!id) return res.status(400).json({ error: "Missing like target id" });
 
-      let nextCount = Number(globalLikes[id] || 0) + 1;
-
-      if (supabase) {
-        try {
-          const { data: row } = await supabase
-            .from("likes")
-            .select("count")
-            .eq("id", id)
-            .maybeSingle();
-
-          const dbCount = row ? Number(row.count || 0) + 1 : nextCount;
-          nextCount = dbCount;
-
-          await supabase
-            .from("likes")
-            .upsert({
-              id,
-              count: nextCount,
-              updated_at: new Date().toISOString()
-            });
-        } catch (e) {}
-      }
-
+      const nextCount = Number(globalLikes[id] || 0) + 1;
       globalLikes[id] = nextCount;
-      return res.status(200).json({ ok: true, id, count: nextCount });
+      persistLikes();
+
+      return res.status(200).json({ ok: true, id, count: nextCount, likes: globalLikes });
     } catch (err) {
       return res.status(500).json({ error: "Failed to update like" });
     }

@@ -1,7 +1,8 @@
 /* ==============================================================================
    🌐 i18n Multi-Language System (Thai 🇹🇭 / English 🇬🇧)
    Auto Browser Language Detection (th -> TH, other -> EN)
-   Features React Bits <Shuffle /> 3D Flip Scramble Animation on Language Switch
+   Features React Bits <Shuffle /> 3D Flip Scramble on Hero Headline
+   Optimized 60fps instant transitions for all body sections
    ============================================================================== */
 
 import { shuffleText } from './shuffle.js';
@@ -20,14 +21,15 @@ export const TRANSLATIONS = {
     "nav_sound_off": "ปิดเสียง",
     
     // Hero Section
-    "hero_tag": "NMRTUP (ม.6 / วิทย์-คณิต) • PROBLEM SOLVER & WEB SPECIALIST",
+    "hero_tag": "Grade 12 (Sci - Math) • Problem Solver & Web Specialist",
     "hero_title_prefix": "ภัทรดนัย ป้องเศร้า",
-    "hero_title_nickname": "(นิว)",
-    "hero_desc": "เด็กติดเกมคนหนึ่งที่ก้าวสู่การเป็นหัวหน้าทีมพัฒนาเว็บไซต์ ทำงานจริงระดับประเทศ แก้ไขปัญหาเชิงลึก และสร้างระบบที่ตอบโจทย์ผู้ใช้จริง",
+    "hero_title_nickname": "New JA (นิว)",
+    "hero_desc": "ผมเป็นคนที่หลงใหลในโลกของคอมพิวเตอร์มาตั้งแต่วัยเด็ก จากจุดเริ่มต้นที่อยากรู้ว่าเกมถูกสร้างขึ้นมาได้อย่างไร สู่การเป็นหัวหน้าทีมพัฒนาเว็บไซต์ที่พาทีมคว้ารางวัลชนะเลิศระดับประเทศ มีความสามารถในการวิเคราะห์แก้ปัญหา ดูแลและจัดการระบบเว็บไซต์ ค้นหาและแก้บั๊กได้อย่างตรงจุด เพื่อสร้างระบบซอฟต์แวร์ที่เสถียรและใช้งานได้จริง",
+    "hero_view_port_btn": "ดูผลงาน & การแข่งขัน",
     "hero_chat_btn": "พูดคุยกับผม",
     "hero_contact_btn": "ติดต่อฉัน",
-    "hero_drag_hint": "ดึงยืดเพื่อเหวี่ยงบัตรได้อิสระ",
-    "hero_bottom_hint": "คลิกที่บัตรเพื่อสลับมุมมอง",
+    "hero_drag_hint": "ดึง ยืด หรือเหวี่ยงป้ายได้อิสระ",
+    "hero_bottom_hint": "พลิกด้าน ↻",
     
     // About Me
     "about_title": "About Me",
@@ -36,7 +38,7 @@ export const TRANSLATIONS = {
     "about_name": "ภัทรดนัย ป้องเศร้า",
     "about_nickname": "ชื่อเล่น นิว (New JA)",
     "about_role": "นักพัฒนาที่พร้อมลุยงานจริง มีทักษะและความสามารถในการวิเคราะห์แก้ปัญหา ดูแลและจัดการระบบเว็บไซต์ ค้นหาและแก้บั๊กเชิงลึก (Bug Fixing) พร้อมพัฒนาระบบซอฟต์แวร์ให้เสถียรและตอบโจทย์ผู้ใช้งานจริงอย่างเต็มประสิทธิภาพ",
-    "about_story_1": "ผมมีความสนใจในด้านคอมพิวเตอร์มาตั้งแต่ ม.1 ตอนนั้นเป็นเพียงเด็กที่ติดเกมมากๆ จนเกิดคำถามว่า \"เกมพวกนี้มันทำงานและสร้างขึ้นมาได้อย่างไร?\" จึงเริ่มศึกษาและเขียนโค้ดสร้างเกมตั้งแต่วัยเยาว์",
+    "about_story_1": "ผมมีความสนใจในด้านคอมพิวเตอร์มาตั้งแต่ ม.1 ตอนนั้นเป็นเพียงเด็กที่ติดเกมมากๆ จนเกิดคำถามว่า \"เกมพวกนี้มันทำงานและสร้างขึ้นมาได้อย่างไร?\" จึงเริ่มศึกษาและเขียนโค้ดสร้างเกมตั้งแต่เด็ก",
     "about_story_2": "ช่วงมัธยมปลาย ผมได้ก้าวขึ้นเป็น หัวหน้าทีมพัฒนาเว็บไซต์ ให้กับโปรเจกต์ AQUA-AI นำเสนอ Pitching จนคณะกรรมการระดับประเทศไม่มีคอมเมนต์ติ และคว้ารางวัลชนะเลิศอันดับ 1 ระดับประเทศมาได้",
     "about_story_3": "นอกจากนี้ยังพัฒนา Chatbot ด้วย Thai LLM ภายในเวลาเพียง 1 วัน คว้ารองชนะเลิศอันดับ 2 ในการแข่งขันของคณะเทคโนโลยีสารสนเทศ สจล. อีกด้วย",
     "about_mask_hint": "เลื่อนเมาส์ไปที่ใบหน้าเพื่อเปิดลูกเล่น Mask Reveal",
@@ -45,32 +47,18 @@ export const TRANSLATIONS = {
     "edu_tag": "เส้นทางการศึกษา (Education Journey)",
     "edu_title": "ประถมศึกษา & มัธยมศึกษา",
     "edu_sub": "เลื่อนเมาส์หรือแตะที่การ์ดเพื่อกระจายฟิสิกส์ (Bounce & Hover) • คลิกที่การ์ดเพื่อเปิดเว็บไซต์โรงเรียน",
-    "edu_school_1_name": "รร. บางพลีพัฒนศึกษาลัย",
-    "edu_school_1_sub": "BPE (อนุบาล - ประถมศึกษา)",
-    "edu_school_1_item1": "อนุบาล (Kindergarten)",
-    "edu_school_1_item2": "ประถมศึกษาตอนต้น (Grade 1-3)",
-    "edu_school_1_item3": "ประถมศึกษาตอนปลาย (Grade 4-6)",
-    "edu_school_2_name": "รร. นวมินทราชินูทิศ เตรียมอุดมศึกษาพัฒนาการ",
-    "edu_school_2_sub": "NMRTUP (ม.1 - มัธยม 6)",
-    "edu_school_2_item1": "มัธยมศึกษาตอนต้น (Grade 7-9)",
-    "edu_school_2_item2": "มัธยมศึกษาตอนปลาย (Grade 10-12)",
-    "edu_school_2_item3": "ปัจจุบัน: มัธยมศึกษาปีที่ 6 ห้อง 2",
     
     // Services
     "services_title": "Web Services & Expertise",
     "services_sub": "ทักษะและความเชี่ยวชาญด้านการพัฒนา ออกแบบ และดูแลรักษาระบบเว็บแบบครบวงจร",
-    "service_1_title": "Full-Stack Web Development",
-    "service_1_desc": "พัฒนาเว็บแอปพลิเคชันตั้งแต่สถาปัตยกรรม Frontend จนถึง Backend และฐานข้อมูล ด้วยความปลอดภัยและความเร็วสูง",
-    "service_2_title": "In-Depth Bug Fixing",
-    "service_2_desc": "ค้นหาและวิเคราะห์แก้บักเชิงลึกทั้งระบบ ตรวจสอบ Memory Leaks, Race Conditions และข้อผิดพลาดระดับโค้ด",
-    "service_3_title": "Database & Realtime Systems",
-    "service_3_desc": "ออกแบบและปรับแต่งฐานข้อมูลความเร็วสูง ซิงโครไนซ์ข้อมูลแบบ Realtime ผ่าน Supabase, PostgreSQL และ WebSockets",
-    "service_4_title": "Creative UI/UX & Micro-Interactions",
-    "service_4_desc": "รังสรรค์ประสบการณ์ผู้ใช้ด้วยแอนิเมชันล้ำสมัย Three.js, GSAP และ React Bits ที่ลื่นไหลและโดดเด่น",
     
     // Portfolio
     "portfolio_title": "ผลงาน & กิจกรรม (Portfolio)",
     "portfolio_sub": "รวมผลงานการพัฒนาเว็บไซต์ บอท และการแข่งขันระดับประเทศที่ผ่านมา",
+    "port_tab_projects": "ผลงาน (Projects)",
+    "port_tab_achievements": "การแข่งขัน (Achievements)",
+    "port_tab_certs": "ใบรับรอง (Certificates)",
+    "port_tab_skills": "ทักษะ (Tech Stack)",
     "port_tab_all": "ทั้งหมด",
     "port_tab_web": "เว็บแอปพลิเคชัน",
     "port_tab_bot": "ดิสคอร์ด & ทูลส์",
@@ -93,7 +81,7 @@ export const TRANSLATIONS = {
     "guestbook_title": "ความคิดเห็น",
     "guestbook_name_ph": "ชื่อของคุณ *",
     "guestbook_avatar_ph": "ตัวย่อ (เช่น NJ)",
-    "guestbook_msg_ph": "แสดงความคิดเห็นพูดคุย... (มีระบบกรองคำไม่เหมาะสมอัตโนมัติ)",
+    "guestbook_msg_ph": "แสดงความคิดเห็นหรือพูดคุย... (มีระบบกรองคำไม่เหมาะสมอัตโนมัติ)",
     "guestbook_post_btn": "โพสต์ความคิดเห็น",
     
     // Festival Countdown
@@ -123,14 +111,15 @@ export const TRANSLATIONS = {
     "nav_sound_off": "Mute Sound",
     
     // Hero Section
-    "hero_tag": "NMRTUP (GRADE 12 / SCI-MATH) • PROBLEM SOLVER & WEB SPECIALIST",
+    "hero_tag": "Grade 12 (Sci - Math) • Problem Solver & Web Specialist",
     "hero_title_prefix": "Pataradanai Pongsao",
-    "hero_title_nickname": "(New)",
-    "hero_desc": "From a game-loving teenager to a national champion lead web developer. Solving complex problems and engineering robust full-stack digital experiences.",
+    "hero_title_nickname": "New JA (New)",
+    "hero_desc": "From an avid gamer who wondered how games were made behind the scenes, to leading a web development team that won 1st Place National Champion. Dedicated to deep problem analysis, web maintenance, bug fixing, and building rock-solid, production-ready software systems.",
+    "hero_view_port_btn": "View Works & Competitions",
     "hero_chat_btn": "Chat With Me",
     "hero_contact_btn": "Contact Me",
-    "hero_drag_hint": "Stretch & swing the ID lanyard freely across the screen",
-    "hero_bottom_hint": "Click card to flip view",
+    "hero_drag_hint": "Stretch, swing, or flick the ID badge freely",
+    "hero_bottom_hint": "Flip Badge ↻",
     
     // About Me
     "about_title": "About Me",
@@ -138,46 +127,32 @@ export const TRANSLATIONS = {
     "about_greeting": "Hello, I am",
     "about_name": "Pataradanai Pongsao",
     "about_nickname": "Nickname: New (New JA)",
-    "about_role": "Production-ready developer with deep skills in problem analysis, web maintenance, bug fixing, and building high-performance, rock-solid software systems.",
-    "about_story_1": "My passion for computers began in Grade 7. As an avid gamer, I wondered: \"How do these games actually work behind the scenes?\", leading me to learn programming and game development from an early age.",
-    "about_story_2": "In high school, I became the Lead Web Developer for the AQUA-AI project, delivering a flawless pitch with zero critical remarks from national judges and winning 1st Place National Champion.",
-    "about_story_3": "I also engineered a Thai LLM-powered AI Chatbot within just 24 hours, securing 2nd Runner-Up at the prestigious KMITL Faculty of Information Technology competition.",
-    "about_mask_hint": "Hover cursor over the portrait for interactive Mask Reveal",
+    "about_role": "Production-ready developer with proven skills in web maintenance, deep bug fixing, and architecting high-performance web systems tailored for real-world reliability.",
+    "about_story_1": "My passion for computers began in Grade 7. As an avid gamer, I asked myself: \"How do these games actually work?\", which inspired me to learn programming and game development from an early age.",
+    "about_story_2": "In high school, I stepped up as Lead Web Developer for the AQUA-AI project, delivering a pitching presentation with zero negative remarks from national judges and winning 1st Place National Champion.",
+    "about_story_3": "I also engineered a Thai LLM-powered AI Chatbot within just 24 hours, winning 2nd Runner-Up at the KMITL School of Information Technology competition.",
+    "about_mask_hint": "Hover cursor over the portrait to reveal interactive Hero Mask",
     
     // Education Journey
     "edu_tag": "Education Journey",
     "edu_title": "Primary & Secondary Education",
     "edu_sub": "Hover or touch cards for physics scatter (Bounce & Hover) • Click card to visit school website",
-    "edu_school_1_name": "Bangpleepatthanasuksalai School",
-    "edu_school_1_sub": "BPE (Kindergarten - Primary School)",
-    "edu_school_1_item1": "Kindergarten",
-    "edu_school_1_item2": "Lower Primary (Grades 1-3)",
-    "edu_school_1_item3": "Upper Primary (Grades 4-6)",
-    "edu_school_2_name": "Navamindrajinuthit Triamudomsuksapattanakarn",
-    "edu_school_2_sub": "NMRTUP (Grades 7 - 12)",
-    "edu_school_2_item1": "Lower Secondary (Grades 7-9)",
-    "edu_school_2_item2": "Upper Secondary (Grades 10-12)",
-    "edu_school_2_item3": "Current: Grade 12 (Room 2)",
     
     // Services
     "services_title": "Web Services & Expertise",
     "services_sub": "Full-cycle web development, architecture, performance tuning, and technical maintenance",
-    "service_1_title": "Full-Stack Web Development",
-    "service_1_desc": "Architecting modern web apps from frontend interfaces to scalable backend APIs and secure databases.",
-    "service_2_title": "In-Depth Bug Fixing",
-    "service_2_desc": "Diagnosing complex root causes, memory leaks, race conditions, and deep logic vulnerabilities.",
-    "service_3_title": "Database & Realtime Systems",
-    "service_3_desc": "High-throughput database design with real-time data streaming via Supabase, PostgreSQL, and WebSockets.",
-    "service_4_title": "Creative UI/UX & Micro-Interactions",
-    "service_4_desc": "Crafting tactile user experiences with Three.js, GSAP, and React Bits animations.",
     
     // Portfolio
-    "portfolio_title": "Projects & Achievements (Portfolio)",
+    "portfolio_title": "Projects & Competitions (Portfolio)",
     "portfolio_sub": "Curated collection of web applications, bots, and national competitions",
+    "port_tab_projects": "Projects",
+    "port_tab_achievements": "Achievements",
+    "port_tab_certs": "Certificates",
+    "port_tab_skills": "Tech Stack",
     "port_tab_all": "All",
     "port_tab_web": "Web Apps",
     "port_tab_bot": "Discord & Tools",
-    "port_tab_hackathon": "Hackathons & Awards",
+    "port_tab_hackathon": "Competitions & Awards",
     "port_like_label": "Like",
     "port_already_liked": "You have already liked this project! ❤️",
     
@@ -193,7 +168,7 @@ export const TRANSLATIONS = {
     "contact_msg_label": "Message",
     "contact_msg_ph": "Type your message here...",
     "contact_send_btn": "Send Message",
-    "guestbook_title": "Comments & Discussion",
+    "guestbook_title": "Comments",
     "guestbook_name_ph": "Your Name *",
     "guestbook_avatar_ph": "Initials (e.g. NJ)",
     "guestbook_msg_ph": "Leave a comment... (Automated profanity filter enabled)",
@@ -235,16 +210,6 @@ export function translate(key) {
   return dict[key] || key;
 }
 
-// Elements that get the 3D Flip Scramble animation on switch
-const FLIP_ANIMATED_SELECTORS = [
-  '#hero-greeting',
-  '#about-title-text',
-  '#services-title-text',
-  '#portfolio-title-text',
-  '#contact-title-text',
-  '#fest-modal-title-text'
-];
-
 export async function setSiteLanguage(lang, triggerAnimation = true) {
   activeLang = lang === 'en' ? 'en' : 'th';
   try {
@@ -265,16 +230,15 @@ export async function setSiteLanguage(lang, triggerAnimation = true) {
     const newText = dict[key];
     if (!newText) return;
 
-    const isFlipTarget = triggerAnimation && FLIP_ANIMATED_SELECTORS.some(sel => el.matches(sel));
-
-    if (isFlipTarget) {
+    // Only run 3D Flip on Hero Greeting to keep performance blazing fast at 60fps
+    if (triggerAnimation && el.id === 'hero-greeting') {
       shuffleText(el, newText, {
         effect: 'flip',
         shuffleDirection: 'down',
-        duration: 1.1,
-        shuffleTimes: 7,
+        duration: 0.55,
+        shuffleTimes: 4,
         animationMode: 'sequence',
-        stagger: 0.07,
+        stagger: 0.035,
         ease: 'power2.out'
       });
     } else {
@@ -305,11 +269,11 @@ function updateLangButtonUI() {
   if (!thBtn || !enBtn) return;
 
   if (activeLang === 'th') {
-    thBtn.className = 'px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition';
-    enBtn.className = 'px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition';
+    thBtn.className = 'px-2.5 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition';
+    enBtn.className = 'px-2.5 py-1 rounded-full text-xs font-medium text-slate-400 hover:text-white transition';
   } else {
-    thBtn.className = 'px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition';
-    enBtn.className = 'px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition';
+    thBtn.className = 'px-2.5 py-1 rounded-full text-xs font-medium text-slate-400 hover:text-white transition';
+    enBtn.className = 'px-2.5 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition';
   }
 }
 
@@ -322,6 +286,12 @@ export function initLanguageSystem() {
 
   if (thBtn) thBtn.addEventListener('click', () => setSiteLanguage('th', true));
   if (enBtn) enBtn.addEventListener('click', () => setSiteLanguage('en', true));
+}
+
+// Bind to window for global access
+if (typeof window !== 'undefined') {
+  window.setSiteLanguage = setSiteLanguage;
+  window.switchLanguage = setSiteLanguage;
 }
 
 export default {

@@ -1054,7 +1054,7 @@ async function initPulseHearts() {
           }
         }
       } catch (e) {}
-    }, 3500);
+    }, 8000);
   } catch (e) {
     console.warn("PulseHeart failed to mount:", e);
   }
@@ -2068,10 +2068,7 @@ async function initWorldClockWidgets() {
       createWorldClock(navMount, { variant: "pill", showSelector: true });
     }
 
-    const heroMount = document.getElementById("hero-world-clock");
-    if (heroMount) {
-      createWorldClock(heroMount, { variant: "pill", showSelector: true });
-    }
+
 
     const modalMount = document.getElementById("festival-world-clock-mount");
     if (modalMount) {

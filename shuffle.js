@@ -1,8 +1,6 @@
 /* ==============================================================================
-   🚀 React Bits: Shuffle Component Port (Vanilla JS + GSAP 3D Flip Variant)
-   Parameters matched with React Bits Preset:
-   effect: 'flip', direction: 'down', duration: 1.1, shuffleTimes: 7,
-   animationMode: 'sequence', stagger: 0.07, ease: 'power2.out'
+   🚀 React Bits: Shuffle Component Port (Optimized 3D Flip Variant)
+   Fast, Lightweight, Low-CPU GSAP Flip Scramble Transition
    ============================================================================== */
 
 const DEFAULT_CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*กขคงจชซดตถทนบปผฝพฟภมยรลวศษสหอฮ';
@@ -13,14 +11,20 @@ export function shuffleText(element, newText, options = {}) {
   const {
     effect = 'flip',
     shuffleDirection = 'down',
-    duration = 1.1,
-    shuffleTimes = 7,
+    duration = 0.55,
+    shuffleTimes = 4,
     animationMode = 'sequence',
-    stagger = 0.07,
+    stagger = 0.035,
     ease = 'power2.out',
     scrambleCharset = DEFAULT_CHARSET,
     onComplete = null
   } = options;
+
+  // Kill any existing shuffle timeline on this element
+  if (element._shuffleTl) {
+    element._shuffleTl.kill();
+    element._shuffleTl = null;
+  }
 
   // Reduced motion check
   if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -65,7 +69,7 @@ export function shuffleText(element, newText, options = {}) {
       const wrap = document.createElement('span');
       wrap.className = 'shuffle-char-wrapper';
       wrap.style.display = 'inline-block';
-      wrap.style.perspective = '280px';
+      wrap.style.perspective = '200px';
       wrap.style.verticalAlign = 'baseline';
 
       const inner = document.createElement('span');
@@ -121,8 +125,8 @@ export function shuffleText(element, newText, options = {}) {
 
       gsap.set(cell.inner, {
         [isVertical ? 'rotationX' : 'rotationY']: turn,
-        z: Math.sin(Math.PI * Math.min(1, Math.max(0, t / last))) * 18,
-        opacity: 0.25 + 0.75 * Math.pow(facing, 1.5)
+        z: Math.sin(Math.PI * Math.min(1, Math.max(0, t / last))) * 14,
+        opacity: 0.3 + 0.7 * Math.pow(facing, 1.5)
       });
     };
 
@@ -132,20 +136,16 @@ export function shuffleText(element, newText, options = {}) {
           cell.orig.textContent = cell.text;
           gsap.set(cell.inner, { clearProps: 'all' });
         });
+        element._shuffleTl = null;
         if (typeof onComplete === 'function') onComplete();
         resolve();
       }
     });
 
-    cells.forEach((cell, i) => {
-      let offset = i * stagger;
-      if (animationMode === 'center') {
-        const mid = cells.length / 2;
-        offset = Math.abs(i - mid) * stagger;
-      } else if (animationMode === 'evenodd') {
-        offset = (i % 2 === 0 ? i : i + 1) * (stagger * 0.7);
-      }
+    element._shuffleTl = tl;
 
+    cells.forEach((cell, i) => {
+      const offset = i * stagger;
       const proxy = { t: 0 };
       tl.to(
         proxy,

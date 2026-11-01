@@ -1,38 +1,41 @@
 /* ==============================================================================
    ⏰ Time.is World Clock Component CSS
    Atomic Precision Glassmorphic Design for New JA Portfolio
+   High-Performance, Zero-Layout-Thrash Engine
    ============================================================================== */
 
 .world-clock-widget {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: rgba(15, 23, 42, 0.82);
-  border: 1px solid rgba(56, 189, 248, 0.25);
+  gap: 8px;
+  background: rgba(11, 17, 29, 0.88);
+  border: 1px solid rgba(56, 189, 248, 0.28);
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
-  padding: 6px 14px;
+  -webkit-backdrop-filter: blur(12px);
+  padding: 4px 12px;
   border-radius: 9999px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   color: #f8fafc;
   user-select: none;
+  position: relative;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .world-clock-widget:hover {
   border-color: rgba(56, 189, 248, 0.5);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
 }
 
 .world-clock-time {
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   font-weight: 800;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: #38bdf8;
   display: flex;
   align-items: center;
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
 }
 
 .world-clock-colon {
@@ -48,39 +51,9 @@
 }
 
 .world-clock-sec {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #93c5fd;
-  margin-left: 2px;
-}
-
-.world-clock-city-select {
-  background: rgba(30, 41, 59, 0.85);
-  color: #e2e8f0;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 3px 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  font-family: inherit;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.world-clock-city-select:hover,
-.world-clock-city-select:focus {
-  background: rgba(30, 41, 59, 1);
-  border-color: #38bdf8;
-  color: #ffffff;
-}
-
-.world-clock-badge {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #34d399;
+  margin-left: 1px;
 }
 
 .world-clock-dot {
@@ -90,6 +63,7 @@
   background-color: #10b981;
   box-shadow: 0 0 8px #10b981;
   animation: atomicPulse 2s infinite ease-in-out;
+  flex-shrink: 0;
 }
 
 @keyframes atomicPulse {
@@ -97,7 +71,114 @@
   50% { opacity: 0.4; transform: scale(0.85); }
 }
 
-/* Modal variant (Expanded panel) */
+/* ─── Custom Cyberpunk City Selector Trigger ─── */
+.world-clock-city-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(30, 41, 59, 0.8);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 2px 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.world-clock-city-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.world-clock-city-btn .world-clock-arrow {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.world-clock-city-btn.is-open .world-clock-arrow {
+  transform: rotate(180deg);
+  color: #38bdf8;
+}
+
+/* ─── Custom Floating City Dropdown Menu ─── */
+.world-clock-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba(56, 189, 248, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 6px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: dropdownSlide 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.world-clock-dropdown.hidden {
+  display: none !important;
+}
+
+@keyframes dropdownSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.world-clock-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.world-clock-item:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: #ffffff;
+}
+
+.world-clock-item.is-selected {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  font-weight: 800;
+  border-left: 2px solid #38bdf8;
+}
+
+.world-clock-item-offset {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.world-clock-item.is-selected .world-clock-item-offset {
+  color: #93c5fd;
+}
+
+/* ─── Modal Variant (Panel) ─── */
 .world-clock-modal-panel {
   display: flex;
   flex-wrap: wrap;
@@ -109,10 +190,21 @@
   border: 1px solid rgba(56, 189, 248, 0.25);
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  position: relative;
 }
 
 .world-clock-date-str {
   font-size: 0.78rem;
   color: #94a3b8;
   font-weight: 500;
+}
+
+.world-clock-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #34d399;
 }

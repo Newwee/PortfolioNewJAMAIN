@@ -42,8 +42,9 @@ export function createPulseHeart(container, options = {}) {
   } = options;
 
   const isStoredLiked = typeof localStorage !== 'undefined' && localStorage.getItem(storageKey) === 'true';
+  const storedCount = typeof localStorage !== 'undefined' ? Number(localStorage.getItem(`newja_like_count_${id}`) || 0) : 0;
   let liked = isStoredLiked;
-  let total = initialCount + (isStoredLiked ? 1 : 0);
+  let total = Math.max(Number(initialCount || 0), storedCount, isStoredLiked ? 1 : 0);
   let shown = { liked, count: total };
   let roll = null;
   let rafId = 0;
@@ -188,25 +189,25 @@ export function createPulseHeart(container, options = {}) {
     viaPointer = false;
 
     liked = true;
-    const nextCount = total + 1;
-    total = nextCount;
+    total = total + 1;
 
     try {
       localStorage.setItem(storageKey, 'true');
+      localStorage.setItem(`newja_like_count_${id}`, String(total));
     } catch (e) {}
 
     btn.setAttribute('aria-pressed', 'true');
 
     if (pointer && !reducedMotion()) {
-      runAnimation(true, nextCount);
+      runAnimation(true, total);
     } else {
       btn.dataset.liked = 'true';
-      shown = { liked: true, count: nextCount };
+      shown = { liked: true, count: total };
       renderDom();
     }
 
     if (typeof onLike === 'function') {
-      onLike(nextCount);
+      onLike(total);
     }
   });
 
@@ -215,14 +216,18 @@ export function createPulseHeart(container, options = {}) {
     getCount: () => total,
     setCount: (n, animate = true) => {
       const next = Number(n || 0);
-      if (next === total) return;
+      const safeNext = Math.max(next, total, liked ? 1 : 0);
+      if (safeNext === total) return;
       const prev = total;
-      total = next;
+      total = safeNext;
+      try {
+        localStorage.setItem(`newja_like_count_${id}`, String(total));
+      } catch (e) {}
       if (animate) {
-        startRoll(prev, next);
-        shown = { liked, count: next };
+        startRoll(prev, total);
+        shown = { liked, count: total };
       } else {
-        shown = { liked, count: next };
+        shown = { liked, count: total };
         renderDom();
       }
     },

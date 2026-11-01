@@ -1,20 +1,21 @@
 /* ==============================================================================
-   ⏰ Time.is World Clock Component (Atomic Precision Engine)
+   ⏰ Time.is World Clock Component (Ultra-Performance Native Atomic Engine)
    Default: Asia/Bangkok (GMT+7)
-   Supports Real-time Ticking, City Switcher, and Dual Language (TH / EN)
+   Custom Cyberpunk Dropdown Menu (No ugly native <select>)
+   Zero-Layout-Thrash: Only updates textContent, never recreates DOM!
    ============================================================================== */
 
 export const WORLD_CITIES = [
-  { id: 'Asia/Bangkok', nameTh: '🇹🇭 กรุงเทพฯ (ไทย)', nameEn: '🇹🇭 Bangkok (TH)', offset: 'GMT+7' },
-  { id: 'Asia/Tokyo', nameTh: '🇯🇵 โตเกียว (ญี่ปุ่น)', nameEn: '🇯🇵 Tokyo (JP)', offset: 'GMT+9' },
-  { id: 'Asia/Singapore', nameTh: '🇸🇬 สิงคโปร์', nameEn: '🇸🇬 Singapore (SG)', offset: 'GMT+8' },
-  { id: 'Asia/Dubai', nameTh: '🇦🇪 ดูไบ (ยูเออี)', nameEn: '🇦🇪 Dubai (AE)', offset: 'GMT+4' },
-  { id: 'Europe/London', nameTh: '🇬🇧 ลอนดอน (อังกฤษ)', nameEn: '🇬🇧 London (UK)', offset: 'GMT+0' },
-  { id: 'Europe/Paris', nameTh: '🇫🇷 ปารีส (ฝรั่งเศส)', nameEn: '🇫🇷 Paris (FR)', offset: 'GMT+1' },
-  { id: 'America/New_York', nameTh: '🇺🇸 นิวยอร์ก (สหรัฐฯ)', nameEn: '🇺🇸 New York (US)', offset: 'GMT-5' },
-  { id: 'America/Los_Angeles', nameTh: '🇺🇸 ลอสแอนเจลิส (สหรัฐฯ)', nameEn: '🇺🇸 Los Angeles (US)', offset: 'GMT-8' },
-  { id: 'Australia/Sydney', nameTh: '🇦🇺 ซิดนีย์ (ออสเตรเลีย)', nameEn: '🇦🇺 Sydney (AU)', offset: 'GMT+11' },
-  { id: 'Europe/Berlin', nameTh: '🇩🇪 เบอร์ลิน (เยอรมนี)', nameEn: '🇩🇪 Berlin (DE)', offset: 'GMT+1' }
+  { id: 'Asia/Bangkok', flag: '🇹🇭', nameTh: 'กรุงเทพฯ (ไทย)', nameEn: 'Bangkok (TH)', offset: 'GMT+7' },
+  { id: 'Asia/Tokyo', flag: '🇯🇵', nameTh: 'โตเกียว (ญี่ปุ่น)', nameEn: 'Tokyo (JP)', offset: 'GMT+9' },
+  { id: 'Asia/Singapore', flag: '🇸🇬', nameTh: 'สิงคโปร์', nameEn: 'Singapore (SG)', offset: 'GMT+8' },
+  { id: 'Asia/Dubai', flag: '🇦🇪', nameTh: 'ดูไบ (ยูเออี)', nameEn: 'Dubai (AE)', offset: 'GMT+4' },
+  { id: 'Europe/London', flag: '🇬🇧', nameTh: 'ลอนดอน (อังกฤษ)', nameEn: 'London (UK)', offset: 'GMT+0' },
+  { id: 'Europe/Paris', flag: '🇫🇷', nameTh: 'ปารีส (ฝรั่งเศส)', nameEn: 'Paris (FR)', offset: 'GMT+1' },
+  { id: 'America/New_York', flag: '🇺🇸', nameTh: 'นิวยอร์ก (สหรัฐฯ)', nameEn: 'New York (US)', offset: 'GMT-5' },
+  { id: 'America/Los_Angeles', flag: '🇺🇸', nameTh: 'ลอสแอนเจลิส (สหรัฐฯ)', nameEn: 'Los Angeles (US)', offset: 'GMT-8' },
+  { id: 'Australia/Sydney', flag: '🇦🇺', nameTh: 'ซิดนีย์ (ออสเตรเลีย)', nameEn: 'Sydney (AU)', offset: 'GMT+11' },
+  { id: 'Europe/Berlin', flag: '🇩🇪', nameTh: 'เบอร์ลิน (เยอรมนี)', nameEn: 'Berlin (DE)', offset: 'GMT+1' }
 ];
 
 let currentTimezone = 'Asia/Bangkok';
@@ -88,99 +89,177 @@ function getZonedTimeParts(date, timeZone) {
   }
 }
 
+// Global outside-click closer for custom dropdowns
+if (typeof window !== 'undefined') {
+  window.addEventListener('click', e => {
+    document.querySelectorAll('.world-clock-dropdown').forEach(dd => {
+      if (!dd.contains(e.target) && !e.target.closest('.world-clock-city-btn')) {
+        dd.classList.add('hidden');
+        const trigger = dd.parentElement?.querySelector('.world-clock-city-btn');
+        if (trigger) trigger.classList.remove('is-open');
+      }
+    });
+  });
+}
+
 export function createWorldClock(container, options = {}) {
   if (!container) return null;
 
   const {
     variant = 'pill', // 'pill' | 'panel'
     showSelector = true,
-    showDate = true,
     initialTz = currentTimezone
   } = options;
 
   let localTz = initialTz;
-
   const widget = document.createElement('div');
   widget.className = variant === 'panel' ? 'world-clock-modal-panel' : 'world-clock-widget';
 
-  function render() {
+  const cityObj = () => WORLD_CITIES.find(c => c.id === localTz) || WORLD_CITIES[0];
+  const cityName = () => currentLanguage === 'th' ? cityObj().nameTh : cityObj().nameEn;
+
+  // Build DOM Structure ONCE (Ultra Optimized)
+  if (variant === 'panel') {
+    widget.innerHTML = `
+      <div class="flex items-center gap-3">
+        <div class="world-clock-time">
+          <span class="wc-hh">00</span>
+          <span class="world-clock-colon">:</span>
+          <span class="wc-mm">00</span>
+          <span class="world-clock-sec wc-ss">:00</span>
+          <span class="text-xs ml-1.5 opacity-80 wc-icon">☀️</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="world-clock-date-str wc-date">Loading...</span>
+          <span class="world-clock-badge">
+            <span class="world-clock-dot"></span>
+            <span class="wc-offset">${cityObj().offset} • Atomic Sync</span>
+          </span>
+        </div>
+      </div>
+      <div class="relative flex items-center">
+        <button type="button" class="world-clock-city-btn" aria-haspopup="true">
+          <span class="wc-flag">${cityObj().flag}</span>
+          <span class="wc-btn-name">${cityName()}</span>
+          <span class="world-clock-arrow">▾</span>
+        </button>
+        <div class="world-clock-dropdown hidden" role="menu"></div>
+      </div>
+    `;
+  } else {
+    widget.innerHTML = `
+      <span class="world-clock-dot" title="Atomic Time"></span>
+      <div class="world-clock-time">
+        <span class="wc-hh">00</span>
+        <span class="world-clock-colon">:</span>
+        <span class="wc-mm">00</span>
+        <span class="world-clock-sec wc-ss">:00</span>
+      </div>
+      <span class="text-xs wc-icon">☀️</span>
+      <div class="relative flex items-center">
+        <button type="button" class="world-clock-city-btn" aria-haspopup="true">
+          <span class="wc-flag">${cityObj().flag}</span>
+          <span class="wc-btn-name">${cityName()}</span>
+          <span class="world-clock-arrow">▾</span>
+        </button>
+        <div class="world-clock-dropdown hidden" role="menu"></div>
+      </div>
+    `;
+  }
+
+  // Cache Element References for Fast Updates (Zero DOM rebuild)
+  const hhEl = widget.querySelector('.wc-hh');
+  const mmEl = widget.querySelector('.wc-mm');
+  const ssEl = widget.querySelector('.wc-ss');
+  const iconEl = widget.querySelector('.wc-icon');
+  const dateEl = widget.querySelector('.wc-date');
+  const offsetEl = widget.querySelector('.wc-offset');
+  const flagEl = widget.querySelector('.wc-flag');
+  const btnNameEl = widget.querySelector('.wc-btn-name');
+  const triggerBtn = widget.querySelector('.world-clock-city-btn');
+  const dropdownMenu = widget.querySelector('.world-clock-dropdown');
+
+  // Populate Dropdown Items
+  function renderDropdownItems() {
+    if (!dropdownMenu) return;
+    dropdownMenu.innerHTML = WORLD_CITIES.map(c => `
+      <button type="button" class="world-clock-item ${c.id === localTz ? 'is-selected' : ''}" data-tz="${c.id}">
+        <span class="flex items-center gap-2">
+          <span>${c.flag}</span>
+          <span>${currentLanguage === 'th' ? c.nameTh : c.nameEn}</span>
+        </span>
+        <span class="world-clock-item-offset">${c.offset}</span>
+      </button>
+    `).join('');
+
+    dropdownMenu.querySelectorAll('.world-clock-item').forEach(item => {
+      item.addEventListener('click', e => {
+        e.stopPropagation();
+        const selectedTz = item.dataset.tz;
+        setGlobalClockTimezone(selectedTz);
+        dropdownMenu.classList.add('hidden');
+        if (triggerBtn) triggerBtn.classList.remove('is-open');
+      });
+    });
+  }
+
+  renderDropdownItems();
+
+  if (triggerBtn && dropdownMenu) {
+    triggerBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      const isClosed = dropdownMenu.classList.contains('hidden');
+      // Close other dropdowns
+      document.querySelectorAll('.world-clock-dropdown').forEach(dd => dd.classList.add('hidden'));
+      document.querySelectorAll('.world-clock-city-btn').forEach(btn => btn.classList.remove('is-open'));
+
+      if (isClosed) {
+        dropdownMenu.classList.remove('hidden');
+        triggerBtn.classList.add('is-open');
+      } else {
+        dropdownMenu.classList.add('hidden');
+        triggerBtn.classList.remove('is-open');
+      }
+    });
+  }
+
+  // Fast Tick (Zero DOM churn)
+  function tick() {
     const now = new Date();
     const { hh, mm, ss, isDay } = getZonedTimeParts(now, localTz);
-    const dateStr = formatClockDate(now, localTz, currentLanguage);
-    const cityObj = WORLD_CITIES.find(c => c.id === localTz) || WORLD_CITIES[0];
-    const cityName = currentLanguage === 'th' ? cityObj.nameTh : cityObj.nameEn;
-    const dayIcon = isDay ? '☀️' : '🌙';
-    const atomicText = currentLanguage === 'th' ? 'เวลาตรงเป๊ะ (Atomic)' : 'Exact Time (Atomic)';
 
-    const selectHtml = showSelector
-      ? `<select class="world-clock-city-select" aria-label="Select City">
-          ${WORLD_CITIES.map(c => `
-            <option value="${c.id}" ${c.id === localTz ? 'selected' : ''}>
-              ${currentLanguage === 'th' ? c.nameTh : c.nameEn} (${c.offset})
-            </option>
-          `).join('')}
-        </select>`
-      : `<span class="text-xs font-bold text-slate-300">${cityName}</span>`;
+    if (hhEl) hhEl.textContent = hh;
+    if (mmEl) mmEl.textContent = mm;
+    if (ssEl) ssEl.textContent = `:${ss}`;
+    if (iconEl) iconEl.textContent = isDay ? '☀️' : '🌙';
 
-    if (variant === 'panel') {
-      widget.innerHTML = `
-        <div class="flex items-center gap-3">
-          <div class="world-clock-time">
-            <span>${hh}</span>
-            <span class="world-clock-colon">:</span>
-            <span>${mm}</span>
-            <span class="world-clock-sec">:${ss}</span>
-            <span class="text-xs ml-1.5 opacity-80">${dayIcon}</span>
-          </div>
-          <div class="flex flex-col">
-            <span class="world-clock-date-str">${dateStr}</span>
-            <span class="world-clock-badge">
-              <span class="world-clock-dot"></span>
-              <span>${atomicText} • ${cityObj.offset}</span>
-            </span>
-          </div>
-        </div>
-        <div class="flex items-center gap-2">
-          ${selectHtml}
-        </div>
-      `;
-    } else {
-      widget.innerHTML = `
-        <span class="world-clock-dot" title="${atomicText}"></span>
-        <div class="world-clock-time">
-          <span>${hh}</span>
-          <span class="world-clock-colon">:</span>
-          <span>${mm}</span>
-          <span class="world-clock-sec">:${ss}</span>
-        </div>
-        <span class="text-xs">${dayIcon}</span>
-        ${selectHtml}
-      `;
+    if (dateEl) {
+      dateEl.textContent = formatClockDate(now, localTz, currentLanguage);
     }
-
-    const selectEl = widget.querySelector('.world-clock-city-select');
-    if (selectEl) {
-      selectEl.addEventListener('change', e => {
-        localTz = e.target.value;
-        currentTimezone = localTz;
-        render();
-        // Sync other clocks
-        activeInstances.forEach(inst => {
-          if (inst.setTz) inst.setTz(localTz);
-        });
-      });
+    if (offsetEl) {
+      const atomicText = currentLanguage === 'th' ? 'เวลาตรงเป๊ะ (Atomic)' : 'Exact Time (Atomic)';
+      offsetEl.textContent = `${cityObj().offset} • ${atomicText}`;
     }
   }
 
-  render();
+  function updateCityUI() {
+    const cur = cityObj();
+    if (flagEl) flagEl.textContent = cur.flag;
+    if (btnNameEl) btnNameEl.textContent = cityName();
+    renderDropdownItems();
+    tick();
+  }
+
+  tick();
   container.innerHTML = '';
   container.appendChild(widget);
 
   const instance = {
-    update: render,
+    tick,
+    updateCityUI,
     setTz: tz => {
       localTz = tz;
-      render();
+      updateCityUI();
     },
     destroy: () => {
       activeInstances.delete(instance);
@@ -192,7 +271,7 @@ export function createWorldClock(container, options = {}) {
 
   if (!timerId) {
     timerId = setInterval(() => {
-      activeInstances.forEach(inst => inst.update());
+      activeInstances.forEach(inst => inst.tick());
     }, 1000);
   }
 
@@ -201,7 +280,7 @@ export function createWorldClock(container, options = {}) {
 
 export function setGlobalClockLanguage(lang) {
   currentLanguage = lang === 'en' ? 'en' : 'th';
-  activeInstances.forEach(inst => inst.update());
+  activeInstances.forEach(inst => inst.updateCityUI());
 }
 
 export function setGlobalClockTimezone(tz) {
