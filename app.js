@@ -183,6 +183,16 @@ function initNavbarScrollSpy() {
         item.classList.remove("active");
       }
     });
+    document.querySelectorAll(".mobile-nav-item").forEach((item) => {
+      const href = item.getAttribute("href");
+      if (href === `#${id}`) {
+        item.classList.add("active", "text-cyan-300", "bg-blue-600/30");
+        item.classList.remove("text-slate-300");
+      } else {
+        item.classList.remove("active", "text-cyan-300", "bg-blue-600/30");
+        item.classList.add("text-slate-300");
+      }
+    });
   }
 
   let ticking = false;
@@ -230,7 +240,7 @@ function initNavbarScrollSpy() {
     }
   }
 
-  // Smooth click navigation
+  // Smooth click navigation (Desktop)
   navItems.forEach((item) => {
     item.addEventListener("click", (e) => {
       const href = item.getAttribute("href");
@@ -248,6 +258,58 @@ function initNavbarScrollSpy() {
       }
     });
   });
+
+  // Mobile Drawer Navigation & Toggle
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenuDrawer = document.getElementById("mobile-menu-drawer");
+  const mobileNavItems = document.querySelectorAll(".mobile-nav-item");
+
+  if (mobileMenuBtn && mobileMenuDrawer) {
+    mobileMenuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isHidden = mobileMenuDrawer.classList.contains("hidden");
+      if (isHidden) {
+        mobileMenuDrawer.classList.remove("hidden");
+        mobileMenuDrawer.classList.add("flex");
+        mobileMenuBtn.setAttribute("aria-expanded", "true");
+        if (window.lucide?.createIcons) window.lucide.createIcons();
+      } else {
+        mobileMenuDrawer.classList.add("hidden");
+        mobileMenuDrawer.classList.remove("flex");
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+      }
+      playBeep(520, 0.06);
+    });
+
+    mobileNavItems.forEach((item) => {
+      item.addEventListener("click", (e) => {
+        const href = item.getAttribute("href");
+        if (!href || !href.startsWith("#")) return;
+        const targetId = href.replace("#", "");
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          e.preventDefault();
+          playBeep(440, 0.05);
+          setActive(targetId);
+          mobileMenuDrawer.classList.add("hidden");
+          mobileMenuDrawer.classList.remove("flex");
+          mobileMenuBtn.setAttribute("aria-expanded", "false");
+          targetSection.scrollIntoView({ behavior: "smooth" });
+          if (history.pushState) {
+            history.pushState(null, "", `#${targetId}`);
+          }
+        }
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!mobileMenuDrawer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        mobileMenuDrawer.classList.add("hidden");
+        mobileMenuDrawer.classList.remove("flex");
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("hashchange", () => {
@@ -353,14 +415,6 @@ async function initLanyard() {
 
   try {
     const { initLanyard: mountLanyard } = await import("./lanyard.js");
-    const calcLanyardAnchor = () => {
-      const w = window.innerWidth;
-      if (w < 768) return 0.5;
-      const contentWidth = Math.min(w, 1152);
-      const targetX = (w / 2) + (contentWidth * 0.22);
-      return Math.min(0.85, Math.max(0.5, targetX / w));
-    };
-
     const isDesktop = window.innerWidth >= 768;
     const lanyard = mountLanyard(container, {
       frontImage: "assets/badge-front.png",
@@ -370,8 +424,8 @@ async function initLanyard() {
       strapColor: "#111827",
       strapWidth: 0.62,
       strapLength: 0.52,
-      anchor: calcLanyardAnchor(),
-      size: isDesktop ? 0.52 : 0.46,
+      anchor: 0.5,
+      size: isDesktop ? 0.52 : 0.44,
       cornerRadius: 0.25,
       finish: "glossy",
       metal: "silver",
@@ -386,7 +440,10 @@ async function initLanyard() {
 
     window.addEventListener("resize", () => {
       if (lanyard?.update) {
-        lanyard.update({ anchor: calcLanyardAnchor() });
+        lanyard.update({
+          anchor: 0.5,
+          size: window.innerWidth >= 768 ? 0.52 : 0.44
+        });
       }
     }, { passive: true });
 
@@ -1089,10 +1146,12 @@ async function initEducationBounceCards() {
 
     const getResponsiveConfig = () => {
       const w = window.innerWidth;
-      if (w < 480) {
-        return { cardSize: 260, spread: 130, height: 380, push: 140 };
+      if (w < 400) {
+        return { cardSize: 220, spread: 90, height: 340, push: 100 };
+      } else if (w < 480) {
+        return { cardSize: 250, spread: 120, height: 370, push: 130 };
       } else if (w < 768) {
-        return { cardSize: 310, spread: 180, height: 430, push: 180 };
+        return { cardSize: 300, spread: 160, height: 420, push: 160 };
       } else {
         return { cardSize: 360, spread: 220, height: 480, push: 220 };
       }

@@ -112,15 +112,22 @@ body {
 }
 
 .lanyard-card-container {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  height: 100%;
-  z-index: 20;
-  pointer-events: none;
+  width: 100%;
+  height: 440px;
+  position: relative;
   overflow: visible;
+  touch-action: pan-y;
+}
+
+@media (min-width: 768px) {
+  .lanyard-card-container {
+    height: 580px;
+  }
+}
+
+.hero-lanyard-col {
+  position: relative;
+  width: 100%;
 }
 
 .lanyard-viewport {
@@ -197,6 +204,19 @@ body {
   margin-bottom: 1.5rem;
   padding: 6px 16px;
   display: inline-flex;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .hero-status-pill {
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
 }
 
 .hero-status-dot {
@@ -1547,3 +1567,36 @@ body {
   user-select: none;
 }
 
+
+/* ─── MOBILE RESPONSIVENESS ENHANCEMENTS (< 640px) ────────────────────────── */
+@media (max-width: 640px) {
+  .hero-root-section {
+    padding: 75px 12px 30px !important;
+  }
+  .hero-h1-gradient,
+  .hero-h1-white {
+    font-size: clamp(1.85rem, 6.8vw, 3rem) !important;
+  }
+  .hero-action-row {
+    gap: 8px !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    padding: 9px 16px !important;
+    font-size: 0.8rem !important;
+    border-radius: 12px !important;
+  }
+  .nav-pill-wrap {
+    top: 10px !important;
+    max-width: calc(100vw - 16px) !important;
+  }
+  .nav-pill {
+    padding: 4px 8px !important;
+  }
+  .hero-description-copy {
+    font-size: 0.84rem !important;
+    line-height: 1.6 !important;
+    padding: 0 4px !important;
+  }
+}

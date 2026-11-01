@@ -78,35 +78,68 @@
   <div id="gradient-ascii-hero" class="gradient-ascii-container pointer-events-none opacity-25"></div>
 
   <!-- ================= 2. FLOATING PILL NAVBAR ================= -->
-  <header class="nav-pill-wrap">
+  <header class="nav-pill-wrap flex flex-col items-center">
     <nav class="nav-pill">
       <!-- Brand Logo / Avatar -->
-      <a href="#home" class="flex items-center gap-2 pl-1 pr-2.5 py-0.5 rounded-full hover:bg-white/10 transition group" title="New JA Portfolio">
+      <a href="#home" class="flex items-center gap-2 pl-1 pr-2 py-0.5 rounded-full hover:bg-white/10 transition group shrink-0" title="New JA Portfolio">
         <img src="assets/logo.png" alt="New JA" class="w-6 h-6 rounded-full object-cover ring-2 ring-cyan-400/80 shadow-[0_0_10px_rgba(6,182,212,0.6)] group-hover:scale-105 transition" />
         <span class="font-black text-xs text-white tracking-wider hidden sm:inline group-hover:text-cyan-300 transition">NEW JA</span>
       </a>
-      <div class="w-px h-5 bg-white/10 mx-1 hidden sm:block"></div>
+      <div class="w-px h-5 bg-white/10 mx-1 hidden md:block"></div>
 
-      <a href="#home" class="nav-item active" data-i18n="nav_home">Home</a>
-      <a href="#about" class="nav-item" data-i18n="nav_about">About</a>
-      <a href="#portfolio" class="nav-item" data-i18n="nav_portfolio">Portfolio</a>
-      <a href="#services" class="nav-item" data-i18n="nav_services">Services</a>
-      <a href="#contact" class="nav-item" data-i18n="nav_contact">Contact</a>
-      <div class="w-px h-5 bg-white/10 mx-1"></div>
+      <!-- Desktop Nav Items -->
+      <div class="hidden md:flex items-center gap-1">
+        <a href="#home" class="nav-item active" data-i18n="nav_home">Home</a>
+        <a href="#about" class="nav-item" data-i18n="nav_about">About</a>
+        <a href="#portfolio" class="nav-item" data-i18n="nav_portfolio">Portfolio</a>
+        <a href="#services" class="nav-item" data-i18n="nav_services">Services</a>
+        <a href="#contact" class="nav-item" data-i18n="nav_contact">Contact</a>
+      </div>
+      <div class="w-px h-5 bg-white/10 mx-0.5 sm:mx-1"></div>
       
       <!-- Sound FX Toggle Button -->
-      <button id="sound-btn" type="button" title="เปิด/ปิดเสียงเอฟเฟกต์ UI" class="p-2 rounded-full hover:bg-white/10 text-slate-300 hover:text-white transition">
+      <button id="sound-btn" type="button" title="เปิด/ปิดเสียงเอฟเฟกต์ UI" class="p-1.5 sm:p-2 rounded-full hover:bg-white/10 text-slate-300 hover:text-white transition shrink-0">
         <i data-lucide="volume-2" class="w-4 h-4"></i>
       </button>
 
-      <div class="w-px h-5 bg-white/10 mx-1"></div>
+      <div class="w-px h-5 bg-white/10 mx-0.5 sm:mx-1"></div>
 
       <!-- Language Switcher Pill (TH / EN) -->
-      <div class="flex items-center bg-slate-900/90 border border-white/10 rounded-full p-0.5 text-xs font-bold shadow-inner" title="สลับภาษา / Switch Language (TH / EN)">
-        <button id="lang-btn-th" type="button" class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition">TH</button>
-        <button id="lang-btn-en" type="button" class="px-2.5 py-1 rounded-full text-xs font-medium text-slate-400 hover:text-white transition">EN</button>
+      <div class="flex items-center bg-slate-900/90 border border-white/10 rounded-full p-0.5 text-xs font-bold shadow-inner shrink-0" title="สลับภาษา / Switch Language (TH / EN)">
+        <button id="lang-btn-th" type="button" class="px-2 sm:px-2.5 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition">TH</button>
+        <button id="lang-btn-en" type="button" class="px-2 sm:px-2.5 py-1 rounded-full text-xs font-medium text-slate-400 hover:text-white transition">EN</button>
       </div>
+
+      <!-- Mobile Hamburger Button (< md) -->
+      <div class="w-px h-5 bg-white/10 mx-0.5 md:hidden"></div>
+      <button id="mobile-menu-btn" type="button" class="md:hidden p-1.5 rounded-full hover:bg-white/10 text-slate-300 hover:text-white transition shrink-0" aria-label="Toggle Menu" aria-expanded="false">
+        <i data-lucide="menu" class="w-4 h-4"></i>
+      </button>
     </nav>
+
+    <!-- Mobile Cyberpunk Dropdown Drawer -->
+    <div id="mobile-menu-drawer" class="hidden md:hidden mt-2.5 w-[280px] bg-slate-950/95 border border-cyan-400/35 rounded-2xl p-2.5 shadow-[0_16px_40px_rgba(0,0,0,0.85),0_0_25px_rgba(6,182,212,0.25)] backdrop-blur-2xl flex-col gap-1 transition-all z-50">
+      <a href="#home" class="mobile-nav-item active flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-semibold text-white hover:bg-blue-600/20 hover:text-cyan-300 transition" data-i18n="nav_home">
+        <i data-lucide="home" class="w-4 h-4 text-cyan-400"></i>
+        <span>Home</span>
+      </a>
+      <a href="#about" class="mobile-nav-item flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:bg-blue-600/20 hover:text-cyan-300 transition" data-i18n="nav_about">
+        <i data-lucide="user" class="w-4 h-4 text-cyan-400"></i>
+        <span>About</span>
+      </a>
+      <a href="#portfolio" class="mobile-nav-item flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:bg-blue-600/20 hover:text-cyan-300 transition" data-i18n="nav_portfolio">
+        <i data-lucide="folder-git-2" class="w-4 h-4 text-cyan-400"></i>
+        <span>Portfolio</span>
+      </a>
+      <a href="#services" class="mobile-nav-item flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:bg-blue-600/20 hover:text-cyan-300 transition" data-i18n="nav_services">
+        <i data-lucide="wrench" class="w-4 h-4 text-cyan-400"></i>
+        <span>Services</span>
+      </a>
+      <a href="#contact" class="mobile-nav-item flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:bg-blue-600/20 hover:text-cyan-300 transition" data-i18n="nav_contact">
+        <i data-lucide="mail" class="w-4 h-4 text-cyan-400"></i>
+        <span>Contact</span>
+      </a>
+    </div>
   </header>
 
   <!-- ================= MAIN VIEW ================= -->
@@ -115,22 +148,19 @@
     <!-- ================= 3. HERO SECTION & 3D LANYARD BADGE ================= -->
     <section id="home" class="hero-root-section">
 
-      <!-- Full-Section 3D Lanyard Overlay (Top Layer z-20 - Never blocked by text) -->
-      <div id="lanyard-container" class="lanyard-card-container"></div>
-
       <div class="hero-container-inner">
         
         <!-- Left Column: Bio & Hero Info -->
         <div class="hero-text-col">
-          <div class="flex flex-wrap items-center gap-3">
+          <div class="flex items-center justify-center sm:justify-start w-full">
             <div class="hero-status-pill">
-              <span class="hero-status-dot"></span>
-              <span class="hero-status-label"><a href="https://nmrtup.ac.th/" target="_blank" rel="noreferrer" class="hover:text-cyan-300 underline underline-offset-2 transition font-bold" title="โรงเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาพัฒนาการ (NMRTUP)">NMRTUP (น.ม.ร.ต.อ.พ.) ↗</a> <span data-i18n="hero_tag">Grade 12 (Sci - Math) • Problem Solver &amp; Web Specialist</span></span>
+              <span class="hero-status-dot shrink-0"></span>
+              <span class="hero-status-label"><a href="https://nmrtup.ac.th/" target="_blank" rel="noreferrer" class="hover:text-cyan-300 underline underline-offset-2 transition font-bold" title="โรงเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาพัฒนาการ (NMRTUP)">NMRTUP (น.ม.ร.ต.อ.พ.) ↗</a> <span class="opacity-40 mx-1">•</span> <span data-i18n="hero_tag">Grade 12 (Sci - Math) • Problem Solver</span></span>
             </div>
           </div>
 
           <!-- Time.is Atomic World Clock (Prominent Hero Widget - Requested Location) -->
-          <div id="hero-world-clock" class="my-3"></div>
+          <div id="hero-world-clock" class="my-3 flex justify-center sm:justify-start w-full"></div>
 
           <div class="hero-heading-group">
             <h1 id="hero-greeting" data-i18n="hero_title_prefix" class="hero-h1-gradient">ภัทรดนัย ป้องเศร้า</h1>
@@ -196,15 +226,17 @@
           </div>
         </div>
 
-        <!-- Right Column: Interactive Spacer & Flip Button (z-30) -->
-        <div class="hidden md:flex flex-col items-center justify-end h-[620px] relative select-none pointer-events-none">
-          <div class="flex items-center justify-between w-full max-w-sm px-2 mt-auto text-xs text-slate-400 pointer-events-auto z-30">
-            <span class="flex items-center gap-1.5 text-blue-400 font-medium">
+        <!-- Right Column: Interactive 3D Lanyard Card & Flip Button (Desktop: Right Side; Mobile: Below Bio) -->
+        <div class="hero-lanyard-col flex flex-col items-center justify-center w-full min-h-[460px] md:min-h-[600px] relative select-none mt-8 md:mt-0">
+          <div id="lanyard-container" class="lanyard-card-container"></div>
+          
+          <div class="flex items-center justify-between w-full max-w-sm px-4 mt-2 text-xs text-slate-400 relative z-30">
+            <span class="flex items-center gap-1.5 text-cyan-400 font-medium">
               <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-              <span>ดึง ยืด หรือเหวี่ยงป้ายได้อิสระ</span>
+              <span data-i18n="hero_drag_hint">ดึง ยืด หรือเหวี่ยงป้ายได้อิสระ</span>
             </span>
-            <button id="lanyard-flip-btn" type="button" class="text-xs text-slate-300 hover:text-white transition flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-white/10 hover:border-blue-500/40 shadow-sm cursor-pointer">
-              <span>พลิกด้าน ↻</span>
+            <button id="lanyard-flip-btn" type="button" class="text-xs text-slate-300 hover:text-white transition flex items-center gap-1.5 bg-slate-900/90 px-3 py-1.5 rounded-xl border border-white/10 hover:border-cyan-500/40 shadow-sm cursor-pointer active:scale-95">
+              <span data-i18n="hero_bottom_hint">พลิกด้าน ↻</span>
             </button>
           </div>
         </div>
@@ -243,7 +275,7 @@
 
         <!-- Center: Hover Mask Reveal (Spider-Man / Hero Mask Effect) -->
         <div class="lg:col-span-6 flex flex-col items-center justify-center reveal-on-scroll" data-reveal-delay="0.15">
-          <div id="mask-container" class="hero-reveal-container relative w-[340px] sm:w-[400px] md:w-[460px] lg:w-[500px] h-[500px] sm:h-[560px] md:h-[620px]">
+          <div id="mask-container" class="hero-reveal-container relative w-[min(340px,88vw)] sm:w-[400px] md:w-[460px] lg:w-[500px] h-[460px] sm:h-[560px] md:h-[620px]">
             <!-- Base Photo (Normal Face) -->
             <img src="assets/myface.png" alt="Pataradanai Pongsao" class="w-full h-full object-contain object-bottom filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.95)]" />
             <!-- Top Reveal Layer (Mask Face) -->
