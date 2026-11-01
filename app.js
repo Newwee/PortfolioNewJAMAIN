@@ -1103,12 +1103,12 @@ async function initEducationBounceCards() {
     createBounceCards(mount, {
       images: [
         {
-          src: "assets/school_bangpleepat.png",
+          src: "assets/school_bangpleepat.png?v=logo2",
           alt: "รร.บางพลีพัฒนศึกษาลัย (อนุบาล - ป.6)",
           url: "https://www.bangpleepat.com/"
         },
         {
-          src: "assets/school_nmrtup.png",
+          src: "assets/school_nmrtup.png?v=logo2",
           alt: "รร.นวมินทราชินูทิศ เตรียมอุดมศึกษาพัฒนาการ (ม.1 - ม.6)",
           url: "https://nmrtup.ac.th/"
         }
