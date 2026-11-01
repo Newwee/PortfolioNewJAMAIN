@@ -3,6 +3,7 @@
    Default: Asia/Bangkok (GMT+7)
    Custom Cyberpunk Dropdown Menu (No ugly native <select>)
    Zero-Layout-Thrash: Only updates textContent, never recreates DOM!
+   Variants: 'hero' (prominent large), 'panel' (modal), 'pill' (compact)
    ============================================================================== */
 
 export const WORLD_CITIES = [
@@ -106,20 +107,46 @@ export function createWorldClock(container, options = {}) {
   if (!container) return null;
 
   const {
-    variant = 'pill', // 'pill' | 'panel'
+    variant = 'hero', // 'hero' | 'panel' | 'pill'
     showSelector = true,
     initialTz = currentTimezone
   } = options;
 
   let localTz = initialTz;
   const widget = document.createElement('div');
-  widget.className = variant === 'panel' ? 'world-clock-modal-panel' : 'world-clock-widget';
 
   const cityObj = () => WORLD_CITIES.find(c => c.id === localTz) || WORLD_CITIES[0];
   const cityName = () => currentLanguage === 'th' ? cityObj().nameTh : cityObj().nameEn;
 
   // Build DOM Structure ONCE (Ultra Optimized)
-  if (variant === 'panel') {
+  if (variant === 'hero') {
+    widget.className = 'world-clock-hero-widget';
+    widget.innerHTML = `
+      <div class="flex items-center gap-3">
+        <span class="world-clock-dot" title="Atomic Sync"></span>
+        <div class="world-clock-time">
+          <span class="wc-hh">00</span>
+          <span class="world-clock-colon">:</span>
+          <span class="wc-mm">00</span>
+          <span class="world-clock-sec wc-ss">:00</span>
+        </div>
+        <span class="text-sm ml-0.5 wc-icon">☀️</span>
+      </div>
+      <div class="h-4 w-px bg-white/20 hidden sm:block"></div>
+      <div class="flex items-center gap-2">
+        <span class="text-xs text-slate-300 font-medium wc-date">Loading date...</span>
+      </div>
+      <div class="relative flex items-center">
+        <button type="button" class="world-clock-city-btn" aria-haspopup="true">
+          <span class="wc-flag">${cityObj().flag}</span>
+          <span class="wc-btn-name">${cityName()}</span>
+          <span class="world-clock-arrow">▾</span>
+        </button>
+        <div class="world-clock-dropdown hidden" role="menu"></div>
+      </div>
+    `;
+  } else if (variant === 'panel') {
+    widget.className = 'world-clock-modal-panel';
     widget.innerHTML = `
       <div class="flex items-center gap-3">
         <div class="world-clock-time">
@@ -147,6 +174,7 @@ export function createWorldClock(container, options = {}) {
       </div>
     `;
   } else {
+    widget.className = 'world-clock-widget';
     widget.innerHTML = `
       <span class="world-clock-dot" title="Atomic Time"></span>
       <div class="world-clock-time">
@@ -209,7 +237,6 @@ export function createWorldClock(container, options = {}) {
     triggerBtn.addEventListener('click', e => {
       e.stopPropagation();
       const isClosed = dropdownMenu.classList.contains('hidden');
-      // Close other dropdowns
       document.querySelectorAll('.world-clock-dropdown').forEach(dd => dd.classList.add('hidden'));
       document.querySelectorAll('.world-clock-city-btn').forEach(btn => btn.classList.remove('is-open'));
 

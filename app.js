@@ -2063,12 +2063,10 @@ async function initWorldClockWidgets() {
   try {
     const { createWorldClock } = await import("./world-clock.js");
 
-    const navMount = document.getElementById("navbar-world-clock");
-    if (navMount) {
-      createWorldClock(navMount, { variant: "pill", showSelector: true });
+    const heroMount = document.getElementById("hero-world-clock");
+    if (heroMount) {
+      createWorldClock(heroMount, { variant: "hero", showSelector: true });
     }
-
-
 
     const modalMount = document.getElementById("festival-world-clock-mount");
     if (modalMount) {
@@ -2076,6 +2074,23 @@ async function initWorldClockWidgets() {
     }
   } catch (e) {
     console.warn("World clock init failed:", e);
+  }
+}
+
+// ─── 21. REACT BITS: ANIMATED CONTENT (SCROLL REVEAL) ────────────────────
+async function initScrollAnimations() {
+  try {
+    const { initAnimatedContent } = await import("./animated-content.js");
+    initAnimatedContent({
+      selector: ".reveal-on-scroll",
+      distance: 40,
+      scale: 0.98,
+      blur: 5,
+      duration: 0.75,
+      threshold: 0.1
+    });
+  } catch (e) {
+    console.warn("Scroll animation init failed:", e);
   }
 }
 
@@ -2144,6 +2159,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Visitor Tracking & Session Logging
   trackVisitorSession();
+
+  // React Bits AnimatedContent (Scroll-Triggered Reveal)
+  initScrollAnimations();
 
   // Admin secret trigger
   setupAdminSecretTrigger();

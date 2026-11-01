@@ -53,6 +53,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="shuffle.css" />
   <link rel="stylesheet" href="world-clock.css" />
+  <link rel="stylesheet" href="animated-content.css" />
 </head>
 
 <body class="selection:bg-blue-600 selection:text-white relative">
@@ -100,24 +101,11 @@
 
       <div class="w-px h-5 bg-white/10 mx-1"></div>
 
-      <!-- Upcoming Festivals Countdown Trigger -->
-      <button onclick="openFestivalModal()" type="button" title="ดูเทศกาลที่จะถึงนี้ (Festival Countdown)" class="px-3 py-1.5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/40 text-cyan-300 text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-cyan-400"></i>
-        <span data-i18n="nav_festival">เทศกาล</span>
-      </button>
-
-      <div class="w-px h-5 bg-white/10 mx-1"></div>
-
-      <!-- Language Switcher Pill (TH / EN) with React Bits Shuffle Flip -->
+      <!-- Language Switcher Pill (TH / EN) -->
       <div class="flex items-center bg-slate-900/90 border border-white/10 rounded-full p-0.5 text-xs font-bold shadow-inner" title="สลับภาษา / Switch Language (TH / EN)">
         <button id="lang-btn-th" type="button" class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm transition">TH</button>
         <button id="lang-btn-en" type="button" class="px-2.5 py-1 rounded-full text-xs font-medium text-slate-400 hover:text-white transition">EN</button>
       </div>
-
-      <div class="w-px h-5 bg-white/10 mx-1 hidden xl:block"></div>
-
-      <!-- Time.is Atomic World Clock (Navbar Widget) -->
-      <div id="navbar-world-clock" class="hidden xl:flex items-center"></div>
     </nav>
   </header>
 
@@ -139,8 +127,10 @@
               <span class="hero-status-dot"></span>
               <span class="hero-status-label"><a href="https://nmrtup.ac.th/" target="_blank" rel="noreferrer" class="hover:text-cyan-300 underline underline-offset-2 transition font-bold" title="โรงเรียนนวมินทราชินูทิศ เตรียมอุดมศึกษาพัฒนาการ (NMRTUP)">NMRTUP (น.ม.ร.ต.อ.พ.) ↗</a> <span data-i18n="hero_tag">Grade 12 (Sci - Math) • Problem Solver &amp; Web Specialist</span></span>
             </div>
-            
           </div>
+
+          <!-- Time.is Atomic World Clock (Prominent Hero Widget - Requested Location) -->
+          <div id="hero-world-clock" class="my-3"></div>
 
           <div class="hero-heading-group">
             <h1 id="hero-greeting" data-i18n="hero_title_prefix" class="hero-h1-gradient">ภัทรดนัย ป้องเศร้า</h1>
@@ -226,7 +216,7 @@
     <!-- ================= 4. ABOUT ME SECTION & HOVER MASK REVEAL ================= -->
     <section id="about" class="py-24 space-y-16">
       
-      <div class="text-center space-y-3">
+      <div class="text-center space-y-3 reveal-on-scroll">
         <h2 class="text-3xl md:text-5xl font-black text-white" id="about-title-text" data-i18n="about_title">About Me</h2>
         <p class="text-sm md:text-base text-slate-400 max-w-2xl mx-auto">
           เรื่องราว แรงบันดาลใจ และเป้าหมายการเดินทางในโลกคอมพิวเตอร์และเทคโนโลยีสารสนเทศ
@@ -236,7 +226,7 @@
       <div class="grid lg:grid-cols-12 items-center gap-8 xl:gap-12">
         
         <!-- Left Sub-Bio -->
-        <div class="lg:col-span-3 space-y-4">
+        <div class="lg:col-span-3 space-y-4 reveal-on-scroll" data-reveal-delay="0.1">
           <p data-i18n="about_greeting" class="text-3xl md:text-4xl font-extrabold text-blue-400">สวัสดีครับ, ผม</p>
           <h3 class="text-2xl md:text-3xl font-black text-white leading-tight">
             <span data-i18n="about_name">ภัทรดนัย ป้องเศร้า</span><br />
@@ -252,7 +242,7 @@
         </div>
 
         <!-- Center: Hover Mask Reveal (Spider-Man / Hero Mask Effect) -->
-        <div class="lg:col-span-6 flex flex-col items-center justify-center">
+        <div class="lg:col-span-6 flex flex-col items-center justify-center reveal-on-scroll" data-reveal-delay="0.15">
           <div id="mask-container" class="hero-reveal-container relative w-[340px] sm:w-[400px] md:w-[460px] lg:w-[500px] h-[500px] sm:h-[560px] md:h-[620px]">
             <!-- Base Photo (Normal Face) -->
             <img src="assets/myface.png" alt="Pataradanai Pongsao" class="w-full h-full object-contain object-bottom filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.95)]" />
@@ -268,7 +258,7 @@
         </div>
 
         <!-- Right Story Bio -->
-        <div class="lg:col-span-3 space-y-4 text-slate-300 text-sm leading-relaxed">
+        <div class="lg:col-span-3 space-y-4 text-slate-300 text-sm leading-relaxed reveal-on-scroll" data-reveal-delay="0.2">
           <p data-i18n="about_story_1">
             ผมมีความสนใจในด้านคอมพิวเตอร์มาตั้งแต่ ม.1 ตอนนั้นเป็นเพียงเด็กที่ติดเกมมากๆ จนเกิดคำถามว่า <em class="text-cyan-300">"เกมพวกนี้มันทำงานและสร้างขึ้นมาได้อย่างไร?"</em> จึงเริ่มศึกษาและเขียนโค้ดสร้างเกมตั้งแต่เด็ก
           </p>
@@ -284,7 +274,7 @@
 
       <!-- Education Journey with React Bits BounceCards -->
       <div class="pt-6 space-y-6">
-        <div class="text-center space-y-2">
+        <div class="text-center space-y-2 reveal-on-scroll">
           <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25 text-cyan-300 text-xs font-semibold">
             <i data-lucide="graduation-cap" class="w-4 h-4"></i>
             <span data-i18n="edu_tag">เส้นทางการศึกษา (Education Journey)</span>
@@ -296,7 +286,7 @@
         </div>
 
         <!-- BounceCards Container Mount -->
-        <div id="education-bounce-cards-mount" class="w-full flex items-center justify-center min-h-[460px] md:min-h-[500px] relative select-none"></div>
+        <div id="education-bounce-cards-mount" class="reveal-on-scroll" data-reveal-delay="0.15" class="w-full flex items-center justify-center min-h-[460px] md:min-h-[500px] relative select-none"></div>
 
         <!-- School Links & Overview Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
@@ -408,7 +398,7 @@
             <div id="elastic-slider-mount" class="w-full pt-1"></div>
           </div>
         </div>
-        <div class="md:col-span-7">
+        <div class="md:col-span-7 reveal-on-scroll" data-reveal-delay="0.15">
           <iframe id="spotify-iframe" style="border-radius:18px" src="https://open.spotify.com/embed/playlist/6qM9smcDFHdPK2UTYKzAzd?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
       </div>
@@ -441,7 +431,7 @@
     <!-- ================= 5. PORTFOLIO SHOWCASE (โฟกัส: ผลงาน และ การแข่งขัน) ================= -->
     <section id="portfolio" class="py-24 space-y-12">
       
-      <div class="text-center space-y-4">
+      <div class="text-center space-y-4 reveal-on-scroll">
         <h2 class="text-3xl md:text-5xl font-black text-white">Portfolio Showcase</h2>
         <p class="text-sm md:text-base text-slate-400 max-w-2xl mx-auto">
           ผลงานโปรเจกต์ซอฟต์แวร์ และเกียรติประวัติการแข่งขันระดับประเทศ
@@ -1044,7 +1034,7 @@
     <!-- ================= 7. CONTACT & REALTIME SUPABASE COMMENT SECTION ================= -->
     <section id="contact" class="py-24 space-y-12">
       
-      <div class="text-center space-y-3">
+      <div class="text-center space-y-3 reveal-on-scroll">
         <h2 class="text-3xl md:text-5xl font-black text-white" id="contact-title-text" data-i18n="contact_title">Contact &amp; Discussion</h2>
         <p class="text-sm md:text-base text-slate-400 max-w-xl mx-auto">
           ช่องทางการติดต่อและกล่องความคิดเห็นแบบ Realtime ขับเคลื่อนด้วย Supabase
@@ -1054,7 +1044,7 @@
       <div class="grid md:grid-cols-12 gap-8">
         
         <!-- Left Column: Contact Form -->
-        <div class="md:col-span-5 space-y-6">
+        <div class="md:col-span-5 space-y-6 reveal-on-scroll" data-reveal-delay="0.1">
           <div class="spotlight-card p-6 md:p-8 rounded-3xl space-y-5">
             <div>
               <h3 data-i18n="contact_form_title" class="text-xl font-bold text-blue-400">ส่งข้อความถึงผม</h3>
@@ -1090,7 +1080,7 @@
         </div>
 
         <!-- Right Column: Realtime Comments Box (Supabase + Bad Words Filter) -->
-        <div class="md:col-span-7">
+        <div class="md:col-span-7 reveal-on-scroll" data-reveal-delay="0.15">
           <div class="spotlight-card p-6 md:p-8 rounded-3xl space-y-6">
             
             <div class="flex items-center justify-between border-b border-white/10 pb-4">

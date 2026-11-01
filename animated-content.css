@@ -1,0 +1,32 @@
+/* ==============================================================================
+   🚀 React Bits: AnimatedContent / ScrollReveal Component CSS
+   Hardware-Accelerated Scroll-Triggered Entrance Animations
+   High-performance GPU compositing (will-change, transform3d, filter blur)
+   ============================================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, var(--ac-distance, 45px), 0) scale(var(--ac-scale, 0.97));
+  filter: blur(var(--ac-blur, 6px));
+  will-change: transform, opacity, filter;
+  transition:
+    transform var(--ac-duration, 0.8s) cubic-bezier(0.16, 1, 0.3, 1),
+    opacity var(--ac-duration, 0.8s) cubic-bezier(0.16, 1, 0.3, 1),
+    filter var(--ac-duration, 0.8s) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.animated-content-visible {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) scale(1) !important;
+  filter: blur(0) !important;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
