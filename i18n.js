@@ -83,6 +83,15 @@ export const TRANSLATIONS = {
     "guestbook_avatar_ph": "ตัวย่อ (เช่น NJ)",
     "guestbook_msg_ph": "แสดงความคิดเห็นหรือพูดคุย... (มีระบบกรองคำไม่เหมาะสมอัตโนมัติ)",
     "guestbook_post_btn": "โพสต์ความคิดเห็น",
+    "contact_find_me_heading": "ช่องทางติดต่อ & คอมมูนิตี้",
+    "contact_find_me_sub": "สามารถทักข้อความ ติดตามผลงาน หรือเข้าร่วมพูดคุยในคอมมูนิตี้ได้ทุกช่องทาง",
+    "contact_discord_badge": "คอมมูนิตี้",
+    "contact_discord_desc": "เข้าร่วมเซิร์ฟเวอร์คอมมูนิตี้ แลกเปลี่ยนความรู้",
+    "contact_github_desc": "คลังซอร์สโค้ด และโปรเจกต์โอเพนซอร์ส",
+    "contact_ig_desc": "เรื่องราว กิจกรรม และไลฟ์สไตล์ประจำวัน",
+    "contact_line_desc": "แชตติดต่อสอบถามหรือปรึกษาด่วน",
+    "contact_fb_desc": "เฟซบุ๊กส่วนตัว อัปเดตงานและกิจกรรม",
+    "contact_yt_desc": "ช่องคลิปวิดีโอ ผลงาน และนำเสนอโปรเจกต์",
     
     // Festival Countdown
     "fest_modal_title": "FESTIVAL COUNTDOWN",
@@ -173,6 +182,15 @@ export const TRANSLATIONS = {
     "guestbook_avatar_ph": "Initials (e.g. NJ)",
     "guestbook_msg_ph": "Leave a comment... (Automated profanity filter enabled)",
     "guestbook_post_btn": "Post Comment",
+    "contact_find_me_heading": "Social Channels & Community",
+    "contact_find_me_sub": "Connect directly, follow my updates, or join our community server",
+    "contact_discord_badge": "COMMUNITY",
+    "contact_discord_desc": "Join our community server & share ideas",
+    "contact_github_desc": "Source code repositories & open source projects",
+    "contact_ig_desc": "Daily lifestyle, stories & activities",
+    "contact_line_desc": "Fast direct chat & project consultation",
+    "contact_fb_desc": "Personal profile & project updates",
+    "contact_yt_desc": "Video showcases, demos & tutorials",
     
     // Festival Countdown
     "fest_modal_title": "FESTIVAL COUNTDOWN",
