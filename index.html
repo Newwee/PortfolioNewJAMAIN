@@ -507,15 +507,7 @@
           </button>
         </div>
 
-        <!-- Admin Studio Button -->
-        <div class="flex justify-center pt-3">
-          <button onclick="openAdminStudioModal()" id="btn-admin-studio" class="px-4 py-2 rounded-xl bg-slate-900/90 border border-white/10 hover:border-cyan-400/60 hover:bg-cyan-950/40 text-xs font-bold text-slate-300 hover:text-cyan-300 flex items-center gap-2 transition shadow-lg group">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 group-hover:animate-ping"></span>
-            <i data-lucide="shield-plus" class="w-4 h-4 text-cyan-400"></i>
-            <span data-i18n="port_admin_btn">จัดการ &amp; อัปโหลดผลงาน (Admin Studio)</span>
-            <span class="text-[10px] text-slate-500 font-mono hidden sm:inline">(Ctrl+Shift+A)</span>
-          </button>
-        </div>
+
       </div>
 
       <!-- ─── TAB 1: PROJECTS (ผลงาน) ─── -->
@@ -1621,43 +1613,275 @@
         </div>
       </div>
 
+      <!-- Navigation Tabs inside Admin Control Room -->
+      <div class="flex items-center gap-2 px-6 pt-3 border-b border-white/10 bg-slate-950/50">
+        <button type="button" onclick="switchAdminRoomTab('comments')" id="btn-admin-room-comments" class="px-4 py-2.5 rounded-t-xl text-xs font-bold text-white bg-slate-800 border-t-2 border-cyan-400 flex items-center gap-2 transition">
+          <i data-lucide="message-square" class="w-4 h-4 text-cyan-400"></i>
+          <span>จัดการความคิดเห็น (Comments Moderation)</span>
+        </button>
+        <button type="button" onclick="switchAdminRoomTab('portfolio')" id="btn-admin-room-portfolio" class="px-4 py-2.5 rounded-t-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-2 transition">
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
+          <span>อัปโหลด &amp; จัดการผลงาน (Portfolio Studio)</span>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-mono bg-cyan-500/20 text-cyan-300 font-bold">STUDIO</span>
+        </button>
+      </div>
+
       <!-- Dashboard Content Body -->
       <div class="flex-1 overflow-y-auto p-6 space-y-6">
         
-        <!-- Quick Stats -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div class="p-4 rounded-2xl bg-slate-950/60 border border-white/10">
-            <div class="text-xs text-slate-400">ความคิดเห็นทั้งหมด</div>
-            <div id="admin-stat-total" class="text-2xl font-black text-white mt-1">0</div>
+        <!-- 💬 TAB 1: COMMENTS MODERATION -->
+        <div id="admin-room-comments" class="space-y-6">
+          <!-- Quick Stats -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-4 rounded-2xl bg-slate-950/60 border border-white/10">
+              <div class="text-xs text-slate-400">ความคิดเห็นทั้งหมด</div>
+              <div id="admin-stat-total" class="text-2xl font-black text-white mt-1">0</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-950/60 border border-amber-500/30">
+              <div class="text-xs text-amber-400">โดนบล็อก / รอตรวจสอบ</div>
+              <div id="admin-stat-flagged" class="text-2xl font-black text-amber-400 mt-1">0</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-950/60 border border-emerald-500/30">
+              <div class="text-xs text-emerald-400">แสดงผลสาธารณะ</div>
+              <div id="admin-stat-active" class="text-2xl font-black text-emerald-400 mt-1">0</div>
+            </div>
           </div>
-          <div class="p-4 rounded-2xl bg-slate-950/60 border border-amber-500/30">
-            <div class="text-xs text-amber-400">โดนบล็อก / รอตรวจสอบ</div>
-            <div id="admin-stat-flagged" class="text-2xl font-black text-amber-400 mt-1">0</div>
-          </div>
-          <div class="p-4 rounded-2xl bg-slate-950/60 border border-emerald-500/30">
-            <div class="text-xs text-emerald-400">แสดงผลสาธารณะ</div>
-            <div id="admin-stat-active" class="text-2xl font-black text-emerald-400 mt-1">0</div>
+
+          <!-- Comments Management Section -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="message-square" class="w-4 h-4 text-cyan-400"></i>
+                <span>จัดการความคิดเห็น &amp; ปลดแบน (Comments Moderation)</span>
+              </h4>
+              <button onclick="loadAdminComments()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs text-slate-300 hover:text-white flex items-center gap-1 transition">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                <span>รีเฟรช</span>
+              </button>
+            </div>
+
+            <div id="admin-comments-table" class="space-y-3">
+              <div class="text-center py-8 text-xs text-slate-500">
+                กำลังโหลดรายการคอมเมนต์...
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Comments Management Section -->
-        <div class="space-y-3">
-          <div class="flex items-center justify-between">
-            <h4 class="text-sm font-bold text-white flex items-center gap-2">
-              <i data-lucide="message-square" class="w-4 h-4 text-cyan-400"></i>
-              <span>จัดการความคิดเห็น &amp; ปลดแบน (Comments Moderation)</span>
-            </h4>
-            <button onclick="loadAdminComments()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs text-slate-300 hover:text-white flex items-center gap-1 transition">
-              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-              <span>รีเฟรช</span>
-            </button>
-          </div>
-
-          <div id="admin-comments-table" class="space-y-3">
-            <div class="text-center py-8 text-xs text-slate-500">
-              กำลังโหลดรายการคอมเมนต์...
+        <!-- 🚀 TAB 2: PORTFOLIO CONTENT STUDIO -->
+        <div id="admin-room-portfolio" class="hidden space-y-6">
+          
+          <!-- Studio Mode Switcher: New Upload vs Manage Items -->
+          <div class="flex items-center justify-between gap-2 bg-slate-950/80 p-1.5 rounded-2xl border border-white/10">
+            <div class="flex items-center gap-1.5">
+              <button type="button" onclick="switchAdminStudioTab('new')" id="btn-studio-tab-new" class="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-600 text-white flex items-center gap-1.5 transition shadow-md">
+                <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                <span>+ อัปโหลดรายการใหม่</span>
+              </button>
+              <button type="button" onclick="switchAdminStudioTab('manage')" id="btn-studio-tab-manage" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5 transition">
+                <i data-lucide="list" class="w-3.5 h-3.5"></i>
+                <span>รายการที่เผยแพร่แล้ว (<span id="admin-items-count">0</span>)</span>
+              </button>
             </div>
           </div>
+
+          <!-- VIEW 1: NEW UPLOAD FORM -->
+          <div id="admin-view-new" class="space-y-6">
+            <form id="admin-upload-form" onsubmit="handleAdminSubmitItem(event)" class="space-y-5">
+              
+              <!-- 1. Category / Type Picker -->
+              <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">1. เลือกประเภทรายการ *</label>
+                <div class="grid grid-cols-3 gap-2 sm:gap-3">
+                  <button type="button" onclick="selectAdminItemType('project')" id="btn-type-project" class="p-3.5 rounded-2xl border-2 border-cyan-500 bg-cyan-500/10 text-cyan-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]">
+                    <i data-lucide="layout-grid" class="w-5 h-5 text-cyan-400"></i>
+                    <span>🎨 ผลงาน (Project)</span>
+                  </button>
+                  <button type="button" onclick="selectAdminItemType('achievement')" id="btn-type-achievement" class="p-3.5 rounded-2xl border border-white/10 bg-slate-900 text-slate-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]">
+                    <i data-lucide="trophy" class="w-5 h-5 text-amber-400"></i>
+                    <span>🏆 การแข่งขัน (Award)</span>
+                  </button>
+                  <button type="button" onclick="selectAdminItemType('certificate')" id="btn-type-certificate" class="p-3.5 rounded-2xl border border-white/10 bg-slate-900 text-slate-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]">
+                    <i data-lucide="file-badge" class="w-5 h-5 text-indigo-400"></i>
+                    <span>📜 ใบรับรอง (Cert)</span>
+                  </button>
+                </div>
+                <input type="hidden" id="admin-item-type" value="project" />
+              </div>
+
+              <!-- 2. Common Fields -->
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div class="sm:col-span-2">
+                  <label class="block text-xs font-semibold text-slate-300 mb-1.5">ชื่อรายการ *</label>
+                  <input type="text" id="admin-field-title" placeholder="เช่น UTCC AI Hackathon 2026 หรือ ระบบ J3A Portal" required class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder-slate-600 transition" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1.5">หมวดหมู่ / Tag หลัก</label>
+                  <input type="text" id="admin-field-category" placeholder="เช่น WEB APP &amp; COMMERCE หรือ Hackathon AI" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder-slate-600 transition" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1.5">ปีที่ทำ / แข่งขัน</label>
+                  <input type="text" id="admin-field-year" value="2026" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder-slate-600 transition" />
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label class="block text-xs font-semibold text-slate-300 mb-1.5">รายละเอียด / คำอธิบาย</label>
+                  <textarea id="admin-field-desc" rows="3" placeholder="ระบุรายละเอียดผลงาน บทบาทหน้าที่ หรือความท้าทาย..." class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder-slate-600 transition leading-relaxed"></textarea>
+                </div>
+              </div>
+
+              <!-- 3. Dynamic Fields: Achievements -->
+              <div id="admin-section-achievement" class="hidden space-y-4 p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20">
+                <div class="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase">
+                  <i data-lucide="trophy" class="w-4 h-4"></i>
+                  <span>ข้อมูลเฉพาะการแข่งขัน &amp; รางวัล</span>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">ระดับการแข่งขัน *</label>
+                    <input type="text" id="admin-field-level" placeholder="เช่น ระดับประเทศ, ระดับเขตพื้นที่การศึกษา" class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">รางวัลที่ได้รับ *</label>
+                    <input type="text" id="admin-field-award" placeholder="เช่น รางวัลชนะเลิศอันดับ 1 ของประเทศ" class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-emerald-300 mb-1">เงินรางวัล (บาท) เช่น 20000</label>
+                    <input type="number" id="admin-field-prize" placeholder="0" class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-emerald-500/30 text-xs text-emerald-400 font-mono placeholder-slate-600" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">ประเภทการแข่งขัน</label>
+                    <input type="text" id="admin-field-comptype" placeholder="เช่น Hackathon, AI Innovation, Pitching" class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">ชื่อทีม / สังกัด</label>
+                    <input type="text" id="admin-field-team" placeholder="เช่น ทีม MANITA (ร.ร.นวมินทราชินูทิศ...)" class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">ชื่อโครงงานที่ส่งแข่ง</label>
+                    <input type="text" id="admin-field-projname" placeholder="เช่น โครงงาน: AQUA-AI" class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">ลิงก์ข่าว หรือ ประกาศผลรางวัล</label>
+                    <input type="url" id="admin-field-newsurl" placeholder="https://..." class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4. Dynamic Fields: Projects -->
+              <div id="admin-section-project" class="space-y-4 p-4 rounded-2xl bg-cyan-500/5 border border-cyan-500/20">
+                <div class="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase">
+                  <i data-lucide="code" class="w-4 h-4"></i>
+                  <span>ข้อมูลเฉพาะผลงาน (Project &amp; Web Apps)</span>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-3">
+                  <div class="sm:col-span-2">
+                    <label class="block text-[11px] font-semibold text-cyan-200/90 mb-1">Tech Stack Tags (คั่นด้วยจุลภาค)</label>
+                    <input type="text" id="admin-field-tags" placeholder="เช่น React, Tailwind CSS, Supabase, Discord API" class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-cyan-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-cyan-200/90 mb-1">ลิงก์เว็บจริง (Live Demo URL)</label>
+                    <input type="url" id="admin-field-demourl" placeholder="https://..." class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-cyan-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-cyan-200/90 mb-1">ลิงก์ Canva หรือ GitHub</label>
+                    <input type="url" id="admin-field-canvaurl" placeholder="https://..." class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-cyan-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. Dynamic Fields: Certificates -->
+              <div id="admin-section-certificate" class="hidden space-y-4 p-4 rounded-2xl bg-indigo-500/5 border border-indigo-500/20">
+                <div class="flex items-center gap-2 text-indigo-400 text-xs font-bold uppercase">
+                  <i data-lucide="award" class="w-4 h-4"></i>
+                  <span>ข้อมูลเฉพาะใบรับรอง (Certificates)</span>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-[11px] font-semibold text-indigo-200/90 mb-1">หน่วยงาน / สถาบันผู้ออกใบรับรอง *</label>
+                    <input type="text" id="admin-field-issuer" placeholder="เช่น มหาวิทยาลัยหอการค้าไทย, สจล. (KMITL)" class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-indigo-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-indigo-200/90 mb-1">ลิงก์ตรวจสอบใบรับรอง (Verify URL)</label>
+                    <input type="url" id="admin-field-verifyurl" placeholder="https://..." class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-indigo-500/30 text-xs text-white placeholder-slate-600" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6. Frame Selector ("เลือก กรอบได้ จะใส่หรือไม่ใส่") -->
+              <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                  2. เลือกกรอบเรืองแสง (จะใส่หรือไม่ใส่ก็ได้)
+                </label>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs">
+                  <label class="p-2.5 rounded-xl bg-slate-950 border border-white/10 flex items-center gap-2 cursor-pointer hover:border-white/30 transition">
+                    <input type="radio" name="admin-frame-style" value="none" checked class="text-cyan-500" />
+                    <span class="font-medium text-slate-300">🚫 ไม่ใส่กรอบ</span>
+                  </label>
+                  <label class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center gap-2 cursor-pointer hover:border-amber-400 transition shadow-[0_0_10px_rgba(245,158,11,0.2)]">
+                    <input type="radio" name="admin-frame-style" value="gold_electric" class="text-amber-500" />
+                    <span class="font-bold text-amber-300">⚡ ทองนีออน</span>
+                  </label>
+                  <label class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/40 flex items-center gap-2 cursor-pointer hover:border-cyan-400 transition shadow-[0_0_10px_rgba(6,182,212,0.2)]">
+                    <input type="radio" name="admin-frame-style" value="cyber_blue" class="text-cyan-500" />
+                    <span class="font-bold text-cyan-300">🔷 ไซเบอร์ฟ้า</span>
+                  </label>
+                  <label class="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/40 flex items-center gap-2 cursor-pointer hover:border-purple-400 transition shadow-[0_0_10px_rgba(168,85,247,0.2)]">
+                    <input type="radio" name="admin-frame-style" value="neon_purple" class="text-purple-500" />
+                    <span class="font-bold text-purple-300">🟣 นีออนม่วง</span>
+                  </label>
+                  <label class="p-2.5 rounded-xl bg-white/10 border border-white/30 flex items-center gap-2 cursor-pointer hover:border-white/50 transition shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+                    <input type="radio" name="admin-frame-style" value="glass_border" class="text-white" />
+                    <span class="font-bold text-white">💎 โฮโลแกรม</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- 7. Image Upload Component (Max 5 Images) -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                    3. เลือกรูปภาพ (สูงสุด 5 รูป) *
+                  </label>
+                  <span id="admin-images-count-badge" class="text-xs font-mono text-cyan-400">เลือกแล้ว 0 / 5 รูป</span>
+                </div>
+
+                <!-- Upload Drop Area -->
+                <div onclick="document.getElementById('admin-file-input').click()" class="border-2 border-dashed border-white/20 hover:border-cyan-400/60 rounded-2xl p-6 text-center cursor-pointer bg-slate-950/60 hover:bg-cyan-950/20 transition group">
+                  <input type="file" id="admin-file-input" multiple accept="image/*" class="hidden" onchange="handleAdminFilesSelected(event)" />
+                  <div class="flex flex-col items-center gap-2">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 group-hover:bg-cyan-500/20 flex items-center justify-center text-slate-400 group-hover:text-cyan-300 transition">
+                      <i data-lucide="image-plus" class="w-6 h-6"></i>
+                    </div>
+                    <p class="text-sm font-bold text-white">คลิกเพื่อเลือกไฟล์ หรือลากรูปมาวางที่นี่</p>
+                    <p class="text-xs text-slate-400">รองรับ JPG, PNG, WEBP (สูงสุด 5 รูป บีบอัดภาพอัตโนมัติ)</p>
+                  </div>
+                </div>
+
+                <!-- Previews Thumbnails Grid -->
+                <div id="admin-previews-container" class="grid grid-cols-5 gap-2.5 pt-2"></div>
+              </div>
+
+              <!-- Submit Buttons -->
+              <div class="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+                <button type="submit" id="btn-admin-submit-item" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-xs font-bold text-white flex items-center gap-2 transition shadow-lg shadow-cyan-600/30">
+                  <i data-lucide="cloud-upload" class="w-4 h-4"></i>
+                  <span id="btn-admin-submit-text">บันทึกและเผยแพร่ทันที</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- VIEW 2: MANAGE UPLOADED ITEMS -->
+          <div id="admin-view-manage" class="hidden space-y-4">
+            <div id="admin-manage-list" class="space-y-3 max-h-[50vh] overflow-y-auto pr-1">
+              <div class="text-center py-8 text-xs text-slate-500">กำลังโหลดรายการจาก Supabase...</div>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -1709,288 +1933,6 @@
 
   <!-- Main JavaScript App -->
   <script src="app.js"></script>
-  <!-- ═══════════════════════════════════════════════════════════════════════ -->
-  <!-- 🔐 ADMIN CONTENT STUDIO MODAL & PASSCODE PROMPT -->
-  <!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-  <!-- 1. Passcode Prompt Modal -->
-  <div id="admin-auth-modal" class="fixed inset-0 z-[130] hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-    <div class="relative w-full max-w-sm rounded-3xl bg-slate-950 border border-cyan-500/40 p-6 space-y-5 text-white shadow-[0_0_50px_rgba(6,182,212,0.3)]">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-400">
-            <i data-lucide="lock" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 class="font-black text-white text-base">ADMIN ACCESS</h3>
-            <p class="text-[11px] text-slate-400">ยืนยันสิทธิ์เพื่อจัดการผลงาน</p>
-          </div>
-        </div>
-        <button onclick="closeAdminAuthModal()" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-
-      <form onsubmit="submitAdminPasscode(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1.5">รหัสผ่าน Admin (PIN / Key)</label>
-          <input type="password" id="admin-pass-input" placeholder="กรอกรหัสผ่าน (เช่น newja2026)" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/15 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder-slate-600 font-mono tracking-wider transition" />
-        </div>
-        <div class="flex items-center justify-end gap-2 pt-1">
-          <button type="button" onclick="closeAdminAuthModal()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 transition">ยกเลิก</button>
-          <button type="submit" id="btn-auth-submit" class="px-5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-xs font-bold text-white flex items-center gap-1.5 transition shadow-lg shadow-cyan-600/30">
-            <i data-lucide="key" class="w-3.5 h-3.5"></i>
-            <span>เข้าสู่ระบบ</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 2. Full Admin Content Studio Modal -->
-  <div id="admin-studio-modal" class="fixed inset-0 z-[120] hidden flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md overflow-y-auto">
-    <div class="relative w-full max-w-3xl my-auto rounded-3xl bg-slate-950 border border-cyan-500/40 p-5 sm:p-7 space-y-6 text-white shadow-[0_0_60px_rgba(6,182,212,0.25)] max-h-[92vh] overflow-y-auto">
-      
-      <!-- Studio Header -->
-      <div class="flex items-start justify-between border-b border-white/10 pb-4">
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-600 to-blue-600 flex items-center justify-center text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] shrink-0">
-            <i data-lucide="shield-check" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-lg md:text-xl font-black text-white tracking-wide">ADMIN CONTENT STUDIO</h3>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-mono">SUPABASE SYNC</span>
-            </div>
-            <p class="text-xs text-slate-400 mt-0.5">
-              อัปโหลดผลงาน การแข่งขัน และใบรับรองขึ้นฐานข้อมูลเรียลไทม์ ทุกคนจะมองเห็นทันที
-            </p>
-          </div>
-        </div>
-        <button onclick="closeAdminStudioModal()" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white transition shrink-0">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-
-      <!-- Studio Mode Switcher: New Upload vs Manage Items -->
-      <div class="flex items-center justify-between gap-2 bg-slate-900/90 p-1.5 rounded-2xl border border-white/10">
-        <div class="flex items-center gap-1.5">
-          <button type="button" onclick="switchAdminStudioTab('new')" id="btn-studio-tab-new" class="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-600 text-white flex items-center gap-1.5 transition shadow-md">
-            <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
-            <span>+ อัปโหลดรายการใหม่</span>
-          </button>
-          <button type="button" onclick="switchAdminStudioTab('manage')" id="btn-studio-tab-manage" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5 transition">
-            <i data-lucide="list" class="w-3.5 h-3.5"></i>
-            <span>จัดการรายการที่เผยแพร่แล้ว (<span id="admin-items-count">0</span>)</span>
-          </button>
-        </div>
-        <button type="button" onclick="logoutAdmin()" class="px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-semibold transition border border-red-500/20">
-          ออกจากระบบ
-        </button>
-      </div>
-
-      <!-- VIEW 1: NEW UPLOAD FORM -->
-      <div id="admin-view-new" class="space-y-6">
-        <form id="admin-upload-form" onsubmit="handleAdminSubmitItem(event)" class="space-y-5">
-          
-          <!-- 1. Category / Type Picker -->
-          <div class="space-y-2">
-            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">1. เลือกประเภทรายการ *</label>
-            <div class="grid grid-cols-3 gap-2 sm:gap-3">
-              <button type="button" onclick="selectAdminItemType('project')" id="btn-type-project" class="p-3.5 rounded-2xl border-2 border-cyan-500 bg-cyan-500/10 text-cyan-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]">
-                <i data-lucide="layout-grid" class="w-5 h-5 text-cyan-400"></i>
-                <span>🎨 ผลงาน (Project)</span>
-              </button>
-              <button type="button" onclick="selectAdminItemType('achievement')" id="btn-type-achievement" class="p-3.5 rounded-2xl border border-white/10 bg-slate-900 text-slate-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]">
-                <i data-lucide="trophy" class="w-5 h-5 text-amber-400"></i>
-                <span>🏆 การแข่งขัน (Award)</span>
-              </button>
-              <button type="button" onclick="selectAdminItemType('certificate')" id="btn-type-certificate" class="p-3.5 rounded-2xl border border-white/10 bg-slate-900 text-slate-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]">
-                <i data-lucide="file-badge" class="w-5 h-5 text-indigo-400"></i>
-                <span>📜 ใบรับรอง (Cert)</span>
-              </button>
-            </div>
-            <input type="hidden" id="admin-item-type" value="project" />
-          </div>
-
-          <!-- 2. Common Fields -->
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div class="sm:col-span-2">
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">ชื่อรายการ *</label>
-              <input type="text" id="admin-field-title" placeholder="เช่น UTCC AI Hackathon 2026 หรือ ระบบ J3A Portal" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/15 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder-slate-600 transition" />
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">หมวดหมู่ / Tag หลัก</label>
-              <input type="text" id="admin-field-category" placeholder="เช่น WEB APP &amp; COMMERCE หรือ Hackathon AI" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/15 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder-slate-600 transition" />
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">ปีที่ทำ / แข่งขัน</label>
-              <input type="text" id="admin-field-year" value="2026" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/15 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder-slate-600 transition" />
-            </div>
-
-            <div class="sm:col-span-2">
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">รายละเอียด / คำอธิบาย</label>
-              <textarea id="admin-field-desc" rows="3" placeholder="ระบุรายละเอียดผลงาน บทบาทหน้าที่ หรือความท้าทาย..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-white/15 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder-slate-600 transition leading-relaxed"></textarea>
-            </div>
-          </div>
-
-          <!-- 3. Dynamic Fields: Achievements -->
-          <div id="admin-section-achievement" class="hidden space-y-4 p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20">
-            <div class="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase">
-              <i data-lucide="trophy" class="w-4 h-4"></i>
-              <span>ข้อมูลเฉพาะการแข่งขัน &amp; รางวัล</span>
-            </div>
-            <div class="grid sm:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">ระดับการแข่งขัน *</label>
-                <input type="text" id="admin-field-level" placeholder="เช่น ระดับประเทศ, ระดับเขตพื้นที่การศึกษา" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">รางวัลที่ได้รับ *</label>
-                <input type="text" id="admin-field-award" placeholder="เช่น รางวัลชนะเลิศอันดับ 1 ของประเทศ" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-semibold text-emerald-300 mb-1">เงินรางวัล (บาท) เช่น 20000</label>
-                <input type="number" id="admin-field-prize" placeholder="0" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-emerald-500/30 text-xs text-emerald-400 font-mono placeholder-slate-600" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">ประเภทการแข่งขัน</label>
-                <input type="text" id="admin-field-comptype" placeholder="เช่น Hackathon, AI Innovation, Pitching" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">ชื่อทีม / สังกัด</label>
-                <input type="text" id="admin-field-team" placeholder="เช่น ทีม MANITA (ร.ร.นวมินทราชินูทิศ...)" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">ชื่อโครงงานที่ส่งแข่ง</label>
-                <input type="text" id="admin-field-projname" placeholder="เช่น โครงงาน: AQUA-AI" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-              <div class="sm:col-span-2">
-                <label class="block text-[11px] font-semibold text-amber-200/90 mb-1">ลิงก์ข่าว หรือ ประกาศผลรางวัล</label>
-                <input type="url" id="admin-field-newsurl" placeholder="https://..." class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-amber-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-            </div>
-          </div>
-
-          <!-- 4. Dynamic Fields: Projects -->
-          <div id="admin-section-project" class="space-y-4 p-4 rounded-2xl bg-cyan-500/5 border border-cyan-500/20">
-            <div class="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase">
-              <i data-lucide="code" class="w-4 h-4"></i>
-              <span>ข้อมูลเฉพาะผลงาน (Project &amp; Web Apps)</span>
-            </div>
-            <div class="grid sm:grid-cols-2 gap-3">
-              <div class="sm:col-span-2">
-                <label class="block text-[11px] font-semibold text-cyan-200/90 mb-1">Tech Stack Tags (คั่นด้วยจุลภาค)</label>
-                <input type="text" id="admin-field-tags" placeholder="เช่น React, Tailwind CSS, Supabase, Discord API" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-cyan-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-semibold text-cyan-200/90 mb-1">ลิงก์เว็บจริง (Live Demo URL)</label>
-                <input type="url" id="admin-field-demourl" placeholder="https://..." class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-cyan-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-semibold text-cyan-200/90 mb-1">ลิงก์ Canva หรือ GitHub</label>
-                <input type="url" id="admin-field-canvaurl" placeholder="https://..." class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-cyan-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-            </div>
-          </div>
-
-          <!-- 5. Dynamic Fields: Certificates -->
-          <div id="admin-section-certificate" class="hidden space-y-4 p-4 rounded-2xl bg-indigo-500/5 border border-indigo-500/20">
-            <div class="flex items-center gap-2 text-indigo-400 text-xs font-bold uppercase">
-              <i data-lucide="award" class="w-4 h-4"></i>
-              <span>ข้อมูลเฉพาะใบรับรอง (Certificates)</span>
-            </div>
-            <div class="grid sm:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-[11px] font-semibold text-indigo-200/90 mb-1">หน่วยงาน / สถาบันผู้ออกใบรับรอง *</label>
-                <input type="text" id="admin-field-issuer" placeholder="เช่น มหาวิทยาลัยหอการค้าไทย, สจล. (KMITL)" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-indigo-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-semibold text-indigo-200/90 mb-1">ลิงก์ตรวจสอบใบรับรอง (Verify URL)</label>
-                <input type="url" id="admin-field-verifyurl" placeholder="https://..." class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-indigo-500/30 text-xs text-white placeholder-slate-600" />
-              </div>
-            </div>
-          </div>
-
-          <!-- 6. Frame Selector ("เลือก กรอบได้ จะใส่หรือไม่ใส่") -->
-          <div class="space-y-2">
-            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">
-              2. เลือกกรอบเรืองแสง (จะใส่หรือไม่ใส่ก็ได้)
-            </label>
-            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs">
-              <label class="p-2.5 rounded-xl bg-slate-900 border border-white/10 flex items-center gap-2 cursor-pointer hover:border-white/30 transition">
-                <input type="radio" name="admin-frame-style" value="none" checked class="text-cyan-500" />
-                <span class="font-medium text-slate-300">🚫 ไม่ใส่กรอบ</span>
-              </label>
-              <label class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center gap-2 cursor-pointer hover:border-amber-400 transition shadow-[0_0_10px_rgba(245,158,11,0.2)]">
-                <input type="radio" name="admin-frame-style" value="gold_electric" class="text-amber-500" />
-                <span class="font-bold text-amber-300">⚡ ทองนีออน</span>
-              </label>
-              <label class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/40 flex items-center gap-2 cursor-pointer hover:border-cyan-400 transition shadow-[0_0_10px_rgba(6,182,212,0.2)]">
-                <input type="radio" name="admin-frame-style" value="cyber_blue" class="text-cyan-500" />
-                <span class="font-bold text-cyan-300">🔷 ไซเบอร์ฟ้า</span>
-              </label>
-              <label class="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/40 flex items-center gap-2 cursor-pointer hover:border-purple-400 transition shadow-[0_0_10px_rgba(168,85,247,0.2)]">
-                <input type="radio" name="admin-frame-style" value="neon_purple" class="text-purple-500" />
-                <span class="font-bold text-purple-300">🟣 นีออนม่วง</span>
-              </label>
-              <label class="p-2.5 rounded-xl bg-white/10 border border-white/30 flex items-center gap-2 cursor-pointer hover:border-white/50 transition shadow-[0_0_10px_rgba(255,255,255,0.2)]">
-                <input type="radio" name="admin-frame-style" value="glass_border" class="text-white" />
-                <span class="font-bold text-white">💎 โฮโลแกรม</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- 7. Image Upload Component (Max 5 Images) -->
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">
-                3. เลือกรูปภาพ (สูงสุด 5 รูป) *
-              </label>
-              <span id="admin-images-count-badge" class="text-xs font-mono text-cyan-400">เลือกแล้ว 0 / 5 รูป</span>
-            </div>
-
-            <!-- Upload Drop Area -->
-            <div onclick="document.getElementById('admin-file-input').click()" class="border-2 border-dashed border-white/20 hover:border-cyan-400/60 rounded-2xl p-6 text-center cursor-pointer bg-slate-900/60 hover:bg-cyan-950/20 transition group">
-              <input type="file" id="admin-file-input" multiple accept="image/*" class="hidden" onchange="handleAdminFilesSelected(event)" />
-              <div class="flex flex-col items-center gap-2">
-                <div class="w-12 h-12 rounded-2xl bg-white/5 group-hover:bg-cyan-500/20 flex items-center justify-center text-slate-400 group-hover:text-cyan-300 transition">
-                  <i data-lucide="image-plus" class="w-6 h-6"></i>
-                </div>
-                <p class="text-sm font-bold text-white">คลิกเพื่อเลือกไฟล์ หรือลากรูปมาวางที่นี่</p>
-                <p class="text-xs text-slate-400">รองรับ JPG, PNG, WEBP (เลือกได้พร้อมกันสูงสุด 5 รูป บีบอัดอัตโนมัติ)</p>
-              </div>
-            </div>
-
-            <!-- Previews Thumbnails Grid -->
-            <div id="admin-previews-container" class="grid grid-cols-5 gap-2.5 pt-2"></div>
-          </div>
-
-          <!-- Submit Buttons -->
-          <div class="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
-            <button type="button" onclick="closeAdminStudioModal()" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 transition">
-              ยกเลิก
-            </button>
-            <button type="submit" id="btn-admin-submit-item" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-xs font-bold text-white flex items-center gap-2 transition shadow-lg shadow-cyan-600/30">
-              <i data-lucide="cloud-upload" class="w-4 h-4"></i>
-              <span id="btn-admin-submit-text">บันทึกและเผยแพร่ทันที</span>
-            </button>
-          </div>
-
-        </form>
-      </div>
-
-      <!-- VIEW 2: MANAGE UPLOADED ITEMS -->
-      <div id="admin-view-manage" class="hidden space-y-4">
-        <div id="admin-manage-list" class="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
-          <div class="text-center py-8 text-xs text-slate-500">กำลังโหลดรายการจาก Supabase...</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
 
 </body>
 

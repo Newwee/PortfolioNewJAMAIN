@@ -1288,6 +1288,7 @@ function setupAdminSecretTrigger() {
     }
   }
 
+  // 1. RightAlt 1.5s Hold Listener (PC)
   window.addEventListener("keydown", (e) => {
     const isRightAlt = e.code === "AltRight" || (e.key === "Alt" && e.location === 2);
     if (isRightAlt && !altPressTimer) {
@@ -1304,7 +1305,14 @@ function setupAdminSecretTrigger() {
           hud.classList.add("opacity-0", "translate-y-4");
         }
         playBeep(880, 0.15, "triangle");
-        openAdminLoginModal();
+        
+        // If already logged in, jump straight to Admin Control Room!
+        if (sessionStorage.getItem("newja_admin_session") === "Admin1230S_asdl133") {
+          openAdminDashboardModal();
+        } else {
+          openAdminLoginModal();
+        }
+
         altPressTimer = null;
         altStartTime = 0;
       }, ALT_HOLD_DURATION);
@@ -1326,9 +1334,36 @@ function setupAdminSecretTrigger() {
       }
     }
   });
+
+  // 2. Mobile Secret Trigger: Long-press on Navbar Logo for 1.5s
+  const brandLogo = document.querySelector('header a[href="#home"]') || document.querySelector('nav a[href="#home"]');
+  if (brandLogo) {
+    let touchTimer = null;
+    brandLogo.addEventListener("touchstart", () => {
+      touchTimer = setTimeout(() => {
+        playBeep(880, 0.15, "triangle");
+        if (sessionStorage.getItem("newja_admin_session") === "Admin1230S_asdl133") {
+          openAdminDashboardModal();
+        } else {
+          openAdminLoginModal();
+        }
+      }, 1500);
+    }, { passive: true });
+    brandLogo.addEventListener("touchend", () => {
+      if (touchTimer) clearTimeout(touchTimer);
+    });
+    brandLogo.addEventListener("touchcancel", () => {
+      if (touchTimer) clearTimeout(touchTimer);
+    });
+  }
 }
 
 window.openAdminLoginModal = function() {
+  // If already authenticated, skip login and open Control Room
+  if (sessionStorage.getItem("newja_admin_session") === "Admin1230S_asdl133") {
+    openAdminDashboardModal();
+    return;
+  }
   playBeep(700, 0.08);
   const modal = document.getElementById("admin-login-modal");
   if (modal) {
@@ -1353,7 +1388,40 @@ window.openAdminDashboardModal = function() {
     modal.classList.remove("hidden");
     modal.classList.add("flex");
     loadAdminComments();
+    renderAdminManageList();
+    if (window.lucide) lucide.createIcons();
   }
+};
+
+window.switchAdminRoomTab = function(tab) {
+  playBeep(520, 0.06);
+  const roomComments = document.getElementById("admin-room-comments");
+  const roomPortfolio = document.getElementById("admin-room-portfolio");
+  const btnComments = document.getElementById("btn-admin-room-comments");
+  const btnPortfolio = document.getElementById("btn-admin-room-portfolio");
+
+  if (tab === "comments") {
+    if (roomComments) roomComments.classList.remove("hidden");
+    if (roomPortfolio) roomPortfolio.classList.add("hidden");
+    if (btnComments) {
+      btnComments.className = "px-4 py-2.5 rounded-t-xl text-xs font-bold text-white bg-slate-800 border-t-2 border-cyan-400 flex items-center gap-2 transition";
+    }
+    if (btnPortfolio) {
+      btnPortfolio.className = "px-4 py-2.5 rounded-t-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-2 transition";
+    }
+    loadAdminComments();
+  } else {
+    if (roomComments) roomComments.classList.add("hidden");
+    if (roomPortfolio) roomPortfolio.classList.remove("hidden");
+    if (btnPortfolio) {
+      btnPortfolio.className = "px-4 py-2.5 rounded-t-xl text-xs font-bold text-white bg-slate-800 border-t-2 border-cyan-400 flex items-center gap-2 transition";
+    }
+    if (btnComments) {
+      btnComments.className = "px-4 py-2.5 rounded-t-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-2 transition";
+    }
+    renderAdminManageList();
+  }
+  if (window.lucide) lucide.createIcons();
 };
 
 window.closeAdminDashboardModal = function() {
@@ -2254,75 +2322,14 @@ document.addEventListener("DOMContentLoaded", () => {
 let adminUploadedFiles = []; // { file, dataUrl, name, size } (max 5)
 let currentUploadedItems = [];
 
-const DEFAULT_ADMIN_KEYS = ["Admin1230S_asdl133", "newja2026", "admin2026"];
-
 function getAdminKey() {
-  return sessionStorage.getItem("newja_admin_key") || "";
+  return sessionStorage.getItem("newja_admin_session") || "Admin1230S_asdl133";
 }
 
 function isAdminLoggedIn() {
-  const k = getAdminKey();
-  return k && DEFAULT_ADMIN_KEYS.includes(k.trim());
+  const k = sessionStorage.getItem("newja_admin_session");
+  return k === "Admin1230S_asdl133";
 }
-
-window.openAdminStudioModal = function() {
-  playBeep(580, 0.08);
-  if (!isAdminLoggedIn()) {
-    const authModal = document.getElementById("admin-auth-modal");
-    if (authModal) authModal.classList.remove("hidden");
-    const input = document.getElementById("admin-pass-input");
-    if (input) {
-      input.value = "";
-      setTimeout(() => input.focus(), 150);
-    }
-  } else {
-    const studioModal = document.getElementById("admin-studio-modal");
-    if (studioModal) studioModal.classList.remove("hidden");
-    switchAdminStudioTab("new");
-    renderAdminManageList();
-    if (window.lucide) lucide.createIcons();
-  }
-};
-
-window.closeAdminAuthModal = function() {
-  playBeep(440, 0.06);
-  const modal = document.getElementById("admin-auth-modal");
-  if (modal) modal.classList.add("hidden");
-};
-
-window.closeAdminStudioModal = function() {
-  playBeep(440, 0.06);
-  const modal = document.getElementById("admin-studio-modal");
-  if (modal) modal.classList.add("hidden");
-};
-
-window.submitAdminPasscode = function(e) {
-  e.preventDefault();
-  const input = document.getElementById("admin-pass-input");
-  const val = input ? input.value.trim() : "";
-  if (!val) return;
-
-  if (DEFAULT_ADMIN_KEYS.includes(val)) {
-    sessionStorage.setItem("newja_admin_key", val);
-    playBeep(720, 0.12);
-    closeAdminAuthModal();
-    showToast("เข้าสู่ระบบ Admin สำเร็จ ยินดีต้อนรับครับ! 🔐⚡");
-    setTimeout(() => {
-      openAdminStudioModal();
-    }, 200);
-  } else {
-    playBeep(260, 0.2);
-    showToast("รหัสผ่าน Admin ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
-    if (input) input.select();
-  }
-};
-
-window.logoutAdmin = function() {
-  playBeep(480, 0.08);
-  sessionStorage.removeItem("newja_admin_key");
-  closeAdminStudioModal();
-  showToast("ออกจากระบบ Admin เรียบร้อยแล้ว");
-};
 
 window.switchAdminStudioTab = function(tab) {
   playBeep(520, 0.06);
@@ -2367,7 +2374,6 @@ window.selectAdminItemType = function(type) {
   const secAchieve = document.getElementById("admin-section-achievement");
   const secCert = document.getElementById("admin-section-certificate");
 
-  // Reset button styles
   const baseBtnClass = "p-3.5 rounded-2xl border border-white/10 bg-slate-900 text-slate-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]";
   const activeProjClass = "p-3.5 rounded-2xl border-2 border-cyan-500 bg-cyan-500/10 text-cyan-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]";
   const activeAchieveClass = "p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-500/10 text-amber-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]";
@@ -2424,16 +2430,22 @@ window.handleAdminFilesSelected = async function(e) {
 
   const remainingSlots = 5 - adminUploadedFiles.length;
   if (remainingSlots <= 0) {
-    showToast("อัปโหลดครบ 5 รูปแล้วครับ หากต้องการเพิ่มให้ลบรูปเดิมก่อน");
+    showToast({
+      title: "รูปภาพครบแล้ว",
+      description: "อัปโหลดครบ 5 รูปแล้วครับ หากต้องการเปลี่ยนให้ลบรูปเดิมก่อน",
+      fuseColor: "#f59e0b"
+    });
     return;
   }
 
   const filesToAdd = files.slice(0, remainingSlots);
   if (files.length > remainingSlots) {
-    showToast(`เลือกได้สูงสุด 5 รูป (เพิ่มได้อีก ${remainingSlots} รูป)`);
+    showToast({
+      title: "จำกัดสูงสุด 5 รูป",
+      description: `ระบบรับรูปเพิ่มได้อีก ${remainingSlots} รูป`,
+      fuseColor: "#06b6d4"
+    });
   }
-
-  showToast("กำลังบีบอัดรูปภาพให้ความละเอียดคมชัดสูงสุด...");
 
   for (const file of filesToAdd) {
     try {
@@ -2487,11 +2499,7 @@ function renderAdminThumbnails() {
 
 window.handleAdminSubmitItem = async function(e) {
   e.preventDefault();
-  if (!isAdminLoggedIn()) {
-    showToast("กรุณายืนยันรหัสผ่าน Admin ก่อนบันทึก");
-    openAdminStudioModal();
-    return;
-  }
+  const adminKey = getAdminKey();
 
   const type = document.getElementById("admin-item-type")?.value || "project";
   const title = document.getElementById("admin-field-title")?.value.trim();
@@ -2500,12 +2508,12 @@ window.handleAdminSubmitItem = async function(e) {
   const desc = document.getElementById("admin-field-desc")?.value.trim();
 
   if (!title) {
-    showToast("กรุณากรอกชื่อรายการ");
+    showToast({ title: "ข้อมูลไม่ครบ", description: "กรุณาระบุชื่อรายการ", fuseColor: "#f43f5e" });
     return;
   }
 
   if (adminUploadedFiles.length === 0) {
-    showToast("กรุณาเลือกรูปภาพอย่างน้อย 1 รูป (สูงสุด 5 รูป)");
+    showToast({ title: "ต้องมีรูปภาพ", description: "กรุณาเลือกรูปภาพอย่างน้อย 1 รูป (สูงสุด 5 รูป)", fuseColor: "#f43f5e" });
     return;
   }
 
@@ -2518,7 +2526,6 @@ window.handleAdminSubmitItem = async function(e) {
   if (btnText) btnText.textContent = "กำลังอัปโหลดรูปและบันทึก...";
 
   try {
-    const adminKey = getAdminKey();
     const uploadedUrls = [];
 
     // 1. Upload each image to Supabase Storage via /api/upload
@@ -2596,29 +2603,33 @@ window.handleAdminSubmitItem = async function(e) {
 
     if (itemRes.ok) {
       playBeep(880, 0.15);
-      showToast("🎉 เผยแพร่ผลงานสำเร็จ ทุกคนสามารถเห็นได้ทันที!");
+      showToast({
+        title: "🎉 เผยแพร่ผลงานสำเร็จ!",
+        description: "รายการใหม่ถูกซิงค์ขึ้นฐานข้อมูล Supabase เรียบร้อย ทุกคนเห็นได้ทันที",
+        fuseColor: "#10b981"
+      });
       
       // Reset form
       document.getElementById("admin-upload-form")?.reset();
       adminUploadedFiles = [];
       renderAdminThumbnails();
 
-      // Refresh items on page
+      // Refresh items on main page
       await loadPortfolioItems();
 
-      // Switch to the relevant tab on the main page so user sees their new upload
-      if (type === "project") switchTab("projects");
-      else if (type === "achievement") switchTab("achievements");
-      else if (type === "certificate") switchTab("certificates");
-
-      closeAdminStudioModal();
+      // Switch to manage tab in Studio
+      switchAdminStudioTab("manage");
     } else {
       const errData = await itemRes.json();
       throw new Error(errData.error || "Failed to save item");
     }
   } catch (err) {
     playBeep(260, 0.2);
-    showToast("เกิดข้อผิดพลาด: " + err.message);
+    showToast({
+      title: "เกิดข้อผิดพลาด",
+      description: err.message,
+      fuseColor: "#f43f5e"
+    });
   } finally {
     if (btn) btn.disabled = false;
     if (btnText) btnText.textContent = "บันทึกและเผยแพร่ทันที";
@@ -2633,8 +2644,8 @@ window.renderAdminManageList = function() {
   if (!listEl) return;
   if (!currentUploadedItems.length) {
     listEl.innerHTML = `
-      <div class="text-center py-10 rounded-2xl bg-slate-900/60 border border-white/5 space-y-2">
-        <div class="text-slate-500 text-xs">ยังไม่มีรายการที่อัปโหลดไว้</div>
+      <div class="text-center py-10 rounded-2xl bg-slate-950/60 border border-white/5 space-y-2">
+        <div class="text-slate-500 text-xs">ยังไม่มีรายการผลงานที่อัปโหลดไว้</div>
         <button type="button" onclick="switchAdminStudioTab('new')" class="px-4 py-1.5 rounded-lg bg-cyan-600/20 text-cyan-300 text-xs font-bold hover:bg-cyan-600/40 transition">
           + อัปโหลดรายการแรกเลย
         </button>
@@ -2651,9 +2662,9 @@ window.renderAdminManageList = function() {
       const typeColor = item.type === "achievement" ? "text-amber-400 bg-amber-500/10 border-amber-500/30" : item.type === "certificate" ? "text-indigo-400 bg-indigo-500/10 border-indigo-500/30" : "text-cyan-400 bg-cyan-500/10 border-cyan-500/30";
 
       return `
-        <div class="p-3.5 rounded-2xl bg-slate-900 border border-white/10 flex items-center justify-between gap-3 group hover:border-cyan-500/30 transition">
+        <div class="p-3.5 rounded-2xl bg-slate-950 border border-white/10 flex items-center justify-between gap-3 group hover:border-cyan-500/30 transition">
           <div class="flex items-center gap-3 min-w-0">
-            <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-950 border border-white/10 shrink-0 relative">
+            <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-900 border border-white/10 shrink-0 relative">
               ${mainImg ? `<img src="${mainImg}" alt="" class="w-full h-full object-cover" />` : `<div class="w-full h-full flex items-center justify-center text-[10px] text-slate-600">No Image</div>`}
               ${imgCount > 1 ? `<span class="absolute bottom-1 right-1 px-1 rounded text-[9px] font-mono bg-black/80 text-cyan-300">${imgCount} รูป</span>` : ""}
             </div>
@@ -2679,7 +2690,7 @@ window.renderAdminManageList = function() {
 };
 
 window.deletePortfolioItem = async function(id) {
-  if (!confirm("คุณแน่ใจว่าต้องการลบรายการนี้ใช่หรือไม่?")) return;
+  if (!confirm("คุณแน่ใจว่าต้องการลบรายการนี้ออกจากฐานข้อมูล Supabase ใช่หรือไม่?")) return;
   const adminKey = getAdminKey();
   try {
     const res = await fetch(`/api/items?id=${id}`, {
@@ -2688,14 +2699,18 @@ window.deletePortfolioItem = async function(id) {
     });
     if (res.ok) {
       playBeep(480, 0.1);
-      showToast("ลบรายการสำเร็จเรียบร้อย");
+      showToast({
+        title: "ลบสำเร็จ",
+        description: "ลบรายการออกจากฐานข้อมูลเรียบร้อยแล้ว",
+        fuseColor: "#94a3b8"
+      });
       await loadPortfolioItems();
       renderAdminManageList();
     } else {
-      showToast("ลบรายการไม่สำเร็จ");
+      showToast({ title: "ลบไม่สำเร็จ", description: "เกิดข้อผิดพลาดจากเซิร์ฟเวอร์", fuseColor: "#f43f5e" });
     }
   } catch (err) {
-    showToast("เกิดข้อผิดพลาดในการลบ: " + err.message);
+    showToast({ title: "เกิดข้อผิดพลาด", description: err.message, fuseColor: "#f43f5e" });
   }
 };
 
@@ -2874,14 +2889,12 @@ window.loadPortfolioItems = async function() {
       }
     });
 
-    // Dynamically update total prize money metric: Base 22,000 + newly uploaded prizes!
     const prizeEl = document.getElementById("stat-prize-money");
     if (prizeEl) {
       const totalPrize = 22000 + extraPrizeMoney;
       prizeEl.setAttribute("data-countup-to", totalPrize);
     }
 
-    // Refresh dynamic widgets
     initSpotlightCards();
     initPulseHearts();
     if (window.lucide) lucide.createIcons();
@@ -2889,11 +2902,3 @@ window.loadPortfolioItems = async function() {
     console.error("loadPortfolioItems error:", err);
   }
 };
-
-// Global Shortcut: Ctrl+Shift+A opens Admin Content Studio
-window.addEventListener("keydown", (e) => {
-  if ((e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "a") || (e.altKey && e.key.toLowerCase() === "a")) {
-    e.preventDefault();
-    openAdminStudioModal();
-  }
-});
