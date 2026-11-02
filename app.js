@@ -2232,4 +2232,656 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Admin secret trigger
   setupAdminSecretTrigger();
+
+  // Load dynamically uploaded portfolio items from Supabase
+  loadPortfolioItems();
+});
+
+
+// ─── 17. ADMIN CONTENT STUDIO & SUPABASE DYNAMIC PORTFOLIO ─────────────────
+let adminUploadedFiles = []; // { file, dataUrl, name, size } (max 5)
+let currentUploadedItems = [];
+
+const DEFAULT_ADMIN_KEYS = ["Admin1230S_asdl133", "newja2026", "admin2026"];
+
+function getAdminKey() {
+  return sessionStorage.getItem("newja_admin_key") || "";
+}
+
+function isAdminLoggedIn() {
+  const k = getAdminKey();
+  return k && DEFAULT_ADMIN_KEYS.includes(k.trim());
+}
+
+window.openAdminStudioModal = function() {
+  playBeep(580, 0.08);
+  if (!isAdminLoggedIn()) {
+    const authModal = document.getElementById("admin-auth-modal");
+    if (authModal) authModal.classList.remove("hidden");
+    const input = document.getElementById("admin-pass-input");
+    if (input) {
+      input.value = "";
+      setTimeout(() => input.focus(), 150);
+    }
+  } else {
+    const studioModal = document.getElementById("admin-studio-modal");
+    if (studioModal) studioModal.classList.remove("hidden");
+    switchAdminStudioTab("new");
+    renderAdminManageList();
+    if (window.lucide) lucide.createIcons();
+  }
+};
+
+window.closeAdminAuthModal = function() {
+  playBeep(440, 0.06);
+  const modal = document.getElementById("admin-auth-modal");
+  if (modal) modal.classList.add("hidden");
+};
+
+window.closeAdminStudioModal = function() {
+  playBeep(440, 0.06);
+  const modal = document.getElementById("admin-studio-modal");
+  if (modal) modal.classList.add("hidden");
+};
+
+window.submitAdminPasscode = function(e) {
+  e.preventDefault();
+  const input = document.getElementById("admin-pass-input");
+  const val = input ? input.value.trim() : "";
+  if (!val) return;
+
+  if (DEFAULT_ADMIN_KEYS.includes(val)) {
+    sessionStorage.setItem("newja_admin_key", val);
+    playBeep(720, 0.12);
+    closeAdminAuthModal();
+    showToast("เข้าสู่ระบบ Admin สำเร็จ ยินดีต้อนรับครับ! 🔐⚡");
+    setTimeout(() => {
+      openAdminStudioModal();
+    }, 200);
+  } else {
+    playBeep(260, 0.2);
+    showToast("รหัสผ่าน Admin ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
+    if (input) input.select();
+  }
+};
+
+window.logoutAdmin = function() {
+  playBeep(480, 0.08);
+  sessionStorage.removeItem("newja_admin_key");
+  closeAdminStudioModal();
+  showToast("ออกจากระบบ Admin เรียบร้อยแล้ว");
+};
+
+window.switchAdminStudioTab = function(tab) {
+  playBeep(520, 0.06);
+  const viewNew = document.getElementById("admin-view-new");
+  const viewManage = document.getElementById("admin-view-manage");
+  const btnNew = document.getElementById("btn-studio-tab-new");
+  const btnManage = document.getElementById("btn-studio-tab-manage");
+
+  if (tab === "new") {
+    if (viewNew) viewNew.classList.remove("hidden");
+    if (viewManage) viewManage.classList.add("hidden");
+    if (btnNew) {
+      btnNew.className = "px-4 py-2 rounded-xl text-xs font-bold bg-cyan-600 text-white flex items-center gap-1.5 transition shadow-md";
+    }
+    if (btnManage) {
+      btnManage.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5 transition";
+    }
+  } else {
+    if (viewNew) viewNew.classList.add("hidden");
+    if (viewManage) viewManage.classList.remove("hidden");
+    if (btnManage) {
+      btnManage.className = "px-4 py-2 rounded-xl text-xs font-bold bg-cyan-600 text-white flex items-center gap-1.5 transition shadow-md";
+    }
+    if (btnNew) {
+      btnNew.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5 transition";
+    }
+    renderAdminManageList();
+  }
+  if (window.lucide) lucide.createIcons();
+};
+
+window.selectAdminItemType = function(type) {
+  playBeep(600, 0.06);
+  const hiddenInput = document.getElementById("admin-item-type");
+  if (hiddenInput) hiddenInput.value = type;
+
+  const btnProj = document.getElementById("btn-type-project");
+  const btnAchieve = document.getElementById("btn-type-achievement");
+  const btnCert = document.getElementById("btn-type-certificate");
+
+  const secProj = document.getElementById("admin-section-project");
+  const secAchieve = document.getElementById("admin-section-achievement");
+  const secCert = document.getElementById("admin-section-certificate");
+
+  // Reset button styles
+  const baseBtnClass = "p-3.5 rounded-2xl border border-white/10 bg-slate-900 text-slate-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]";
+  const activeProjClass = "p-3.5 rounded-2xl border-2 border-cyan-500 bg-cyan-500/10 text-cyan-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]";
+  const activeAchieveClass = "p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-500/10 text-amber-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]";
+  const activeCertClass = "p-3.5 rounded-2xl border-2 border-indigo-500 bg-indigo-500/10 text-indigo-300 font-bold text-xs sm:text-sm flex flex-col items-center gap-2 transition hover:scale-[1.02]";
+
+  if (btnProj) btnProj.className = type === "project" ? activeProjClass : baseBtnClass;
+  if (btnAchieve) btnAchieve.className = type === "achievement" ? activeAchieveClass : baseBtnClass;
+  if (btnCert) btnCert.className = type === "certificate" ? activeCertClass : baseBtnClass;
+
+  if (secProj) secProj.classList.toggle("hidden", type !== "project");
+  if (secAchieve) secAchieve.classList.toggle("hidden", type !== "achievement");
+  if (secCert) secCert.classList.toggle("hidden", type !== "certificate");
+
+  if (window.lucide) lucide.createIcons();
+};
+
+// Client-Side Canvas Image Compression (Max 1280px, 0.85 Quality)
+function compressImageToDataUrl(file, maxWidth = 1280, quality = 0.85) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+        if (width > maxWidth || height > maxWidth) {
+          if (width > height) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          } else {
+            width = Math.round((width * maxWidth) / height);
+            height = maxWidth;
+          }
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL("image/jpeg", quality);
+        resolve(dataUrl);
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+window.handleAdminFilesSelected = async function(e) {
+  const files = Array.from(e.target.files || []);
+  if (!files.length) return;
+
+  const remainingSlots = 5 - adminUploadedFiles.length;
+  if (remainingSlots <= 0) {
+    showToast("อัปโหลดครบ 5 รูปแล้วครับ หากต้องการเพิ่มให้ลบรูปเดิมก่อน");
+    return;
+  }
+
+  const filesToAdd = files.slice(0, remainingSlots);
+  if (files.length > remainingSlots) {
+    showToast(`เลือกได้สูงสุด 5 รูป (เพิ่มได้อีก ${remainingSlots} รูป)`);
+  }
+
+  showToast("กำลังบีบอัดรูปภาพให้ความละเอียดคมชัดสูงสุด...");
+
+  for (const file of filesToAdd) {
+    try {
+      const compressedDataUrl = await compressImageToDataUrl(file, 1280, 0.85);
+      adminUploadedFiles.push({
+        file,
+        dataUrl: compressedDataUrl,
+        name: file.name,
+        size: file.size
+      });
+    } catch (err) {
+      console.error("Compression error:", err);
+    }
+  }
+
+  renderAdminThumbnails();
+  e.target.value = "";
+};
+
+window.removeAdminUploadedFile = function(index) {
+  playBeep(420, 0.05);
+  adminUploadedFiles.splice(index, 1);
+  renderAdminThumbnails();
+};
+
+function renderAdminThumbnails() {
+  const container = document.getElementById("admin-previews-container");
+  const badge = document.getElementById("admin-images-count-badge");
+  if (badge) {
+    badge.textContent = `เลือกแล้ว ${adminUploadedFiles.length} / 5 รูป`;
+  }
+
+  if (!container) return;
+  container.innerHTML = "";
+
+  adminUploadedFiles.forEach((item, idx) => {
+    const thumb = document.createElement("div");
+    thumb.className = "relative aspect-square rounded-xl overflow-hidden border border-white/20 bg-slate-900 group shadow-md";
+    thumb.innerHTML = `
+      <img src="${item.dataUrl}" alt="Preview" class="w-full h-full object-cover" />
+      <span class="absolute top-1 left-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-black/75 text-cyan-300">#${idx + 1}</span>
+      <button type="button" onclick="removeAdminUploadedFile(${idx})" class="absolute top-1 right-1 w-6 h-6 rounded-lg bg-red-600/90 hover:bg-red-500 text-white flex items-center justify-center transition shadow-lg">
+        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+      </button>
+    `;
+    container.appendChild(thumb);
+  });
+
+  if (window.lucide) lucide.createIcons();
+}
+
+window.handleAdminSubmitItem = async function(e) {
+  e.preventDefault();
+  if (!isAdminLoggedIn()) {
+    showToast("กรุณายืนยันรหัสผ่าน Admin ก่อนบันทึก");
+    openAdminStudioModal();
+    return;
+  }
+
+  const type = document.getElementById("admin-item-type")?.value || "project";
+  const title = document.getElementById("admin-field-title")?.value.trim();
+  const category = document.getElementById("admin-field-category")?.value.trim();
+  const year = document.getElementById("admin-field-year")?.value.trim() || "2026";
+  const desc = document.getElementById("admin-field-desc")?.value.trim();
+
+  if (!title) {
+    showToast("กรุณากรอกชื่อรายการ");
+    return;
+  }
+
+  if (adminUploadedFiles.length === 0) {
+    showToast("กรุณาเลือกรูปภาพอย่างน้อย 1 รูป (สูงสุด 5 รูป)");
+    return;
+  }
+
+  const frameRadio = document.querySelector('input[name="admin-frame-style"]:checked');
+  const frameStyle = frameRadio ? frameRadio.value : "none";
+
+  const btn = document.getElementById("btn-admin-submit-item");
+  const btnText = document.getElementById("btn-admin-submit-text");
+  if (btn) btn.disabled = true;
+  if (btnText) btnText.textContent = "กำลังอัปโหลดรูปและบันทึก...";
+
+  try {
+    const adminKey = getAdminKey();
+    const uploadedUrls = [];
+
+    // 1. Upload each image to Supabase Storage via /api/upload
+    for (let i = 0; i < adminUploadedFiles.length; i++) {
+      if (btnText) btnText.textContent = `กำลังอัปโหลดรูป (${i + 1}/${adminUploadedFiles.length})...`;
+      const item = adminUploadedFiles[i];
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Admin-Key": adminKey
+        },
+        body: JSON.stringify({
+          filename: item.name,
+          data: item.dataUrl,
+          contentType: "image/jpeg",
+          adminKey
+        })
+      });
+
+      if (res.ok) {
+        const uploadData = await res.json();
+        if (uploadData.url) {
+          uploadedUrls.push(uploadData.url);
+        } else {
+          uploadedUrls.push(item.dataUrl);
+        }
+      } else {
+        uploadedUrls.push(item.dataUrl);
+      }
+    }
+
+    // 2. Prepare payload
+    const payload = {
+      type,
+      title,
+      category,
+      year,
+      description: desc,
+      images: uploadedUrls,
+      frame_style: frameStyle,
+      adminKey
+    };
+
+    if (type === "achievement") {
+      payload.competition_level = document.getElementById("admin-field-level")?.value.trim() || "ระดับประเทศ";
+      payload.award_title = document.getElementById("admin-field-award")?.value.trim() || "รางวัลชนะเลิศ";
+      payload.prize_money = Number(document.getElementById("admin-field-prize")?.value) || 0;
+      payload.competition_type = document.getElementById("admin-field-comptype")?.value.trim() || "Hackathon";
+      payload.team_name = document.getElementById("admin-field-team")?.value.trim();
+      payload.project_name = document.getElementById("admin-field-projname")?.value.trim();
+      payload.news_url = document.getElementById("admin-field-newsurl")?.value.trim();
+    } else if (type === "project") {
+      const tagsStr = document.getElementById("admin-field-tags")?.value.trim();
+      payload.tags = tagsStr ? tagsStr.split(",").map(t => t.trim()).filter(Boolean) : [];
+      payload.demo_url = document.getElementById("admin-field-demourl")?.value.trim();
+      payload.canva_url = document.getElementById("admin-field-canvaurl")?.value.trim();
+    } else if (type === "certificate") {
+      payload.issuer = document.getElementById("admin-field-issuer")?.value.trim() || "หน่วยงานผู้ออกใบรับรอง";
+      payload.verify_url = document.getElementById("admin-field-verifyurl")?.value.trim();
+    }
+
+    if (btnText) btnText.textContent = "กำลังบันทึกลงฐานข้อมูล Supabase...";
+
+    // 3. Send to /api/items
+    const itemRes = await fetch("/api/items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Admin-Key": adminKey
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (itemRes.ok) {
+      playBeep(880, 0.15);
+      showToast("🎉 เผยแพร่ผลงานสำเร็จ ทุกคนสามารถเห็นได้ทันที!");
+      
+      // Reset form
+      document.getElementById("admin-upload-form")?.reset();
+      adminUploadedFiles = [];
+      renderAdminThumbnails();
+
+      // Refresh items on page
+      await loadPortfolioItems();
+
+      // Switch to the relevant tab on the main page so user sees their new upload
+      if (type === "project") switchTab("projects");
+      else if (type === "achievement") switchTab("achievements");
+      else if (type === "certificate") switchTab("certificates");
+
+      closeAdminStudioModal();
+    } else {
+      const errData = await itemRes.json();
+      throw new Error(errData.error || "Failed to save item");
+    }
+  } catch (err) {
+    playBeep(260, 0.2);
+    showToast("เกิดข้อผิดพลาด: " + err.message);
+  } finally {
+    if (btn) btn.disabled = false;
+    if (btnText) btnText.textContent = "บันทึกและเผยแพร่ทันที";
+  }
+};
+
+window.renderAdminManageList = function() {
+  const listEl = document.getElementById("admin-manage-list");
+  const countBadge = document.getElementById("admin-items-count");
+  if (countBadge) countBadge.textContent = currentUploadedItems.length;
+
+  if (!listEl) return;
+  if (!currentUploadedItems.length) {
+    listEl.innerHTML = `
+      <div class="text-center py-10 rounded-2xl bg-slate-900/60 border border-white/5 space-y-2">
+        <div class="text-slate-500 text-xs">ยังไม่มีรายการที่อัปโหลดไว้</div>
+        <button type="button" onclick="switchAdminStudioTab('new')" class="px-4 py-1.5 rounded-lg bg-cyan-600/20 text-cyan-300 text-xs font-bold hover:bg-cyan-600/40 transition">
+          + อัปโหลดรายการแรกเลย
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  listEl.innerHTML = currentUploadedItems
+    .map((item) => {
+      const mainImg = item.images && item.images.length ? item.images[0] : "";
+      const imgCount = item.images ? item.images.length : 0;
+      const typeLabel = item.type === "achievement" ? "🏆 การแข่งขัน" : item.type === "certificate" ? "📜 ใบรับรอง" : "🎨 ผลงาน";
+      const typeColor = item.type === "achievement" ? "text-amber-400 bg-amber-500/10 border-amber-500/30" : item.type === "certificate" ? "text-indigo-400 bg-indigo-500/10 border-indigo-500/30" : "text-cyan-400 bg-cyan-500/10 border-cyan-500/30";
+
+      return `
+        <div class="p-3.5 rounded-2xl bg-slate-900 border border-white/10 flex items-center justify-between gap-3 group hover:border-cyan-500/30 transition">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-950 border border-white/10 shrink-0 relative">
+              ${mainImg ? `<img src="${mainImg}" alt="" class="w-full h-full object-cover" />` : `<div class="w-full h-full flex items-center justify-center text-[10px] text-slate-600">No Image</div>`}
+              ${imgCount > 1 ? `<span class="absolute bottom-1 right-1 px-1 rounded text-[9px] font-mono bg-black/80 text-cyan-300">${imgCount} รูป</span>` : ""}
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold border ${typeColor}">${typeLabel}</span>
+                <span class="text-[10px] text-slate-500 font-mono">${item.year || "2026"}</span>
+              </div>
+              <h4 class="font-bold text-white text-xs sm:text-sm truncate mt-1">${item.title}</h4>
+              <p class="text-[11px] text-slate-400 truncate mt-0.5">${item.award_title || item.category || item.issuer || ""}</p>
+            </div>
+          </div>
+          <button type="button" onclick="deletePortfolioItem('${item.id}')" class="px-3 py-1.5 rounded-lg bg-red-600/10 hover:bg-red-600 text-red-400 hover:text-white border border-red-500/30 text-xs font-bold transition flex items-center gap-1 shrink-0">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            <span>ลบ</span>
+          </button>
+        </div>
+      `;
+    })
+    .join("");
+
+  if (window.lucide) lucide.createIcons();
+};
+
+window.deletePortfolioItem = async function(id) {
+  if (!confirm("คุณแน่ใจว่าต้องการลบรายการนี้ใช่หรือไม่?")) return;
+  const adminKey = getAdminKey();
+  try {
+    const res = await fetch(`/api/items?id=${id}`, {
+      method: "DELETE",
+      headers: { "X-Admin-Key": adminKey }
+    });
+    if (res.ok) {
+      playBeep(480, 0.1);
+      showToast("ลบรายการสำเร็จเรียบร้อย");
+      await loadPortfolioItems();
+      renderAdminManageList();
+    } else {
+      showToast("ลบรายการไม่สำเร็จ");
+    }
+  } catch (err) {
+    showToast("เกิดข้อผิดพลาดในการลบ: " + err.message);
+  }
+};
+
+window.loadPortfolioItems = async function() {
+  try {
+    const res = await fetch("/api/items");
+    if (!res.ok) return;
+    const data = await res.json();
+    const items = Array.isArray(data.items) ? data.items : [];
+    currentUploadedItems = items;
+
+    const countBadge = document.getElementById("admin-items-count");
+    if (countBadge) countBadge.textContent = items.length;
+
+    const projContainer = document.getElementById("dynamic-projects-container");
+    const achieveContainer = document.getElementById("dynamic-achievements-container");
+    const certContainer = document.getElementById("dynamic-certificates-container");
+
+    if (projContainer) projContainer.innerHTML = "";
+    if (achieveContainer) achieveContainer.innerHTML = "";
+    if (certContainer) certContainer.innerHTML = "";
+
+    let extraPrizeMoney = 0;
+
+    items.forEach((item) => {
+      const frameClass = item.frame_style && item.frame_style !== "none" ? `frame-${item.frame_style}` : "";
+      const images = Array.isArray(item.images) ? item.images : [];
+      const mainImg = images.length ? images[0] : "assets/j3a-store.png";
+
+      // 1. PROJECT
+      if (item.type === "project" && projContainer) {
+        const tags = Array.isArray(item.tags) ? item.tags : [];
+        const tagsHtml = tags.map(t => `<span class="px-2.5 py-1 rounded bg-slate-800 text-xs text-slate-300">${t}</span>`).join("");
+        
+        let galleryHtml = "";
+        if (images.length > 1) {
+          galleryHtml = `
+            <div class="grid grid-cols-${Math.min(images.length, 5)} gap-2 pt-2">
+              ${images.map((img, i) => `
+                <div onclick="openCertModal('${img}', '${item.title}', '${item.category || "Project"}')" class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-slate-950 cursor-pointer hover:border-cyan-400 transition">
+                  <img src="${img}" alt="" class="w-full h-full object-cover" />
+                </div>
+              `).join("")}
+            </div>
+          `;
+        }
+
+        const card = document.createElement("div");
+        card.className = `spotlight-card rounded-2xl p-6 flex flex-col justify-between space-y-5 ${frameClass}`;
+        card.innerHTML = `
+          <div class="space-y-4">
+            <div onclick="openCertModal('${mainImg}', '${item.title}', '${item.category || "Project"}')" class="aspect-video w-full rounded-xl overflow-hidden border border-white/10 bg-slate-950 cursor-pointer group">
+              <img src="${mainImg}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            </div>
+            ${galleryHtml}
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold uppercase">
+                ${item.category || "WEB APPLICATION"}
+              </span>
+              <span class="text-xs text-slate-400">${item.year || "2026"}</span>
+            </div>
+            <h3 class="text-2xl font-black text-white">${item.title}</h3>
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed">${item.description || ""}</p>
+            <div class="flex flex-wrap gap-2 pt-1">${tagsHtml}</div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between w-full gap-3 pt-2">
+            <div class="flex flex-wrap items-center gap-2.5">
+              ${item.demo_url ? `
+                <a href="${item.demo_url}" target="_blank" rel="noreferrer" class="px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-xs font-bold text-white flex items-center gap-1.5 transition shadow-md shadow-cyan-600/30">
+                  <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                  <span>เว็บจริง ↗</span>
+                </a>
+              ` : ""}
+              ${item.canva_url ? `
+                <a href="${item.canva_url}" target="_blank" rel="noreferrer" class="px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 hover:border-indigo-500/40 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>รายละเอียด</span>
+                </a>
+              ` : ""}
+            </div>
+            <div class="pulse-heart-mount" data-heart-id="item-${item.id}" data-heart-count="0"></div>
+          </div>
+        `;
+        projContainer.appendChild(card);
+      }
+
+      // 2. ACHIEVEMENT
+      else if (item.type === "achievement" && achieveContainer) {
+        if (item.prize_money) extraPrizeMoney += Number(item.prize_money);
+
+        let imagesGrid = "";
+        if (images.length === 1) {
+          imagesGrid = `
+            <div onclick="openCertModal('${images[0]}', '${item.title}', '${item.award_title || ""}')" class="cursor-pointer group rounded-2xl overflow-hidden border border-white/10 hover:border-amber-400/50 bg-slate-950 aspect-[4/3] shadow-lg transition">
+              <img src="${images[0]}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+            </div>
+          `;
+        } else if (images.length === 2) {
+          imagesGrid = `
+            <div class="grid grid-cols-2 gap-3">
+              ${images.map(img => `
+                <div onclick="openCertModal('${img}', '${item.title}', '${item.award_title || ""}')" class="cursor-pointer group rounded-2xl overflow-hidden border border-white/10 hover:border-amber-400/50 bg-slate-950 aspect-[4/5] shadow-lg transition">
+                  <img src="${img}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                </div>
+              `).join("")}
+            </div>
+          `;
+        } else {
+          imagesGrid = `
+            <div class="grid grid-cols-2 gap-2.5">
+              ${images.slice(0, 4).map((img, idx) => `
+                <div onclick="openCertModal('${img}', '${item.title}', '${item.award_title || ""}')" class="cursor-pointer group rounded-xl overflow-hidden border border-white/10 hover:border-amber-400/50 bg-slate-950 aspect-video shadow-md transition relative">
+                  <img src="${img}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                  ${idx === 3 && images.length > 4 ? `<div class="absolute inset-0 bg-black/75 flex items-center justify-center font-bold text-xs text-white">+${images.length - 4} รูป</div>` : ""}
+                </div>
+              `).join("")}
+            </div>
+          `;
+        }
+
+        const card = document.createElement("div");
+        card.className = `spotlight-card rounded-3xl p-6 sm:p-8 ${frameClass}`;
+        card.innerHTML = `
+          <div class="grid md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-7 space-y-4">
+              <div class="flex flex-wrap items-center gap-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black uppercase">
+                  <i data-lucide="trophy" class="w-3.5 h-3.5"></i>
+                  <span>${item.award_title || "รางวัลชนะเลิศ"}</span>
+                </div>
+                ${item.competition_level ? `<span class="px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">${item.competition_level}</span>` : ""}
+                ${item.prize_money ? `<span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold">฿${Number(item.prize_money).toLocaleString()}</span>` : ""}
+              </div>
+              <h3 class="text-2xl md:text-3xl font-black text-white leading-tight">${item.title}</h3>
+              <div class="flex flex-wrap items-center gap-2 text-xs text-amber-300 font-semibold">
+                ${item.team_name ? `<span class="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20">${item.team_name}</span>` : ""}
+                ${item.project_name ? `<span class="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-300">${item.project_name}</span>` : ""}
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${item.description || ""}</p>
+              <div class="pt-2 flex flex-wrap items-center justify-between gap-4">
+                ${item.news_url ? `
+                  <a href="${item.news_url}" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-300 hover:text-white hover:bg-amber-500/30 text-xs font-bold transition shadow-lg shadow-amber-500/10">
+                    <i data-lucide="external-link" class="w-4 h-4 text-amber-400"></i>
+                    <span>อ่านบทความและประกาศผลรางวัล ↗</span>
+                  </a>
+                ` : `<div></div>`}
+                <div class="pulse-heart-mount" data-heart-id="item-${item.id}" data-heart-count="0"></div>
+              </div>
+            </div>
+            <div class="md:col-span-5">${imagesGrid}</div>
+          </div>
+        `;
+        achieveContainer.appendChild(card);
+      }
+
+      // 3. CERTIFICATE
+      else if (item.type === "certificate" && certContainer) {
+        const card = document.createElement("div");
+        card.className = `spotlight-card rounded-2xl p-4 space-y-3 cursor-pointer group hover:border-cyan-500/50 transition ${frameClass}`;
+        card.setAttribute("onclick", `openCertModal('${mainImg}', '${item.title.replace(/'/g, "\'")}', '${(item.issuer || "").replace(/'/g, "\'")}')`);
+        card.innerHTML = `
+          <div class="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 bg-slate-950 flex items-center justify-center p-2 relative">
+            <img src="${mainImg}" alt="${item.title}" class="w-full h-full object-contain group-hover:scale-105 transition duration-300" />
+            ${images.length > 1 ? `<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyan-950/80 text-cyan-300 border border-cyan-400/40 font-mono">${images.length} รูป</span>` : ""}
+            <span class="absolute bottom-2 right-2 p-1.5 rounded-lg bg-slate-900/80 border border-white/10 text-white text-[10px] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
+              <i data-lucide="maximize-2" class="w-3 h-3"></i>
+              <span>ดูใบรับรอง</span>
+            </span>
+          </div>
+          <div>
+            <h4 class="font-bold text-white text-sm">${item.title}</h4>
+            <p class="text-xs text-cyan-400 mt-0.5">${item.issuer || item.category || "Certificate"}</p>
+          </div>
+        `;
+        certContainer.appendChild(card);
+      }
+    });
+
+    // Dynamically update total prize money metric: Base 22,000 + newly uploaded prizes!
+    const prizeEl = document.getElementById("stat-prize-money");
+    if (prizeEl) {
+      const totalPrize = 22000 + extraPrizeMoney;
+      prizeEl.setAttribute("data-countup-to", totalPrize);
+    }
+
+    // Refresh dynamic widgets
+    initSpotlightCards();
+    initPulseHearts();
+    if (window.lucide) lucide.createIcons();
+  } catch (err) {
+    console.error("loadPortfolioItems error:", err);
+  }
+};
+
+// Global Shortcut: Ctrl+Shift+A opens Admin Content Studio
+window.addEventListener("keydown", (e) => {
+  if ((e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "a") || (e.altKey && e.key.toLowerCase() === "a")) {
+    e.preventDefault();
+    openAdminStudioModal();
+  }
 });

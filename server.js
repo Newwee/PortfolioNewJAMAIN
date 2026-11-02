@@ -340,6 +340,11 @@ app.all("/api/admin/notify-login", (req, res) => adminNotifyHandler(req, res));
 app.all("/api/likes", (req, res) => likesHandler(req, res));
 app.all("/api/visitors", (req, res) => visitorsHandler(req, res));
 
+const itemsHandler = require("./api/items.js");
+const uploadHandler = require("./api/upload.js");
+app.all("/api/items", (req, res) => itemsHandler(req, res));
+app.all("/api/upload", (req, res) => uploadHandler(req, res));
+
 // ==============================================================================
 // 🎵 SPOTIFY EMBED & SETTINGS (SUPABASE INTEGRATION)
 // ==============================================================================
