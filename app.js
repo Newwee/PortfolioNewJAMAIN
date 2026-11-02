@@ -1060,10 +1060,19 @@ async function initPulseHearts() {
       }
     } catch (e) {}
 
-    window._pulseHeartInstances = {};
+    window._pulseHeartInstances = window._pulseHeartInstances || {};
     mounts.forEach(mount => {
       const id = mount.dataset.heartId || "item";
-      const initialCount = typeof serverLikes[id] === "number" ? serverLikes[id] : Number(mount.dataset.heartCount || 0);
+
+      // If already mounted, update count safely without destroying the DOM!
+      if (mount._pulseHeartInstance) {
+        if (typeof serverLikes[id] === "number" && serverLikes[id] !== mount._pulseHeartInstance.getCount()) {
+          mount._pulseHeartInstance.setCount(serverLikes[id], false);
+        }
+        return;
+      }
+
+      const initialCount = typeof serverLikes[id] === "number" ? serverLikes[id] : Number(mount.dataset.heartCount || 1);
       const heartInstance = createPulseHeart(mount, {
         id,
         initialCount,
@@ -1099,27 +1108,30 @@ async function initPulseHearts() {
           });
         }
       });
+      mount._pulseHeartInstance = heartInstance;
       window._pulseHeartInstances[id] = heartInstance;
     });
 
-    // Realtime Cross-User Sync Poller (every 3.5s with rolling number pulse)
-    setInterval(async () => {
-      if (document.hidden) return;
-      try {
-        const res = await fetch("/api/likes");
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.likes) {
-            Object.entries(data.likes).forEach(([itemId, liveCount]) => {
-              const inst = window._pulseHeartInstances[itemId];
-              if (inst && typeof liveCount === "number" && liveCount !== inst.getCount()) {
-                inst.setCount(liveCount, true);
-              }
-            });
+    // Start single realtime cross-user poller
+    if (!window._pulseHeartInterval) {
+      window._pulseHeartInterval = setInterval(async () => {
+        if (document.hidden) return;
+        try {
+          const res = await fetch("/api/likes");
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.likes) {
+              Object.entries(data.likes).forEach(([itemId, liveCount]) => {
+                const inst = window._pulseHeartInstances?.[itemId];
+                if (inst && typeof liveCount === "number" && liveCount !== inst.getCount()) {
+                  inst.setCount(liveCount, true);
+                }
+              });
+            }
           }
-        }
-      } catch (e) {}
-    }, 8000);
+        } catch (e) {}
+      }, 3500);
+    }
   } catch (e) {
     console.warn("PulseHeart failed to mount:", e);
   }

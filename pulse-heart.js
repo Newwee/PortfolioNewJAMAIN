@@ -197,11 +197,11 @@ export function createPulseHeart(container, options = {}) {
     } catch (e) {}
 
     btn.setAttribute('aria-pressed', 'true');
+    btn.dataset.liked = 'true'; // Instant responsive pink color
 
     if (pointer && !reducedMotion()) {
       runAnimation(true, total);
     } else {
-      btn.dataset.liked = 'true';
       shown = { liked: true, count: total };
       renderDom();
     }
