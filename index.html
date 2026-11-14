@@ -96,6 +96,18 @@
         <a href="#contact" class="nav-item" data-i18n="nav_contact">Contact</a>
       </div>
       <div class="w-px h-5 bg-white/10 mx-0.5 sm:mx-1"></div>
+
+      <!-- Live Visitor Counter Badge (โชว์ยอดผู้เข้าชมสดด้านบน) -->
+      <div id="live-visitor-badge" class="flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-slate-900/90 border border-cyan-400/35 text-cyan-300 hover:border-cyan-300 transition shadow-[0_0_12px_rgba(6,182,212,0.18)] shrink-0 group cursor-default" title="ยอดผู้เข้าชมเว็บไซต์ทั้งหมด (Live Visitor Counter)">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_6px_#10b981]"></span>
+        </span>
+        <i data-lucide="eye" class="w-3.5 h-3.5 text-cyan-400 group-hover:scale-110 transition"></i>
+        <span id="visitor-count-display" class="font-mono font-black text-white text-xs tracking-wide">0</span>
+        <span class="text-[10px] text-slate-400 font-medium hidden sm:inline" data-i18n="nav_views">views</span>
+      </div>
+      <div class="w-px h-5 bg-white/10 mx-0.5 sm:mx-1"></div>
       
       <!-- Sound FX Toggle Button -->
       <button id="sound-btn" type="button" title="เปิด/ปิดเสียงเอฟเฟกต์ UI" class="p-1.5 sm:p-2 rounded-full hover:bg-white/10 text-slate-300 hover:text-white transition shrink-0">
@@ -139,6 +151,19 @@
         <i data-lucide="mail" class="w-4 h-4 text-cyan-400"></i>
         <span>Contact</span>
       </a>
+
+      <!-- Mobile Visitor Counter Info -->
+      <div class="mt-1 pt-2 border-t border-white/10 flex items-center justify-between px-3 py-1.5 text-xs text-slate-400">
+        <span class="flex items-center gap-2 font-medium">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+          </span>
+          <i data-lucide="eye" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span data-i18n="nav_visitor_label">ยอดผู้เข้าชมเว็บ</span>
+        </span>
+        <span id="visitor-count-mobile" class="font-mono font-bold text-white bg-slate-900 border border-cyan-500/30 px-2.5 py-0.5 rounded-full text-xs shadow-inner">0</span>
+      </div>
     </div>
   </header>
 

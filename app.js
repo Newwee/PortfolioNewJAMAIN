@@ -2241,8 +2241,15 @@ async function initScrollAnimations() {
   }
 }
 
-// ─── 19. VISITOR TRACKING & SESSION LOGGING ─────────────────────────────
+// ─── 19. VISITOR TRACKING & LIVE VIEW COUNTER ─────────────────────────────
 async function trackVisitorSession() {
+  const displayEl = document.getElementById("visitor-count-display");
+  const mobileEl = document.getElementById("visitor-count-mobile");
+
+  // Ensure default is 0 visually
+  if (displayEl) displayEl.textContent = "0";
+  if (mobileEl) mobileEl.textContent = "0";
+
   try {
     let visitorId = localStorage.getItem("newja_visitor_id");
     if (!visitorId) {
@@ -2257,12 +2264,73 @@ async function trackVisitorSession() {
       screenWidth: window.screen?.width || 0,
       screenHeight: window.screen?.height || 0
     };
-    await fetch("/api/visitors", {
+    const res = await fetch("/api/visitors", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
-  } catch (e) {}
+
+    if (res.ok) {
+      const data = await res.json();
+      const currentCount = Number(data.totalViews ?? data.totalVisitors ?? data.count ?? 0);
+      updateVisitorCounterUI(currentCount);
+    } else {
+      const getRes = await fetch("/api/visitors");
+      if (getRes.ok) {
+        const getData = await getRes.json();
+        const currentCount = Number(getData.totalViews ?? getData.totalVisitors ?? getData.count ?? 0);
+        updateVisitorCounterUI(currentCount);
+      }
+    }
+  } catch (e) {
+    console.warn("Visitor tracking sync failed, retrying read-only:", e);
+    try {
+      const fallbackRes = await fetch("/api/visitors");
+      if (fallbackRes.ok) {
+        const fallbackData = await fallbackRes.json();
+        const currentCount = Number(fallbackData.totalViews ?? fallbackData.totalVisitors ?? fallbackData.count ?? 0);
+        updateVisitorCounterUI(currentCount);
+      }
+    } catch (err) {}
+  }
+}
+
+async function updateVisitorCounterUI(targetCount) {
+  const displayEl = document.getElementById("visitor-count-display");
+  const mobileEl = document.getElementById("visitor-count-mobile");
+  const badge = document.getElementById("live-visitor-badge");
+
+  if (!displayEl && !mobileEl) return;
+
+  const countNum = Math.max(0, Number(targetCount) || 0);
+  const formatted = countNum.toLocaleString();
+
+  try {
+    if (!countUpModule) {
+      countUpModule = await import("./count-up.js");
+    }
+    if (displayEl && countUpModule && typeof countUpModule.animateCountUp === "function") {
+      countUpModule.animateCountUp(displayEl, {
+        from: 0,
+        to: countNum,
+        duration: 1.2
+      });
+    } else if (displayEl) {
+      displayEl.textContent = formatted;
+    }
+  } catch (err) {
+    if (displayEl) displayEl.textContent = formatted;
+  }
+
+  if (mobileEl) mobileEl.textContent = formatted;
+
+  // Flash subtle glow to indicate real-time sync
+  if (badge) {
+    badge.classList.add("ring-2", "ring-cyan-400", "shadow-[0_0_20px_rgba(6,182,212,0.6)]");
+    setTimeout(() => {
+      badge.classList.remove("ring-2", "ring-cyan-400", "shadow-[0_0_20px_rgba(6,182,212,0.6)]");
+    }, 1500);
+  }
 }
 
 // ─── 20. MULTI-LANGUAGE SYSTEM (i18n & SHUFFLE FLIP) ─────────────────────
