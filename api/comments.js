@@ -43,7 +43,7 @@ function checkProfanity(text) {
   return { hasProfanity: false };
 }
 
-// In-Memory Fallback State (ensures 100% uptime fallback)
+// In-Memory Fallback State
 let fallbackComments = [
   {
     id: "welcome-1",
@@ -54,6 +54,70 @@ let fallbackComments = [
     created_at: new Date().toISOString()
   }
 ];
+
+async function getCommentsFromSupabase(isAdmin) {
+  if (!supabase) return null;
+  try {
+    let query = supabase
+      .from("portfolio_items")
+      .select("id, title, description, category, competition_type, competition_level, created_at")
+      .eq("type", "comment")
+      .order("created_at", { ascending: false })
+      .limit(100);
+
+    if (!isAdmin) {
+      query = query.or("competition_type.is.null,competition_type.eq.false");
+    }
+
+    const { data, error } = await query;
+    if (!error && Array.isArray(data)) {
+      return data.map(r => ({
+        id: r.id,
+        name: r.title,
+        message: r.description,
+        avatar: r.category || (r.title ? r.title.slice(0, 2).toUpperCase() : "NJ"),
+        is_flagged: r.competition_type === "true",
+        flag_reason: r.competition_level || null,
+        created_at: r.created_at
+      }));
+    }
+  } catch (err) {
+    console.error("fetch comments error:", err);
+  }
+  return null;
+}
+
+async function insertCommentToSupabase(newComment) {
+  if (!supabase) return null;
+  try {
+    const { data, error } = await supabase
+      .from("portfolio_items")
+      .insert([{
+        type: "comment",
+        title: newComment.name,
+        description: newComment.message,
+        category: newComment.avatar,
+        competition_type: newComment.is_flagged ? "true" : "false",
+        competition_level: newComment.flag_reason || null
+      }])
+      .select();
+
+    if (!error && data && data.length) {
+      return {
+        id: data[0].id,
+        name: data[0].title,
+        message: data[0].description,
+        avatar: data[0].category || "NJ",
+        is_flagged: data[0].competition_type === "true",
+        flag_reason: data[0].competition_level || null,
+        created_at: data[0].created_at
+      };
+    }
+  } catch (err) {
+    console.error("insert comment error:", err);
+  }
+  return null;
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -69,55 +133,9 @@ module.exports = async function handler(req, res) {
 
   // 1. GET: Fetch Comments (Filtered for public, all for Admin)
   if (req.method === "GET") {
-    if (supabase) {
-      try {
-        // Try dedicated comments table first
-        let query = supabase
-          .from("comments")
-          .select("id, name, message, avatar, is_flagged, flag_reason, created_at")
-          .order("created_at", { ascending: false })
-          .limit(100);
-
-        if (!isAdmin) {
-          query = query.or("is_flagged.is.null,is_flagged.eq.false");
-        }
-
-        const { data, error } = await query;
-        if (!error && Array.isArray(data)) {
-          return res.status(200).json({ ok: true, comments: data, source: "supabase" });
-        }
-
-        // If comments table does not exist, use portfolio_items table (type='comment')
-        if (error && error.code === "PGRST205") {
-          let pQuery = supabase
-            .from("portfolio_items")
-            .select("id, title, description, category, competition_type, competition_level, created_at")
-            .eq("type", "comment")
-            .order("created_at", { ascending: false })
-            .limit(100);
-
-          if (!isAdmin) {
-            pQuery = pQuery.or("competition_type.is.null,competition_type.eq.false");
-          }
-
-          const { data: pData, error: pErr } = await pQuery;
-          if (!pErr && Array.isArray(pData)) {
-            const mapped = pData.map(r => ({
-              id: r.id,
-              name: r.title,
-              message: r.description,
-              avatar: r.category || (r.title ? r.title.slice(0, 2).toUpperCase() : "NJ"),
-              is_flagged: r.competition_type === "true",
-              flag_reason: r.competition_level || null,
-              created_at: r.created_at
-            }));
-
-            return res.status(200).json({ ok: true, comments: mapped, source: "supabase" });
-          }
-        }
-      } catch (err) {
-        console.error("Supabase GET comments error:", err);
-      }
+    const dbComments = await getCommentsFromSupabase(isAdmin);
+    if (dbComments && dbComments.length) {
+      return res.status(200).json({ ok: true, comments: dbComments, source: "supabase" });
     }
 
     const filtered = isAdmin
@@ -155,59 +173,14 @@ module.exports = async function handler(req, res) {
         created_at: new Date().toISOString()
       };
 
-      if (supabase) {
-        try {
-          // 1. Try insert into dedicated comments table
-          const { data, error } = await supabase
-            .from("comments")
-            .insert([newComment])
-            .select();
-
-          if (!error && data && data.length) {
-            return res.status(201).json({
-              ok: true,
-              comment: data[0],
-              flagged: isFlagged,
-              source: "supabase"
-            });
-          }
-
-          // 2. If comments table not found, insert into portfolio_items (type='comment')
-          if (error && error.code === "PGRST205") {
-            const { data: pData, error: pErr } = await supabase
-              .from("portfolio_items")
-              .insert([{
-                type: "comment",
-                title: newComment.name,
-                description: newComment.message,
-                category: newComment.avatar,
-                competition_type: isFlagged ? "true" : "false",
-                competition_level: flagReason || null
-              }])
-              .select();
-
-            if (!pErr && pData && pData.length) {
-              const mapped = {
-                id: pData[0].id,
-                name: pData[0].title,
-                message: pData[0].description,
-                avatar: pData[0].category || "NJ",
-                is_flagged: pData[0].competition_type === "true",
-                flag_reason: pData[0].competition_level || null,
-                created_at: pData[0].created_at
-              };
-
-              return res.status(201).json({
-                ok: true,
-                comment: mapped,
-                flagged: isFlagged,
-                source: "supabase"
-              });
-            }
-          }
-        } catch (e) {
-          console.error("Supabase POST error:", e);
-        }
+      const saved = await insertCommentToSupabase(newComment);
+      if (saved) {
+        return res.status(201).json({
+          ok: true,
+          comment: saved,
+          flagged: isFlagged,
+          source: "supabase"
+        });
       }
 
       // In-Memory Fallback
@@ -240,21 +213,14 @@ module.exports = async function handler(req, res) {
 
       if (supabase) {
         try {
-          const { error } = await supabase
-            .from("comments")
-            .update({ is_flagged: isFlagged, flag_reason: null })
-            .eq("id", id);
-
-          if (error && error.code === "PGRST205") {
-            await supabase
-              .from("portfolio_items")
-              .update({
-                competition_type: isFlagged ? "true" : "false",
-                competition_level: isFlagged ? "แบนโดยผู้ดูแลระบบ" : null
-              })
-              .eq("id", id)
-              .eq("type", "comment");
-          }
+          await supabase
+            .from("portfolio_items")
+            .update({
+              competition_type: isFlagged ? "true" : "false",
+              competition_level: isFlagged ? "แบนโดยผู้ดูแลระบบ" : null
+            })
+            .eq("id", id)
+            .eq("type", "comment");
         } catch (e) {
           console.error("Supabase PATCH error:", e);
         }
@@ -281,10 +247,11 @@ module.exports = async function handler(req, res) {
 
     if (supabase) {
       try {
-        const { error } = await supabase.from("comments").delete().eq("id", id);
-        if (error && error.code === "PGRST205") {
-          await supabase.from("portfolio_items").delete().eq("id", id).eq("type", "comment");
-        }
+        await supabase
+          .from("portfolio_items")
+          .delete()
+          .eq("id", id)
+          .eq("type", "comment");
       } catch (e) {
         console.error("Supabase DELETE error:", e);
       }
