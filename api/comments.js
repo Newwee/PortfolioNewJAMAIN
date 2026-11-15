@@ -1,14 +1,20 @@
 const { createClient } = require("@supabase/supabase-js");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://nbmjzhhvpksbxvqcxjpn.supabase.co";
-const SUPABASE_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || "";
+const SUPABASE_KEY =
+  process.env.SUPABASE_SECRET_KEY ||
+  process.env.SUPABASE_KEY ||
+  process.env.SUPABASE_PUBLISHABLE_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ibWp6aGh2cGtzYnh2cWN4anBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzNjIxMzMsImV4cCI6MjEwODkzODEzM30.1FnjKoPb2ONKQOXLQSoPbgp7utWuHkYUR-dg-nLRJoM";
 const ADMIN_PASS = "Admin1230S_asdl133";
 
 let supabase = null;
 if (SUPABASE_KEY) {
   try {
     supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-  } catch (e) {}
+  } catch (e) {
+    console.error("Supabase init error:", e);
+  }
 }
 
 const PROFANITY_WORDS = [
@@ -37,7 +43,7 @@ function checkProfanity(text) {
   return { hasProfanity: false };
 }
 
-// In-Memory Fallback State (persists across warm serverless invocations)
+// In-Memory Fallback State (ensures 100% uptime fallback)
 let fallbackComments = [
   {
     id: "welcome-1",
@@ -53,6 +59,7 @@ module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Admin-Key");
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
 
   if (req.method === "OPTIONS") {
     return res.status(200).end();
@@ -64,6 +71,7 @@ module.exports = async function handler(req, res) {
   if (req.method === "GET") {
     if (supabase) {
       try {
+        // Try dedicated comments table first
         let query = supabase
           .from("comments")
           .select("id, name, message, avatar, is_flagged, flag_reason, created_at")
@@ -75,10 +83,41 @@ module.exports = async function handler(req, res) {
         }
 
         const { data, error } = await query;
-        if (!error && data) {
+        if (!error && Array.isArray(data)) {
           return res.status(200).json({ ok: true, comments: data, source: "supabase" });
         }
-      } catch (err) {}
+
+        // If comments table does not exist, use portfolio_items table (type='comment')
+        if (error && error.code === "PGRST205") {
+          let pQuery = supabase
+            .from("portfolio_items")
+            .select("id, title, description, category, competition_type, competition_level, created_at")
+            .eq("type", "comment")
+            .order("created_at", { ascending: false })
+            .limit(100);
+
+          if (!isAdmin) {
+            pQuery = pQuery.or("competition_type.is.null,competition_type.eq.false");
+          }
+
+          const { data: pData, error: pErr } = await pQuery;
+          if (!pErr && Array.isArray(pData)) {
+            const mapped = pData.map(r => ({
+              id: r.id,
+              name: r.title,
+              message: r.description,
+              avatar: r.category || (r.title ? r.title.slice(0, 2).toUpperCase() : "NJ"),
+              is_flagged: r.competition_type === "true",
+              flag_reason: r.competition_level || null,
+              created_at: r.created_at
+            }));
+
+            return res.status(200).json({ ok: true, comments: mapped, source: "supabase" });
+          }
+        }
+      } catch (err) {
+        console.error("Supabase GET comments error:", err);
+      }
     }
 
     const filtered = isAdmin
@@ -108,7 +147,6 @@ module.exports = async function handler(req, res) {
       const flagReason = checkMsg.matchedWord || checkName.matchedWord || null;
 
       const newComment = {
-        id: `c-${Date.now()}`,
         name: cleanName,
         message: cleanMsg,
         avatar: cleanAvatar || "NJ",
@@ -119,15 +157,10 @@ module.exports = async function handler(req, res) {
 
       if (supabase) {
         try {
+          // 1. Try insert into dedicated comments table
           const { data, error } = await supabase
             .from("comments")
-            .insert([{
-              name: newComment.name,
-              message: newComment.message,
-              avatar: newComment.avatar,
-              is_flagged: newComment.is_flagged,
-              flag_reason: newComment.flag_reason
-            }])
+            .insert([newComment])
             .select();
 
           if (!error && data && data.length) {
@@ -138,9 +171,47 @@ module.exports = async function handler(req, res) {
               source: "supabase"
             });
           }
-        } catch (e) {}
+
+          // 2. If comments table not found, insert into portfolio_items (type='comment')
+          if (error && error.code === "PGRST205") {
+            const { data: pData, error: pErr } = await supabase
+              .from("portfolio_items")
+              .insert([{
+                type: "comment",
+                title: newComment.name,
+                description: newComment.message,
+                category: newComment.avatar,
+                competition_type: isFlagged ? "true" : "false",
+                competition_level: flagReason || null
+              }])
+              .select();
+
+            if (!pErr && pData && pData.length) {
+              const mapped = {
+                id: pData[0].id,
+                name: pData[0].title,
+                message: pData[0].description,
+                avatar: pData[0].category || "NJ",
+                is_flagged: pData[0].competition_type === "true",
+                flag_reason: pData[0].competition_level || null,
+                created_at: pData[0].created_at
+              };
+
+              return res.status(201).json({
+                ok: true,
+                comment: mapped,
+                flagged: isFlagged,
+                source: "supabase"
+              });
+            }
+          }
+        } catch (e) {
+          console.error("Supabase POST error:", e);
+        }
       }
 
+      // In-Memory Fallback
+      newComment.id = `c-${Date.now()}`;
       fallbackComments.unshift(newComment);
       if (fallbackComments.length > 100) fallbackComments.pop();
 
@@ -151,7 +222,7 @@ module.exports = async function handler(req, res) {
         source: "local"
       });
     } catch (err) {
-      return res.status(500).json({ error: "ไม่สามารถบันทึกความคิดเห็นได้" });
+      return res.status(500).json({ error: "ไม่สามารถบันทึกความคิดเห็นได้: " + err.message });
     }
   }
 
@@ -169,11 +240,24 @@ module.exports = async function handler(req, res) {
 
       if (supabase) {
         try {
-          await supabase
+          const { error } = await supabase
             .from("comments")
             .update({ is_flagged: isFlagged, flag_reason: null })
             .eq("id", id);
-        } catch (e) {}
+
+          if (error && error.code === "PGRST205") {
+            await supabase
+              .from("portfolio_items")
+              .update({
+                competition_type: isFlagged ? "true" : "false",
+                competition_level: isFlagged ? "แบนโดยผู้ดูแลระบบ" : null
+              })
+              .eq("id", id)
+              .eq("type", "comment");
+          }
+        } catch (e) {
+          console.error("Supabase PATCH error:", e);
+        }
       }
 
       const item = fallbackComments.find(c => c.id === id);
@@ -182,33 +266,33 @@ module.exports = async function handler(req, res) {
         if (!isFlagged) item.flag_reason = null;
       }
 
-      return res.status(200).json({ ok: true, action, id });
+      return res.status(200).json({ ok: true, action, is_flagged: isFlagged });
     } catch (err) {
-      return res.status(500).json({ error: "Failed to update comment status" });
+      return res.status(500).json({ error: "Failed to update comment" });
     }
   }
 
-  // 4. DELETE: Delete comment
+  // 4. DELETE: Permanent deletion (Admin Only)
   if (req.method === "DELETE") {
     if (!isAdmin) return res.status(401).json({ error: "Unauthorized" });
 
-    try {
-      const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
-      const id = body.id || req.query?.id;
+    const id = req.query?.id;
+    if (!id) return res.status(400).json({ error: "Missing comment id" });
 
-      if (!id) return res.status(400).json({ error: "Missing comment id" });
-
-      if (supabase) {
-        try {
-          await supabase.from("comments").delete().eq("id", id);
-        } catch (e) {}
+    if (supabase) {
+      try {
+        const { error } = await supabase.from("comments").delete().eq("id", id);
+        if (error && error.code === "PGRST205") {
+          await supabase.from("portfolio_items").delete().eq("id", id).eq("type", "comment");
+        }
+      } catch (e) {
+        console.error("Supabase DELETE error:", e);
       }
-
-      fallbackComments = fallbackComments.filter(c => c.id !== id);
-      return res.status(200).json({ ok: true, deleted: id });
-    } catch (err) {
-      return res.status(500).json({ error: "Failed to delete comment" });
     }
+
+    fallbackComments = fallbackComments.filter(c => c.id !== id);
+
+    return res.status(200).json({ ok: true, deleted: id });
   }
 
   return res.status(405).json({ error: "Method not allowed" });

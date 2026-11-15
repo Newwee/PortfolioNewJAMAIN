@@ -751,6 +751,26 @@ async function loadComments() {
 
   let comments = [];
 
+  // Auto-recover and sync any unsaved offline/local comments to Supabase
+  try {
+    const cachedRaw = localStorage.getItem("newja_comments");
+    if (cachedRaw) {
+      const cached = JSON.parse(cachedRaw);
+      if (Array.isArray(cached)) {
+        const unsynced = cached.filter(c => c && c.id && String(c.id).startsWith("c-") && c.name && c.message && c.name !== "New JA");
+        if (unsynced.length) {
+          for (const uc of unsynced) {
+            await fetch("/api/comments", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name: uc.name, message: uc.message, avatar: uc.avatar })
+            }).catch(() => {});
+          }
+        }
+      }
+    }
+  } catch (e) {}
+
   try {
     const res = await fetch("/api/comments");
     if (res.ok) {

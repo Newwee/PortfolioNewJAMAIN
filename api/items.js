@@ -48,6 +48,7 @@ module.exports = async function handler(req, res) {
         const { data, error } = await supabase
           .from("portfolio_items")
           .select("*")
+          .neq("type", "comment")
           .order("created_at", { ascending: false });
 
         if (!error && Array.isArray(data)) {
